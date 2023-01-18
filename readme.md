@@ -1,15 +1,17 @@
 ![GitHub Repo stars](https://img.shields.io/github/stars/jackytuneur/galaktoon?style=for-the-badge) ![GitHub last commit (branch)](https://img.shields.io/github/last-commit/jackytuneur/galaktoon/main?style=for-the-badge) ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/JackyTUneur/galaktoon?style=for-the-badge) ![GitHub Release Date](https://img.shields.io/github/release-date/jackytuneur/galaktoon?style=for-the-badge) ![GitHub release (latest by date)](https://img.shields.io/github/v/release/jackytuneur/galaktoon?style=for-the-badge) ![GitHub all releases](https://img.shields.io/github/downloads/jackytuneur/galaktoon/total?style=for-the-badge)
 
-<div align="center" font-size="90px"> GALAKTOON </div>
+# GALAKTOON
 #### Galaktoon is a web video game made with p5.js currently in developpement
 
 ### Table of Contents
 
+<div align = "center">
 1. [Techologies]
 2. [How To Install]
 2. [Engine Informations]
 3. [Features Informations]
 4. [Studio Informations]
+</div>
 
 ## 1. Techologies
 
