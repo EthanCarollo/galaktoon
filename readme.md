@@ -5,13 +5,11 @@
 
 ### Table of Contents
 
-<div align = "center">
 1. [Techologies]
 2. [How To Install]
 2. [Engine Informations]
 3. [Features Informations]
 4. [Studio Informations]
-</div>
 
 ## 1. Techologies
 
