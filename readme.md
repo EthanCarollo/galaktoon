@@ -1,7 +1,14 @@
+[![Contributors][contributors-shield]][contributors-url]
+[![Forks][forks-shield]][forks-url]
+[![Stargazers][stars-shield]][stars-url]
+[![Issues][issues-shield]][issues-url]
+[![MIT License][license-shield]][license-url]
+[![LinkedIn][linkedin-shield]][linkedin-url]
+
 # GALAKTOON
 #### Galaktoon is a web video game made with p5.js currently in developpement
 
-## Table of Contents
+### Table of Contents
 
 1. [Techologies]
 2. [How To Install]
