@@ -98,7 +98,7 @@ const interactWithATile = () => {
     switch(interactedTile.type){
         case "explore":
             // explore function
-            loadNewMap(mapData[0])
+            loadNewMap(mapData[1], mapData[1].start)
             break;
         case "build":
             // build function
