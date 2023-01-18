@@ -8,3 +8,4 @@ const loadNewMap = (mapToLoad, start) => {
         mapVector = createVector(0,0);
     }
 }
+//This function takes maptoload and start because start can be different for 1 map (ex : map can have a start on the right and on the top)

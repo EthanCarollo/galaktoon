@@ -92,13 +92,12 @@ const getPlayerCollision = () => {
 
 // ************************ Player Interaction
 
-const interactWithATile = () => {
+const interactWithATile = (tileInteract) => {
     // this is the reason why my playerLastDirection is an array
-    let interactedTile = getTileData(actualPlayerTile()[0] + playerLastDirection[0], actualPlayerTile()[1] + playerLastDirection[1]) // get the information of the tile that the player is looking for
+    let interactedTile = getTileData(tileInteract[0], tileInteract[1]) // get the information of the tile that the player is looking for
     switch(interactedTile.type){
         case "explore":
             // explore function
-            loadNewMap(mapData[1], mapData[1].start)
             break;
         case "build":
             // build function
@@ -108,9 +107,20 @@ const interactWithATile = () => {
             break;
         case "useless":
             break;
+        case "goDownInSpaceShip":
+            loadNewMap(mapData[1], mapData[1].start)
+            break;
         default :
             throw new Error
                 ("The player is interacting with nothing which is impossible if all are doing well, so it's probably an exception with the parameter type of the tile : ' " + interactedTile.type + " ' ")
+    }
+}
+
+const createInteractionPopup = (x ,y ,typeOfInteract) => {
+    switch(typeOfInteract){
+        default:
+            createTile(x, y-1, 20, 65)
+            break;
     }
 }
 
