@@ -1,0 +1,11 @@
+{
+    "data" : 
+    [
+        {
+            "id" : "0",
+            "path" : "assets/sprites/testsprite/MainCharacter.png",
+            "nb" : "1",
+            "image" : "null"
+        }
+    ]
+}

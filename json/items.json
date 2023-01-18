@@ -1,0 +1,12 @@
+{
+    "data" : 
+    [
+        {
+            "id" : "0",
+            "path" : "assets/items/book.png",
+            "image" : "null",
+            "name" : "testItem",
+            "type" : "book"
+        }
+    ]
+}
