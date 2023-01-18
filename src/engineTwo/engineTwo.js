@@ -1,37 +1,4 @@
 
-let playerTeam = [
-    {
-        id : 0,
-        hp : {
-            current : 50,
-            max : 50
-        }
-    }, 
-    {
-        id : 0,
-        hp : {
-            current : 50,
-            max : 50
-        }
-    }, 
-    {
-        id : 0,
-        hp : {
-            current : 50,
-            max : 50
-        }
-    }
-]
-
-let enemyTeam = [
-    {
-        id : 1,
-        hp : {
-            current : 50,
-            max : 50
-        }
-    }
-]
 
 const runEngineTwo = () => {
     background(255)
@@ -39,8 +6,11 @@ const runEngineTwo = () => {
     showTeamOnMap();
 }
 
+// ---- Display
+
 const displaySideScroller2D = () => {
     createMapSideScroller("nothing")
+    createInterfaceForFight()
 }
 
 const createMapSideScroller = (map) => {
@@ -108,7 +78,7 @@ const showEnemyTeam = () => {
     }
 }
 
-const showSpriteOnMap = (sprite, x, y, size, charObject) => {
+const showSpriteOnMap = (sprite, x, y, size, charObject, isTarget = false) => {
     image(sprite, x, y, size, size)
     showSpriteHealthOnMap(x, y, size, charObject)
 }
@@ -116,3 +86,5 @@ const showSpriteOnMap = (sprite, x, y, size, charObject) => {
 const showSpriteHealthOnMap = (x, y, size, charObject) => {
     image(uiData[0].image,x,y,size, size)
 }
+
+// ---- Display
