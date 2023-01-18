@@ -95,10 +95,10 @@ const getPlayerCollision = () => {
 const interactWithATile = () => {
     // this is the reason why my playerLastDirection is an array
     let interactedTile = getTileData(actualPlayerTile()[0] + playerLastDirection[0], actualPlayerTile()[1] + playerLastDirection[1]) // get the information of the tile that the player is looking for
-
     switch(interactedTile.type){
         case "explore":
             // explore function
+            loadNewMap(mapData[0])
             break;
         case "build":
             // build function
