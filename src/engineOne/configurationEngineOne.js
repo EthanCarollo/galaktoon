@@ -1,6 +1,6 @@
 let playerVector;
 let cameraVector;
-let    mapVector;
+let mapVector;
 
 // Player Var
 let playerSpeed = 5;
@@ -19,8 +19,8 @@ let playerLastDirection = [0,1]; // orientation naturally down
 // Player Var
 
 // Map Var
-let playerOnMap = spaceShipMap;
-let actualPlayerMap = playerOnMap.map1.slice()
+let playerOnMap;
+let actualPlayerMap;
 let tileSize = 65;
 // Map Var
 

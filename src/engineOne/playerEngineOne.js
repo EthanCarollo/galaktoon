@@ -20,7 +20,7 @@ const animationIdlePlayerSprite = (positionX, positionY, size, direction) => {
     // ! /!\ switch don't take array, so i stringify it /!\ ! \\
     switch(direction.toString()){
         case "1,0":
-            idleSpriteAnimation = spritesData[0].image.get(60,30,30,30)
+            idleSpriteAnimation = spritesData[0].image.get(0,30,30,30)
             break;
         case "-1,0":
             idleSpriteAnimation = spritesData[0].image.get(0,60,30,30)
@@ -50,7 +50,7 @@ const animationMoovePlayerSprite = (positionX, positionY, size, direction) => {
             break;
         case "left" :
             playerLastDirection = [-1, 0]
-            spritePlayerAnimationMoove = spritesData[0].image.get(30*Math.floor(playerAnimationIndex)-30,60,30,30);
+            spritePlayerAnimationMoove = spritesData[0].image.get(30*Math.floor(playerAnimationIndex),60,30,30);
             break;
         case "up" :
             playerLastDirection = [0, -1]
@@ -92,10 +92,9 @@ const getPlayerCollision = () => {
 
 // ************************ Player Interaction
 
-const interactWithATile = () => {
+const interactWithATile = (tileInteract) => {
     // this is the reason why my playerLastDirection is an array
-    let interactedTile = getTileData(actualPlayerTile()[0] + playerLastDirection[0], actualPlayerTile()[1] + playerLastDirection[1]) // get the information of the tile that the player is looking for
-
+    let interactedTile = getTileData(tileInteract[0], tileInteract[1]) // get the information of the tile that the player is looking for
     switch(interactedTile.type){
         case "explore":
             // explore function
@@ -108,9 +107,20 @@ const interactWithATile = () => {
             break;
         case "useless":
             break;
+        case "goDownInSpaceShip":
+            loadNewMap(mapData[1], mapData[1].start)
+            break;
         default :
             throw new Error
                 ("The player is interacting with nothing which is impossible if all are doing well, so it's probably an exception with the parameter type of the tile : ' " + interactedTile.type + " ' ")
+    }
+}
+
+const createInteractionPopup = (x ,y ,typeOfInteract) => {
+    switch(typeOfInteract){
+        default:
+            createTile(x, y-1, 20, 65)
+            break;
     }
 }
 

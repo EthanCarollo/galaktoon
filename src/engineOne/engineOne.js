@@ -1,8 +1,8 @@
 
 const runEngineOne = () => {
     setPlayerCamera();
-    playerInputEngineOne();
     displayTopDown2D();
+    playerInputEngineOne();
 }
 
 const playerInputEngineOne=()=>{
@@ -70,8 +70,16 @@ const playerInputEngineOne=()=>{
     }
 
     if(playerCanInteract === true){
+
+        let playerCaseInteract = [actualPlayerTile()[0] + playerLastDirection[0], actualPlayerTile()[1] + playerLastDirection[1]]
+
         if(keyIsDown(69)) {
-          interactWithATile();
+          interactWithATile(playerCaseInteract);
+        }
+        if(getTileData(playerCaseInteract[0], playerCaseInteract[1]).type !== "useless")
+        {
+          let interactType = getTileData(playerCaseInteract[0], playerCaseInteract[1]).type;
+          createInteractionPopup(playerCaseInteract[0], playerCaseInteract[1], interactType)
         }
     }
 }

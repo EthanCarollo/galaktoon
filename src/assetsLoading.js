@@ -12,12 +12,17 @@ const ressourceToLoad = [
     {
         typeOfRessource : "item",
         path : "./json/items.json"
+    },
+    {
+        typeOfRessource : "map",
+        path : "./json/topDownMap.json"
     }
 ]
 
 let tilesData = [];
 let spritesData = [];
 let itemsData = [];
+let mapData = [];
 
 // variables that follow the resource loading course
 
@@ -37,10 +42,11 @@ const loadAssets = () => {
         fetch(ressourceToLoad[i].path)
         .then(rep => rep.json())
         .then(rep => { 
-            loadRessource(
-                rep.data,
-                ressourceToLoad[i].typeOfRessource
-            )
+                loadRessource(
+                    rep.data,
+                    ressourceToLoad[i].typeOfRessource
+                )
+                    
         })
         .catch(error => { 
             // error handling
@@ -88,7 +94,12 @@ const loadRessource = (ressource, typeOfRessource) => {
                 );
             }
             break;
-        
+
+        case "map" :
+            mapData = ressource;
+            successfullLoadingRessource(typeOfRessource)
+            break;
+
         default :
             throw new Error("this is not an accepted type of ressource : " + typeOfRessource);
         
@@ -121,20 +132,41 @@ const successfullLoadingRessource = (typeOfRessource) => {
                 totalLoadCounter ++;
             }
             break;
+        case "map" :
+            totalLoadCounter ++;
+            break;
         default :
             throw new Error("this cannot load that type of ressource : " + typeOfRessource);
     }
 
     if(totalLoadCounter === totalLoad)
     {
-        console.log("successfully loaded")
-        ressourceIsLoaded = true;
+        loadAllRessource()
     }
-
 
     // error handling
     if(totalLoadCounter > totalLoad)
     {
         throw new Error("code loaded too much data, there is a problem in the 'successfullLoadingRessource' function");
     }
+}
+
+const loadAllRessource = () => {
+    setEngineOneVariableAfterLoadingAllAssets();
+
+    ressourceIsLoaded = true;
+}
+
+const setEngineOneVariableAfterLoadingAllAssets = () => {
+    if(mapData.length < 1)
+    {
+        throw new Error("mapData isn't set for map creation");
+    }
+
+    playerOnMap = mapData[0];
+    actualPlayerMap = playerOnMap.map.slice();
+
+    playerVector = createVector(playerOnMap.start[0], playerOnMap.start[1]);
+    cameraVector = createVector(windowWidth/2, windowHeight/2);
+    mapVector = createVector(0,0);
 }
