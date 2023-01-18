@@ -1,9 +1,4 @@
-[![Contributors][contributors-shield]][contributors-url]
-[![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
-[![Issues][issues-shield]][issues-url]
-[![MIT License][license-shield]][license-url]
-[![LinkedIn][linkedin-shield]][linkedin-url]
+![GitHub Repo stars](https://img.shields.io/github/stars/jackytuneur/galaktoon?style=for-the-badge)
 
 # GALAKTOON
 #### Galaktoon is a web video game made with p5.js currently in developpement
