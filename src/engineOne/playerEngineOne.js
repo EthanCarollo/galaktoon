@@ -20,7 +20,7 @@ const animationIdlePlayerSprite = (positionX, positionY, size, direction) => {
     // ! /!\ switch don't take array, so i stringify it /!\ ! \\
     switch(direction.toString()){
         case "1,0":
-            idleSpriteAnimation = spritesData[0].image.get(60,30,30,30)
+            idleSpriteAnimation = spritesData[0].image.get(0,30,30,30)
             break;
         case "-1,0":
             idleSpriteAnimation = spritesData[0].image.get(0,60,30,30)
@@ -50,7 +50,7 @@ const animationMoovePlayerSprite = (positionX, positionY, size, direction) => {
             break;
         case "left" :
             playerLastDirection = [-1, 0]
-            spritePlayerAnimationMoove = spritesData[0].image.get(30*Math.floor(playerAnimationIndex)-30,60,30,30);
+            spritePlayerAnimationMoove = spritesData[0].image.get(30*Math.floor(playerAnimationIndex),60,30,30);
             break;
         case "up" :
             playerLastDirection = [0, -1]
