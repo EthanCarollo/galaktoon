@@ -1,0 +1,17 @@
+{
+    "data" : 
+    [
+        {
+            "id" : "0",
+            "path" : "assets/sprites/fightSprites/fightSpriteTest.png",
+            "image" : "null",
+            "size" : 60
+        },
+        {
+            "id" : "1",
+            "path" : "assets/sprites/fightSprites/fightEnemySpriteTest.png",
+            "image" : "null",
+            "size" : 60
+        }
+    ]
+}

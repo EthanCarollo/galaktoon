@@ -16,19 +16,31 @@ const ressourceToLoad = [
     {
         typeOfRessource : "map",
         path : "./json/topDownMap.json"
-    }
+    },
+    {
+        typeOfRessource : "spriteFight",
+        path : "./json/spritesFight.json"
+    },
+    {
+        typeOfRessource : "ui",
+        path : "./json/ui.json"
+    },
 ]
 
 let tilesData = [];
 let spritesData = [];
 let itemsData = [];
 let mapData = [];
+let spritesFightData = [];
+let uiData = [];
 
 // variables that follow the resource loading course
 
 let loadingCounterTilesData = 0;
 let loadingCounterSpritesData = 0;
 let loadingCounterItemsData = 0;
+let loadingCounterSpritesFightData = 0;
+let loadingCounterUIData = 0;
 let totalLoadCounter = 0;
 let totalLoad = ressourceToLoad.length;
 
@@ -100,6 +112,30 @@ const loadRessource = (ressource, typeOfRessource) => {
             successfullLoadingRessource(typeOfRessource)
             break;
 
+        case "spriteFight" :
+            spritesFightData = ressource;
+            for(let i = 0; i < spritesFightData.length; i++)
+            {
+                spritesFightData[i].image = loadImage(
+                    spritesFightData[i].path, 
+                    () => successfullLoadingRessource(typeOfRessource),
+                    () => failureLoadingRessource(spritesFightData[i], typeOfRessource)
+                );
+            }
+            break;
+
+        case "ui" :
+            uiData = ressource;
+            for(let i = 0; i < uiData.length; i++)
+            {
+                uiData[i].image = loadImage(
+                    uiData[i].path, 
+                    () => successfullLoadingRessource(typeOfRessource),
+                    () => failureLoadingRessource(uiData[i], typeOfRessource)
+                );
+            }
+            break;
+
         default :
             throw new Error("this is not an accepted type of ressource : " + typeOfRessource);
         
@@ -134,6 +170,18 @@ const successfullLoadingRessource = (typeOfRessource) => {
             break;
         case "map" :
             totalLoadCounter ++;
+            break;
+        case "spriteFight" :
+            loadingCounterSpritesFightData ++;
+            if(loadingCounterSpritesFightData === spritesFightData.length){
+                totalLoadCounter ++;
+            }
+            break;
+        case "ui" :
+            loadingCounterUIData ++;
+            if(loadingCounterUIData === uiData.length){
+                totalLoadCounter ++;
+            }
             break;
         default :
             throw new Error("this cannot load that type of ressource : " + typeOfRessource);

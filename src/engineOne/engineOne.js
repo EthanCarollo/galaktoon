@@ -87,9 +87,9 @@ const playerInputEngineOne=()=>{
 // ************************ Display game && camera
 
 const displayTopDown2D = () => {
-    createMap("back"); // create the layer in back of the player
+    createMapTopDown("back"); // create the layer in back of the player
     showPlayerSprite(cameraVector.x, cameraVector.y, playerSpriteSize)
-    createMap("front"); // create the layer in front of the player
+    createMapTopDown("front"); // create the layer in front of the player
     // the double createmap function is used to simulate a 2D perspective
 }
 
@@ -106,24 +106,24 @@ const setPlayerCamera = () => {
 
 // ************************ MAP LOGIC (create and verification on array)
 
-const createMap = (orientation) => {
+const createMapTopDown = (orientation, map = actualPlayerMap) => {
 
-    for(let y = 0;y < actualPlayerMap.length; y++)
+    for(let y = 0;y < map.length; y++)
     {
-      for(let x = 0;x < actualPlayerMap[0].length; x++)
+      for(let x = 0;x < map[0].length; x++)
       {
         if(!tileIsEmpty(x, y)){
           switch(orientation){
             case "back" :
               if(actualPlayerTile()[1] >= y)
               {
-                createTile(x, y, actualPlayerMap[y][x], tileSize);
+                createTile(x, y, map[y][x], tileSize);
               }
               break;
             case "front":
               if(actualPlayerTile()[1] < y)
               {
-                createTile(x, y, actualPlayerMap[y][x], tileSize);
+                createTile(x, y, map[y][x], tileSize);
               }
               break;
             default :
