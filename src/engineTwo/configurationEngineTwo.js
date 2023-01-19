@@ -4,7 +4,7 @@ let playerTeam = [
     {
         id : 0,
         hp : {
-            current : 50,
+            current : 30,
             max : 50
         },
         abilities : [
@@ -45,7 +45,21 @@ let enemyTeam = [
     {
         id : 1,
         hp : {
-            current : 50,
+            current : 20,
+            max : 50
+        }
+    },
+    {
+        id : 1,
+        hp : {
+            current : 30,
+            max : 50
+        }
+    },
+    {
+        id : 1,
+        hp : {
+            current : 40,
             max : 50
         }
     }

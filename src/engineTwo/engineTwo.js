@@ -54,6 +54,7 @@ const showPlayerTeam = () => {
         let yPositionSprite = window.innerHeight - (sizeSprite+sizeSprite*(i/1.25)) - 50;
         let tempSpriteToShow = spritesFightData[characterObject.id].image.get(0,0,60,60);
         showSpriteOnMap(tempSpriteToShow, xPositionSprite, yPositionSprite, sizeSprite, characterObject)
+
     }
 }
 
@@ -74,17 +75,30 @@ const showEnemyTeam = () => {
         let xPositionSprite = window.innerWidth - (120 + sizeSprite);
         let yPositionSprite = window.innerHeight - (sizeSprite+sizeSprite*(i/1.25)) - 50;
         let tempSpriteToShow = spritesFightData[characterObject.id].image.get(0,0,60,60)
-        showSpriteOnMap(tempSpriteToShow, xPositionSprite, yPositionSprite, sizeSprite, characterObject)
+        const isTargeted = i === currentTarget
+        showSpriteOnMap(tempSpriteToShow, xPositionSprite, yPositionSprite, sizeSprite, characterObject, isTargeted)
     }
 }
 
 const showSpriteOnMap = (sprite, x, y, size, charObject, isTarget = false) => {
-    image(sprite, x, y, size, size)
+    if(isTarget === true){
+        tint(255,0,0)
+        image(sprite, x, y, size, size)
+        noTint()
+    }else{
+        image(sprite, x, y, size, size)
+    }
     showSpriteHealthOnMap(x, y, size, charObject)
 }
 
 const showSpriteHealthOnMap = (x, y, size, charObject) => {
-    image(uiData[0].image,x,y,size, size)
+    let percentOfSpriteLife = charObject.hp.current / charObject.hp.max;
+    let currentHealthBarUIImage = uiData[0].image;
+    let currentEmptyHealthBarUIImage = uiData[2].image;
+
+    
+    image(currentHealthBarUIImage,x,y,size * percentOfSpriteLife, size)
+    image(currentEmptyHealthBarUIImage,x,y,size, size)
 }
 
 // ---- Display

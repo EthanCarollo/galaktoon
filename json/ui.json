@@ -8,6 +8,10 @@
         {
             "id" : "1",
             "path" : "assets/ui/abilityTest.png"
+        },
+        {
+            "id" : "2",
+            "path" : "assets/ui/fightUI/empty_healthbar.png"
         }
     ]
 }

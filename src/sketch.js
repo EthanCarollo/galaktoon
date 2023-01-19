@@ -23,6 +23,8 @@ function draw() {
                 break;
             default :
                 throw new Error("Actual Engine isnt set");
+                break;
         }
+        runInputManager();
     }
 }
