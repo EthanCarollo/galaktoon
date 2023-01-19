@@ -1,7 +1,7 @@
 
 
 const runEngineTwo = () => {
-    background(255)
+    background(180)
     displaySideScroller2D();
     showTeamOnMap();
 }
@@ -93,7 +93,7 @@ const showSpriteOnMap = (sprite, x, y, size, charObject, isTarget = false, playe
     }else{
         image(sprite, x, y, size, size)
     }
-    showSpriteHealthOnMap(x, y, size, charObject)
+    showSpriteHealthOnMap(x, y, size, charObject);
 }
 
 const showSpriteHealthOnMap = (x, y, size, charObject) => {
@@ -105,6 +105,7 @@ const showSpriteHealthOnMap = (x, y, size, charObject) => {
     image(currentBackgroundHealthBar,x,y,size, size)
     image(currentHealthBarUIImage,x,y,size * percentOfSpriteLife, size)
     image(currentEmptyHealthBarUIImage,x,y,size, size)
+    
 }
 
 // ---- Display

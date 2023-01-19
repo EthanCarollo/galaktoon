@@ -11,14 +11,17 @@ const changeCurrentAbilityOnInput = () => {
 }
 
 const changeCurrentTargetOnInput = () => {
-    if(keyIsDown(UP_ARROW)){
-        currentTarget++;
-        compareCurrentTargetAndEnemyTeam(currentTarget);
+    let mouseCurrentX = Math.floor((window.innerWidth - mouseX -120) / 200);
+    let mouseCurrentY = Math.floor((window.innerHeight - mouseY) / 200);
+    if(mouseCurrentX === 0){
+        changeCurrentTarget(mouseCurrentY)
     }
-    if(keyIsDown(DOWN_ARROW))
+}
+
+const changeCurrentTarget = (targetIndex) => {
+    if(targetIndex < (enemyTeam.length))
     {
-        currentTarget--;
-        compareCurrentTargetAndEnemyTeam(currentTarget);
+        currentTarget = targetIndex;
     }
 }
 
@@ -27,22 +30,8 @@ const attackCurrentTargetOnInput = () => {
     {
         let playerAttack = playerTeam[currentTurn].abilities[currentAbilityUsed];
         let enemyWhoGetAttacked = enemyTeam[currentTarget];
-        attackTarget(playerAttack, enemyWhoGetAttacked);
-    }
-}
-
-const attackTarget = (currentAttack, currentTarget) => {
-
-    switch(currentAttack.type){
-        case "attack":
-            currentTarget.hp.current = currentTarget.hp.current - 20;
-            break;
-        default :
-            throw new Error("Player abilities don't actually work cause there is no good type")
-            break;
-    }
-    if(currentTarget.hp.current <= 0){
-        currentTarget.hp.current = 0;
+        useAbilityOnTarget(playerAttack, enemyWhoGetAttacked);
+        actualTurnGame ++;
     }
 }
 

@@ -22,11 +22,47 @@ const createIconAbility = (x, y, size, abilityID, abilityIndexOnCharacter) => {
     }
     if(abilityIndexOnCharacter === currentAbilityUsed)
     {
-        tint(150, 0, 0)
         image(uiData[abilityID].image, x, y, size, size)
-        noTint()
+        image(uiData[6].image, x, y, size, size)
     }else{
         image(uiData[abilityID].image, x, y, size, size)
+    }
+}
+
+const useAbilityOnTarget = (currentAttack, currentTarget) => {
+
+    switch(currentAttack.type){
+        case "attack":
+            currentTarget.hp.current = currentTarget.hp.current - 20;
+            break;
+        case "heal":
+            healCharacterPlayerTeam(currentAttack.amount, currentTurn)
+            break;
+        case "healAll":
+            healAllCharacter(currentAttack.amount)
+            break;
+        default :
+            throw new Error("Player abilities don't actually work cause there is no good type")
+            break;
+    }
+    if(currentTarget.hp.current <= 0){
+        currentTarget.hp.current = 0;
+    }
+}
+
+const healAllCharacter = (amount) => {
+    for(let i = 0; i < playerTeam.length; i++)
+    {
+        console.log(amount)
+        healCharacterPlayerTeam(amount, i);
+    } 
+}
+
+const healCharacterPlayerTeam = (amount, characterIndex) => {
+    playerTeam[characterIndex].hp.current = playerTeam[characterIndex].hp.current + amount;
+    if(playerTeam[characterIndex].hp.current > playerTeam[characterIndex].hp.max)
+    {
+        playerTeam[characterIndex].hp.current = playerTeam[characterIndex].hp.max 
     }
 }
 

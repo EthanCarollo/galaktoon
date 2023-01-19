@@ -9,19 +9,22 @@ let playerTeam = [
         },
         abilities : [
             {
-                name : "Attack1",
+                name : "Attack",
                 type : "attack",
+                amount : 20,
                 id : 1
             },
             {
-                name : "Attack1",
-                type : "attack",
-                id : 1
+                name : "Heal",
+                type : "heal",
+                amount : 20,
+                id : 4
             },
             {
-                name : "Attack1",
-                type : "attack",
-                id : 1
+                name : "HealAll",
+                type : "healAll",
+                amount : 10,
+                id : 5
             }
         ],
         isAlive : true
@@ -29,17 +32,57 @@ let playerTeam = [
     {
         id : 0,
         hp : {
-            current : 50,
+            current : 0,
             max : 50
         },
+        abilities : [
+            {
+                name : "Attack",
+                type : "attack",
+                amount : 20,
+                id : 1
+            },
+            {
+                name : "Heal",
+                type : "heal",
+                amount : 20,
+                id : 4
+            },
+            {
+                name : "HealAll",
+                type : "healAll",
+                amount : 10,
+                id : 5
+            }
+        ],
         isAlive : true
     }, 
     {
         id : 0,
         hp : {
-            current : 50,
+            current : 10,
             max : 50
         },
+        abilities : [
+            {
+                name : "Attack",
+                type : "attack",
+                amount : 20,
+                id : 1
+            },
+            {
+                name : "Heal",
+                type : "heal",
+                amount : 20,
+                id : 4
+            },
+            {
+                name : "HealAll",
+                type : "healAll",
+                amount : 10,
+                id : 5
+            }
+        ],
         isAlive : true
     }
 ]
@@ -76,4 +119,6 @@ let currentAbilityUsed = 0;
 let currentTarget = 0;
 
 // Fight team
+
+let actualTurnGame = 0;
 

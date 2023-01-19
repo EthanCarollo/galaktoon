@@ -23,7 +23,22 @@ function keyPressed(){
       default :
         break;
     }
-  }
+}
+
+function mouseClicked(){
+    switch(actualEngine){
+        case EngineOne :
+
+          break;
+        case EngineTwo :
+          keyPressedForEngineTwo();
+          break;
+        default :
+          break;
+      }
+}
+
+// Engine One Input ----------------------------
 
 const playerInputInteractForEngineOne = () => {
     if(playerCanInteract === true){
@@ -113,17 +128,26 @@ const playerInputForEngineOne=()=>{
           createInteractionPopup(playerCaseInteract[0], playerCaseInteract[1], interactType)
         }
     }
-    }
-
-const playerInputForEngineTwo=()=>{
-    changeCurrentAbilityOnInput();
 }
 
 const playerKeyPressedForEngineOne = () => {
     playerInputInteractForEngineOne()
 }
 
+// Engine One Input ----------------------------
+
+// Engine Two Input ----------------------------
+
+const playerInputForEngineTwo=()=>{
+    changeCurrentAbilityOnInput();
+}
+
 const playerKeyPressedForEngineTwo = () => {
     attackCurrentTargetOnInput();
+}
+
+const keyPressedForEngineTwo = () => {
     changeCurrentTargetOnInput();
 }
+
+// Engine Two Input ----------------------------
