@@ -10,7 +10,9 @@ const runEngineTwo = () => {
 
 const displaySideScroller2D = () => {
     createMapSideScroller("nothing")
-    createInterfaceForFight()
+    if(turnTeam === "player"){
+        createInterfaceForFight()
+    }
 }
 
 const createMapSideScroller = (map) => {

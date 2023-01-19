@@ -3,23 +3,23 @@
 const ressourceToLoad = [
     {
         typeOfRessource : "tile",
-        path : "./json/tiles.json"
+        path : "./json/engineOne/tiles.json"
     },
     {
         typeOfRessource : "sprite",
-        path : "./json/sprites.json"
+        path : "./json/engineOne/sprites.json"
     },
     {
         typeOfRessource : "item",
-        path : "./json/items.json"
+        path : "./json/engineOne/items.json"
     },
     {
         typeOfRessource : "map",
-        path : "./json/topDownMap.json"
+        path : "./json/engineOne/topDownMap.json"
     },
     {
         typeOfRessource : "spriteFight",
-        path : "./json/spritesFight.json"
+        path : "./json/engineTwo/spritesFight.json"
     },
     {
         typeOfRessource : "ui",

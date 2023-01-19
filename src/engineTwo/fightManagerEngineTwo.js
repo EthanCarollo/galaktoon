@@ -26,12 +26,12 @@ const changeCurrentTarget = (targetIndex) => {
 }
 
 const attackCurrentTargetOnInput = () => {
-    if(keyIsDown(32))
+    if(keyIsDown(32) && turnTeam === "player")
     {
         let playerAttack = playerTeam[currentTurn].abilities[currentAbilityUsed];
         let enemyWhoGetAttacked = enemyTeam[currentTarget];
         useAbilityOnTarget(playerAttack, enemyWhoGetAttacked);
-        actualTurnGame ++;
+        endTurn();
     }
 }
 
@@ -44,3 +44,42 @@ const compareCurrentTargetAndEnemyTeam = (currentTargetNumber) => {
         currentTarget = (enemyTeam.length -1)
     }
 }
+
+// ------- TURN MANAGER
+
+const endTurn = () => {
+    switchTeamTurn(turnTeam)
+    console.log("endTurn, wait")
+    setTimeout(() => {
+        console.log("You can play now")
+        turnManager(turnTeam)
+        actualTurnGame ++;
+    }, 2000);
+}
+
+const switchTeamTurn = (teamTurn) => {
+    switch(teamTurn){
+        case "player" :
+            turnTeam = "ia"
+            break;
+        case "ia" :
+            turnTeam = "player"
+            break;
+        default :
+            throw new Error("It will be the turn of nobody which is IMPOSSIBLE")
+    }
+}
+
+const turnManager = (teamTurn) => {
+    switch(teamTurn){
+        case "player" :
+            break;
+        case "ia" :
+            enemyIaTurn();
+            break;
+        default :
+            throw new Error("It's the turn of nobody which is IMPOSSIBLE")
+    }
+}
+
+// ------- TURN MANAGER

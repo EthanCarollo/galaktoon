@@ -117,6 +117,7 @@ let enemyTeam = [
 let currentTurn = 0;
 let currentAbilityUsed = 0;
 let currentTarget = 0;
+let turnTeam = "player";
 
 // Fight team
 
