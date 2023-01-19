@@ -1,0 +1,33 @@
+{
+    "data" : 
+    [
+        {
+            "id" : "0",
+            "path" : "assets/ui/fightUI/healthbar.png"
+        },
+        {
+            "id" : "1",
+            "path" : "assets/ui/ability/abilityTest.png"
+        },
+        {
+            "id" : "2",
+            "path" : "assets/ui/fightUI/empty_healthbar.png"
+        },
+        {
+            "id" : "3",
+            "path" : "assets/ui/fightUI/background_healthbar.png"
+        },
+        {
+            "id" : "4",
+            "path" : "assets/ui/ability/abilityTest2.png"
+        },
+        {
+            "id" : "5",
+            "path" : "assets/ui/ability/abilityTest3.png"
+        },
+        {
+            "id" : "6",
+            "path" : "assets/ui/ability/selectedAbility.png"
+        }
+    ]
+}

@@ -97,6 +97,7 @@ const interactWithATile = (tileInteract) => {
     let interactedTile = getTileData(tileInteract[0], tileInteract[1]) // get the information of the tile that the player is looking for
     switch(interactedTile.type){
         case "explore":
+            launchEngineTwo();
             // explore function
             break;
         case "build":
@@ -110,6 +111,10 @@ const interactWithATile = (tileInteract) => {
         case "goDownInSpaceShip":
             loadNewMap(mapData[1], mapData[1].start)
             break;
+        case "goUpInSpaceShip": {
+            loadNewMap(mapData[0], mapData[0].secondStart)
+            break;
+        }
         default :
             throw new Error
                 ("The player is interacting with nothing which is impossible if all are doing well, so it's probably an exception with the parameter type of the tile : ' " + interactedTile.type + " ' ")
