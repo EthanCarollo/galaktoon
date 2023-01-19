@@ -3,7 +3,7 @@
     [
         {
             "id" : "0",
-            "path" : "assets/sprites/testsprite/MainCharacter.png",
+            "path" : "assets/sprites/topDownSprite/testsprite/MainCharacter.png",
             "nb" : "1",
             "image" : "null"
         }
