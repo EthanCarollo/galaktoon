@@ -25,11 +25,26 @@ const changeCurrentTargetOnInput = () => {
 const attackCurrentTargetOnInput = () => {
     if(keyIsDown(32))
     {
-
+        let playerAttack = playerTeam[currentTurn].abilities[currentAbilityUsed];
+        let enemyWhoGetAttacked = enemyTeam[currentTarget];
+        attackTarget(playerAttack, enemyWhoGetAttacked);
     }
 }
 
-const attackTarget = (currentAbility, currentTarget) => {}
+const attackTarget = (currentAttack, currentTarget) => {
+
+    switch(currentAttack.type){
+        case "attack":
+            currentTarget.hp.current = currentTarget.hp.current - 20;
+            break;
+        default :
+            throw new Error("Player abilities don't actually work cause there is no good type")
+            break;
+    }
+    if(currentTarget.hp.current <= 0){
+        currentTarget.hp.current = 0;
+    }
+}
 
 const compareCurrentTargetAndEnemyTeam = (currentTargetNumber) => {
     if(currentTargetNumber >= enemyTeam.length){

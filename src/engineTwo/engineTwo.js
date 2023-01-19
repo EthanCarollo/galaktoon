@@ -53,7 +53,8 @@ const showPlayerTeam = () => {
         let xPositionSprite = 120;
         let yPositionSprite = window.innerHeight - (sizeSprite+sizeSprite*(i/1.25)) - 50;
         let tempSpriteToShow = spritesFightData[characterObject.id].image.get(0,0,60,60);
-        showSpriteOnMap(tempSpriteToShow, xPositionSprite, yPositionSprite, sizeSprite, characterObject)
+        const isTurnOfThisCharacter = i === currentTurn;
+        showSpriteOnMap(tempSpriteToShow, xPositionSprite, yPositionSprite, sizeSprite, characterObject, false, isTurnOfThisCharacter)
 
     }
 }
@@ -80,9 +81,13 @@ const showEnemyTeam = () => {
     }
 }
 
-const showSpriteOnMap = (sprite, x, y, size, charObject, isTarget = false) => {
-    if(isTarget === true){
-        tint(255,0,0)
+const showSpriteOnMap = (sprite, x, y, size, charObject, isTarget = false, playerSelectedCharacter = false) => {
+    if(playerSelectedCharacter === true){
+        tint(150,150,255)
+        image(sprite, x, y, size, size)
+        noTint()
+    }else if(isTarget === true){
+        tint(155,0,0)
         image(sprite, x, y, size, size)
         noTint()
     }else{
@@ -92,11 +97,12 @@ const showSpriteOnMap = (sprite, x, y, size, charObject, isTarget = false) => {
 }
 
 const showSpriteHealthOnMap = (x, y, size, charObject) => {
-    let percentOfSpriteLife = charObject.hp.current / charObject.hp.max;
+    let percentOfSpriteLife = charObject.hp.current / charObject.hp.max +0.00001; // adding 0.00001 on that var cause size can't be 0 :(
     let currentHealthBarUIImage = uiData[0].image;
     let currentEmptyHealthBarUIImage = uiData[2].image;
-
+    let currentBackgroundHealthBar = uiData[3].image;
     
+    image(currentBackgroundHealthBar,x,y,size, size)
     image(currentHealthBarUIImage,x,y,size * percentOfSpriteLife, size)
     image(currentEmptyHealthBarUIImage,x,y,size, size)
 }

@@ -15,10 +15,10 @@ const runInputManager = () => {
 function keyPressed(){
     switch(actualEngine){
       case EngineOne :
-        playerInputInteractForEngineOne()
+        playerKeyPressedForEngineOne()
         break;
       case EngineTwo :
-        changeCurrentTargetOnInput();
+        playerKeyPressedForEngineTwo()
         break;
       default :
         break;
@@ -117,4 +117,13 @@ const playerInputForEngineOne=()=>{
 
 const playerInputForEngineTwo=()=>{
     changeCurrentAbilityOnInput();
+}
+
+const playerKeyPressedForEngineOne = () => {
+    playerInputInteractForEngineOne()
+}
+
+const playerKeyPressedForEngineTwo = () => {
+    attackCurrentTargetOnInput();
+    changeCurrentTargetOnInput();
 }
