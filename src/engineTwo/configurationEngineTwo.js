@@ -12,22 +12,26 @@ let playerTeam = [
                 name : "Attack",
                 type : "attack",
                 amount : 20,
-                id : 1
+                id : 1,
+                couldown : 1
             },
             {
                 name : "Heal",
                 type : "heal",
                 amount : 20,
-                id : 4
+                id : 4,
+                couldown : 2
             },
             {
                 name : "HealAll",
                 type : "healAll",
                 amount : 10,
-                id : 5
+                id : 5,
+                couldown : 3
             }
         ],
-        isAlive : true
+        isAlive : true,
+        state : "idle"
     }, 
     {
         id : 0,
@@ -40,22 +44,26 @@ let playerTeam = [
                 name : "Attack",
                 type : "attack",
                 amount : 20,
-                id : 1
+                id : 1,
+                couldown : 1
             },
             {
                 name : "Heal",
                 type : "heal",
                 amount : 20,
-                id : 4
+                id : 4,
+                couldown : 1
             },
             {
                 name : "HealAll",
                 type : "healAll",
                 amount : 10,
-                id : 5
+                id : 5,
+                couldown : 1
             }
         ],
-        isAlive : true
+        isAlive : true,
+        state : "idle"
     }, 
     {
         id : 0,
@@ -68,22 +76,26 @@ let playerTeam = [
                 name : "Attack",
                 type : "attack",
                 amount : 20,
-                id : 1
+                id : 1,
+                couldown : 1
             },
             {
                 name : "Heal",
                 type : "heal",
                 amount : 20,
-                id : 4
+                id : 4,
+                couldown : 1
             },
             {
                 name : "HealAll",
                 type : "healAll",
                 amount : 10,
-                id : 5
+                id : 5,
+                couldown : 1
             }
         ],
-        isAlive : true
+        isAlive : true,
+        state : "idle"
     }
 ]
 
@@ -94,7 +106,8 @@ let enemyTeam = [
             current : 20,
             max : 50
         },
-        isAlive : true
+        isAlive : true,
+        state : "idle"
     },
     {
         id : 1,
@@ -102,7 +115,8 @@ let enemyTeam = [
             current : 30,
             max : 50
         },
-        isAlive : true
+        isAlive : true,
+        state : "idle"
     },
     {
         id : 1,
@@ -110,7 +124,8 @@ let enemyTeam = [
             current : 40,
             max : 50
         },
-        isAlive : true
+        isAlive : true,
+        state : "idle"
     }
 ]
 

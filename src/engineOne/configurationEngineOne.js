@@ -22,6 +22,7 @@ let playerLastDirection = [0,1]; // orientation naturally down
 let playerOnMap;
 let actualPlayerMap;
 let tileSize = 65;
+let spriteSizeCut = 30;
 // Map Var
 
 // Construction Mode

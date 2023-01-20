@@ -56,7 +56,7 @@ const showPlayerTeam = () => {
         let yPositionSprite = window.innerHeight - (sizeSprite+sizeSprite*(i/1.25)) - 50;
         let tempSpriteToShow = spritesFightData[characterObject.id].image.get(0,0,60,60);
         const isTurnOfThisCharacter = i === currentTurn;
-        showSpriteOnMap(tempSpriteToShow, xPositionSprite, yPositionSprite, sizeSprite, characterObject, false, isTurnOfThisCharacter)
+        showSpriteOnMap(tempSpriteToShow, xPositionSprite, yPositionSprite, sizeSprite, characterObject, false, isTurnOfThisCharacter, i, false)
 
     }
 }
@@ -79,23 +79,49 @@ const showEnemyTeam = () => {
         let yPositionSprite = window.innerHeight - (sizeSprite+sizeSprite*(i/1.25)) - 50;
         let tempSpriteToShow = spritesFightData[characterObject.id].image.get(0,0,60,60)
         const isTargeted = i === currentTarget
-        showSpriteOnMap(tempSpriteToShow, xPositionSprite, yPositionSprite, sizeSprite, characterObject, isTargeted)
+        showSpriteOnMap(tempSpriteToShow, xPositionSprite, yPositionSprite, sizeSprite, characterObject, isTargeted, false, i, true)
     }
 }
 
-const showSpriteOnMap = (sprite, x, y, size, charObject, isTarget = false, playerSelectedCharacter = false) => {
+const showSpriteOnMap = (sprite, x, y, size, charObject, isTarget, playerSelectedCharacter, indexInArray, isAnEnemy) => {
     if(playerSelectedCharacter === true){
         tint(150,150,255)
-        image(sprite, x, y, size, size)
+        spriteAnimationFight(sprite, x, y, size, isAnEnemy, indexInArray)
         noTint()
     }else if(isTarget === true){
         tint(155,0,0)
-        image(sprite, x, y, size, size)
+        spriteAnimationFight(sprite, x, y, size, isAnEnemy, indexInArray)
         noTint()
     }else{
-        image(sprite, x, y, size, size)
+        spriteAnimationFight(sprite, x, y, size, isAnEnemy, indexInArray)
     }
     showSpriteHealthOnMap(x, y, size, charObject);
+}
+
+const spriteAnimationFight = (sprite, x, y, size, isAnEnemy, index) => {
+    let actualTeamSprite;
+    console.log(isAnEnemy)
+    switch(isAnEnemy){
+        case true : 
+            actualTeamSprite = playerTeam;
+            break;
+        case false :
+            actualTeamSprite = enemyTeam;
+            break;
+    }
+
+
+    switch(actualTeamSprite[index].state){
+        case "idle" :
+            idleSpriteAnimationFight(sprite, x, y, size)
+            break;
+        default : 
+            throw new Error ("Sprite can't animate cause state doesn't exist")
+    }
+}
+
+const idleSpriteAnimationFight = (spriteToAnim, x, y, size) => {
+    image(spriteToAnim, x, y, size, size);
 }
 
 const showSpriteHealthOnMap = (x, y, size, charObject) => {

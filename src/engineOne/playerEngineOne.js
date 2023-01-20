@@ -20,16 +20,16 @@ const animationIdlePlayerSprite = (positionX, positionY, size, direction) => {
     // ! /!\ switch don't take array, so i stringify it /!\ ! \\
     switch(direction.toString()){
         case "1,0":
-            idleSpriteAnimation = spritesData[0].image.get(0,30,30,30)
+            idleSpriteAnimation = spritesData[0].image.get(0,spriteSizeCut,spriteSizeCut,spriteSizeCut)
             break;
         case "-1,0":
-            idleSpriteAnimation = spritesData[0].image.get(0,60,30,30)
+            idleSpriteAnimation = spritesData[0].image.get(0,spriteSizeCut*2,spriteSizeCut,spriteSizeCut)
             break;
         case "0,-1":
-            idleSpriteAnimation = spritesData[0].image.get(0,90,30,30)
+            idleSpriteAnimation = spritesData[0].image.get(0,spriteSizeCut*3,spriteSizeCut,spriteSizeCut)
             break;
         case "0,1":
-            idleSpriteAnimation = spritesData[0].image.get(0,0,30,30)
+            idleSpriteAnimation = spritesData[0].image.get(0,0,spriteSizeCut,spriteSizeCut)
             break;
         default :
             throw new Error("failed to animate the sprite, there is an error in the lastDirection var");
@@ -46,19 +46,19 @@ const animationMoovePlayerSprite = (positionX, positionY, size, direction) => {
     switch(direction){
         case "right" :
             playerLastDirection = [1, 0]
-            spritePlayerAnimationMoove = spritesData[0].image.get(30*Math.floor(playerAnimationIndex),30,30,30);
+            spritePlayerAnimationMoove = spritesData[0].image.get(spriteSizeCut*Math.floor(playerAnimationIndex),spriteSizeCut,spriteSizeCut,spriteSizeCut);
             break;
         case "left" :
             playerLastDirection = [-1, 0]
-            spritePlayerAnimationMoove = spritesData[0].image.get(30*Math.floor(playerAnimationIndex),60,30,30);
+            spritePlayerAnimationMoove = spritesData[0].image.get(spriteSizeCut*Math.floor(playerAnimationIndex),spriteSizeCut*2,spriteSizeCut,spriteSizeCut);
             break;
         case "up" :
             playerLastDirection = [0, -1]
-            spritePlayerAnimationMoove = spritesData[0].image.get(30*Math.floor(playerAnimationIndex),90,30,30);
+            spritePlayerAnimationMoove = spritesData[0].image.get(spriteSizeCut*Math.floor(playerAnimationIndex),spriteSizeCut*3,spriteSizeCut,spriteSizeCut);
             break;
         case "down" :
             playerLastDirection = [0, 1]
-            spritePlayerAnimationMoove = spritesData[0].image.get(30*Math.floor(playerAnimationIndex),0,30,30);
+            spritePlayerAnimationMoove = spritesData[0].image.get(spriteSizeCut*Math.floor(playerAnimationIndex),0,spriteSizeCut,spriteSizeCut);
             break;
         default :
             throw new Error("failed to animate the sprite, there is an error in the direction array");
