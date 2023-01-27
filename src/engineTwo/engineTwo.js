@@ -55,8 +55,9 @@ const showPlayerTeam = () => {
         let xPositionSprite = 120;
         let yPositionSprite = window.innerHeight - (sizeSprite+sizeSprite*(i/1.25)) - 50;
         let tempSpriteToShow = spritesFightData[characterObject.id].image.get(0,0,60,60);
+        // set all variables for the showSpriteOnMap function
         const isTurnOfThisCharacter = i === currentTurn;
-        showSpriteOnMap(tempSpriteToShow, xPositionSprite, yPositionSprite, sizeSprite, characterObject, false, isTurnOfThisCharacter, i, false)
+        showSpriteOnMap(tempSpriteToShow, xPositionSprite, yPositionSprite, sizeSprite, characterObject, false, isTurnOfThisCharacter, i, false);
 
     }
 }
@@ -73,11 +74,13 @@ const showEnemyTeam = () => {
 
     for(let i = enemyTeam.length-1; i >= 0; i--)
     {
+
         let characterObject = enemyTeam[i]
         let sizeSprite = 200;
         let xPositionSprite = window.innerWidth - (120 + sizeSprite);
         let yPositionSprite = window.innerHeight - (sizeSprite+sizeSprite*(i/1.25)) - 50;
         let tempSpriteToShow = spritesFightData[characterObject.id].image.get(0,0,60,60)
+        // set all variables for the showSpriteOnMap function
         const isTargeted = i === currentTarget
         showSpriteOnMap(tempSpriteToShow, xPositionSprite, yPositionSprite, sizeSprite, characterObject, isTargeted, false, i, true)
     }
@@ -100,7 +103,6 @@ const showSpriteOnMap = (sprite, x, y, size, charObject, isTarget, playerSelecte
 
 const spriteAnimationFight = (sprite, x, y, size, isAnEnemy, index) => {
     let actualTeamSprite;
-    console.log(isAnEnemy)
     switch(isAnEnemy){
         case true : 
             actualTeamSprite = playerTeam;

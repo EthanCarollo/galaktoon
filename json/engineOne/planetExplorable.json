@@ -1,0 +1,11 @@
+{
+    "data" : 
+    [
+        {
+            "id" : "0",
+            "map" : "2",
+            "name" : "Earth",
+            "description" : "A basic explorable planets !"
+        }
+    ]
+}

@@ -25,6 +25,10 @@ const ressourceToLoad = [
         typeOfRessource : "ui",
         path : "./json/ui.json"
     },
+    {
+        typeOfRessource : "planets",
+        path : "./json/engineOne/planetExplorable.json"
+    },
 ]
 
 let tilesData = [];
@@ -33,6 +37,7 @@ let itemsData = [];
 let mapData = [];
 let spritesFightData = [];
 let uiData = [];
+let planetsData = [];
 
 // variables that follow the resource loading course
 
@@ -41,6 +46,7 @@ let loadingCounterSpritesData = 0;
 let loadingCounterItemsData = 0;
 let loadingCounterSpritesFightData = 0;
 let loadingCounterUIData = 0;
+let loadingCounterPlanetsData = 0;
 let totalLoadCounter = 0;
 let totalLoad = ressourceToLoad.length;
 
@@ -136,6 +142,11 @@ const loadRessource = (ressource, typeOfRessource) => {
             }
             break;
 
+        case "planets" :
+            planetsData = ressource;
+            successfullLoadingRessource(typeOfRessource)
+            break;
+
         default :
             throw new Error("this is not an accepted type of ressource : " + typeOfRessource);
         
@@ -182,6 +193,9 @@ const successfullLoadingRessource = (typeOfRessource) => {
             if(loadingCounterUIData === uiData.length){
                 totalLoadCounter ++;
             }
+            break;
+        case "planets" :
+            totalLoadCounter ++;
             break;
         default :
             throw new Error("this cannot load that type of ressource : " + typeOfRessource);
