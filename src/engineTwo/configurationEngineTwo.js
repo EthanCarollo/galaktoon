@@ -133,6 +133,7 @@ let currentTurn = 0;
 let currentAbilityUsed = 0;
 let currentTarget = 0;
 let turnTeam = "player";
+let indexAnimation = 0;
 
 // Fight team
 

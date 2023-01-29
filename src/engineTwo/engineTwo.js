@@ -54,7 +54,7 @@ const showPlayerTeam = () => {
         let sizeSprite = 200;
         let xPositionSprite = 120;
         let yPositionSprite = window.innerHeight - (sizeSprite+sizeSprite*(i/1.25)) - 50;
-        let tempSpriteToShow = spritesFightData[characterObject.id].image.get(0,0,60,60);
+        let tempSpriteToShow = spritesFightData[characterObject.id].image;
         // set all variables for the showSpriteOnMap function
         const isTurnOfThisCharacter = i === currentTurn;
         showSpriteOnMap(tempSpriteToShow, xPositionSprite, yPositionSprite, sizeSprite, characterObject, false, isTurnOfThisCharacter, i, false);
@@ -79,7 +79,7 @@ const showEnemyTeam = () => {
         let sizeSprite = 200;
         let xPositionSprite = window.innerWidth - (120 + sizeSprite);
         let yPositionSprite = window.innerHeight - (sizeSprite+sizeSprite*(i/1.25)) - 50;
-        let tempSpriteToShow = spritesFightData[characterObject.id].image.get(0,0,60,60)
+        let tempSpriteToShow = spritesFightData[characterObject.id].image
         // set all variables for the showSpriteOnMap function
         const isTargeted = i === currentTarget
         showSpriteOnMap(tempSpriteToShow, xPositionSprite, yPositionSprite, sizeSprite, characterObject, isTargeted, false, i, true)
@@ -105,10 +105,10 @@ const spriteAnimationFight = (sprite, x, y, size, isAnEnemy, index) => {
     let actualTeamSprite;
     switch(isAnEnemy){
         case true : 
-            actualTeamSprite = playerTeam;
+            actualTeamSprite = enemyTeam;
             break;
         case false :
-            actualTeamSprite = enemyTeam;
+            actualTeamSprite = playerTeam;
             break;
     }
 
@@ -117,13 +117,20 @@ const spriteAnimationFight = (sprite, x, y, size, isAnEnemy, index) => {
         case "idle" :
             idleSpriteAnimationFight(sprite, x, y, size)
             break;
+        case "attack" :
+            fightSpriteAnimationFight(sprite, x, y, size)
+            break;
         default : 
             throw new Error ("Sprite can't animate cause state doesn't exist")
     }
 }
 
 const idleSpriteAnimationFight = (spriteToAnim, x, y, size) => {
-    image(spriteToAnim, x, y, size, size);
+    image(spriteToAnim.get(0,0,60,60), x, y, size, size);
+}
+
+const fightSpriteAnimationFight = (spriteToAnim, x, y, size) => {
+    image(spriteToAnim.get(0,60,60,60), x, y, size, size);
 }
 
 const showSpriteHealthOnMap = (x, y, size, charObject) => {

@@ -48,9 +48,12 @@ const compareCurrentTargetAndEnemyTeam = (currentTargetNumber) => {
 // ------- TURN MANAGER
 
 const endTurn = () => {
+    playerTeam[currentTurn].state = "attack"
+    console.log(playerTeam[currentTurn])
     switchTeamTurn(turnTeam)
     console.log("endTurn, wait")
     setTimeout(() => {
+        playerTeam[currentTurn].state = "idle"
         console.log("You can play now")
         turnManager(turnTeam)
         actualTurnGame ++;

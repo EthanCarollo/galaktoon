@@ -115,6 +115,10 @@ const interactWithATile = (tileInteract) => {
             loadNewMap(mapData[0], mapData[0].secondStart)
             break;
         }
+        case "fight":{
+            launchEngineTwo()
+            break;
+        }
         default :
             throw new Error
                 ("The player is interacting with nothing which is impossible if all are doing well, so it's probably an exception with the parameter type of the tile : ' " + interactedTile.type + " ' ")
