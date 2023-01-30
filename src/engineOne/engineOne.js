@@ -74,7 +74,7 @@ const createTile = (x, y, id,currentTileSize) => {
   }
   if(tileIsAnObject(id))
   {
-    image(tilesData[0].image, xPositionTiles , normalYPositionTiles, currentTileSize, currentTileSize);
+    image(tilesData[playerOnMap.baseTile].image, xPositionTiles , normalYPositionTiles, currentTileSize, currentTileSize);
     image(tilesData[id].image, xPositionTiles , yPositionTiles, currentTileSize * xTileWidth, currentTileSize * yTileHeight); 
   }else{
     image(tilesData[id].image, xPositionTiles , yPositionTiles, currentTileSize * xTileWidth, currentTileSize * yTileHeight); 

@@ -397,7 +397,7 @@
         },
         {
             "id" : "30",
-            "path" : "assets/tiles/furnitures/newTable.png",
+            "path" : "assets/tiles/debugTiles/FightTiles.png",
             "image" : "null",
             "collider" : true,
             "canConstruct" : "false",
@@ -405,6 +405,19 @@
             "xWidth" : 1,
             "yWidth" : 1.5,
             "type" : "fight",
+            "destructible" : "false",
+            "sizeXonConstruct" : 1
+        },
+        {
+            "id" : "31",
+            "path" : "assets/tiles/earthTiles/herbe-5.png",
+            "image" : "null",
+            "collider" : false,
+            "canConstruct" : "false",
+            "isAnObject" : false,
+            "xWidth" : 1,
+            "yWidth" : 1,
+            "type" : "useless",
             "destructible" : "false",
             "sizeXonConstruct" : 1
         }
