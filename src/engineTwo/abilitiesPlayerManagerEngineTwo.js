@@ -27,6 +27,23 @@ const createIconAbility = (x, y, size, abilityID, abilityIndexOnCharacter) => {
     }else{
         image(uiData[abilityID].image, x, y, size, size)
     }
+    createAblityIndication( x, y, size, abilityIndexOnCharacter);
+}
+
+const createAblityIndication = (x, y, size, abilityIndexOnCharacter) => {
+    fill(255,0,0)
+    textSize(32)
+    switch(abilityIndexOnCharacter){
+        case 0:
+            text("A",x,y+size,size)
+            break;
+        case 1:
+            text("Z",x,y+size,size)
+            break;
+        case 2:
+            text("E",x,y+size,size)
+            break;
+    }
 }
 
 const useAbilityOnTarget = (currentAttack, currentTarget) => {
