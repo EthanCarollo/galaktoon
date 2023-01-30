@@ -43,12 +43,16 @@ function mouseClicked(){
 const playerInputInteractForEngineOne = () => {
     if(playerCanInteract === true){
   
-        let playerCaseInteract = [actualPlayerTile()[0] + playerLastDirection[0], actualPlayerTile()[1] + playerLastDirection[1]]
+        let playerCaseInteract = tileNextToThePlayer()
     
         if(keyIsDown(69)) {
           interactWithATile(playerCaseInteract);
         }
     }
+}
+
+const tileNextToThePlayer = () => {
+    return [actualPlayerTile()[0] + playerLastDirection[0], actualPlayerTile()[1] + playerLastDirection[1]]
 }
 
 const playerInputForEngineOne=()=>{

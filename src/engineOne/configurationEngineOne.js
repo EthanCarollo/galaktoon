@@ -8,6 +8,8 @@ let playerSpriteSize = 95;
 let playerCanMove = true;
 let cameraSmoothStep = 0.98;
 
+let playerIsExploringMap = false;
+
 // Player anim
 let playerIsMooving = false;
 let playerAnimationIndex = 0;
@@ -37,3 +39,7 @@ let destructionMode = false;
 let playerCanInteract = true;
 
 // Player interaction
+
+// Player exploration list
+
+// Player exploration list

@@ -97,7 +97,8 @@ const interactWithATile = (tileInteract) => {
     let interactedTile = getTileData(tileInteract[0], tileInteract[1]) // get the information of the tile that the player is looking for
     switch(interactedTile.type){
         case "explore":
-            
+            playerCanMove = false
+            playerIsExploringMap = true;
             // explore function
             break;
         case "build":
