@@ -11,7 +11,7 @@ const displayUserInterface = () => {
 // * Exploring Menu 
 
 const displayExploringMenu = () => {
-    fill(255,255,255)
+    fill(0,0,0,155)
     rect(50,50,400,800)
     for(let i =0; i < planetsData.length; i++)
     {
@@ -46,7 +46,7 @@ const exitExploringMenu = () => {
 // * Exploring Menu 
 
 
-const createInputButtonWithCallback = (xStartButton, yStartButton, sizeXButton, sizeYButton, callbackFunction = errorButton) => {
+const createInputButtonWithCallback = (xStartButton, yStartButton, sizeXButton, sizeYButton, callbackFunction = errorCallbackFunctionButton) => { // callback function is naturally an error !
     if( mouseX > xStartButton && 
         mouseY > yStartButton && 
         mouseX < xStartButton + sizeXButton && 
@@ -58,6 +58,6 @@ const createInputButtonWithCallback = (xStartButton, yStartButton, sizeXButton, 
 }
 
 
-const errorButton = () => {
+const errorCallbackFunctionButton = () => {
     throw new Error("This Button doesn't have a Function !")
 }

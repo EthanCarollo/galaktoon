@@ -117,6 +117,8 @@ const playerInputForEngineOne=()=>{
         }else{
             playerIsMooving = false;
         }
+    }else{
+        playerIsMooving = false;
     }
 
     if(playerCanInteract === true){
