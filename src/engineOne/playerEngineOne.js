@@ -75,7 +75,7 @@ const animationMoovePlayerSprite = (positionX, positionY, size, direction) => {
 
 const isOutOfLength = () => playerAnimationIndex >= (playerAnimationLength -1)
 
-const actualPlayerTile = () => [Math.floor((playerVector.x - (playerSpriteSize / 2)) / tileSize * -1), Math.floor((playerVector.y - (playerSpriteSize / 2.5)+10) / tileSize * -1)]
+const actualPlayerTile = () => [Math.floor((playerVector.x - (playerSpriteSize / 2)) / tileSize * -1), Math.floor((playerVector.y - (playerSpriteSize / 4)+10) / tileSize * -1)]
 
 const getPlayerCollision = () => {
     // Check if the tile is empty, so we won't go further in the code and check if there is a collider and crash the game cause an empty tile doesn't have collider :'(

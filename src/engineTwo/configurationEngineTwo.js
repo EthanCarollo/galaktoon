@@ -43,7 +43,16 @@ let enemyTeam = [
             max : 50
         },
         isAlive : true,
-        state : "idle"
+        state : "idle",
+        abilities : [
+            {
+                name : "Attack",
+                type : "attack",
+                amount : 20,
+                id : 1,
+                couldown : 1
+            }
+        ]
     },
     {
         id : 1,
@@ -52,7 +61,16 @@ let enemyTeam = [
             max : 50
         },
         isAlive : true,
-        state : "idle"
+        state : "idle",
+        abilities : [
+            {
+                name : "Attack",
+                type : "attack",
+                amount : 20,
+                id : 1,
+                couldown : 1
+            }
+        ]
     },
     {
         id : 1,
@@ -61,7 +79,16 @@ let enemyTeam = [
             max : 50
         },
         isAlive : true,
-        state : "idle"
+        state : "idle",
+        abilities : [
+            {
+                name : "Attack",
+                type : "attack",
+                amount : 20,
+                id : 1,
+                couldown : 1
+            }
+        ]
     }
 ]
 

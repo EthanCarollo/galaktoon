@@ -56,7 +56,7 @@ const createMapTopDown = (orientation, map = actualPlayerMap) => {
 
 }
 
-const createTile = (x, y, id,currentTileSize) => {
+const createTile = (x, y, id, currentTileSize) => {
 
   // size of the current tile according to the data
   let xTileWidth = tilesData[id].xWidth;

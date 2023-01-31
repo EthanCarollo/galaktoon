@@ -13,6 +13,8 @@ const displaySideScroller2D = () => {
     if(turnTeam === "player"){
         createInterfaceForFight()
     }
+    // DEBUG
+    text(turnTeam, 250, 50)
 }
 
 const createMapSideScroller = (map) => {
