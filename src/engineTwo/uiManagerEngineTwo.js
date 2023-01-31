@@ -3,9 +3,16 @@ const displayUserInterfaceEngineTwo = () => {
 }
 
 const createLogDebugFight = () => {
-    text("fight log", 500, 300,300)
+    let sizeX = 600;
+    let sizeY = 400;
+    let offsetXLog = (window.innerWidth/2) - sizeX /2;
+    fill(100,100,100)
+    rect(offsetXLog, window.innerHeight-sizeY,sizeX,sizeY)
+    fill(0,255,0)
+    text("fight log", offsetXLog, window.innerHeight-sizeY-50,300)
     for(let i = 0; i < fightLog.length; i++)
     {
-        text(fightLog[i], 500, 350+50*i,650)
+        fill(255,0,0)
+        text(fightLog[fightLog.length-1-i], offsetXLog, window.innerHeight-sizeY+50*i,sizeX)
     }
 }
