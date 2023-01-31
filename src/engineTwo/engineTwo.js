@@ -4,6 +4,7 @@ const runEngineTwo = () => {
     background(180)
     displaySideScroller2D();
     showTeamOnMap();
+    displayUserInterfaceEngineTwo();
 }
 
 // ---- Display

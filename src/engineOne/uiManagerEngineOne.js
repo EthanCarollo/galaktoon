@@ -1,6 +1,6 @@
 // * Display Screen
 
-const displayUserInterface = () => {
+const displayUserInterfaceEngineOne = () => {
     if(playerIsExploringMap === true){
         displayExploringMenu();
     }
@@ -24,17 +24,27 @@ const createPlanetMenuObject = (x, y, sizeX, sizeY, planetID) => {
     fill(200,55,55)
     rect(x,y,sizeX,sizeY)
     noFill()
-    createInputButtonWithCallback(x, y, sizeX, sizeY, () => {
-        let mapToExplore = mapData[planetsData[planetID].map]
-        loadNewMap(mapToExplore, mapToExplore.start)
-        exitExploringMenu()
-    })
+    fill(55,200,55)
+    textSize(60);
+    text(planetsData[planetID].name, x, y, 150)
+    noFill()
+    let mapToExplore = mapData[planetsData[planetID].map]
+    createInputButtonWithCallback(x, y, sizeX, sizeY, () => {loadMapAndExitExploringMenu(mapToExplore)})
+
+}
+
+const loadMapAndExitExploringMenu = (mapToExplore) => {
+    loadNewMap(mapToExplore, mapToExplore.start)
+    exitExploringMenu()
 }
 
 const exitCross = () => {
     fill(255,150,150)
     rect(75,20,40,40)
     createInputButtonWithCallback(75, 20, 40, 40, exitExploringMenu)
+    textSize(20);
+    fill(150,150,255)
+    text("quit menu", 75, 20, 150)
     noFill()
 }
 
@@ -59,5 +69,5 @@ const createInputButtonWithCallback = (xStartButton, yStartButton, sizeXButton, 
 
 
 const errorCallbackFunctionButton = () => {
-    throw new Error("This Button doesn't have a Function !")
+    throw new Error("This Button doesn't have a Function ! (uiManagerEngineOne.js --> const createInputButtonWithWallback)")
 }

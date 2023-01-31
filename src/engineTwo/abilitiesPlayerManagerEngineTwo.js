@@ -65,6 +65,17 @@ const useAbilityOnTarget = (currentAttack, currentTarget) => {
     if(currentTarget.hp.current <= 0){
         currentTarget.hp.current = 0;
     }
+
+    debugLogFightArray(currentAttack, currentTarget);
+}
+
+const debugLogFightArray = (currentAttack, currentTarget) => {
+    if(turnTeam === "player")
+    {
+        fightLog.push(playerTeam[0].name + " " + currentAttack.name + " on " + currentTarget.name)
+    }else{
+        fightLog.push(enemyTeam[0].name + " " + currentAttack.name + " on " + currentTarget.name)
+    }
 }
 
 const healAllCharacter = (amount) => {

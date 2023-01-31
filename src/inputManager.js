@@ -66,7 +66,7 @@ const playerInputForEngineOne=()=>{
             mapVector.x += playerSpeed
             playerDirection.push("right");
             playerIsMooving = true;
-            if(getPlayerCollision())
+            if(getPlayerCollision(createVector(-10, 0)))
             {
                 cameraVector.x -= playerSpeed
                 playerVector.x += playerSpeed
@@ -79,7 +79,7 @@ const playerInputForEngineOne=()=>{
             mapVector.x -= playerSpeed
             playerDirection.push("left");
             playerIsMooving = true;
-            if(getPlayerCollision())
+            if(getPlayerCollision(createVector(20, 0)))
             {
                 cameraVector.x += playerSpeed
                 playerVector.x -= playerSpeed
@@ -92,7 +92,7 @@ const playerInputForEngineOne=()=>{
             mapVector.y -= playerSpeed
             playerDirection.push("up");
             playerIsMooving = true;
-            if(getPlayerCollision()){
+            if(getPlayerCollision(createVector(0, 35))){
                 cameraVector.y += playerSpeed
                 playerVector.y -= playerSpeed
                 mapVector.y += playerSpeed 

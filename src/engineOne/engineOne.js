@@ -2,7 +2,7 @@
 const runEngineOne = () => {
     setPlayerCamera();
     displayTopDown2D();
-    displayUserInterface();
+    displayUserInterfaceEngineOne();
 }
 
 // ************************ Display game && camera

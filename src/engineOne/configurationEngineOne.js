@@ -4,7 +4,7 @@ let mapVector;
 
 // Player Var
 let playerSpeed = 5;
-let playerSpriteSize = 115;
+let playerSpriteSize = 100;
 let playerCanMove = true;
 let cameraSmoothStep = 0.98;
 

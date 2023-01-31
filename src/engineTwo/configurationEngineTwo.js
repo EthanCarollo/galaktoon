@@ -3,6 +3,7 @@
 let playerTeam = [
     {
         id : 0,
+        name : "You",
         hp : {
             current : 30,
             max : 50
@@ -38,6 +39,7 @@ let playerTeam = [
 let enemyTeam = [
     {
         id : 1,
+        name : "testEnemy",
         hp : {
             current : 20,
             max : 50
@@ -56,6 +58,7 @@ let enemyTeam = [
     },
     {
         id : 1,
+        name : "testEnemy",
         hp : {
             current : 30,
             max : 50
@@ -74,6 +77,7 @@ let enemyTeam = [
     },
     {
         id : 1, 
+        name : "testEnemy",
         hp : {
             current : 40,
             max : 50
@@ -97,6 +101,8 @@ let currentAbilityUsed = 0;
 let currentTarget = 0;
 let turnTeam = "player";
 let indexAnimation = 0;
+
+let fightLog = ["Fight Started !"];
 
 // Fight team
 

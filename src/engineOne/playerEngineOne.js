@@ -69,21 +69,23 @@ const animationMoovePlayerSprite = (positionX, positionY, size, direction) => {
 
     if(isOutOfLength()) 
     {
-        playerAnimationIndex = 1;
+        playerAnimationIndex = 0;
     }
 }
 
 const isOutOfLength = () => playerAnimationIndex >= (playerAnimationLength -1)
 
-const actualPlayerTile = () => [Math.floor((playerVector.x - (playerSpriteSize / 2)) / tileSize * -1), Math.floor((playerVector.y - (playerSpriteSize / 4)+10) / tileSize * -1)]
+const actualPlayerTile = (offsetVectorBounds = createVector(0, 0)) => [Math.floor((playerVector.x + offsetVectorBounds.x - (playerSpriteSize / 2)) / tileSize * -1), Math.floor((playerVector.y + offsetVectorBounds.y - (playerSpriteSize / 2)+10) / tileSize * -1)]
 
-const getPlayerCollision = () => {
+const getPlayerCollision = (offsetVectorBounds = createVector(0, 0)) => { // offsetVectorBounds is usefull in case we have different collision point on the player
+
+    let actualPlayerTileWithOffsetBounds = actualPlayerTile(offsetVectorBounds)
     // Check if the tile is empty, so we won't go further in the code and check if there is a collider and crash the game cause an empty tile doesn't have collider :'(
-    if(tileIsEmpty(actualPlayerTile()[0], actualPlayerTile()[1])){
+    if(tileIsEmpty(actualPlayerTileWithOffsetBounds[0], actualPlayerTileWithOffsetBounds[1])){
         return true
     }
 
-    return getTileData(actualPlayerTile()[0], actualPlayerTile()[1]).collider
+    return getTileData(actualPlayerTileWithOffsetBounds[0], actualPlayerTileWithOffsetBounds[1]).collider
 }
 
 // With this code, if the player is out of range of the array or the value of the tile isn't defined, he won't be able to go further
