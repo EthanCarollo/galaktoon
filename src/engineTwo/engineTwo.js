@@ -14,7 +14,9 @@ const displaySideScroller2D = () => {
         createInterfaceForFight()
     }
     // DEBUG
-    text(turnTeam, 250, 50)
+    text("actual turn is " + turnTeam, 50, 250)
+    text("Click on an enemy to target him ", window.innerWidth-500, 250)
+    text("Press space to attack ", window.innerWidth/2-175, 250)
 }
 
 const createMapSideScroller = (map) => {

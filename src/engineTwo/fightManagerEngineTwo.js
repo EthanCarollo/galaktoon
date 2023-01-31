@@ -86,3 +86,38 @@ const turnManager = (teamTurn) => {
 }
 
 // ------- TURN MANAGER
+
+// ------- CHECK IF THE FIGHT IS ENDED
+
+const checkFightState = () => {
+    if(playerTeam[0].hp.current <= 0)
+    {
+        playerLooseFight()
+    }else{
+
+    }
+}
+
+const allEnemiesAreDead = () => {
+    let countDeadTeam = 0
+    for(let i = 0; i < enemyTeam.length; i++)
+    {
+        if(enemyTeam[i].hp.current <= 0)
+        {
+            countDeadTeam ++;
+        }
+    }
+    if(countDeadTeam === enemyTeam.length){
+        return true
+    }else{
+        return false
+    }
+}
+
+const playerWinFight = () => {
+
+}
+
+const playerLooseFight = () => {
+
+}

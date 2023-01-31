@@ -425,12 +425,25 @@
             "id" : "32",
             "path" : "assets/tiles/debugTiles/backInSpaceShipTiles.png",
             "image" : "null",
-            "collider" : false,
+            "collider" : true,
             "canConstruct" : "false",
             "isAnObject" : true,
             "xWidth" : 1,
             "yWidth" : 1.5,
             "type" : "goUpInSpaceShip",
+            "destructible" : "false",
+            "sizeXonConstruct" : 1
+        },
+        {
+            "id" : "33",
+            "path" : "assets/tiles/debugTiles/CrossCollider.png",
+            "image" : "null",
+            "collider" : true,
+            "canConstruct" : "false",
+            "isAnObject" : true,
+            "xWidth" : 1,
+            "yWidth" : 1,
+            "type" : "useless",
             "destructible" : "false",
             "sizeXonConstruct" : 1
         }

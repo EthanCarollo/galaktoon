@@ -50,7 +50,7 @@ const useAbilityOnTarget = (currentAttack, currentTarget) => {
 
     switch(currentAttack.type){
         case "attack":
-            currentTarget.hp.current = currentTarget.hp.current - 20;
+            currentTarget.hp.current = currentTarget.hp.current - currentAttack.amount;
             break;
         case "heal":
             healCharacterPlayerTeam(currentAttack.amount, currentTurn)

@@ -48,7 +48,7 @@ let enemyTeam = [
             {
                 name : "Attack",
                 type : "attack",
-                amount : 20,
+                amount : 5,
                 id : 1,
                 couldown : 1
             }
@@ -66,14 +66,14 @@ let enemyTeam = [
             {
                 name : "Attack",
                 type : "attack",
-                amount : 20,
+                amount : 5,
                 id : 1,
                 couldown : 1
             }
         ]
     },
     {
-        id : 1,
+        id : 1, 
         hp : {
             current : 40,
             max : 50
@@ -84,7 +84,7 @@ let enemyTeam = [
             {
                 name : "Attack",
                 type : "attack",
-                amount : 20,
+                amount : 5,
                 id : 1,
                 couldown : 1
             }
