@@ -7,6 +7,18 @@ const displayUserInterfaceEngineTwo = () => {
 
 const displayEndFightMenu = () => {
     background(0,0,0,75);
+
+    // TEMP RETURN MAIN ENGINE BUTTON
+    let sizeButtonTemp = 150
+    rect(window.innerWidth /2 - sizeButtonTemp/2, window.innerHeight /2 - sizeButtonTemp/2, sizeButtonTemp, sizeButtonTemp)
+    fill(255,255,255)
+    createInputButtonWithCallback(window.innerWidth /2 - sizeButtonTemp/2, window.innerHeight /2 - sizeButtonTemp/2, sizeButtonTemp, sizeButtonTemp, returnMainEngine);
+    noFill()
+    // TEMP RETURN MAIN ENGINE BUTTON
+}
+
+const returnMainEngine = () => {
+    launchEngineOne();
 }
 
 const createLogDebugFight = () => {
