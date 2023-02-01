@@ -4,13 +4,20 @@ const runEngineTwo = () => {
     background(180)
     displaySideScroller2D();
     showTeamOnMap();
+    displayUserInterfaceEngineTwo();
 }
 
 // ---- Display
 
 const displaySideScroller2D = () => {
     createMapSideScroller("nothing")
-    createInterfaceForFight()
+    if(turnTeam === "player"){
+        createInterfaceForFight()
+    }
+    // DEBUG
+    text("actual turn is " + turnTeam, 50, 250)
+    text("Click on an enemy to target him ", window.innerWidth-500, 250)
+    text("Press space to attack ", window.innerWidth/2-175, 250)
 }
 
 const createMapSideScroller = (map) => {
@@ -52,9 +59,10 @@ const showPlayerTeam = () => {
         let sizeSprite = 200;
         let xPositionSprite = 120;
         let yPositionSprite = window.innerHeight - (sizeSprite+sizeSprite*(i/1.25)) - 50;
-        let tempSpriteToShow = spritesFightData[characterObject.id].image.get(0,0,60,60);
+        let tempSpriteToShow = spritesFightData[characterObject.id].image;
+        // set all variables for the showSpriteOnMap function
         const isTurnOfThisCharacter = i === currentTurn;
-        showSpriteOnMap(tempSpriteToShow, xPositionSprite, yPositionSprite, sizeSprite, characterObject, false, isTurnOfThisCharacter)
+        showSpriteOnMap(tempSpriteToShow, xPositionSprite, yPositionSprite, sizeSprite, characterObject, false, isTurnOfThisCharacter, i, false);
 
     }
 }
@@ -71,29 +79,63 @@ const showEnemyTeam = () => {
 
     for(let i = enemyTeam.length-1; i >= 0; i--)
     {
+
         let characterObject = enemyTeam[i]
         let sizeSprite = 200;
         let xPositionSprite = window.innerWidth - (120 + sizeSprite);
         let yPositionSprite = window.innerHeight - (sizeSprite+sizeSprite*(i/1.25)) - 50;
-        let tempSpriteToShow = spritesFightData[characterObject.id].image.get(0,0,60,60)
+        let tempSpriteToShow = spritesFightData[characterObject.id].image
+        // set all variables for the showSpriteOnMap function
         const isTargeted = i === currentTarget
-        showSpriteOnMap(tempSpriteToShow, xPositionSprite, yPositionSprite, sizeSprite, characterObject, isTargeted)
+        showSpriteOnMap(tempSpriteToShow, xPositionSprite, yPositionSprite, sizeSprite, characterObject, isTargeted, false, i, true)
     }
 }
 
-const showSpriteOnMap = (sprite, x, y, size, charObject, isTarget = false, playerSelectedCharacter = false) => {
+const showSpriteOnMap = (sprite, x, y, size, charObject, isTarget, playerSelectedCharacter, indexInArray, isAnEnemy) => {
     if(playerSelectedCharacter === true){
         tint(150,150,255)
-        image(sprite, x, y, size, size)
+        spriteAnimationFight(sprite, x, y, size, isAnEnemy, indexInArray)
         noTint()
     }else if(isTarget === true){
         tint(155,0,0)
-        image(sprite, x, y, size, size)
+        spriteAnimationFight(sprite, x, y, size, isAnEnemy, indexInArray)
         noTint()
     }else{
-        image(sprite, x, y, size, size)
+        spriteAnimationFight(sprite, x, y, size, isAnEnemy, indexInArray)
     }
     showSpriteHealthOnMap(x, y, size, charObject);
+}
+
+const spriteAnimationFight = (sprite, x, y, size, isAnEnemy, index) => {
+    let actualTeamSprite;
+    switch(isAnEnemy){
+        case true : 
+            actualTeamSprite = enemyTeam;
+            break;
+        case false :
+            actualTeamSprite = playerTeam;
+            break;
+    }
+
+
+    switch(actualTeamSprite[index].state){
+        case "idle" :
+            idleSpriteAnimationFight(sprite, x, y, size)
+            break;
+        case "attack" :
+            fightSpriteAnimationFight(sprite, x, y, size)
+            break;
+        default : 
+            throw new Error ("Sprite can't animate cause state doesn't exist")
+    }
+}
+
+const idleSpriteAnimationFight = (spriteToAnim, x, y, size) => {
+    image(spriteToAnim.get(0,0,60,60), x, y, size, size);
+}
+
+const fightSpriteAnimationFight = (spriteToAnim, x, y, size) => {
+    image(spriteToAnim.get(0,60,60,60), x, y, size, size);
 }
 
 const showSpriteHealthOnMap = (x, y, size, charObject) => {

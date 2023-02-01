@@ -20,16 +20,16 @@ const animationIdlePlayerSprite = (positionX, positionY, size, direction) => {
     // ! /!\ switch don't take array, so i stringify it /!\ ! \\
     switch(direction.toString()){
         case "1,0":
-            idleSpriteAnimation = spritesData[0].image.get(0,30,30,30)
+            idleSpriteAnimation = spritesData[0].image.get(0,spriteSizeCut,spriteSizeCut,spriteSizeCut)
             break;
         case "-1,0":
-            idleSpriteAnimation = spritesData[0].image.get(0,60,30,30)
+            idleSpriteAnimation = spritesData[0].image.get(0,spriteSizeCut*2,spriteSizeCut,spriteSizeCut)
             break;
         case "0,-1":
-            idleSpriteAnimation = spritesData[0].image.get(0,90,30,30)
+            idleSpriteAnimation = spritesData[0].image.get(0,spriteSizeCut*3,spriteSizeCut,spriteSizeCut)
             break;
         case "0,1":
-            idleSpriteAnimation = spritesData[0].image.get(0,0,30,30)
+            idleSpriteAnimation = spritesData[0].image.get(0,0,spriteSizeCut,spriteSizeCut)
             break;
         default :
             throw new Error("failed to animate the sprite, there is an error in the lastDirection var");
@@ -46,19 +46,19 @@ const animationMoovePlayerSprite = (positionX, positionY, size, direction) => {
     switch(direction){
         case "right" :
             playerLastDirection = [1, 0]
-            spritePlayerAnimationMoove = spritesData[0].image.get(30*Math.floor(playerAnimationIndex),30,30,30);
+            spritePlayerAnimationMoove = spritesData[0].image.get(spriteSizeCut*Math.floor(playerAnimationIndex),spriteSizeCut,spriteSizeCut,spriteSizeCut);
             break;
         case "left" :
             playerLastDirection = [-1, 0]
-            spritePlayerAnimationMoove = spritesData[0].image.get(30*Math.floor(playerAnimationIndex),60,30,30);
+            spritePlayerAnimationMoove = spritesData[0].image.get(spriteSizeCut*Math.floor(playerAnimationIndex),spriteSizeCut*2,spriteSizeCut,spriteSizeCut);
             break;
         case "up" :
             playerLastDirection = [0, -1]
-            spritePlayerAnimationMoove = spritesData[0].image.get(30*Math.floor(playerAnimationIndex),90,30,30);
+            spritePlayerAnimationMoove = spritesData[0].image.get(spriteSizeCut*Math.floor(playerAnimationIndex),spriteSizeCut*3,spriteSizeCut,spriteSizeCut);
             break;
         case "down" :
             playerLastDirection = [0, 1]
-            spritePlayerAnimationMoove = spritesData[0].image.get(30*Math.floor(playerAnimationIndex),0,30,30);
+            spritePlayerAnimationMoove = spritesData[0].image.get(spriteSizeCut*Math.floor(playerAnimationIndex),0,spriteSizeCut,spriteSizeCut);
             break;
         default :
             throw new Error("failed to animate the sprite, there is an error in the direction array");
@@ -69,21 +69,27 @@ const animationMoovePlayerSprite = (positionX, positionY, size, direction) => {
 
     if(isOutOfLength()) 
     {
-        playerAnimationIndex = 1;
+        playerAnimationIndex = 0;
     }
 }
 
 const isOutOfLength = () => playerAnimationIndex >= (playerAnimationLength -1)
 
-const actualPlayerTile = () => [Math.floor((playerVector.x - (playerSpriteSize / 2)) / tileSize * -1), Math.floor((playerVector.y - (playerSpriteSize / 2.5)+10) / tileSize * -1)]
+const actualPlayerTile = (offsetVectorBounds = createVector(0, 0)) => 
+[
+ Math.floor((playerVector.x + offsetVectorBounds.x - (playerSpriteSize / 2)) / tileSize * -1), 
+ Math.floor((playerVector.y + offsetVectorBounds.y - (playerSpriteSize / 2) + 25) / tileSize * -1) // y is a little bit offset (by 25) because the spriteY doesnt cut on yPixel = 0
+] // this is a temporary messy function
 
-const getPlayerCollision = () => {
+const getPlayerCollision = (offsetVectorBounds = createVector(0, 0)) => { // offsetVectorBounds is usefull in case we have different collision point on the player
+
+    let actualPlayerTileWithOffsetBounds = actualPlayerTile(offsetVectorBounds)
     // Check if the tile is empty, so we won't go further in the code and check if there is a collider and crash the game cause an empty tile doesn't have collider :'(
-    if(tileIsEmpty(actualPlayerTile()[0], actualPlayerTile()[1])){
+    if(tileIsEmpty(actualPlayerTileWithOffsetBounds[0], actualPlayerTileWithOffsetBounds[1])){
         return true
     }
 
-    return getTileData(actualPlayerTile()[0], actualPlayerTile()[1]).collider
+    return getTileData(actualPlayerTileWithOffsetBounds[0], actualPlayerTileWithOffsetBounds[1]).collider
 }
 
 // With this code, if the player is out of range of the array or the value of the tile isn't defined, he won't be able to go further
@@ -97,7 +103,8 @@ const interactWithATile = (tileInteract) => {
     let interactedTile = getTileData(tileInteract[0], tileInteract[1]) // get the information of the tile that the player is looking for
     switch(interactedTile.type){
         case "explore":
-            launchEngineTwo();
+            playerCanMove = false
+            playerIsExploringMap = true;
             // explore function
             break;
         case "build":
@@ -115,6 +122,12 @@ const interactWithATile = (tileInteract) => {
             loadNewMap(mapData[0], mapData[0].secondStart)
             break;
         }
+        case "fight":{
+            // ! TEMP 
+            launchFightOnEngineTwo()
+            // ! TEMP
+            break;
+        }
         default :
             throw new Error
                 ("The player is interacting with nothing which is impossible if all are doing well, so it's probably an exception with the parameter type of the tile : ' " + interactedTile.type + " ' ")
@@ -124,7 +137,7 @@ const interactWithATile = (tileInteract) => {
 const createInteractionPopup = (x ,y ,typeOfInteract) => {
     switch(typeOfInteract){
         default:
-            createTile(x, y-1, 20, 65)
+            createImageWithIdOn2dArray(x, y-1, 20, 65) // god tier function 
             break;
     }
 }

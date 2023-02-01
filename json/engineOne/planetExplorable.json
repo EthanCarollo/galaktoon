@@ -1,0 +1,17 @@
+{
+    "data" : 
+    [
+        {
+            "id" : "0",
+            "map" : "2",
+            "name" : "Earth",
+            "description" : "A basic explorable planets !"
+        },
+        {
+            "id" : "1",
+            "map" : "3",
+            "name" : "Bob's Planet",
+            "description" : "A basic explorable planets !"
+        }
+    ]
+}
