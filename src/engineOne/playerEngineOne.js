@@ -123,7 +123,9 @@ const interactWithATile = (tileInteract) => {
             break;
         }
         case "fight":{
-            launchEngineTwo()
+            // ! TEMP 
+            launchFightOnEngineTwo()
+            // ! TEMP
             break;
         }
         default :
@@ -135,7 +137,7 @@ const interactWithATile = (tileInteract) => {
 const createInteractionPopup = (x ,y ,typeOfInteract) => {
     switch(typeOfInteract){
         default:
-            createImageWithIdOn2dArray(x, y-1, 20, 65)
+            createImageWithIdOn2dArray(x, y-1, 20, 65) // god tier function 
             break;
     }
 }

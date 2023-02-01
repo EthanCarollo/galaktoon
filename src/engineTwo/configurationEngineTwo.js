@@ -5,7 +5,7 @@ let playerTeam = [
         id : 0,
         name : "You",
         hp : {
-            current : 30,
+            current : 50,
             max : 50
         },
         abilities : [
@@ -36,65 +36,7 @@ let playerTeam = [
     }
 ]
 
-let enemyTeam = [
-    {
-        id : 1,
-        name : "testEnemy",
-        hp : {
-            current : 20,
-            max : 50
-        },
-        isAlive : true,
-        state : "idle",
-        abilities : [
-            {
-                name : "Attack",
-                type : "attack",
-                amount : 5,
-                id : 1,
-                couldown : 1
-            }
-        ]
-    },
-    {
-        id : 1,
-        name : "testEnemy",
-        hp : {
-            current : 30,
-            max : 50
-        },
-        isAlive : true,
-        state : "idle",
-        abilities : [
-            {
-                name : "Attack",
-                type : "attack",
-                amount : 5,
-                id : 1,
-                couldown : 1
-            }
-        ]
-    },
-    {
-        id : 1, 
-        name : "testEnemy",
-        hp : {
-            current : 40,
-            max : 50
-        },
-        isAlive : true,
-        state : "idle",
-        abilities : [
-            {
-                name : "Attack",
-                type : "attack",
-                amount : 5,
-                id : 1,
-                couldown : 1
-            }
-        ]
-    }
-]
+let enemyTeam;
 
 let currentTurn = 0;
 let currentAbilityUsed = 0;

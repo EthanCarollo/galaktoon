@@ -61,6 +61,7 @@ const endTurn = () => {
 }
 
 const switchTeamTurn = (teamTurn) => {
+    checkFightState();
     switch(teamTurn){
         case "player" :
             turnTeam = "ia"
@@ -83,7 +84,6 @@ const turnManager = (teamTurn) => {
         default :
             throw new Error("It's the turn of nobody which is IMPOSSIBLE")
     }
-    checkFightState();
 }
 
 // ------- TURN MANAGER

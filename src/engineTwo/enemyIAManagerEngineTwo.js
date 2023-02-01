@@ -1,6 +1,8 @@
 const enemyIaTurn = () => {
-    enemyIaUseAbility();
-    switchTeamTurn(turnTeam)
+    if(fightIsEnd === false){
+        enemyIaUseAbility();
+        switchTeamTurn(turnTeam)
+    }
 }
 
 const enemyIaUseAbility = () => {
