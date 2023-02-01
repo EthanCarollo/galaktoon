@@ -62,7 +62,7 @@ const playerInputForEngineOne=()=>{
             mapVector.y += playerSpeed  
             playerDirection.push("down");  
             playerIsMooving = true; 
-            if(getPlayerCollision(createVector(-10, 0))){
+            if(getPlayerCollision(createVector(0, 0))){
                 cameraVector.y -= playerSpeed
                 playerVector.y += playerSpeed
                 mapVector.y -= playerSpeed
