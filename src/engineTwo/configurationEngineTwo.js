@@ -102,6 +102,8 @@ let currentTarget = 0;
 let turnTeam = "player";
 let indexAnimation = 0;
 
+let fightIsEnd = false;
+
 let fightLog = ["Fight Started !"];
 
 // Fight team

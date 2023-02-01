@@ -83,6 +83,7 @@ const turnManager = (teamTurn) => {
         default :
             throw new Error("It's the turn of nobody which is IMPOSSIBLE")
     }
+    checkFightState();
 }
 
 // ------- TURN MANAGER
@@ -93,8 +94,8 @@ const checkFightState = () => {
     if(playerTeam[0].hp.current <= 0)
     {
         playerLooseFight()
-    }else{
-
+    }else if(allEnemiesAreDead()){
+        playerWinFight()
     }
 }
 
@@ -115,9 +116,11 @@ const allEnemiesAreDead = () => {
 }
 
 const playerWinFight = () => {
-
+    fightIsEnd = true
+    fightLog.push("Player Won !")
 }
 
 const playerLooseFight = () => {
-
+    fightIsEnd = true
+    fightLog.push("Player is Dead !")
 }

@@ -1,5 +1,12 @@
 const displayUserInterfaceEngineTwo = () => {
     createLogDebugFight();
+    if(fightIsEnd === true){
+        displayEndFightMenu();
+    }
+}
+
+const displayEndFightMenu = () => {
+    background(0,0,0,75);
 }
 
 const createLogDebugFight = () => {
