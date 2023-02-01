@@ -39,6 +39,7 @@ This game only use the p5.js library.
 * Player can interact with tile.
 * Camera smooth follow the player.
 * Player can travel through planets from the control panel.
+* Player can fight enemy !
 
 ## 5. Studio Informations
 
