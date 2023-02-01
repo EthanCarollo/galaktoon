@@ -3,8 +3,9 @@
 let playerTeam = [
     {
         id : 0,
+        name : "You",
         hp : {
-            current : 30,
+            current : 50,
             max : 50
         },
         abilities : [
@@ -12,111 +13,40 @@ let playerTeam = [
                 name : "Attack",
                 type : "attack",
                 amount : 20,
-                id : 1
+                id : 1,
+                couldown : 1
             },
             {
                 name : "Heal",
                 type : "heal",
                 amount : 20,
-                id : 4
+                id : 4,
+                couldown : 2
             },
             {
                 name : "HealAll",
                 type : "healAll",
                 amount : 10,
-                id : 5
+                id : 5,
+                couldown : 3
             }
         ],
-        isAlive : true
-    }, 
-    {
-        id : 0,
-        hp : {
-            current : 0,
-            max : 50
-        },
-        abilities : [
-            {
-                name : "Attack",
-                type : "attack",
-                amount : 20,
-                id : 1
-            },
-            {
-                name : "Heal",
-                type : "heal",
-                amount : 20,
-                id : 4
-            },
-            {
-                name : "HealAll",
-                type : "healAll",
-                amount : 10,
-                id : 5
-            }
-        ],
-        isAlive : true
-    }, 
-    {
-        id : 0,
-        hp : {
-            current : 10,
-            max : 50
-        },
-        abilities : [
-            {
-                name : "Attack",
-                type : "attack",
-                amount : 20,
-                id : 1
-            },
-            {
-                name : "Heal",
-                type : "heal",
-                amount : 20,
-                id : 4
-            },
-            {
-                name : "HealAll",
-                type : "healAll",
-                amount : 10,
-                id : 5
-            }
-        ],
-        isAlive : true
+        isAlive : true,
+        state : "idle"
     }
 ]
 
-let enemyTeam = [
-    {
-        id : 1,
-        hp : {
-            current : 20,
-            max : 50
-        },
-        isAlive : true
-    },
-    {
-        id : 1,
-        hp : {
-            current : 30,
-            max : 50
-        },
-        isAlive : true
-    },
-    {
-        id : 1,
-        hp : {
-            current : 40,
-            max : 50
-        },
-        isAlive : true
-    }
-]
+let enemyTeam;
 
 let currentTurn = 0;
 let currentAbilityUsed = 0;
 let currentTarget = 0;
+let turnTeam = "player";
+let indexAnimation = 0;
+
+let fightIsEnd = false;
+
+let fightLog = ["Fight Started !"];
 
 // Fight team
 

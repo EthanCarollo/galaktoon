@@ -28,3 +28,7 @@ function draw() {
         runInputManager();
     }
 }
+
+function windowResized() {
+	resizeCanvas(windowWidth, windowHeight);
+}

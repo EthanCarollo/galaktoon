@@ -2,6 +2,7 @@
 const runEngineOne = () => {
     setPlayerCamera();
     displayTopDown2D();
+    displayUserInterfaceEngineOne();
 }
 
 // ************************ Display game && camera
@@ -37,13 +38,13 @@ const createMapTopDown = (orientation, map = actualPlayerMap) => {
             case "back" :
               if(actualPlayerTile()[1] >= y)
               {
-                createTile(x, y, map[y][x], tileSize);
+                createImageWithIdOn2dArray(x, y, map[y][x], tileSize);
               }
               break;
             case "front":
               if(actualPlayerTile()[1] < y)
               {
-                createTile(x, y, map[y][x], tileSize);
+                createImageWithIdOn2dArray(x, y, map[y][x], tileSize);
               }
               break;
             default :
@@ -55,7 +56,7 @@ const createMapTopDown = (orientation, map = actualPlayerMap) => {
 
 }
 
-const createTile = (x, y, id,currentTileSize) => {
+const createImageWithIdOn2dArray = (x, y, id, currentTileSize) => {
 
   // size of the current tile according to the data
   let xTileWidth = tilesData[id].xWidth;
@@ -64,21 +65,26 @@ const createTile = (x, y, id,currentTileSize) => {
   let xPositionTiles = currentTileSize*x + cameraVector.x + playerVector.x -45;
   let yPositionTiles = (currentTileSize*(y+1-yTileHeight) + cameraVector.y + playerVector.y -45);
   let normalYPositionTiles = currentTileSize*y + cameraVector.y + playerVector.y -45; // normal position of a tiles (usefull when you need to instantiate a normal tile behind a special tile)
-
+  
+  /*
   if(tileIsConstructibleAndWeCanConstruct(id)){
     tint(100, 255, 100) // this is purely esthetic
   }
   if(tileIsDestructibleAndWeCanDestruct(id)){
     tint(255, 100, 100) // this is purely esthetic too
   }
+  This code isn't usefull actually, i just preshot for a next features :3
+  */
+
   if(tileIsAnObject(id))
   {
-    image(tilesData[0].image, xPositionTiles , normalYPositionTiles, currentTileSize, currentTileSize);
+    image(tilesData[playerOnMap.baseTile].image, xPositionTiles , normalYPositionTiles, currentTileSize, currentTileSize);
     image(tilesData[id].image, xPositionTiles , yPositionTiles, currentTileSize * xTileWidth, currentTileSize * yTileHeight); 
   }else{
     image(tilesData[id].image, xPositionTiles , yPositionTiles, currentTileSize * xTileWidth, currentTileSize * yTileHeight); 
   }
-    noTint()
+
+  //noTint()
 }
 
 const tileIsEmpty = (x, y) => actualPlayerMap[y][x]<=-1 || actualPlayerMap[y][x] >= tilesData.length // In this case, a tile with a value <= to -1 is an empty case or if the value is >= to the length of the tilesData

@@ -4,9 +4,11 @@ let mapVector;
 
 // Player Var
 let playerSpeed = 5;
-let playerSpriteSize = 95;
+let playerSpriteSize = 100;
 let playerCanMove = true;
 let cameraSmoothStep = 0.98;
+
+let playerIsExploringMap = false;
 
 // Player anim
 let playerIsMooving = false;
@@ -22,6 +24,7 @@ let playerLastDirection = [0,1]; // orientation naturally down
 let playerOnMap;
 let actualPlayerMap;
 let tileSize = 65;
+let spriteSizeCut = 30;
 // Map Var
 
 // Construction Mode
@@ -36,3 +39,7 @@ let destructionMode = false;
 let playerCanInteract = true;
 
 // Player interaction
+
+// Player exploration list
+
+// Player exploration list

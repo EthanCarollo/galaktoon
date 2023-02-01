@@ -20,34 +20,29 @@ This game only use the p5.js library.
 
 ## 2. How To Install
 
-1 - Download the source
-2 - Install the "live server" extension in Visual Studio Code
-3 - Open index.html in Visual Studio Code 
-4 - Click on "Go Live" in the right bottom corner of the window
-5 - Enjoy !
+* 1 - Download the source
+* 2 - Install the "live server" extension in Visual Studio Code
+* 3 - Open index.html in Visual Studio Code 
+* 4 - Click on "Go Live" in the right bottom corner of the window
+* 5 - Enjoy !
 
 ## 3. Engine Informations
 
-##### Engine One :
+##### Engine One works with a 2D top down view.
 
-###### 2D Top-down engine :
-
-Moovement and collision system already built
-Map creation already built (perspective map done) 
-Interaction tile currently being built
-
-##### Engine TWO :
-
-###### 2D side scroll engine :
-
-Not started yet
+##### Engine Two works with a 2D side view for turn-based fight.
 
 ## 4. Features Informations
 
-???
+* Player Movement and collision system.
+* Map creation (with y-axis). 
+* Player can interact with tile.
+* Camera smooth follow the player.
+* Player can travel through planets from the control panel.
 
 ## 5. Studio Informations
 
-##### Our name
+##### Us
 
-We are the Sleepy Mouse studio
+We are a group of 4 students ! 3 web designers and 1 developper. This game is a pedagogical project, it is absolutely not intended for commercial purposes.
+

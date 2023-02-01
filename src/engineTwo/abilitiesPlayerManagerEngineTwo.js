@@ -27,13 +27,30 @@ const createIconAbility = (x, y, size, abilityID, abilityIndexOnCharacter) => {
     }else{
         image(uiData[abilityID].image, x, y, size, size)
     }
+    createAblityIndication( x, y, size, abilityIndexOnCharacter);
+}
+
+const createAblityIndication = (x, y, size, abilityIndexOnCharacter) => {
+    fill(255,0,0)
+    textSize(32)
+    switch(abilityIndexOnCharacter){
+        case 0:
+            text("A",x,y+size,size)
+            break;
+        case 1:
+            text("Z",x,y+size,size)
+            break;
+        case 2:
+            text("E",x,y+size,size)
+            break;
+    }
 }
 
 const useAbilityOnTarget = (currentAttack, currentTarget) => {
 
     switch(currentAttack.type){
         case "attack":
-            currentTarget.hp.current = currentTarget.hp.current - 20;
+            currentTarget.hp.current = currentTarget.hp.current - currentAttack.amount;
             break;
         case "heal":
             healCharacterPlayerTeam(currentAttack.amount, currentTurn)
@@ -47,6 +64,17 @@ const useAbilityOnTarget = (currentAttack, currentTarget) => {
     }
     if(currentTarget.hp.current <= 0){
         currentTarget.hp.current = 0;
+    }
+
+    debugLogFightArray(currentAttack, currentTarget);
+}
+
+const debugLogFightArray = (currentAttack, currentTarget) => {
+    if(turnTeam === "player")
+    {
+        fightLog.push(playerTeam[0].name + " " + currentAttack.name + " on " + currentTarget.name)
+    }else{
+        fightLog.push(enemyTeam[0].name + " " + currentAttack.name + " on " + currentTarget.name)
     }
 }
 
