@@ -21,10 +21,10 @@ const displaySideScroller2D = () => {
 }
 
 const createMapSideScroller = (map) => {
-    createFloorOfSideScrollerMap()
+    createFloorOfSideMap()
 }
 
-const createFloorOfSideScrollerMap = () => {
+const createFloorOfSideMap = () => {
     for(let y = 0; y < 6; y++){
         for(let x = 0; x < 25; x++)
         {
@@ -35,6 +35,7 @@ const createFloorOfSideScrollerMap = () => {
             image(tilesData[0].image, xPositionTiles, yPositionTiles, tileSizeTemp, tileSizeTemp)
         }
     }
+    //temp code for initializing floor of side map
 }
 
 const showTeamOnMap = () => {
@@ -125,6 +126,9 @@ const spriteAnimationFight = (sprite, x, y, size, isAnEnemy, index) => {
         case "attack" :
             fightSpriteAnimationFight(sprite, x, y, size)
             break;
+        case "dead" :
+            deadSpriteAnimationFight(sprite, x, y, size)
+            break;
         default : 
             throw new Error ("Sprite can't animate cause state doesn't exist")
     }
@@ -135,7 +139,14 @@ const idleSpriteAnimationFight = (spriteToAnim, x, y, size) => {
 }
 
 const fightSpriteAnimationFight = (spriteToAnim, x, y, size) => {
-    image(spriteToAnim.get(0,60,60,60), x, y, size, size);
+    image(spriteToAnim.get(0+(60*Math.floor(indexAnimationFight)),60,60,60), x, y, size, size);
+    if(indexAnimationFight < 3){
+        indexAnimationFight += 0.1;
+    }
+}
+
+const deadSpriteAnimationFight = (spriteToAnim, x, y, size) => {
+    image(spriteToAnim.get(0,120,60,60), x, y, size, size);
 }
 
 const showSpriteHealthOnMap = (x, y, size, charObject) => {

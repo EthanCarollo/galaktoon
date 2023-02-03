@@ -39,6 +39,7 @@ const launchFightOnEngineTwo = (enemiesArray = debugEnemiesArray) => { // this t
 const settingUpEngineTwoScene = (enemiesArray) => {
     // reset variable
     currentTurn = 0;
+    whoWin = "nobody";
     fightLog = ["Fight Started !"];
     turnTeam = "player";
     fightIsEnd = false;

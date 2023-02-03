@@ -1,18 +1,23 @@
 const displayUserInterfaceEngineTwo = () => {
     createLogDebugFight();
     if(fightIsEnd === true){
-        displayEndFightMenu();
+        displayEndFightMenu(whoWin);
     }
 }
 
-const displayEndFightMenu = () => {
+const displayEndFightMenu = (whoWin) => {
+    let sizeButtonTemp = 150
+    let xPosButton = window.innerWidth /2 - sizeButtonTemp/2;
+    let yPosButton = window.innerHeight /2 - sizeButtonTemp/2;
+
     background(0,0,0,75);
 
+
     // TEMP RETURN MAIN ENGINE BUTTON
-    let sizeButtonTemp = 150
-    rect(window.innerWidth /2 - sizeButtonTemp/2, window.innerHeight /2 - sizeButtonTemp/2, sizeButtonTemp, sizeButtonTemp)
+    rect(xPosButton, yPosButton, sizeButtonTemp, sizeButtonTemp)
     fill(255,255,255)
     createInputButtonWithCallback(window.innerWidth /2 - sizeButtonTemp/2, window.innerHeight /2 - sizeButtonTemp/2, sizeButtonTemp, sizeButtonTemp, returnMainEngine);
+    text(whoWin + " win the fight.", xPosButton, yPosButton)
     noFill()
     // TEMP RETURN MAIN ENGINE BUTTON
 }

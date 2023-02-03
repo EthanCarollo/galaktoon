@@ -48,20 +48,21 @@ const compareCurrentTargetAndEnemyTeam = (currentTargetNumber) => {
 // ------- TURN MANAGER
 
 const endTurn = () => {
+    indexAnimationFight = 0;
     playerTeam[currentTurn].state = "attack"
-    console.log(playerTeam[currentTurn])
     switchTeamTurn(turnTeam)
     console.log("endTurn, wait")
     setTimeout(() => {
+        checkFightState();
         playerTeam[currentTurn].state = "idle"
         console.log("You can play now")
+        indexAnimationFight = 0;
         turnManager(turnTeam)
         actualTurnGame ++;
-    }, 2000);
+    }, 1000);
 }
 
 const switchTeamTurn = (teamTurn) => {
-    checkFightState();
     switch(teamTurn){
         case "player" :
             turnTeam = "ia"
@@ -91,13 +92,14 @@ const turnManager = (teamTurn) => {
 // ------- CHECK IF THE FIGHT IS ENDED
 
 const checkFightState = () => {
-    if(playerTeam[0].hp.current <= 0)
-    {
+    if(allAlliesAreDead()){
         playerLooseFight()
     }else if(allEnemiesAreDead()){
         playerWinFight()
     }
 }
+
+const allAlliesAreDead = () => playerTeam[0].hp.current <= 0
 
 const allEnemiesAreDead = () => {
     let countDeadTeam = 0
@@ -105,6 +107,8 @@ const allEnemiesAreDead = () => {
     {
         if(enemyTeam[i].hp.current <= 0)
         {
+            enemyTeam[i].isAlive = false;
+            enemyTeam[i].state = "dead";
             countDeadTeam ++;
         }
     }
@@ -116,11 +120,13 @@ const allEnemiesAreDead = () => {
 }
 
 const playerWinFight = () => {
+    whoWin = "Player";
     fightIsEnd = true
     fightLog.push("Player Won !")
 }
 
 const playerLooseFight = () => {
+    whoWin = "Enemy";
     fightIsEnd = true
     fightLog.push("Player is Dead !")
 }
