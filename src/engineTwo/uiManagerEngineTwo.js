@@ -13,13 +13,13 @@ const displayEndFightMenu = (whoWin) => {
     background(0,0,0,75);
 
 
-    // TEMP RETURN MAIN ENGINE BUTTON
-    rect(xPosButton, yPosButton, sizeButtonTemp, sizeButtonTemp)
+    // TEMP RETURN MAIN ENGINE BUTTON for debug
+    rect(xPosButton, yPosButton, sizeButtonTemp*2, sizeButtonTemp)
     fill(255,255,255)
-    createInputButtonWithCallback(window.innerWidth /2 - sizeButtonTemp/2, window.innerHeight /2 - sizeButtonTemp/2, sizeButtonTemp, sizeButtonTemp, returnMainEngine);
-    text(whoWin + " win the fight.", xPosButton, yPosButton)
+    createInputButtonWithCallback(xPosButton, yPosButton, sizeButtonTemp*2, sizeButtonTemp, returnMainEngine);
+    text(whoWin + " win the fight.", xPosButton+sizeButtonTemp, yPosButton+sizeButtonTemp/2)
     noFill()
-    // TEMP RETURN MAIN ENGINE BUTTON
+    // TEMP RETURN MAIN ENGINE BUTTON for debug
 }
 
 const returnMainEngine = () => {
