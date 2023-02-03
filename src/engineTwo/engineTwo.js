@@ -129,6 +129,12 @@ const spriteAnimationFight = (sprite, x, y, size, isAnEnemy, index) => {
         case "dead" :
             deadSpriteAnimationFight(sprite, x, y, size)
             break;
+        case "heal" :
+            healSpriteAnimationFight(sprite, x, y, size)
+            break;
+        case "healAll" :
+            healAllSpriteAnimationFight(sprite, x, y, size)
+            break;
         default : 
             throw new Error ("Sprite can't animate cause state doesn't exist")
     }
@@ -140,6 +146,20 @@ const idleSpriteAnimationFight = (spriteToAnim, x, y, size) => {
 
 const fightSpriteAnimationFight = (spriteToAnim, x, y, size) => {
     image(spriteToAnim.get(0+(60*Math.floor(indexAnimationFight)),60,60,60), x, y, size, size);
+    if(indexAnimationFight < 3){
+        indexAnimationFight += 0.1;
+    }
+}
+
+const healSpriteAnimationFight = (spriteToAnim, x, y, size) => {
+    image(spriteToAnim.get(0+(60*Math.floor(indexAnimationFight)),180,60,60), x, y, size, size);
+    if(indexAnimationFight < 3){
+        indexAnimationFight += 0.1;
+    }
+}
+
+const healAllSpriteAnimationFight = (spriteToAnim, x, y, size) => {
+    image(spriteToAnim.get(0+(60*Math.floor(indexAnimationFight)),240,60,60), x, y, size, size);
     if(indexAnimationFight < 3){
         indexAnimationFight += 0.1;
     }

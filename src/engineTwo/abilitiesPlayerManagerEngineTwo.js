@@ -46,7 +46,9 @@ const createAblityIndication = (x, y, size, abilityIndexOnCharacter) => {
     }
 }
 
-const useAbilityOnTarget = (currentAttack, currentTarget) => {
+const useAbilityOnTarget = (currentAttack, currentTarget, attackerRef = null) => {
+    
+    attackerRef.state = currentAttack.type;
 
     switch(currentAttack.type){
         case "attack":
@@ -60,7 +62,6 @@ const useAbilityOnTarget = (currentAttack, currentTarget) => {
             break;
         default :
             throw new Error("Player abilities don't actually work cause there is no good type")
-            break;
     }
     if(currentTarget.hp.current <= 0){
         currentTarget.hp.current = 0;

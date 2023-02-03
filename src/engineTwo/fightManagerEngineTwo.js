@@ -28,9 +28,10 @@ const changeCurrentTarget = (targetIndex) => {
 const attackCurrentTargetOnInput = () => {
     if(keyIsDown(32) && turnTeam === "player")
     {
+        let playerRef = playerTeam[currentTurn];
         let playerAttack = playerTeam[currentTurn].abilities[currentAbilityUsed];
         let enemyWhoGetAttacked = enemyTeam[currentTarget];
-        useAbilityOnTarget(playerAttack, enemyWhoGetAttacked);
+        useAbilityOnTarget(playerAttack, enemyWhoGetAttacked, playerRef);
         endTurn();
     }
 }
@@ -49,7 +50,6 @@ const compareCurrentTargetAndEnemyTeam = (currentTargetNumber) => {
 
 const endTurn = () => {
     indexAnimationFight = 0;
-    playerTeam[currentTurn].state = "attack"
     switchTeamTurn(turnTeam)
     console.log("endTurn, wait")
     setTimeout(() => {

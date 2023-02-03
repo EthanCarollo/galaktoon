@@ -9,8 +9,7 @@ const enemyIaTurn = () => {
 }
 
 const enemyIaUseAbility = () => {
-    enemyTeam[0].state = "attack"
-    useAbilityOnTarget(enemyTeam[0].abilities[0], playerTeam[0])
+    useAbilityOnTarget(enemyTeam[0].abilities[0], playerTeam[0], enemyTeam[0])
 }
 
 // It actually work
