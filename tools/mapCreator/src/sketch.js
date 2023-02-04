@@ -8,6 +8,12 @@ function setup() {
     noSmooth();
     frameRate(60);
   }
+
+function draw(){
+  if(imageIsLoaded === true){
+    displayMap();
+  }
+}
   
 function mouseClicked() {
     

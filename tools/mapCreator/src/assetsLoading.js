@@ -1,4 +1,6 @@
 let tilesData = [];
+let countTile = 0;
+let imageIsLoaded = false;
 
 const loadAssets = () => {
     fetch("../../../json/engineOne/tiles.json")
@@ -16,9 +18,16 @@ const loadImageAssets = () => {
 
     for(let i = 0; i < tilesData.length; i++)
     {
-        tilesData[i].image = loadImage("../../../" + tilesData[i].path);
+        tilesData[i].image = loadImage("../../../" + tilesData[i].path, succeedLoadImage);
     }
     createDOM()
+}
+
+const succeedLoadImage = () => {
+    countTile ++;
+    if(countTile === tilesData.length){
+        imageIsLoaded = true;
+    }
 }
 
 const createDOM = () => {
