@@ -11,6 +11,8 @@ let mapLayer = [
 let xMapPos = 0;
 let yMapPos = 0;
 
+let tileSelected = 0;
+
 let tileSize = 50;
 
 
@@ -18,7 +20,7 @@ const displayMap = () => {
     for(let x = 0; x < mapLayer.length; x++)
     {
         for(let y = 0; y < mapLayer.length; y++){
-            displayTiles(x, y, 45, mapLayer[x][y])
+            displayTiles(x, y, tileSize, mapLayer[x][y])
         }
     }
 }

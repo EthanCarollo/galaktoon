@@ -41,10 +41,11 @@ body{
 .listTiles{
     font-family: pixel;
     position: absolute;
-    top: 0%;
+    bottom: 0%;
     color: rgb(255, 255, 255);
     font-size: 7vh;
-    height: 100vh;
+    height: 20vh;
+    width: 100vw;
     background-color: rgba(0, 0, 0, 0.473);
     padding: 2vh;
 }

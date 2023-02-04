@@ -44,5 +44,5 @@ const createDOM = () => {
 }
 
 const callbackTiles = (id) => {
-    console.log(id)
+    tileSelected = id;
 }

@@ -16,5 +16,7 @@ function draw(){
 }
   
 function mouseClicked() {
-  console.log(getTileWithScreenPosition(mouseX, mouseY))
+  let tileOnMouse = getTileWithScreenPosition(mouseX, mouseY);
+  console.log(tileOnMouse)
+  mapLayer[tileOnMouse[0]][tileOnMouse[1]] = tileSelected
 }
