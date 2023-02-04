@@ -31,3 +31,5 @@ const displayTiles = (x, y, size, id) => {
     image(tilesData[id].image, x*size + xMapPos, y*size + yMapPos, size, size)
     
 }
+
+const getTileWithScreenPosition = (x, y) => [Math.floor(x / tileSize), Math.floor(y / tileSize)]

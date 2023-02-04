@@ -16,5 +16,5 @@ function draw(){
 }
   
 function mouseClicked() {
-    
-  }
+  console.log(getTileWithScreenPosition(mouseX, mouseY))
+}
