@@ -16,7 +16,19 @@ function draw(){
 }
   
 function mouseClicked() {
+  paintTilesOnClick(tileSelected)
+}
+
+const paintTilesOnClick = (tileSelectedByUser = tileSelected) => {
   let tileOnMouse = getTileWithScreenPosition(mouseX, mouseY);
-  console.log(tileOnMouse)
-  mapLayers.ground[tileOnMouse[0]][tileOnMouse[1]] = tileSelected
+  switch(selectedLayer){
+    case "ground" :
+      mapLayers.ground[tileOnMouse[0]][tileOnMouse[1]] = tileSelectedByUser
+      break;
+    case "object" :
+      mapLayers.object[tileOnMouse[0]][tileOnMouse[1]] = tileSelectedByUser
+      break;
+    default :
+      throw new Error("Layer isn't defined")
+  }
 }
