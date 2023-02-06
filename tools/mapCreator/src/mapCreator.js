@@ -28,14 +28,18 @@ let yMapPos = 0;
 
 let tileSelected = 0;
 
-let sizeMap = 10;
+let sizeMap = 20;
 
 let tileSize = 50;
 
 const resizeArrayMap = () => {
     mapLayers.ground.length = sizeMap
-    mapLayers.ground.map(item => 0)
-    console.log(mapLayers.ground)
+    for(let i = 0; i<mapLayers.ground.length;i++){
+        mapLayers.ground[i] = new Array(sizeMap)
+        for(let j = 0; j<mapLayers.ground[i].length;j++){
+            mapLayers.ground[i][j] = 0;
+        }
+    }
 }
 
 const displayMap = () => {
