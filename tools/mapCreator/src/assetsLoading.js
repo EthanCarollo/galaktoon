@@ -31,6 +31,11 @@ const succeedLoadImage = () => {
 }
 
 const createDOM = () => {
+    let erase = document.getElementById("innerTilesList").appendChild(document.createElement("image"))
+    erase.classList.add("tile")
+    erase.addEventListener("mouseup", () => {
+        callbackTiles(-1);
+    })
     for(let j = 0; j<tilesData.length;j++)
     {
         let image = document.getElementById("innerTilesList").appendChild(document.createElement("image"))

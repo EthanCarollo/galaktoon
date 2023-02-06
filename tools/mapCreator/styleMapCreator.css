@@ -95,4 +95,5 @@ body{
     height: 5vh;
     margin: 1vw;
     background-color: wheat;
+    cursor: pointer;
 }

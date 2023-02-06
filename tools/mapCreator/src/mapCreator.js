@@ -8,7 +8,7 @@ let mapLayers = {
         [ 0, 0, 0, 0, 0, 0, 0, 0],
         [ 0, 0, 0, 0, 0, 0, 0, 0]
     ],
-    objectLayer : 
+    object : 
     [
         [-1,-1,-1,-1,-1,-1,-1,-1],
         [-1,-1,-1,-1,-1,-1,-1,-1],
@@ -34,6 +34,7 @@ let tileSize = 50;
 const displayMap = () => {
     background(225)
     displayLayer(mapLayers.ground)
+    displayLayer(mapLayers.object)
 }
 
 const createLayersDisplay = () => {
