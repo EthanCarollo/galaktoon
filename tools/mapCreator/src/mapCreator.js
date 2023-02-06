@@ -1,12 +1,27 @@
-let mapLayer = [
-    [ 0, 0, 0, 0, 0, 0, 0, 0],
-    [ 0, 0, 0, 0, 0, 0, 0, 0],
-    [ 0, 0, 0, 0, 0, 0, 0, 0],
-    [ 0, 0, 0, 0, 0, 0, 0, 0],
-    [ 0, 0, 0, 0, 0, 0, 0, 0],
-    [ 0, 0, 0, 0, 0, 0, 0, 0],
-    [ 0, 0, 0, 0, 0, 0, 0, 0]
-]
+let mapLayers = {
+    ground : [
+        [ 0, 0, 0, 0, 0, 0, 0, 0],
+        [ 0, 0, 0, 0, 0, 0, 0, 0],
+        [ 0, 0, 0, 0, 0, 0, 0, 0],
+        [ 0, 0, 0, 0, 0, 0, 0, 0],
+        [ 0, 0, 0, 0, 0, 0, 0, 0],
+        [ 0, 0, 0, 0, 0, 0, 0, 0],
+        [ 0, 0, 0, 0, 0, 0, 0, 0]
+    ],
+    objectLayer : 
+    [
+        [-1,-1,-1,-1,-1,-1,-1,-1],
+        [-1,-1,-1,-1,-1,-1,-1,-1],
+        [-1,-1,-1,-1,-1,-1,-1,-1],
+        [-1,-1,-1,-1,-1,-1,-1,-1],
+        [-1,-1,-1,-1,-1,-1,-1,-1],
+        [-1,-1,-1,-1,-1,-1,-1,-1],
+        [-1,-1,-1,-1,-1,-1,-1,-1]
+    ]
+}
+
+
+let selectedLayer = "ground"
 
 let xMapPos = 0;
 let yMapPos = 0;
@@ -17,6 +32,22 @@ let tileSize = 50;
 
 
 const displayMap = () => {
+    background(225)
+    displayLayer(mapLayers.ground)
+}
+
+const createLayersDisplay = () => {
+    let layerList = document.getElementById("innerLayerList")
+    layerList.innerHTML = " "
+    let layerGround = layerList.appendChild(document.createElement("div"))
+    layerGround.classList.add("layer")
+    layerGround.addEventListener("mouseup", () => selectedLayer = "ground")
+    let layerObject = layerList.appendChild(document.createElement("div"))
+    layerObject.classList.add("layer")
+    layerObject.addEventListener("mouseup", () => selectedLayer = "object")
+}
+
+const displayLayer = (mapLayer) => {
     for(let x = 0; x < mapLayer.length; x++)
     {
         for(let y = 0; y < mapLayer.length; y++){
@@ -25,12 +56,11 @@ const displayMap = () => {
     }
 }
 
-const displayLayer = () => {
-
-}
-
 const displayTiles = (x, y, size, id) => {
-    image(tilesData[id].image, x*size + xMapPos, y*size + yMapPos, size, size)
+    if(id < 0){
+        return;
+    }
+    image(tilesData[id].image, x*size + xMapPos, (y + (1 - tilesData[id].yWidth)) *size + yMapPos, size, size * tilesData[id].yWidth)
     
 }
 

@@ -40,7 +40,7 @@ const createDOM = () => {
             callbackTiles(j);
         })
     }
-
+    createLayersDisplay()
 }
 
 const callbackTiles = (id) => {
