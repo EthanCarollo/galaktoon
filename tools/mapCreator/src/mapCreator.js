@@ -28,8 +28,15 @@ let yMapPos = 0;
 
 let tileSelected = 0;
 
+let sizeMap = 10;
+
 let tileSize = 50;
 
+const resizeArrayMap = () => {
+    mapLayers.ground.length = sizeMap
+    mapLayers.ground.map(item => 0)
+    console.log(mapLayers.ground)
+}
 
 const displayMap = () => {
     background(225)
@@ -64,8 +71,7 @@ const displayTiles = (x, y, size, id) => {
     if(id < 0){
         return;
     }
-    image(tilesData[id].image, x*size + xMapPos, (y + (1 - tilesData[id].yWidth)) *size + yMapPos, size, size * tilesData[id].yWidth)
-    
+    image(tilesData[id].image, x*size + xMapPos, (y + (1 - tilesData[id].yWidth)) *size + yMapPos, size, size * tilesData[id].yWidth)  
 }
 
 const getTileWithScreenPosition = (x, y) => [Math.floor(x / tileSize), Math.floor(y / tileSize)]

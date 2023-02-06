@@ -9,6 +9,7 @@ function setup() {
     canvas = createCanvas(window.innerWidth, window.innerHeight);
     noSmooth();
     frameRate(60);
+    resizeArrayMap()
   }
 
 function draw(){
