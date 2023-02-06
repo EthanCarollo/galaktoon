@@ -1,3 +1,5 @@
+// DISCLAIMER, THIS IS A TEMP CODE FOR THE MAP CREATOR TOOLS, IM LITERALLY RUSHING THIS TOOL.. SRY I WILL IMPROVE THAT
+
 function preload() {
     loadAssets();
   }
@@ -16,10 +18,10 @@ function draw(){
 }
   
 function mouseClicked() {
-  paintTilesOnClick(tileSelected)
+  paintTileOnClickWithMousePos(tileSelected)
 }
 
-const paintTilesOnClick = (tileSelectedByUser = tileSelected) => {
+const paintTileOnClickWithMousePos = (tileSelectedByUser = tileSelected) => {
   let tileOnMouse = getTileWithScreenPosition(mouseX, mouseY);
   switch(selectedLayer){
     case "ground" :

@@ -38,12 +38,15 @@ const displayMap = () => {
 }
 
 const createLayersDisplay = () => {
+    // DISGRACEFUL SRY RUSHING TIME
     let layerList = document.getElementById("innerLayerList")
     layerList.innerHTML = " "
     let layerGround = layerList.appendChild(document.createElement("div"))
+    layerGround.innerHTML = "<h1>GROUND LAYER</h1>"
     layerGround.classList.add("layer")
     layerGround.addEventListener("mouseup", () => selectedLayer = "ground")
     let layerObject = layerList.appendChild(document.createElement("div"))
+    layerObject.innerHTML = "<h1>OBJECT LAYER</h1>"
     layerObject.classList.add("layer")
     layerObject.addEventListener("mouseup", () => selectedLayer = "object")
 }
