@@ -95,4 +95,13 @@ body{
     margin: 1vw;
     background-color: wheat;
     cursor: pointer;
+    transition: all 0.25s;
+}
+
+.layer.active{
+    transition: all 1s;
+    background-color: black;
+    color: white;
+    border-color: white;
+    border-style: solid;
 }

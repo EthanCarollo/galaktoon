@@ -58,11 +58,19 @@ const createLayersDisplay = () => {
     let layerGround = layerList.appendChild(document.createElement("div"))
     layerGround.innerHTML = "<h1>GROUND LAYER</h1>"
     layerGround.classList.add("layer")
-    layerGround.addEventListener("mouseup", () => selectedLayer = "ground")
+    layerGround.addEventListener("mouseup", () => {
+        layerGround.classList.add("active");
+        layerObject.classList.remove("active");
+        selectedLayer = "ground"
+    })
     let layerObject = layerList.appendChild(document.createElement("div"))
     layerObject.innerHTML = "<h1>OBJECT LAYER</h1>"
     layerObject.classList.add("layer")
-    layerObject.addEventListener("mouseup", () => selectedLayer = "object")
+    layerObject.addEventListener("mouseup", () => {
+        layerGround.classList.remove("active");
+        layerObject.classList.add("active");
+        selectedLayer = "object"
+    })
 }
 
 const displayLayer = (mapLayer) => {
