@@ -29,15 +29,16 @@ let yMapPos = 0;
 let tileSelected = 0;
 
 let sizeMap = 20;
-
 let tileSize = 50;
 
-const resizeArrayMap = () => {
-    mapLayers.ground.length = sizeMap
-    mapLayers.object.length = sizeMap
+const resizeArrayMap = (size = sizeMap) => {
+    mapLayers.ground.length = size
+    mapLayers.object.length = size
     for(let i = 0; i<mapLayers.ground.length;i++){
-        mapLayers.ground[i] = new Array(sizeMap)
-        mapLayers.object[i] = new Array(sizeMap)
+        mapLayers.ground[i] = []
+        mapLayers.object[i] = []
+        mapLayers.ground[i].length = size
+        mapLayers.object[i].length = size
         for(let j = 0; j<mapLayers.ground[i].length;j++){
             mapLayers.ground[i][j] = 0;
             mapLayers.object[i][j] = -1;
@@ -58,6 +59,7 @@ const createLayersDisplay = () => {
     let layerGround = layerList.appendChild(document.createElement("div"))
     layerGround.innerHTML = "<h1>GROUND LAYER</h1>"
     layerGround.classList.add("layer")
+    layerGround.classList.add("active");
     layerGround.addEventListener("mouseup", () => {
         layerGround.classList.add("active");
         layerObject.classList.remove("active");
@@ -100,3 +102,13 @@ const getTileWithScreenPosition = (x, y) => {
     }
     return [Math.floor(x / tileSize), Math.floor(y / tileSize)];
 }
+
+
+document.getElementById("mapSize").addEventListener("input", () => {
+    sizeMap = document.getElementById("mapSize").value
+    console.log(sizeMap)
+    resizeArrayMap(document.getElementById("mapSize").value)
+})
+document.getElementById("mapZoom").addEventListener("input", () => {
+    tileSize = document.getElementById("mapZoom").value
+})

@@ -26,16 +26,16 @@ function mouseClicked() {
 function inputManager() {
   
   if (keyIsDown(RIGHT_ARROW) || keyIsDown(68)) { // When players touch left arrow or Q
-    xMapPos-=2;
-  }
-  if (keyIsDown(LEFT_ARROW) || keyIsDown(81)) { // When players touch left arrow or Q
     xMapPos+=2;
   }
+  if (keyIsDown(LEFT_ARROW) || keyIsDown(81)) { // When players touch left arrow or Q
+    xMapPos-=2;
+  }
   if(keyIsDown(UP_ARROW) || keyIsDown(90)) { // When players touch up arrow or Z
-    yMapPos+=2;
+    yMapPos-=2;
   }
   if(keyIsDown(DOWN_ARROW) || keyIsDown(83)) { // When players touch down arrow or S
-    yMapPos-=2;
+    yMapPos+=2;
   }
 
 }
