@@ -57,7 +57,7 @@ const createLayersDisplay = () => {
     let layerList = document.getElementById("innerLayerList")
     layerList.innerHTML = " "
     let layerGround = layerList.appendChild(document.createElement("div"))
-    layerGround.innerHTML = "<h1>GROUND LAYER</h1>"
+    layerGround.innerHTML = "<h1>GROUND & WALL LAYER</h1>"
     layerGround.classList.add("layer")
     layerGround.classList.add("active");
     layerGround.addEventListener("mouseup", () => {
