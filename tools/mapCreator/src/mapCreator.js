@@ -34,10 +34,13 @@ let tileSize = 50;
 
 const resizeArrayMap = () => {
     mapLayers.ground.length = sizeMap
+    mapLayers.object.length = sizeMap
     for(let i = 0; i<mapLayers.ground.length;i++){
         mapLayers.ground[i] = new Array(sizeMap)
+        mapLayers.object[i] = new Array(sizeMap)
         for(let j = 0; j<mapLayers.ground[i].length;j++){
             mapLayers.ground[i][j] = 0;
+            mapLayers.object[i][j] = -1;
         }
     }
 }
@@ -78,4 +81,14 @@ const displayTiles = (x, y, size, id) => {
     image(tilesData[id].image, x*size + xMapPos, (y + (1 - tilesData[id].yWidth)) *size + yMapPos, size, size * tilesData[id].yWidth)  
 }
 
-const getTileWithScreenPosition = (x, y) => [Math.floor(x / tileSize), Math.floor(y / tileSize)]
+const getTileWithScreenPosition = (x, y) => {
+    if(Math.floor(x / tileSize)>=mapLayers.ground[0].length || Math.floor(x / tileSize) < 0)
+    {
+        return false
+    }
+    if(Math.floor(y / tileSize)>= mapLayers.ground.length || Math.floor(y / tileSize) < 0)
+    {
+        return false;
+    }
+    return [Math.floor(x / tileSize), Math.floor(y / tileSize)];
+}
