@@ -112,3 +112,13 @@ document.getElementById("mapSize").addEventListener("input", () => {
 document.getElementById("mapZoom").addEventListener("input", () => {
     tileSize = document.getElementById("mapZoom").value
 })
+
+const exportMapInJSON = () => {
+    let jsonData = JSON.stringify(mapLayers)
+    var a = document.createElement("a");
+    var file = new Blob([jsonData], {type: "text/plain"});
+    a.href = URL.createObjectURL(file);
+    a.download = "mapLayers.json";
+    a.click();
+
+}
