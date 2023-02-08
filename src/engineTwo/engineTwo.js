@@ -89,6 +89,7 @@ const showEnemyTeam = () => {
         // set all variables for the showSpriteOnMap function
         const isTargeted = i === currentTarget
         showSpriteOnMap(tempSpriteToShow, xPositionSprite, yPositionSprite, sizeSprite, characterObject, isTargeted, false, i, true)
+        createInputButtonWithCallback(xPositionSprite, yPositionSprite, sizeSprite, sizeSprite, () => { changeCurrentTarget(i) })
     }
 }
 
@@ -117,7 +118,6 @@ const spriteAnimationFight = (sprite, x, y, size, isAnEnemy, index) => {
             actualTeamSprite = playerTeam;
             break;
     }
-
 
     switch(actualTeamSprite[index].state){
         case "idle" :
@@ -177,8 +177,7 @@ const showSpriteHealthOnMap = (x, y, size, charObject) => {
     
     image(currentBackgroundHealthBar,x,y,size, size)
     image(currentHealthBarUIImage,x,y,size * percentOfSpriteLife, size)
-    image(currentEmptyHealthBarUIImage,x,y,size, size)
-    
+    image(currentEmptyHealthBarUIImage,x,y,size, size) 
 }
 
 // ---- Display

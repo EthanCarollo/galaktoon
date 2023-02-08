@@ -11,7 +11,7 @@ const playerKeyPressedForEngineTwo = () => {
 }
 
 const keyPressedForEngineTwo = () => {
-    if(fightIsEnd === false){
+    /*if(fightIsEnd === false){
         changeCurrentTargetOnInput();
-    }
+    }*/
 }

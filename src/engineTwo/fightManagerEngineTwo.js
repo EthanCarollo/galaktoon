@@ -10,15 +10,9 @@ const changeCurrentAbilityOnInput = () => {
     }
 }
 
-const changeCurrentTargetOnInput = () => {
-    let mouseCurrentX = Math.floor((window.innerWidth - mouseX -120) / 200);
-    let mouseCurrentY = Math.floor((window.innerHeight - mouseY) / 200);
-    if(mouseCurrentX === 0){
-        changeCurrentTarget(mouseCurrentY)
-    }
-}
 
 const changeCurrentTarget = (targetIndex) => {
+    console.log(targetIndex)
     if(targetIndex < (enemyTeam.length))
     {
         currentTarget = targetIndex;

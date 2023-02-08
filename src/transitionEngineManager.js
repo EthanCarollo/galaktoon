@@ -27,6 +27,25 @@ let debugEnemiesArray = [
                 couldown : 1
             }
         ]
+    },
+    {
+        id : 1,
+        name : "testEnemy",
+        hp : {
+            current : 40,
+            max : 50
+        },
+        isAlive : true,
+        state : "idle",
+        abilities : [
+            {
+                name : "Attack",
+                type : "attack",
+                amount : 5,
+                id : 1,
+                couldown : 1
+            }
+        ]
     }
 ]
 // ! debugEnemiesArray is just a temp variable only used in the prototype /!\
