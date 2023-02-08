@@ -26,7 +26,8 @@ const createPlanetMenuObject = (x, y, sizeX, sizeY, planetID) => {
     noFill()
     fill(55,200,55)
     textSize(40);
-    text(planetsData[planetID].name, x, y, sizeX)
+    textAlign(CENTER, CENTER)
+    text(planetsData[planetID].name, x, y, sizeX, sizeY)
     noFill()
     let mapToExplore = mapData[planetsData[planetID].map]
     createInputButtonWithCallback(x, y, sizeX, sizeY, () => {loadMapAndExitExploringMenu(mapToExplore)})
@@ -44,7 +45,7 @@ const exitCross = () => {
     createInputButtonWithCallback(75, 20, 40, 40, exitExploringMenu)
     textSize(20);
     fill(150,150,255)
-    text("quit menu", 75, 20, 150)
+    text("quit menu", 75, 20, 150,40)
     // text is temporary
     noFill()
 }
