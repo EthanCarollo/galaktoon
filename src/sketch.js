@@ -11,6 +11,7 @@ function setup() {
 }
 
 function draw() {
+    cursor('auto') // Resetting the cursor to auto
     if(ressourceIsLoaded === true){
         switch(actualEngine){
             case EngineOne :

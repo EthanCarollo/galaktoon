@@ -2,6 +2,14 @@ const createInputButtonWithCallback = (xStartButton, yStartButton, sizeXButton, 
     if( mouseX > xStartButton && 
         mouseY > yStartButton && 
         mouseX < xStartButton + sizeXButton && 
+        mouseY < yStartButton + sizeYButton)
+    {
+        cursor('pointer') // Changing the cursor into a pointer if pointer is in the button
+    }
+    
+    if( mouseX > xStartButton && 
+        mouseY > yStartButton && 
+        mouseX < xStartButton + sizeXButton && 
         mouseY < yStartButton + sizeYButton && 
         mouseIsPressed === true )
     {
