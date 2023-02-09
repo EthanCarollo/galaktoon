@@ -22,7 +22,7 @@ let debugEnemiesArray = [
             {
                 name : "Attack",
                 type : "attack",
-                amount : 5,
+                amount : 25,
                 id : 1,
                 couldown : 1
             }

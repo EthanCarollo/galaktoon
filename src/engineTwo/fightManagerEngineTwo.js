@@ -13,7 +13,7 @@ const changeCurrentAbilityOnInput = () => {
 
 const changeCurrentTarget = (targetIndex) => {
     console.log(targetIndex)
-    if(targetIndex < (enemyTeam.length))
+    if(targetIndex < (enemyTeam.length) && enemyTeam[targetIndex].stade !== "dead")
     {
         currentTarget = targetIndex;
     }
@@ -57,6 +57,7 @@ const endTurn = () => {
 }
 
 const switchTeamTurn = (teamTurn) => {
+    checkFightState();
     switch(teamTurn){
         case "player" :
             turnTeam = "ia"
@@ -93,7 +94,15 @@ const checkFightState = () => {
     }
 }
 
-const allAlliesAreDead = () => playerTeam[0].hp.current <= 0
+const allAlliesAreDead = () => {
+    if(playerTeam[0].hp.current <= 0)
+    {
+        playerTeam[0].state = "dead"
+        return true;
+    }else{
+        return false;
+    }
+}
 
 const allEnemiesAreDead = () => {
     let countDeadTeam = 0
@@ -101,6 +110,9 @@ const allEnemiesAreDead = () => {
     {
         if(enemyTeam[i].hp.current <= 0)
         {
+            if(i === currentTarget){
+                changeCurrentTarget(i+1)
+            }
             enemyTeam[i].isAlive = false;
             enemyTeam[i].state = "dead";
             countDeadTeam ++;
