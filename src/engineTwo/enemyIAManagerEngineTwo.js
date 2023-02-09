@@ -1,15 +1,27 @@
 const enemyIaTurn = () => {
     if(fightIsEnd === false){
-        enemyIaUseAbility();
+        let currentAttacker = actualIaTurn()
+        let currentStateBeforeAttack = currentAttacker.state
+        enemyIaUseAbility(currentAttacker);
         setTimeout(() => {
-            enemyTeam[0].state = "idle"
+            currentAttacker.state = currentStateBeforeAttack
             switchTeamTurn(turnTeam)
         }, 1000);
     }
 }
 
-const enemyIaUseAbility = () => {
-    useAbilityOnTarget(enemyTeam[0].abilities[0], playerTeam[0], enemyTeam[0])
+const actualIaTurn = () => {
+    for(let i = 0; i < enemyTeam.length; i++)
+    {
+        if(enemyTeam[i].state !== "dead")
+        {
+            return enemyTeam[i]
+        }
+    }
+}
+
+const enemyIaUseAbility = (enemyCharacterTeam) => {
+    useAbilityOnTarget(enemyCharacterTeam.abilities[0], playerTeam[0], enemyCharacterTeam)
 }
 
 // It actually work
