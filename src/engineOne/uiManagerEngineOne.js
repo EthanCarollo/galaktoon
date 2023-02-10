@@ -1,12 +1,33 @@
 // * Display Screen
 
 const displayUserInterfaceEngineOne = () => {
+    displayPlayerInformationUI()
     if(playerIsExploringMap === true){
         displayExploringMenu();
     }
 }
 
 // * Display Screen
+
+// * Player Information
+
+const displayPlayerInformationUI = () => {
+
+    let tempSize = 150
+    let tempPosX = window.innerWidth - tempSize - 40 
+    let tempPosXForHealth = tempPosX-12.5;
+    let tempPosY = 20;
+    let percentLifeOfPlayer = playerTeam[0].hp.current / playerTeam[0].hp.max +0.00001;
+    image(uiData[7].image, tempPosX, tempPosY ,tempSize, tempSize)
+    // Show Health Bar
+    image(uiData[3].image, tempPosXForHealth, 25, tempSize+25, tempSize+25)
+    image(uiData[0].image, tempPosXForHealth, 25, (tempSize+25)*percentLifeOfPlayer, tempSize+25)
+    image(uiData[2].image, tempPosXForHealth, 25, tempSize+25, tempSize+25)
+    // Show Health Bar
+
+}
+
+// * Player Information
 
 // * Exploring Menu 
 

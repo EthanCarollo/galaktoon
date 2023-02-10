@@ -28,6 +28,10 @@
         {
             "id" : "6",
             "path" : "assets/ui/ability/selectedAbility.png"
+        },
+        {
+            "id" : "7",
+            "path" : "assets/ui/playerPortrait.png"
         }
     ]
 }

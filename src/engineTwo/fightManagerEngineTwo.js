@@ -47,7 +47,6 @@ const endTurn = () => {
     switchTeamTurn(turnTeam)
     console.log("endTurn, wait")
     setTimeout(() => {
-        checkFightState();
         playerTeam[currentTurn].state = "idle"
         console.log("You can play now")
         indexAnimationFight = 0;

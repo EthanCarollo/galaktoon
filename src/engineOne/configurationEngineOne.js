@@ -42,3 +42,7 @@ let playerCanInteract = true;
 // Player exploration list
 
 // Player exploration list
+
+// PLayer can fight
+const playerCanFight = () => playerTeam[0].hp.current > 0
+// PLayer can fight

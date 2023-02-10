@@ -51,8 +51,12 @@ let debugEnemiesArray = [
 // ! debugEnemiesArray is just a temp variable only used in the prototype /!\
 
 const launchFightOnEngineTwo = (enemiesArray = debugEnemiesArray) => { // this take in parameters debug enemies for the prototype
-    settingUpEngineTwoScene(enemiesArray);
-    launchEngineTwo();
+    if(playerCanFight()){
+        settingUpEngineTwoScene(enemiesArray);
+        launchEngineTwo();
+    }else{
+        console.log("player cant fight")
+    }
 }
 
 const settingUpEngineTwoScene = (enemiesArray) => {
