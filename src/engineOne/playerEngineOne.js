@@ -118,20 +118,25 @@ const interactWithATile = (tileInteract) => {
         case "goDownInSpaceShip":
             loadNewMap(mapData[1], mapData[1].start)
             break;
-        case "goUpInSpaceShip": {
+        case "goUpInSpaceShip":
             loadNewMap(mapData[0], mapData[0].secondStart)
             break;
-        }
-        case "fight":{
+        case "fight":
             // ! TEMP 
             launchFightOnEngineTwo()
             // ! TEMP
             break;
-        }
+        case "sleep":
+            playSleepAnimation();
+            break;
         default :
             throw new Error
                 ("The player is interacting with nothing which is impossible if all are doing well, so it's probably an exception with the parameter type of the tile : ' " + interactedTile.type + " ' ")
     }
+}
+
+const playSleepAnimation = () => {
+    playerTeam[0].hp.current = playerTeam[0].hp.max
 }
 
 const createInteractionPopup = (x ,y ,typeOfInteract) => {
