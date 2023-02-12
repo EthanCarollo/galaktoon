@@ -65,6 +65,7 @@ const settingUpEngineTwoScene = (enemiesArray) => {
     whoWin = "nobody";
     fightLog = ["Fight Started !"];
     turnTeam = "player";
+    playerTeam[0].state = "idle";
     fightIsEnd = false;
     actualTurnGame = 0;
     // reset variable
