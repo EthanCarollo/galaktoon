@@ -19,12 +19,29 @@ const displayPlayerInformationUI = () => {
     let tempPosY = 20;
     let percentLifeOfPlayer = playerTeam[0].hp.current / playerTeam[0].hp.max +0.00001;
     image(uiData[7].image, tempPosX, tempPosY ,tempSize, tempSize)
-    // Show Health Bar
-    image(uiData[3].image, tempPosXForHealth, 25, tempSize+25, tempSize+25)
-    image(uiData[0].image, tempPosXForHealth, 25, (tempSize+25)*percentLifeOfPlayer, tempSize+25)
-    image(uiData[2].image, tempPosXForHealth, 25, tempSize+25, tempSize+25)
-    // Show Health Bar
+    showHealthUI(tempPosXForHealth, tempPosY, tempSize, percentLifeOfPlayer)
+    showLevelUI(tempPosX, tempPosY, tempSize, playerTeam[0].level);
 
+}
+
+const showLevelUI = (x, y, spriteSize, level) => {
+    let characterLevel = level;
+    let caseLevel = uiData[8].image;
+    let caseSize = 35;
+    let xCase = x+spriteSize-caseSize;
+    let yCase = y+spriteSize-(caseSize/1.75);
+    image(caseLevel, xCase, yCase, caseSize, caseSize)
+    textAlign(CENTER, CENTER)
+    fill(255)
+    textSize(12)
+    text(characterLevel, xCase, yCase, caseSize, caseSize)
+    textAlign(LEFT, BASELINE)
+}
+
+const showHealthUI = (posX, posY, size, percentOfLife) => {
+    image(uiData[3].image, posX, 25, size+25, size+25)
+    image(uiData[0].image, posX, 25, (size+25)*percentOfLife, size+25)
+    image(uiData[2].image, posX, 25, size+25, size+25)
 }
 
 // * Player Information
