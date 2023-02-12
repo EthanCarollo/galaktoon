@@ -8,6 +8,7 @@ function setup() {
   canvas = createCanvas(windowWidth, windowHeight);
   noSmooth();
   frameRate(fps);
+  textFont(pixelFont)
 }
 
 function draw() {

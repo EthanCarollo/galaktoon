@@ -38,6 +38,7 @@ let mapData = [];
 let spritesFightData = [];
 let uiData = [];
 let planetsData = [];
+let pixelFont;
 
 // variables that follow the resource loading course
 
@@ -55,6 +56,7 @@ let totalLoad = ressourceToLoad.length;
 let ressourceIsLoaded = false; // boolean who tell if ALL the ressources has been loaded or no, while this bool is false, the game won't launch
 
 const loadAssets = () => {
+    pixelFont = loadFont('../assets/fonts/PublicPixel.ttf');
     for(let i = 0 ; i < ressourceToLoad.length ; i++)
     {
         fetch(ressourceToLoad[i].path)

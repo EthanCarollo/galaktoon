@@ -117,6 +117,7 @@ const showSpriteLevelOnMap = (x, y, spriteSize, charObject) => {
     let yCase = y+spriteSize-caseSize;
     image(caseLevel, xCase, yCase, caseSize, caseSize)
     textAlign(CENTER, CENTER)
+    textSize(12)
     text(spriteLevel, xCase, yCase, caseSize, caseSize)
     textAlign(LEFT, BASELINE)
 }
