@@ -45,10 +45,8 @@ const compareCurrentTargetAndEnemyTeam = (currentTargetNumber) => {
 const endTurn = () => {
     indexAnimationFight = 0;
     switchTeamTurn(turnTeam)
-    console.log("endTurn, wait")
     setTimeout(() => {
         playerTeam[currentTurn].state = "idle"
-        console.log("You can play now")
         indexAnimationFight = 0;
         turnManager(turnTeam)
         actualTurnGame ++;

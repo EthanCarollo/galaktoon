@@ -49,7 +49,7 @@ const createPlanetMenuObject = (x, y, sizeX, sizeY, planetID) => {
     textSize(40);
     textAlign(CENTER, CENTER)
     text(planetsData[planetID].name, x, y, sizeX, sizeY)
-    textAlign(LEFT, LEFT)
+    textAlign(LEFT, BASELINE)
     noFill()
     let mapToExplore = mapData[planetsData[planetID].map]
     createInputButtonWithCallback(x, y, sizeX, sizeY, () => {loadMapAndExitExploringMenu(mapToExplore)})
