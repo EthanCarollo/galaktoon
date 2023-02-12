@@ -32,6 +32,9 @@
         {
             "id" : "7",
             "path" : "assets/ui/playerPortrait.png"
+        },{
+            "id" : "8",
+            "path" : "assets/ui/roundCaseUi.png"
         }
     ]
 }

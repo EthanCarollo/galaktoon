@@ -12,6 +12,7 @@ let debugEnemiesArray = [
     {
         id : 1,
         name : "testEnemy",
+        level : 2,
         hp : {
             current : 40,
             max : 50
@@ -31,6 +32,7 @@ let debugEnemiesArray = [
     {
         id : 1,
         name : "testEnemy",
+        level : 12,
         hp : {
             current : 40,
             max : 50
@@ -48,6 +50,7 @@ let debugEnemiesArray = [
         ]
     }
 ]
+
 // ! debugEnemiesArray is just a temp variable only used in the prototype /!\
 
 const launchFightOnEngineTwo = (enemiesArray = debugEnemiesArray) => { // this take in parameters debug enemies for the prototype

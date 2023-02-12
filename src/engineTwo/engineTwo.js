@@ -106,6 +106,19 @@ const showSpriteOnMap = (sprite, x, y, size, charObject, isTarget, playerSelecte
         spriteAnimationFight(sprite, x, y, size, isAnEnemy, indexInArray)
     }
     showSpriteHealthOnMap(x, y, size, charObject);
+    showSpriteLevelOnMap(x, y, size, charObject)
+}
+
+const showSpriteLevelOnMap = (x, y, spriteSize, charObject) => {
+    let spriteLevel = charObject.level;
+    let caseLevel = uiData[8].image;
+    let caseSize = 35;
+    let xCase = x+spriteSize;
+    let yCase = y+spriteSize-caseSize;
+    image(caseLevel, xCase, yCase, caseSize, caseSize)
+    textAlign(CENTER, CENTER)
+    text(spriteLevel, xCase, yCase, caseSize, caseSize)
+    textAlign(LEFT, BASELINE)
 }
 
 const spriteAnimationFight = (sprite, x, y, size, isAnEnemy, index) => {

@@ -4,6 +4,7 @@ let playerTeam = [
     {
         id : 0,
         name : "You",
+        level : 1,
         hp : {
             current : 50,
             max : 50
