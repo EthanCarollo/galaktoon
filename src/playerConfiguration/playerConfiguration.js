@@ -18,7 +18,7 @@ let playerTeam = [
             {
                 name : "Attack",
                 type : "attack",
-                abilityLevel : 2,
+                abilityLevel : 3,
                 baseAmount : 20,
                 id : 1,
                 couldown : 1
@@ -26,7 +26,7 @@ let playerTeam = [
             {
                 name : "Heal",
                 type : "heal",
-                abilityLevel : 2,
+                abilityLevel : 1,
                 baseAmount : 20,
                 id : 4,
                 couldown : 2

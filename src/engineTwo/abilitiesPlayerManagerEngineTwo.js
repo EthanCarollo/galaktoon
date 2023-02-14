@@ -11,23 +11,24 @@ const createAbilityPlayer = (currentPlayerTurn) => {
         let iconSize = 80;
         let xIcon = iconSize + (iconSize*1.25) *i
         let yIcon = iconSize / 1.5
-        createIconAbility(xIcon, yIcon, iconSize, currentAbility.id, i)
+        createIconAbility(xIcon, yIcon, iconSize, currentAbility, i)
     }
 }
 
-const createIconAbility = (x, y, size, abilityID, abilityIndexOnCharacter) => {
+const createIconAbility = (x, y, size, ability, abilityIndexOnCharacter) => {
     if(abilityIndexOnCharacter > 2)
     {
         throw new Error("can't create Ability UI cause abilityIndex is out of array")
     }
     if(abilityIndexOnCharacter === currentAbilityUsed)
     {
-        image(uiData[abilityID].image, x, y, size, size)
+        image(uiData[ability.id].image, x, y, size, size)
         image(uiData[6].image, x, y, size, size)
     }else{
-        image(uiData[abilityID].image, x, y, size, size)
+        image(uiData[ability.id].image, x, y, size, size)
     }
     createAblityIndication( x, y, size, abilityIndexOnCharacter);
+    showLevelUI( x, y, size, ability.abilityLevel) // using the tool used in engine one
 }
 
 const createAblityIndication = (x, y, size, abilityIndexOnCharacter) => {
