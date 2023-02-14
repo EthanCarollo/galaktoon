@@ -44,4 +44,11 @@ let maxPlayerXP = 100;
 let playerSpeed = 5;
 let playerVector;
 
+const updatePlayerLevel = () => {
+    if(actualPlayerXP >= maxPlayerXP){
+        actualPlayerXP -= maxPlayerXP;
+        level ++;
+    }
+}
+
 // ----------------
