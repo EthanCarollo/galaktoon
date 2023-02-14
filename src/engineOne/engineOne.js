@@ -1,5 +1,6 @@
 
 const runEngineOne = () => {
+    updatePlayerLevel(playerTeam[0])
     setPlayerCamera();
     displayTopDown2D();
     displayUserInterfaceEngineOne();

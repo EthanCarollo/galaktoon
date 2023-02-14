@@ -1,5 +1,10 @@
 // ----------------
 
+const getAmountPowerOfAbility = (amount, level) => {
+    console.log(level)
+    return amount * (level)
+}
+
 let playerTeam = [
     {
         id : 0,
@@ -13,21 +18,27 @@ let playerTeam = [
             {
                 name : "Attack",
                 type : "attack",
-                amount : 20,
+                abilityLevel : 2,
+                baseAmount : 20,
+                amount : () => this.baseAmount * this.abilityLevel,
                 id : 1,
                 couldown : 1
             },
             {
                 name : "Heal",
                 type : "heal",
-                amount : 20,
+                abilityLevel : 2,
+                baseAmount : 20,
+                amount : () => this.baseAmount * this.abilityLevel,
                 id : 4,
                 couldown : 2
             },
             {
                 name : "HealAll",
                 type : "healAll",
-                amount : 10,
+                abilityLevel : 2,
+                baseAmount : 20,
+                amount : () => this.baseAmount * this.abilityLevel,
                 id : 5,
                 couldown : 3
             }
@@ -37,17 +48,20 @@ let playerTeam = [
     }
 ]
 
-let actualPlayerXP = 0;
+let actualPlayerXP = 350;
 let maxPlayerXP = 100;
 // * XP VALUE, if actual is > to max, then LEVEL UP
 
 let playerSpeed = 5;
 let playerVector;
 
-const updatePlayerLevel = () => {
+const updatePlayerLevel = (char) => {
     if(actualPlayerXP >= maxPlayerXP){
         actualPlayerXP -= maxPlayerXP;
-        level ++;
+        char.level ++;
+        char.hp.max *= 1.2
+        char.hp.current *= 1.2
+        maxPlayerXP *= 1.2
     }
 }
 

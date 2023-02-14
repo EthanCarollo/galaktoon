@@ -32,7 +32,9 @@ let debugEnemiesArray = [
             {
                 name : "Attack",
                 type : "attack",
-                amount : 25,
+                abilityLevel : 2,
+                baseAmount : 20,
+                amount : () => this.baseAmount * this.abilityLevel,
                 id : 1,
                 couldown : 1
             }
@@ -52,7 +54,9 @@ let debugEnemiesArray = [
             {
                 name : "Attack",
                 type : "attack",
-                amount : 5,
+                abilityLevel : 2,
+                baseAmount : 20,
+                amount : () => this.baseAmount * this.abilityLevel,
                 id : 1,
                 couldown : 1
             }
@@ -81,7 +85,12 @@ const settingUpEngineTwoScene = (enemiesArray) => {
     fightIsEnd = false;
     actualTurnGame = 0;
     // reset variable
-    enemyTeam = JSON.parse(JSON.stringify(enemiesArray)); // Duplicating a 2D array doesn't work with objects in it, but if i use JSON stringify and then JSON parse, it works ! Fancy.
+    enemyTeam = JSON.parse(JSON.stringify(enemiesArray)); 
+    // Duplicating a 2D array doesn't work with objects in it, but if i use JSON stringify and then JSON parse, it works ! Fancy.
+    for(let i = 0; i < enemiesArray.length; i++)
+    {
+        enemyTeam[i].abilities = enemiesArray[i].abilities
+    }
 }
 
 const launchEngineTwo = () => {
