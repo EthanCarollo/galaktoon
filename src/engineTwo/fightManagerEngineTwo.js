@@ -12,7 +12,6 @@ const changeCurrentAbilityOnInput = () => {
 
 
 const changeCurrentTarget = (targetIndex) => {
-    console.log(targetIndex)
     if(targetIndex < (enemyTeam.length) && enemyTeam[targetIndex].stade !== "dead")
     {
         currentTarget = targetIndex;

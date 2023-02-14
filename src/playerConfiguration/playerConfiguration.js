@@ -45,7 +45,7 @@ let playerTeam = [
     }
 ]
 
-let actualPlayerXP = 350;
+let actualPlayerXP = 0;
 let maxPlayerXP = 100;
 // * XP VALUE, if actual is > to max, then LEVEL UP
 
@@ -54,11 +54,12 @@ let playerVector;
 
 const updatePlayerLevel = (char) => {
     if(actualPlayerXP >= maxPlayerXP){
+        let valueMultiplier = 1.2;
         actualPlayerXP -= maxPlayerXP;
         char.level ++;
-        char.hp.max *= 1.2
-        char.hp.current *= 1.2
-        maxPlayerXP *= 1.2
+        char.hp.max = Math.floor(char.hp.max * valueMultiplier);
+        char.hp.current = Math.floor(char.hp.current * valueMultiplier);
+        maxPlayerXP = Math.floor(maxPlayerXP * valueMultiplier);
     }
 }
 
