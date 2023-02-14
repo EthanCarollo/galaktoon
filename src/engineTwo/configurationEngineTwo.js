@@ -1,6 +1,7 @@
 // Fight team
 
 let enemyTeam;
+let xpReward = 10;
 
 let indexAnimationFight = 0;
 let whoWin = "nobody";

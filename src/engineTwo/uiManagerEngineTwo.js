@@ -16,7 +16,7 @@ const displayEndFightMenu = (whoWin) => {
     // TEMP RETURN MAIN ENGINE BUTTON for debug
     rect(xPosButton, yPosButton, sizeButtonTemp*2, sizeButtonTemp)
     fill(255,255,255)
-    createInputButtonWithCallback(xPosButton, yPosButton, sizeButtonTemp*2, sizeButtonTemp, returnMainEngine);
+    createInputButtonWithCallback(xPosButton, yPosButton, sizeButtonTemp*2, sizeButtonTemp, returnMainEngine); // tools
     text(whoWin + " win the fight.", xPosButton+sizeButtonTemp, yPosButton+sizeButtonTemp/2)
     noFill()
     // TEMP RETURN MAIN ENGINE BUTTON for debug

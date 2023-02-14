@@ -13,5 +13,5 @@ const playerKeyPressedForEngineTwo = () => {
 const keyPressedForEngineTwo = () => {
     /*if(fightIsEnd === false){
         changeCurrentTargetOnInput();
-    }*/
+    }*/ // actually useless cause i use UI tools
 }

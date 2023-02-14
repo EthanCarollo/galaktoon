@@ -1,5 +1,14 @@
 // Engine One
 
+const returnEngineOneAfterFight = () => {
+    settingUpEngineOneScene();
+    launchEngineOne();
+}
+
+const settingUpEngineOneScene = () => {
+    // If there is some things to set up before launching the engine, this will be here
+}
+
 const launchEngineOne = () => {
     actualEngine = EngineOne;
 }
@@ -12,7 +21,7 @@ let debugEnemiesArray = [
     {
         id : 1,
         name : "testEnemy",
-        level : 2,
+        level : 12,
         hp : {
             current : 40,
             max : 50
@@ -32,7 +41,7 @@ let debugEnemiesArray = [
     {
         id : 1,
         name : "testEnemy",
-        level : 12,
+        level : 2,
         hp : {
             current : 40,
             max : 50

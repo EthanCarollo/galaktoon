@@ -42,7 +42,7 @@ const animationIdlePlayerSprite = (positionX, positionY, size, direction, id = 0
 const animationMoovePlayerSprite = (positionX, positionY, size, direction, id = 0) => {
 
     let spritePlayerAnimationMoove;
-
+    // There is some new things to set up here like, if there is right and left direction, how is it animate.
     switch(direction){
         case "right" :
             playerLastDirection = [1, 0]

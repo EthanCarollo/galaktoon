@@ -11,6 +11,7 @@ const enemyIaTurn = () => {
 }
 
 const actualIaTurn = () => {
+    // ------------ Here for turn managing of IA
     for(let i = 0; i < enemyTeam.length; i++)
     {
         if(enemyTeam[i].state !== "dead")
@@ -18,6 +19,7 @@ const actualIaTurn = () => {
             return enemyTeam[i]
         }
     }
+    // ------------ Here for turn managing of IA
 }
 
 const enemyIaUseAbility = (enemyCharacterTeam) => {

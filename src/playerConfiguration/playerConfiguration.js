@@ -36,6 +36,11 @@ let playerTeam = [
         state : "idle"
     }
 ]
+
+let actualPlayerXP = 0;
+let maxPlayerXP = 100;
+// * XP VALUE, if actual is > to max, then LEVEL UP
+
 let playerSpeed = 5;
 let playerVector;
 
