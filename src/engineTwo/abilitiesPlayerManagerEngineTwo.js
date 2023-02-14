@@ -49,16 +49,17 @@ const createAblityIndication = (x, y, size, abilityIndexOnCharacter) => {
 const useAbilityOnTarget = (currentAttack, currentTarget, attackerRef = null) => {
     
     attackerRef.state = currentAttack.type;
-    console.log(currentAttack)
+    let amountOfDamage = currentAttack.baseAmount * (currentAttack.abilityLevel / 1.5)
+    console.log(amountOfDamage)
     switch(currentAttack.type){
         case "attack":
-            currentTarget.hp.current = currentTarget.hp.current - currentAttack.amount();
+            currentTarget.hp.current = currentTarget.hp.current - amountOfDamage;
             break;
         case "heal":
-            healCharacterPlayerTeam(currentAttack.amount(), currentTurn)
+            healCharacterPlayerTeam(amountOfDamage, currentTurn)
             break;
         case "healAll":
-            healAllCharacter(currentAttack.amount())
+            healAllCharacter(amountOfDamage)
             break;
         default :
             throw new Error("Player abilities don't actually work cause there is no good type")

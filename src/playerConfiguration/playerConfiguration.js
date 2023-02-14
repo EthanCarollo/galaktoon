@@ -20,7 +20,6 @@ let playerTeam = [
                 type : "attack",
                 abilityLevel : 2,
                 baseAmount : 20,
-                amount : () => this.baseAmount * this.abilityLevel,
                 id : 1,
                 couldown : 1
             },
@@ -29,7 +28,6 @@ let playerTeam = [
                 type : "heal",
                 abilityLevel : 2,
                 baseAmount : 20,
-                amount : () => this.baseAmount * this.abilityLevel,
                 id : 4,
                 couldown : 2
             },
@@ -38,7 +36,6 @@ let playerTeam = [
                 type : "healAll",
                 abilityLevel : 2,
                 baseAmount : 20,
-                amount : () => this.baseAmount * this.abilityLevel,
                 id : 5,
                 couldown : 3
             }

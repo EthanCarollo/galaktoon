@@ -32,9 +32,8 @@ let debugEnemiesArray = [
             {
                 name : "Attack",
                 type : "attack",
-                abilityLevel : 2,
+                abilityLevel : 1,
                 baseAmount : 20,
-                amount : () => this.baseAmount * this.abilityLevel,
                 id : 1,
                 couldown : 1
             }
@@ -55,8 +54,7 @@ let debugEnemiesArray = [
                 name : "Attack",
                 type : "attack",
                 abilityLevel : 2,
-                baseAmount : 20,
-                amount : () => this.baseAmount * this.abilityLevel,
+                baseAmount : 3,
                 id : 1,
                 couldown : 1
             }
