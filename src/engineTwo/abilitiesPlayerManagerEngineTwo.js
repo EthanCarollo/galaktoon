@@ -75,8 +75,8 @@ const debugLogFightArray = (currentAttacker ,currentAttack, currentTarget, attac
     let logFight;
     switch(attackType){
         case "attack" : logFight = currentAttacker.name + " " + currentAttack.name + " on " + currentTarget.name; break;
-        case "heal" : logFight = currentAttacker.name + " " + currentAttack.name + " on " + currentTarget.name; break;
-        case "healAll" : logFight = currentAttacker.name + " " + currentAttack.name + " on " + currentTarget.name; break;
+        case "heal" : logFight = currentAttacker.name + " healed himself "; break;
+        case "healAll" : logFight = currentAttacker.name + " healed the team "; break;
     }
     fightLog.push(logFight)
 }
