@@ -5,6 +5,7 @@ const playerInputInteractForEngineOne = () => {
     
         if(keyIsDown(69)) {
           interactWithATile(playerCaseInteract);
+          interactWithNPC(playerCaseInteract);
         }
     }
 }
@@ -84,9 +85,6 @@ const playerInputForEngineOne=()=>{
 
         let playerCaseInteract = [actualPlayerTile()[0] + playerLastDirection[0], actualPlayerTile()[1] + playerLastDirection[1]]
 
-        /*if(keyIsUp(69)) {
-          interactWithATile(playerCaseInteract);
-        }*/
         if(getTileData(playerCaseInteract[0], playerCaseInteract[1]).type !== "useless")
         {
           let interactType = getTileData(playerCaseInteract[0], playerCaseInteract[1]).type;
