@@ -1,9 +1,5 @@
-// ----------------
 
-const getAmountPowerOfAbility = (amount, level) => {
-    console.log(level)
-    return amount * (level)
-}
+//#region // ! Global Player configuration
 
 let playerTeam = [
     {
@@ -44,14 +40,9 @@ let playerTeam = [
         state : "idle"
     }
 ]
-
 let actualPlayerXP = 0;
 let maxPlayerXP = 100;
 // * XP VALUE, if actual is > to max, then LEVEL UP
-
-let playerSpeed = 5;
-let playerVector;
-
 const updatePlayerLevel = (char) => {
     if(actualPlayerXP >= maxPlayerXP){
         let valueMultiplier = 1.2;
@@ -62,5 +53,18 @@ const updatePlayerLevel = (char) => {
         maxPlayerXP = Math.floor(maxPlayerXP * valueMultiplier);
     }
 }
+
+//#endregion
+
+//#region // * Engine One Player configuration
+
+let playerSpeed = 5;
+let playerCanInteract = true;
+
+//#endregion
+
+//#region // * Engine Two Player configuration
+
+//#endregion
 
 // ----------------

@@ -1,4 +1,5 @@
 
+let playerVector;
 let cameraVector;
 let mapVector;
 
@@ -32,16 +33,6 @@ let constructionMode = false;
 let destructionMode = false;
 
 // Construction Mode
-
-// Player interaction
-
-let playerCanInteract = true;
-
-// Player interaction
-
-// Player exploration list
-
-// Player exploration list
 
 // PLayer can fight
 const playerCanFight = () => playerTeam[0].hp.current > 0
