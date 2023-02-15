@@ -51,7 +51,6 @@ const useAbilityOnTarget = (currentAttack, currentTarget, attackerRef = null) =>
     
     attackerRef.state = currentAttack.type;
     let amountOfDamage = currentAttack.baseAmount * (currentAttack.abilityLevel / 1.5)
-    console.log(amountOfDamage)
     switch(currentAttack.type){
         case "attack":
             currentTarget.hp.current = currentTarget.hp.current - amountOfDamage;
@@ -69,16 +68,17 @@ const useAbilityOnTarget = (currentAttack, currentTarget, attackerRef = null) =>
         currentTarget.hp.current = 0;
     }
 
-    debugLogFightArray(currentAttack, currentTarget);
+    debugLogFightArray(attackerRef, currentAttack, currentTarget, currentAttack.type);
 }
 
-const debugLogFightArray = (currentAttack, currentTarget) => {
-    if(turnTeam === "player")
-    {
-        fightLog.push(playerTeam[0].name + " " + currentAttack.name + " on " + currentTarget.name)
-    }else{
-        fightLog.push(enemyTeam[0].name + " " + currentAttack.name + " on " + currentTarget.name)
+const debugLogFightArray = (currentAttacker ,currentAttack, currentTarget, attackType) => {
+    let logFight;
+    switch(attackType){
+        case "attack" : logFight = currentAttacker.name + " " + currentAttack.name + " on " + currentTarget.name; break;
+        case "heal" : logFight = currentAttacker.name + " " + currentAttack.name + " on " + currentTarget.name; break;
+        case "healAll" : logFight = currentAttacker.name + " " + currentAttack.name + " on " + currentTarget.name; break;
     }
+    fightLog.push(logFight)
 }
 
 const healAllCharacter = (amount) => {
