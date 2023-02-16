@@ -79,7 +79,9 @@ const interactWithNPC = (tileInteract) => {
     let npcInteracted = playerOnMap.npcOnMap.filter(npc => npc.position[0] === tileInteract[0] && npc.position[1] === tileInteract[1])
     if(npcInteracted.length > 0)
     {
-        
+        console.log("INTERACTED")
+        console.log(npcInteracted)
+        console.log("INTERACTED")
     }
 }
 

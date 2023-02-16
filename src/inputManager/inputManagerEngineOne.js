@@ -88,13 +88,26 @@ const playerInputForEngineOne=()=>{
     if(playerCanInteract === true){
 
         let playerCaseInteract = [actualPlayerTile()[0] + playerLastDirection[0], actualPlayerTile()[1] + playerLastDirection[1]]
+        checkForInteraction(playerCaseInteract)
+        
+    }
+}
 
-        if(getTileData(playerCaseInteract[0], playerCaseInteract[1]).type !== "useless")
+const checkForInteraction = (playerCaseInteract) => {
+    //
+
+    if(getTileData(playerCaseInteract[0], playerCaseInteract[1]).type !== "useless")
         {
           let interactType = getTileData(playerCaseInteract[0], playerCaseInteract[1]).type;
           createInteractionPopup(playerCaseInteract[0], playerCaseInteract[1], interactType)
         }
+    
+    let temp = playerOnMap.npcOnMap.filter(npc => npc.position[0] === playerCaseInteract[0] && npc.position[1] === playerCaseInteract[1])
+    if(temp.length > 0)
+    {
+        createInteractionPopup(playerCaseInteract[0], playerCaseInteract[1], "npc")
     }
+
 }
 
 const playerKeyPressedForEngineOne = () => {
