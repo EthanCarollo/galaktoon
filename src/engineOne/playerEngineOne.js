@@ -17,7 +17,7 @@ const showPlayerSprite = (positionX, positionY, spriteSize) => {
 const actualPlayerTile = (offsetVectorBounds = createVector(0, 0)) => 
 [
  Math.floor((playerVector.x + offsetVectorBounds.x - (playerSpriteSize / 2)) / tileSize * -1), 
- Math.floor((playerVector.y + offsetVectorBounds.y - (playerSpriteSize / 2) + 25) / tileSize * -1) // y is a little bit offset (by 25) because the spriteY doesnt cut on yPixel = 0
+ Math.floor((playerVector.y + offsetVectorBounds.y - (playerSpriteSize / 2) + 20) / tileSize * -1) // y is a little bit offset (by 25) because the spriteY doesnt cut on yPixel = 0
 ] // this is a temporary messy function
 
 const getPlayerCollision = (offsetVectorBounds = createVector(0, 0)) => { // offsetVectorBounds is usefull in case we have different collision point on the player
