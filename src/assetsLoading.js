@@ -29,6 +29,10 @@ const ressourceToLoad = [
         typeOfRessource : "planets",
         path : "./json/engineOne/planetExplorable.json"
     },
+    {
+        typeOfRessource : "npc",
+        path : "./json/engineOne/npc.json"
+    }
 ]
 
 let tilesData = [];
@@ -38,6 +42,7 @@ let mapData = [];
 let spritesFightData = [];
 let uiData = [];
 let planetsData = [];
+let npcData = [];
 let pixelFont;
 
 // variables that follow the resource loading course
@@ -48,6 +53,7 @@ let loadingCounterItemsData = 0;
 let loadingCounterSpritesFightData = 0;
 let loadingCounterUIData = 0;
 let loadingCounterPlanetsData = 0;
+let loadingCounterNPCData = 0
 let totalLoadCounter = 0;
 let totalLoad = ressourceToLoad.length;
 
@@ -149,6 +155,11 @@ const loadRessource = (ressource, typeOfRessource) => {
             successfullLoadingRessource(typeOfRessource)
             break;
 
+        case "npc" :
+            npcData = ressource;
+            successfullLoadingRessource(typeOfRessource)
+            break;
+
         default :
             throw new Error("this is not an accepted type of ressource : " + typeOfRessource);
         
@@ -199,10 +210,18 @@ const successfullLoadingRessource = (typeOfRessource) => {
         case "planets" :
             totalLoadCounter ++;
             break;
+        case "npc" :
+            totalLoadCounter ++;
+            break;
         default :
             throw new Error("this cannot load that type of ressource : " + typeOfRessource);
     }
 
+    checkAllRessource()
+    
+}
+
+const checkAllRessource = () => {
     if(totalLoadCounter === totalLoad)
     {
         loadAllRessource()
