@@ -74,6 +74,15 @@ const interactWithATile = (tileInteract) => {
     }
 }
 
+const interactWithNPC = (tileInteract) => {
+
+    let npcInteracted = playerOnMap.npcOnMap.filter(npc => npc.position[0] === tileInteract[0] && npc.position[1] === tileInteract[1])
+    if(npcInteracted.length > 0)
+    {
+        
+    }
+}
+
 const playSleepAnimation = () => {
     playerTeam[0].hp.current = playerTeam[0].hp.max
 }

@@ -22,7 +22,7 @@ const displayNPCOnMap = (orientation = "back") => {
 
 const displayNpc = (npc) => {
     let spriteNpcId = npcData[npc.id].spriteId
-    let positionTemp = getCoordWithTileCoord(npc.position[0], npc.position[1]-1);
+    let positionTemp = getCoordWithTileCoord(npc.position[0]-1, npc.position[1]-1);
     positionTemp.x = positionTemp.x + cameraVector.x + playerVector.x
     positionTemp.y = positionTemp.y + cameraVector.y + playerVector.y
     animateNpc(positionTemp.x, positionTemp.y, playerSpriteSize, [0, 1], spriteNpcId)
@@ -30,8 +30,4 @@ const displayNpc = (npc) => {
 
 const animateNpc = (x, y, size, direction /* ! = Array ! */, npcId) => {
     animationIdleSprite(x, y, size, direction, npcId)
-}
-
-const interactWithNPC = (tileInteract) => {
-
 }

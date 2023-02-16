@@ -4,10 +4,14 @@ const playerInputInteractForEngineOne = () => {
         let playerCaseInteract = tileNextToThePlayer()
     
         if(keyIsDown(69)) {
-          interactWithATile(playerCaseInteract);
-          interactWithNPC(playerCaseInteract);
+            playerInteraction(playerCaseInteract)
         }
     }
+}
+
+const playerInteraction = (caseInteraction) => {
+    interactWithATile(caseInteraction);
+    interactWithNPC(caseInteraction);
 }
 
 const tileNextToThePlayer = () => {
