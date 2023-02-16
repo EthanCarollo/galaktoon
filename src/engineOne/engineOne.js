@@ -10,8 +10,9 @@ const runEngineOne = () => {
 
 const displayTopDown2D = () => {
     createMapTopDown("back"); // create the layer in back of the player
-    showPlayerSprite(cameraVector.x, cameraVector.y, playerSpriteSize)
+    showPlayerSprite(cameraVector.x, cameraVector.y, playerSpriteSize);
     createMapTopDown("front"); // create the layer in front of the player
+    displayNPCOnMap();
     // the double createmap function is used to simulate a 2D perspective
 }
 
