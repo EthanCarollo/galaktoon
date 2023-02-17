@@ -3,7 +3,7 @@
 let canvas;
 let windowWidth = window.innerWidth;
 let windowHeight = window.innerHeight;
-let fps = 60;
+const fps = 60;
 
 // * CNV VAR
 

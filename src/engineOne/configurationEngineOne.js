@@ -13,7 +13,7 @@ let playerIsExploringMap = false;
 // Player anim
 let playerIsMooving = false;
 let playerAnimationIndex = 0;
-let playerAnimationLength = 4;
+const playerAnimationLength = 4;
 let playerDirection = ["right"]; // stock the direction of the player in a array
 let playerLastDirection = [0,1]; // orientation naturally down
 // Player anim
@@ -37,3 +37,9 @@ let destructionMode = false;
 // PLayer can fight
 const playerCanFight = () => playerTeam[0].hp.current > 0
 // PLayer can fight
+
+// Player dialog
+
+let playerIsInDialog = false;
+
+// Player dialog
