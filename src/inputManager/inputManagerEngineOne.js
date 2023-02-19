@@ -21,13 +21,13 @@ const tileNextToThePlayer = () => {
 const playerInputForEngineOne=()=>{
     if(playerCanMove === true){
 
-        playerDirection = []; // reset player direction every frame
-
+        playerDirection = [0, 0]; // reset player direction every frame
+        playerIsMooving = false;
         if (keyIsDown(RIGHT_ARROW) || keyIsDown(68)) { // When players touch right arrow or D
             cameraVector.x += playerSpeed
             playerVector.x -= playerSpeed
             mapVector.x += playerSpeed
-            playerDirection.push("right");
+            playerDirection[0] += 1;
             playerIsMooving = true;
             if(getPlayerCollision(createVector(-10, 0)))
             {
@@ -40,7 +40,7 @@ const playerInputForEngineOne=()=>{
             cameraVector.x -= playerSpeed
             playerVector.x += playerSpeed
             mapVector.x -= playerSpeed
-            playerDirection.push("left");
+            playerDirection[0] -= 1;
             playerIsMooving = true;
             if(getPlayerCollision(createVector(20, 0)))
             {
@@ -53,7 +53,7 @@ const playerInputForEngineOne=()=>{
             cameraVector.y -= playerSpeed
             playerVector.y += playerSpeed
             mapVector.y -= playerSpeed
-            playerDirection.push("up");
+            playerDirection[1] -= 1;
             playerIsMooving = true;
             if(getPlayerCollision(createVector(0, 35))){
                 cameraVector.y += playerSpeed
@@ -64,22 +64,14 @@ const playerInputForEngineOne=()=>{
         if(keyIsDown(DOWN_ARROW) || keyIsDown(83)) { // When players touch down arrow or S
             cameraVector.y += playerSpeed
             playerVector.y -= playerSpeed
-            mapVector.y += playerSpeed  
-            playerDirection.push("down");  
+            mapVector.y += playerSpeed
+            playerDirection[1] += 1;  
             playerIsMooving = true; 
             if(getPlayerCollision(createVector(0, 0))){
                 cameraVector.y -= playerSpeed
                 playerVector.y += playerSpeed
                 mapVector.y -= playerSpeed
             }
-        }
-
-
-        if(keyIsDown(DOWN_ARROW) || keyIsDown(UP_ARROW) || keyIsDown(LEFT_ARROW) || keyIsDown(RIGHT_ARROW) || keyIsDown(83) || keyIsDown(90) || keyIsDown(81) || keyIsDown(68))
-        {
-            // potential code here
-        }else{
-            playerIsMooving = false;
         }
     }else{
         playerIsMooving = false;

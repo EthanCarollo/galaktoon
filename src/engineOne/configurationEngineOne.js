@@ -14,8 +14,8 @@ let playerIsExploringMap = false;
 let playerIsMooving = false;
 let playerAnimationIndex = 0;
 const playerAnimationLength = 4;
-let playerDirection = ["right"]; // stock the direction of the player in a array
-let playerLastDirection = [0,1]; // orientation naturally down
+let playerDirection = [0, 0]; // stock the direction of the player in a array
+let playerLastDirection = [0, 1]; // orientation naturally down
 // Player anim
 
 // Player Var
