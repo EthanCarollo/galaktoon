@@ -1,12 +1,50 @@
 // * Display Screen
 
 const displayUserInterfaceEngineOne = () => {
+    displayPlayerInformationUI()
     if(playerIsExploringMap === true){
         displayExploringMenu();
     }
 }
 
 // * Display Screen
+
+// * Player Information
+
+const displayPlayerInformationUI = () => {
+
+    let tempSize = 150
+    let tempPosX = window.innerWidth - tempSize - 40 
+    let tempPosXForHealth = tempPosX-12.5;
+    let tempPosY = 20;
+    let percentLifeOfPlayer = playerTeam[0].hp.current / playerTeam[0].hp.max +0.00001;
+    image(uiData[7].image, tempPosX, tempPosY ,tempSize, tempSize)
+    showHealthUI(tempPosXForHealth, tempPosY, tempSize, percentLifeOfPlayer)
+    showLevelUI(tempPosX, tempPosY, tempSize, playerTeam[0].level);
+
+}
+
+const showLevelUI = (x, y, spriteSize, level) => {
+    let characterLevel = level;
+    let caseLevel = uiData[8].image;
+    let caseSize = 35;
+    let xCase = x+spriteSize-caseSize;
+    let yCase = y+spriteSize-(caseSize/1.75);
+    image(caseLevel, xCase, yCase, caseSize, caseSize)
+    textAlign(CENTER, CENTER)
+    fill(255)
+    textSize(12)
+    text(characterLevel, xCase, yCase, caseSize, caseSize)
+    textAlign(LEFT, BASELINE)
+}
+
+const showHealthUI = (posX, posY, size, percentOfLife) => {
+    image(uiData[3].image, posX, 25, size+25, size+25)
+    image(uiData[0].image, posX, 25, (size+25)*percentOfLife, size+25)
+    image(uiData[2].image, posX, 25, size+25, size+25)
+}
+
+// * Player Information
 
 // * Exploring Menu 
 
@@ -25,8 +63,10 @@ const createPlanetMenuObject = (x, y, sizeX, sizeY, planetID) => {
     rect(x,y,sizeX,sizeY)
     noFill()
     fill(55,200,55)
-    textSize(60);
-    text(planetsData[planetID].name, x, y, 150)
+    textSize(40);
+    textAlign(CENTER, CENTER)
+    text(planetsData[planetID].name, x, y, sizeX, sizeY)
+    textAlign(LEFT, BASELINE)
     noFill()
     let mapToExplore = mapData[planetsData[planetID].map]
     createInputButtonWithCallback(x, y, sizeX, sizeY, () => {loadMapAndExitExploringMenu(mapToExplore)})
@@ -44,7 +84,7 @@ const exitCross = () => {
     createInputButtonWithCallback(75, 20, 40, 40, exitExploringMenu)
     textSize(20);
     fill(150,150,255)
-    text("quit menu", 75, 20, 150)
+    text("quit menu", 75, 20, 150,40)
     // text is temporary
     noFill()
 }

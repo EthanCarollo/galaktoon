@@ -1,9 +1,9 @@
+
 let playerVector;
 let cameraVector;
 let mapVector;
 
 // Player Var
-let playerSpeed = 5;
 let playerSpriteSize = 100;
 let playerCanMove = true;
 let cameraSmoothStep = 0.98;
@@ -34,12 +34,6 @@ let destructionMode = false;
 
 // Construction Mode
 
-// Player interaction
-
-let playerCanInteract = true;
-
-// Player interaction
-
-// Player exploration list
-
-// Player exploration list
+// PLayer can fight
+const playerCanFight = () => playerTeam[0].hp.current > 0
+// PLayer can fight

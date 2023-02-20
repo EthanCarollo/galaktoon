@@ -21,10 +21,10 @@ const displaySideScroller2D = () => {
 }
 
 const createMapSideScroller = (map) => {
-    createFloorOfSideScrollerMap()
+    createFloorOfSideMap()
 }
 
-const createFloorOfSideScrollerMap = () => {
+const createFloorOfSideMap = () => {
     for(let y = 0; y < 6; y++){
         for(let x = 0; x < 25; x++)
         {
@@ -35,6 +35,7 @@ const createFloorOfSideScrollerMap = () => {
             image(tilesData[0].image, xPositionTiles, yPositionTiles, tileSizeTemp, tileSizeTemp)
         }
     }
+    //temp code for initializing floor of side map
 }
 
 const showTeamOnMap = () => {
@@ -88,6 +89,7 @@ const showEnemyTeam = () => {
         // set all variables for the showSpriteOnMap function
         const isTargeted = i === currentTarget
         showSpriteOnMap(tempSpriteToShow, xPositionSprite, yPositionSprite, sizeSprite, characterObject, isTargeted, false, i, true)
+        createInputButtonWithCallback(xPositionSprite, yPositionSprite, sizeSprite, sizeSprite, () => { changeCurrentTarget(i) })
     }
 }
 
@@ -104,6 +106,20 @@ const showSpriteOnMap = (sprite, x, y, size, charObject, isTarget, playerSelecte
         spriteAnimationFight(sprite, x, y, size, isAnEnemy, indexInArray)
     }
     showSpriteHealthOnMap(x, y, size, charObject);
+    showSpriteLevelOnMap(x, y, size, charObject)
+}
+
+const showSpriteLevelOnMap = (x, y, spriteSize, charObject) => {
+    let spriteLevel = charObject.level;
+    let caseLevel = uiData[8].image;
+    let caseSize = 35;
+    let xCase = x+spriteSize;
+    let yCase = y+spriteSize-caseSize;
+    image(caseLevel, xCase, yCase, caseSize, caseSize)
+    textAlign(CENTER, CENTER)
+    textSize(12)
+    text(spriteLevel, xCase, yCase, caseSize, caseSize)
+    textAlign(LEFT, BASELINE)
 }
 
 const spriteAnimationFight = (sprite, x, y, size, isAnEnemy, index) => {
@@ -117,13 +133,21 @@ const spriteAnimationFight = (sprite, x, y, size, isAnEnemy, index) => {
             break;
     }
 
-
     switch(actualTeamSprite[index].state){
         case "idle" :
             idleSpriteAnimationFight(sprite, x, y, size)
             break;
         case "attack" :
             fightSpriteAnimationFight(sprite, x, y, size)
+            break;
+        case "dead" :
+            deadSpriteAnimationFight(sprite, x, y, size)
+            break;
+        case "heal" :
+            healSpriteAnimationFight(sprite, x, y, size)
+            break;
+        case "healAll" :
+            healAllSpriteAnimationFight(sprite, x, y, size)
             break;
         default : 
             throw new Error ("Sprite can't animate cause state doesn't exist")
@@ -135,7 +159,28 @@ const idleSpriteAnimationFight = (spriteToAnim, x, y, size) => {
 }
 
 const fightSpriteAnimationFight = (spriteToAnim, x, y, size) => {
-    image(spriteToAnim.get(0,60,60,60), x, y, size, size);
+    image(spriteToAnim.get(0+(60*Math.floor(indexAnimationFight)),60,60,60), x, y, size, size);
+    if(indexAnimationFight < 3){
+        indexAnimationFight += 0.1;
+    }
+}
+
+const healSpriteAnimationFight = (spriteToAnim, x, y, size) => {
+    image(spriteToAnim.get(0+(60*Math.floor(indexAnimationFight)),180,60,60), x, y, size, size);
+    if(indexAnimationFight < 3){
+        indexAnimationFight += 0.1;
+    }
+}
+
+const healAllSpriteAnimationFight = (spriteToAnim, x, y, size) => {
+    image(spriteToAnim.get(0+(60*Math.floor(indexAnimationFight)),240,60,60), x, y, size, size);
+    if(indexAnimationFight < 3){
+        indexAnimationFight += 0.1;
+    }
+}
+
+const deadSpriteAnimationFight = (spriteToAnim, x, y, size) => {
+    image(spriteToAnim.get(0,120,60,60), x, y, size, size);
 }
 
 const showSpriteHealthOnMap = (x, y, size, charObject) => {
@@ -146,8 +191,7 @@ const showSpriteHealthOnMap = (x, y, size, charObject) => {
     
     image(currentBackgroundHealthBar,x,y,size, size)
     image(currentHealthBarUIImage,x,y,size * percentOfSpriteLife, size)
-    image(currentEmptyHealthBarUIImage,x,y,size, size)
-    
+    image(currentEmptyHealthBarUIImage,x,y,size, size) 
 }
 
 // ---- Display

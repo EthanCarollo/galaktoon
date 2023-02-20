@@ -6,6 +6,12 @@
             "path" : "assets/sprites/topDownSprite/testsprite/MainCharacter.png",
             "nb" : "1",
             "image" : "null"
+        },
+        {
+            "id" : "1",
+            "path" : "assets/sprites/topDownSprite/bob/BobSpriteSheet.png",
+            "nb" : "1",
+            "image" : "null"
         }
     ]
 }

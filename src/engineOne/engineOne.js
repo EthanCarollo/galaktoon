@@ -1,5 +1,6 @@
 
 const runEngineOne = () => {
+    updatePlayerLevel(playerTeam[0]); // temp call of the function
     setPlayerCamera();
     displayTopDown2D();
     displayUserInterfaceEngineOne();
@@ -9,8 +10,14 @@ const runEngineOne = () => {
 
 const displayTopDown2D = () => {
     createMapTopDown("back"); // create the layer in back of the player
-    showPlayerSprite(cameraVector.x, cameraVector.y, playerSpriteSize)
+    displayNPCOnMap("back");
+
+    showPlayerSprite(cameraVector.x, cameraVector.y, playerSpriteSize);
+
     createMapTopDown("front"); // create the layer in front of the player
+    displayNPCOnMap("front");
+  
+    
     // the double createmap function is used to simulate a 2D perspective
 }
 

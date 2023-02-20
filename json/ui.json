@@ -28,6 +28,13 @@
         {
             "id" : "6",
             "path" : "assets/ui/ability/selectedAbility.png"
+        },
+        {
+            "id" : "7",
+            "path" : "assets/ui/playerPortrait.png"
+        },{
+            "id" : "8",
+            "path" : "assets/ui/roundCaseUi.png"
         }
     ]
 }
