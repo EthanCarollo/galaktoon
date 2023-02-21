@@ -85,13 +85,7 @@ const createImageWithIdOn2dArray = (x, y, id, currentTileSize) => {
   This code isn't usefull actually, i just preshot for a next features :3
   */
 
-  if(tileIsAnObject(id))
-  {
-    image(tilesData[playerOnMap.baseTile].image, xPositionTiles , normalYPositionTiles, currentTileSize, currentTileSize);
-    image(tilesData[id].image, xPositionTiles , yPositionTiles, currentTileSize * xTileWidth, currentTileSize * yTileHeight); 
-  }else{
-    image(tilesData[id].image, xPositionTiles , yPositionTiles, currentTileSize * xTileWidth, currentTileSize * yTileHeight); 
-  }
+  image(tilesData[id].image, xPositionTiles , yPositionTiles, currentTileSize * xTileWidth, currentTileSize * yTileHeight); 
 
   //noTint()
 }

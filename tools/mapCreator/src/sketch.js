@@ -4,9 +4,11 @@ function preload() {
     loadAssets();
   }
   
-  
+  let canvasSize = [window.innerWidth /1.335, window.innerHeight / 1.4]
+
 function setup() {
-    canvas = createCanvas(window.innerWidth /1.335, window.innerHeight / 1.4);
+    
+    canvas = createCanvas(canvasSize[0], canvasSize[1]);
     noSmooth();
     frameRate(60);
     resizeArrayMap()
@@ -42,7 +44,7 @@ function inputManager() {
 
 const paintTileOnClickWithMousePos = (tileSelectedByUser = tileSelected) => {
   let tileOnMouse = getTileWithScreenPosition(mouseX - xMapPos, mouseY - yMapPos);
-  if(tileOnMouse === false){
+  if(tileOnMouse === false || tileOnMouse[1] > canvasSize[1]){
     return;
   }
   switch(selectedLayer){
