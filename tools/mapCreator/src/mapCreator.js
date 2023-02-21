@@ -57,7 +57,7 @@ const createLayersDisplay = () => {
     let layerList = document.getElementById("innerLayerList")
     layerList.innerHTML = " "
     let layergroundLayer = layerList.appendChild(document.createElement("div"))
-    layergroundLayer.innerHTML = "<h1>groundLayer & WALL LAYER</h1>"
+    layergroundLayer.innerHTML = "<h1>GROUND LAYER</h1>"
     layergroundLayer.classList.add("layer")
     layergroundLayer.classList.add("active");
     layergroundLayer.addEventListener("mouseup", () => {
@@ -66,7 +66,7 @@ const createLayersDisplay = () => {
         selectedLayer = "groundLayer"
     })
     let layerobjectLayer = layerList.appendChild(document.createElement("div"))
-    layerobjectLayer.innerHTML = "<h1>objectLayer LAYER</h1>"
+    layerobjectLayer.innerHTML = "<h1>COLLIDER & INTERACTION LAYER</h1>"
     layerobjectLayer.classList.add("layer")
     layerobjectLayer.addEventListener("mouseup", () => {
         layergroundLayer.classList.remove("active");
@@ -79,7 +79,7 @@ const displayLayer = (mapLayer) => {
     for(let y = 0; y < mapLayer.length; y++)
     {
         for(let x = 0; x < mapLayer.length; x++){
-            displayTiles(x, y, tileSize, mapLayer[x][y])
+            displayTiles(x, y, tileSize, mapLayer[y][x])
         }
     }
 }
@@ -88,7 +88,7 @@ const displayTiles = (x, y, size, id) => {
     if(id < 0){
         return;
     }
-    image(tilesData[id].image, x*size + xMapPos, (y + (1 - tilesData[id].yWidth)) *size + yMapPos, size, size * tilesData[id].yWidth)  
+    image(tilesData[id].image, x*size + xMapPos, (y + (1 - tilesData[id].yWidth)) *size + yMapPos, size * tilesData[id].xWidth, size * tilesData[id].yWidth)  
 }
 
 const getTileWithScreenPosition = (x, y) => {

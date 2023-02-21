@@ -20,10 +20,6 @@ function draw(){
   }
   inputManager()
 }
-  
-function mouseClicked() {
-  paintTileOnClickWithMousePos(tileSelected)
-}
 
 function inputManager() {
   
@@ -40,19 +36,22 @@ function inputManager() {
     yMapPos+=2;
   }
 
+  if (mouseIsPressed === true) {
+    paintTileOnClickWithMousePos(tileSelected)
+  }
 }
 
 const paintTileOnClickWithMousePos = (tileSelectedByUser = tileSelected) => {
   let tileOnMouse = getTileWithScreenPosition(mouseX - xMapPos, mouseY - yMapPos);
-  if(tileOnMouse === false || tileOnMouse[1] > canvasSize[1]){
+  if(tileOnMouse === false || mouseY > canvasSize[1] || mouseX > canvasSize[0]){
     return;
   }
   switch(selectedLayer){
     case "groundLayer" :
-      mapLayers.groundLayer[tileOnMouse[0]][tileOnMouse[1]] = tileSelectedByUser
+      mapLayers.groundLayer[tileOnMouse[1]][tileOnMouse[0]] = tileSelectedByUser
       break;
     case "objectLayer" :
-      mapLayers.objectLayer[tileOnMouse[0]][tileOnMouse[1]] = tileSelectedByUser
+      mapLayers.objectLayer[tileOnMouse[1]][tileOnMouse[0]] = tileSelectedByUser
       break;
     default :
       throw new Error("Layer isn't defined")
