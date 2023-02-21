@@ -24,11 +24,16 @@ const getPlayerCollision = (offsetVectorBounds = createVector(0, 0)) => { // off
 
     let actualPlayerTileWithOffsetBounds = actualPlayerTile(offsetVectorBounds)
     // Check if the tile is empty, so we won't go further in the code and check if there is a collider and crash the game cause an empty tile doesn't have collider :'(
-    if(tileIsEmpty(actualPlayerTileWithOffsetBounds[0], actualPlayerTileWithOffsetBounds[1])){
+    if(tileIsEmpty(actualPlayerTileWithOffsetBounds[0], actualPlayerTileWithOffsetBounds[1], actualPlayerMap.groundLayer)){
         return true
     }
-
-    return getTileData(actualPlayerTileWithOffsetBounds[0], actualPlayerTileWithOffsetBounds[1]).collider
+    let tileCollided = getTileData(actualPlayerTileWithOffsetBounds[0], actualPlayerTileWithOffsetBounds[1], actualPlayerMap.objectLayer);
+    if(tileCollided === undefined)
+    {
+        return false;
+    }else{
+        return getTileData(actualPlayerTileWithOffsetBounds[0], actualPlayerTileWithOffsetBounds[1], actualPlayerMap.objectLayer).collider
+    }
 }
 
 // With this code, if the player is out of range of the array or the value of the tile isn't defined, he won't be able to go further
@@ -39,7 +44,7 @@ const getPlayerCollision = (offsetVectorBounds = createVector(0, 0)) => { // off
 
 const interactWithATile = (tileInteract) => {
     // this is the reason why my playerLastDirection is an array
-    let interactedTile = getTileData(tileInteract[0], tileInteract[1]) // get the information of the tile that the player is looking for
+    let interactedTile = getTileData(tileInteract[0], tileInteract[1], actualPlayerMap.objectLayer) // get the information of the tile that the player is looking for
     switch(interactedTile.type){
         case "explore":
             playerCanMove = false

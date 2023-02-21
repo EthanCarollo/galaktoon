@@ -247,7 +247,7 @@ const setEngineOneVariableAfterLoadingAllAssets = () => {
     }
 
     playerOnMap = mapData[0];
-    actualPlayerMap = playerOnMap.map.slice();
+    actualPlayerMap = playerOnMap.map;
 
     playerVector = getCoordWithTileCoord(playerOnMap.start[0], playerOnMap.start[1]);
     cameraVector = createVector(windowWidth/2, windowHeight/2);

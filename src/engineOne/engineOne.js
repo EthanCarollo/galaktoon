@@ -9,12 +9,13 @@ const runEngineOne = () => {
 // ************************ Display game && camera
 
 const displayTopDown2D = () => {
-    createMapTopDown("back"); // create the layer in back of the player
+    createMapTopDown("not", actualPlayerMap.groundLayer); // create the layer ground in back of the player
+    createMapTopDown("back", actualPlayerMap.objectLayer); // create the layer object in back of the player
     displayNPCOnMap("back");
 
     showPlayerSprite(cameraVector.x, cameraVector.y, playerSpriteSize);
 
-    createMapTopDown("front"); // create the layer in front of the player
+    createMapTopDown("front", actualPlayerMap.objectLayer); // create the layer object in front of the player
     displayNPCOnMap("front");
   
     
@@ -40,7 +41,7 @@ const createMapTopDown = (orientation, map = actualPlayerMap) => {
     {
       for(let x = 0;x < map[0].length; x++)
       {
-        if(!tileIsEmpty(x, y)){
+        if(!tileIsEmpty(x, y, map)){
           switch(orientation){
             case "back" :
               if(actualPlayerTile()[1] >= y)
@@ -55,7 +56,8 @@ const createMapTopDown = (orientation, map = actualPlayerMap) => {
               }
               break;
             default :
-              throw new Error("can't create Tile : the parameter' " + orientation + " ' doesn't fit with the function")
+              createImageWithIdOn2dArray(x, y, map[y][x], tileSize);
+              break;
           }
         }
       }
@@ -94,7 +96,7 @@ const createImageWithIdOn2dArray = (x, y, id, currentTileSize) => {
   //noTint()
 }
 
-const tileIsEmpty = (x, y) => actualPlayerMap[y][x]<=-1 || actualPlayerMap[y][x] >= tilesData.length // In this case, a tile with a value <= to -1 is an empty case or if the value is >= to the length of the tilesData
+const tileIsEmpty = (x, y, map) => map[y][x]<=-1 || map[y][x] >= tilesData.length // In this case, a tile with a value <= to -1 is an empty case or if the value is >= to the length of the tilesData
 
 const tileIsConstructibleAndWeCanConstruct = (id) => tilesData[id].canConstruct === "true" && constructionMode === true && destructionMode === false
 
@@ -102,6 +104,6 @@ const tileIsDestructibleAndWeCanDestruct = (id) => tilesData[id].destructible ==
 
 const tileIsAnObject = (id) => tilesData[id].isAnObject === true
 
-const getTileData = (x, y) => actualPlayerMap[y][x] < tilesData.length ? tilesData[actualPlayerMap[y][x]] : tilesData[-1];
+const getTileData = (x, y, map) => map[y][x] < tilesData.length ? tilesData[map[y][x]] : "not a tile";
 
 // ************************ MAP LOGIC (create and verification on array)

@@ -1,5 +1,5 @@
 let mapLayers = {
-    ground : [
+    groundLayer : [
         [ 0, 0, 0, 0, 0, 0, 0, 0],
         [ 0, 0, 0, 0, 0, 0, 0, 0],
         [ 0, 0, 0, 0, 0, 0, 0, 0],
@@ -8,7 +8,7 @@ let mapLayers = {
         [ 0, 0, 0, 0, 0, 0, 0, 0],
         [ 0, 0, 0, 0, 0, 0, 0, 0]
     ],
-    object : 
+    objectLayer : 
     [
         [-1,-1,-1,-1,-1,-1,-1,-1],
         [-1,-1,-1,-1,-1,-1,-1,-1],
@@ -21,7 +21,7 @@ let mapLayers = {
 }
 
 
-let selectedLayer = "ground"
+let selectedLayer = "groundLayer"
 
 let xMapPos = 0;
 let yMapPos = 0;
@@ -32,53 +32,53 @@ let sizeMap = 20;
 let tileSize = 50;
 
 const resizeArrayMap = (size = sizeMap) => {
-    mapLayers.ground.length = size
-    mapLayers.object.length = size
-    for(let i = 0; i<mapLayers.ground.length;i++){
-        mapLayers.ground[i] = []
-        mapLayers.object[i] = []
-        mapLayers.ground[i].length = size
-        mapLayers.object[i].length = size
-        for(let j = 0; j<mapLayers.ground[i].length;j++){
-            mapLayers.ground[i][j] = 0;
-            mapLayers.object[i][j] = -1;
+    mapLayers.groundLayer.length = size
+    mapLayers.objectLayer.length = size
+    for(let i = 0; i<mapLayers.groundLayer.length;i++){
+        mapLayers.groundLayer[i] = []
+        mapLayers.objectLayer[i] = []
+        mapLayers.groundLayer[i].length = size
+        mapLayers.objectLayer[i].length = size
+        for(let j = 0; j<mapLayers.groundLayer[i].length;j++){
+            mapLayers.groundLayer[i][j] = 0;
+            mapLayers.objectLayer[i][j] = -1;
         }
     }
 }
 
 const displayMap = () => {
     background(225)
-    displayLayer(mapLayers.ground)
-    displayLayer(mapLayers.object)
+    displayLayer(mapLayers.groundLayer)
+    displayLayer(mapLayers.objectLayer)
 }
 
 const createLayersDisplay = () => {
     // DISGRACEFUL SRY RUSHING TIME
     let layerList = document.getElementById("innerLayerList")
     layerList.innerHTML = " "
-    let layerGround = layerList.appendChild(document.createElement("div"))
-    layerGround.innerHTML = "<h1>GROUND & WALL LAYER</h1>"
-    layerGround.classList.add("layer")
-    layerGround.classList.add("active");
-    layerGround.addEventListener("mouseup", () => {
-        layerGround.classList.add("active");
-        layerObject.classList.remove("active");
-        selectedLayer = "ground"
+    let layergroundLayer = layerList.appendChild(document.createElement("div"))
+    layergroundLayer.innerHTML = "<h1>groundLayer & WALL LAYER</h1>"
+    layergroundLayer.classList.add("layer")
+    layergroundLayer.classList.add("active");
+    layergroundLayer.addEventListener("mouseup", () => {
+        layergroundLayer.classList.add("active");
+        layerobjectLayer.classList.remove("active");
+        selectedLayer = "groundLayer"
     })
-    let layerObject = layerList.appendChild(document.createElement("div"))
-    layerObject.innerHTML = "<h1>OBJECT LAYER</h1>"
-    layerObject.classList.add("layer")
-    layerObject.addEventListener("mouseup", () => {
-        layerGround.classList.remove("active");
-        layerObject.classList.add("active");
-        selectedLayer = "object"
+    let layerobjectLayer = layerList.appendChild(document.createElement("div"))
+    layerobjectLayer.innerHTML = "<h1>objectLayer LAYER</h1>"
+    layerobjectLayer.classList.add("layer")
+    layerobjectLayer.addEventListener("mouseup", () => {
+        layergroundLayer.classList.remove("active");
+        layerobjectLayer.classList.add("active");
+        selectedLayer = "objectLayer"
     })
 }
 
 const displayLayer = (mapLayer) => {
-    for(let x = 0; x < mapLayer.length; x++)
+    for(let y = 0; y < mapLayer.length; y++)
     {
-        for(let y = 0; y < mapLayer.length; y++){
+        for(let x = 0; x < mapLayer.length; x++){
             displayTiles(x, y, tileSize, mapLayer[x][y])
         }
     }
@@ -92,11 +92,11 @@ const displayTiles = (x, y, size, id) => {
 }
 
 const getTileWithScreenPosition = (x, y) => {
-    if(Math.floor(x / tileSize)>=mapLayers.ground[0].length || Math.floor(x / tileSize) < 0)
+    if(Math.floor(x / tileSize)>=mapLayers.groundLayer[0].length || Math.floor(x / tileSize) < 0)
     {
         return false
     }
-    if(Math.floor(y / tileSize)>= mapLayers.ground.length || Math.floor(y / tileSize) < 0)
+    if(Math.floor(y / tileSize)>= mapLayers.groundLayer.length || Math.floor(y / tileSize) < 0)
     {
         return false;
     }
