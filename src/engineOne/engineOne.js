@@ -90,7 +90,12 @@ const createImageWithIdOn2dArray = (x, y, id, currentTileSize) => {
   //noTint()
 }
 
-const tileIsEmpty = (x, y, map) => map[y][x]<=-1 || map[y][x] >= tilesData.length // In this case, a tile with a value <= to -1 is an empty case or if the value is >= to the length of the tilesData
+const tileIsEmpty = (x, y, map) => {
+  if(y >= map.length || y < 0){
+    return -1;
+  }
+  return map[y][x]<=-1 || map[y][x] >= tilesData.length// In this case, a tile with a value <= to -1 is an empty case or if the value is >= to the length of the tilesData
+}
 
 const tileIsConstructibleAndWeCanConstruct = (id) => tilesData[id].canConstruct === "true" && constructionMode === true && destructionMode === false
 
@@ -98,6 +103,15 @@ const tileIsDestructibleAndWeCanDestruct = (id) => tilesData[id].destructible ==
 
 const tileIsAnObject = (id) => tilesData[id].isAnObject === true
 
-const getTileData = (x, y, map) => map[y][x] < tilesData.length ? tilesData[map[y][x]] : "not a tile";
+const getTileData = (x, y, map) => {
+
+  if(y >= 0 && y < map.length && map[y][x] < tilesData.length)
+  {
+    return tilesData[map[y][x]]
+  }else{
+    return tilesData[1];
+  }
+
+}
 
 // ************************ MAP LOGIC (create and verification on array)
