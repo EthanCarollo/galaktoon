@@ -12,6 +12,12 @@
             "path" : "assets/sprites/topDownSprite/bob/BobSpriteSheet.png",
             "nb" : "1",
             "image" : "null"
+        },
+        {
+            "id" : "2",
+            "path" : "assets/sprites/topDownSprite/darkWoaf/darkWoafSpriteSheet.png",
+            "nb" : "1",
+            "image" : "null"
         }
     ]
 }
