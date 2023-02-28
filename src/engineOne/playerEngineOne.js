@@ -45,6 +45,10 @@ const getPlayerCollision = (offsetVectorBounds = createVector(0, 0)) => { // off
 const interactWithATile = (tileInteract) => {
     // this is the reason why my playerLastDirection is an array
     let interactedTile = getTileData(tileInteract[0], tileInteract[1], actualPlayerMap.objectLayer) // get the information of the tile that the player is looking for
+
+    if(interactedTile === undefined){
+        return;
+    }
     switch(interactedTile.type){
         case "explore":
             playerCanMove = false
@@ -84,9 +88,19 @@ const interactWithNPC = (tileInteract) => {
     let npcInteracted = playerOnMap.npcOnMap.filter(npc => npc.position[0] === tileInteract[0] && npc.position[1] === tileInteract[1])
     if(npcInteracted.length > 0)
     {
-        console.log("INTERACTED")
-        console.log(npcInteracted)
-        console.log("INTERACTED")
+        if(npcInteracted[0].isInteractible === true){
+            console.log("INTERACTED")
+            console.log(npcInteracted)
+            console.log("INTERACTED")
+        }
+    }
+}
+
+const launchInteractionWithNPC = (interaction) => {
+    switch(interaction)
+    {
+        default :
+            throw new Error("No Interaction Set")
     }
 }
 
@@ -97,7 +111,7 @@ const playSleepAnimation = () => {
 const createInteractionPopup = (x ,y ,typeOfInteract) => {
     switch(typeOfInteract){
         case "npc" :
-            createImageWithIdOn2dArray(x, y-1, 36, 65)
+            createImageWithIdOn2dArray(x, y-1, 20, 65)
             break;
         default:
             createImageWithIdOn2dArray(x, y-1, 20, 65) // god tier function 
