@@ -8,12 +8,18 @@
                     "npcOnMap": [{
                         "id" : 0,
                         "position" : [10, 8],
-                        "isInteractible" : true
+                        "isInteractible" : true,
+                        "state" : "idle",
+                        "path" : [],
+                        "currentPath" : 0
                     },
                     {
                         "id" : 1,
                         "position" : [9, 8],
-                        "isInteractible" : true
+                        "isInteractible" : true,
+                        "state" : "moove",
+                        "path" : [[9,8],[9,7]],
+                        "currentPath" : 1
                     }],
                     "secondStart": [-14, -21.5]
                 },

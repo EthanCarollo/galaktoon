@@ -25,15 +25,41 @@ const displayNpc = (npc) => {
     let positionTemp = getCoordWithTileCoord(npc.position[0]-1, npc.position[1]-1);
     positionTemp.x = positionTemp.x + cameraVector.x + playerVector.x
     positionTemp.y = positionTemp.y + cameraVector.y + playerVector.y
-    animateNpc(positionTemp.x, positionTemp.y, playerSpriteSize, [0, 1], spriteNpcId, "idle")
+    animateNpc(positionTemp.x, positionTemp.y, playerSpriteSize, [0, 1], spriteNpcId, npc.state)
+    if(npc.path.length > 0){
+      pathNpc(npc)
+    }
 }
 
-const animateNpc = (x, y, size, direction /* ! = Array ! */, npcId, state) => {
+const pathNpc = (npc) => {
+  let currentPath = npc.currentPath
+  let actualPosition = npc.position
+  let nextPos = npc.path[currentPath]
+  switch(actualPosition[0] < nextPos[0]){
+    case true :
+      console.log("true X < X dest")
+      break;
+    case false :
+      console.log("false X > X dest")
+      break;
+  }
+  switch(actualPosition[1] < nextPos[1]){
+    case true :
+      console.log("true Y < Y dest")
+      break;
+    case false :
+      console.log("false Y > Y dest")
+      break;
+  }
+}
+
+const animateNpc = (x, y, size, direction /* ! = Array ! */, npcId, state = "idle") => {
     switch(state){
       case "idle" :
         animationIdleSprite(x, y, size, direction, npcId)
         break;
       case "moove" :
+        animationMooveSprite(x, y, size, direction, npcId)
         break;
       default :
         break;

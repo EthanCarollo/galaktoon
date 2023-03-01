@@ -4,13 +4,11 @@
         {
             "id" : "0",
             "spriteId" : "1",
-            "name" : "Bob",
-            "path" : []
+            "name" : "Bob"
         },{
             "id" : "1",
             "spriteId" : "2",
-            "name" : "DarkWoaf",
-            "path" : []
+            "name" : "DarkWoaf"
         }
     ]
 }

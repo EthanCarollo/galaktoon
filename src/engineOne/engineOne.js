@@ -3,6 +3,7 @@ const runEngineOne = () => {
     updatePlayerLevel(playerTeam[0]); // temp call of the function
     setPlayerCamera();
     displayTopDown2D();
+    updateAnimationIndex();
     displayUserInterfaceEngineOne();
 }
 

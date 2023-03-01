@@ -61,12 +61,15 @@ const animationMooveSprite = (positionX, positionY, size, direction, id = 0) => 
 
 
     image(spritePlayerAnimationMoove, positionX, positionY, size, size)
+}
+
+const updateAnimationIndex = () => {
     playerAnimationIndex += 0.1;
 
-    if(isOutOfLength()) 
+    if(animationIndexIsOutOfLength()) 
     {
         playerAnimationIndex = 0;
     }
 }
 
-const isOutOfLength = () => playerAnimationIndex >= (playerAnimationLength -1)
+const animationIndexIsOutOfLength = () => playerAnimationIndex >= (playerAnimationLength -1)
