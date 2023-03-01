@@ -25,11 +25,19 @@ const displayNpc = (npc) => {
     let positionTemp = getCoordWithTileCoord(npc.position[0]-1, npc.position[1]-1);
     positionTemp.x = positionTemp.x + cameraVector.x + playerVector.x
     positionTemp.y = positionTemp.y + cameraVector.y + playerVector.y
-    animateNpc(positionTemp.x, positionTemp.y, playerSpriteSize, [0, 1], spriteNpcId)
+    animateNpc(positionTemp.x, positionTemp.y, playerSpriteSize, [0, 1], spriteNpcId, "idle")
 }
 
-const animateNpc = (x, y, size, direction /* ! = Array ! */, npcId) => {
-    animationIdleSprite(x, y, size, direction, npcId)
+const animateNpc = (x, y, size, direction /* ! = Array ! */, npcId, state) => {
+    switch(state){
+      case "idle" :
+        animationIdleSprite(x, y, size, direction, npcId)
+        break;
+      case "moove" :
+        break;
+      default :
+        break;
+    }
 }
 
 const isInFrontOfANpc = () => playerOnMap.npcOnMap.filter(npc => npc.position[0] === tileInteract[0] && npc.position[1] === tileInteract[1])
