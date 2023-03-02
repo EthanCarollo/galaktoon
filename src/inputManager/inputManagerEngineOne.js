@@ -78,7 +78,6 @@ const playerInputForEngineOne=()=>{
     }
 
     if(playerCanInteract === true){
-
         let playerCaseInteract = [actualPlayerTile()[0] + playerLastDirection[0], actualPlayerTile()[1] + playerLastDirection[1]]
         checkForInteraction(playerCaseInteract)
         

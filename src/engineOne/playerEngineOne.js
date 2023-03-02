@@ -6,7 +6,7 @@ const showPlayerSprite = (positionX, positionY, spriteSize) => {
       let ySpritePosition = positionY - spriteSize
         if(playerIsMooving === true){
             // animation "moove" when player moove
-            animationMooveSprite(xSpritePosition, ySpritePosition, spriteSize, playerDirection, 0)
+            animationPlayerMooveSprite(xSpritePosition, ySpritePosition, spriteSize, playerDirection, 0)
         }else{
             // animation "idle" when player doesn't moove (when no key is pressed)
             animationIdleSprite(xSpritePosition, ySpritePosition, spriteSize, playerLastDirection, 0);

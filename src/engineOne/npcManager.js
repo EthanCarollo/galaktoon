@@ -37,18 +37,14 @@ const pathNpc = (npc) => {
   let nextPos = npc.path[currentPath]
   switch(actualPosition[0] < nextPos[0]){
     case true :
-      console.log("true X < X dest")
       break;
     case false :
-      console.log("false X > X dest")
       break;
   }
   switch(actualPosition[1] < nextPos[1]){
     case true :
-      console.log("true Y < Y dest")
       break;
     case false :
-      console.log("false Y > Y dest")
       break;
   }
 }
