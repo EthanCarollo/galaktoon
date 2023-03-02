@@ -940,8 +940,6 @@
             "destructible": "false",
             "sizeXonConstruct": 1
         },
-
-        
         {
             "id": "69",
             "path": "assets/tiles/tempTilesFromJey/caca.png",
@@ -1114,6 +1112,127 @@
         {
             "id": "82",
             "path": "assets/tiles/tempTilesFromJey/sol2.png",
+            "image": "null",
+            "collider": false,
+            "canConstruct": "true",
+            "isAnObject": false,
+            "xWidth": 1,
+            "yWidth": "1",
+            "type": "useless",
+            "destructible": "false",
+            "sizeXonConstruct": 1
+        }
+
+
+        
+        ,
+        {
+            "id": "0",
+            "path": "assets/tiles/tempTilesFromLouane/sv01.png",
+            "image": "null",
+            "collider": false,
+            "canConstruct": "true",
+            "isAnObject": false,
+            "xWidth": 1,
+            "yWidth": "1",
+            "type": "useless",
+            "destructible": "false",
+            "sizeXonConstruct": 1
+        },
+        {
+            "id": "0",
+            "path": "assets/tiles/tempTilesFromLouane/sv02.png",
+            "image": "null",
+            "collider": false,
+            "canConstruct": "true",
+            "isAnObject": false,
+            "xWidth": 1,
+            "yWidth": "1",
+            "type": "useless",
+            "destructible": "false",
+            "sizeXonConstruct": 1
+        },
+        {
+            "id": "0",
+            "path": "assets/tiles/tempTilesFromLouane/sv03.png",
+            "image": "null",
+            "collider": false,
+            "canConstruct": "true",
+            "isAnObject": false,
+            "xWidth": 1,
+            "yWidth": "1",
+            "type": "useless",
+            "destructible": "false",
+            "sizeXonConstruct": 1
+        },
+        {
+            "id": "0",
+            "path": "assets/tiles/tempTilesFromLouane/sv04.png",
+            "image": "null",
+            "collider": false,
+            "canConstruct": "true",
+            "isAnObject": false,
+            "xWidth": 1,
+            "yWidth": "1",
+            "type": "useless",
+            "destructible": "false",
+            "sizeXonConstruct": 1
+        },
+        {
+            "id": "0",
+            "path": "assets/tiles/tempTilesFromLouane/sv05.png",
+            "image": "null",
+            "collider": false,
+            "canConstruct": "true",
+            "isAnObject": false,
+            "xWidth": 1,
+            "yWidth": "1",
+            "type": "useless",
+            "destructible": "false",
+            "sizeXonConstruct": 1
+        },
+        {
+            "id": "0",
+            "path": "assets/tiles/tempTilesFromLouane/sv06.png",
+            "image": "null",
+            "collider": false,
+            "canConstruct": "true",
+            "isAnObject": false,
+            "xWidth": 1,
+            "yWidth": "1",
+            "type": "useless",
+            "destructible": "false",
+            "sizeXonConstruct": 1
+        },
+        {
+            "id": "0",
+            "path": "assets/tiles/tempTilesFromLouane/sv07.png",
+            "image": "null",
+            "collider": false,
+            "canConstruct": "true",
+            "isAnObject": false,
+            "xWidth": 1,
+            "yWidth": "1",
+            "type": "useless",
+            "destructible": "false",
+            "sizeXonConstruct": 1
+        },
+        {
+            "id": "0",
+            "path": "assets/tiles/tempTilesFromLouane/sv08.png",
+            "image": "null",
+            "collider": false,
+            "canConstruct": "true",
+            "isAnObject": false,
+            "xWidth": 1,
+            "yWidth": "1",
+            "type": "useless",
+            "destructible": "false",
+            "sizeXonConstruct": 1
+        },
+        {
+            "id": "0",
+            "path": "assets/tiles/tempTilesFromLouane/sv09.png",
             "image": "null",
             "collider": false,
             "canConstruct": "true",
