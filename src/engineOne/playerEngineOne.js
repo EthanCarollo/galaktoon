@@ -111,10 +111,10 @@ const playSleepAnimation = () => {
 const createInteractionPopup = (x ,y ,typeOfInteract) => {
     switch(typeOfInteract){
         case "npc" :
-            createImageWithIdOn2dArray(x, y-1, 20, 65)
+            createImageWithIdOn2dArray(x, y-1, 9, 65, true)
             break;
         default:
-            createImageWithIdOn2dArray(x, y-1, 20, 65) // god tier function 
+            createImageWithIdOn2dArray(x, y-1, 10, 65, true)
             break;
     }
 }

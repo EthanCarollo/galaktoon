@@ -18,6 +18,11 @@
             "path" : "assets/sprites/topDownSprite/darkWoaf/darkWoafSpriteSheet.png",
             "nb" : "1",
             "image" : "null"
+        },{
+            "id" : "3",
+            "path" : "assets/sprites/topDownSprite/salatonion/salatonionSprite.png",
+            "nb" : "1",
+            "image" : "null"
         }
     ]
 }

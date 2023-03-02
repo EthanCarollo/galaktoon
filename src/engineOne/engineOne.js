@@ -66,7 +66,7 @@ const createMapTopDown = (orientation, map = actualPlayerMap) => {
 
 }
 
-const createImageWithIdOn2dArray = (x, y, id, currentTileSize) => {
+const createImageWithIdOn2dArray = (x, y, id, currentTileSize, isUi = false) => {
 
   // size of the current tile according to the data
   let xTileWidth = tilesData[id].xWidth;
@@ -75,18 +75,12 @@ const createImageWithIdOn2dArray = (x, y, id, currentTileSize) => {
   let xPositionTiles = currentTileSize*x + cameraVector.x + playerVector.x -45;
   let yPositionTiles = (currentTileSize*(y+1-yTileHeight) + cameraVector.y + playerVector.y -45);
   let normalYPositionTiles = currentTileSize*y + cameraVector.y + playerVector.y -45; // normal position of a tiles (usefull when you need to instantiate a normal tile behind a special tile)
-  
-  /*
-  if(tileIsConstructibleAndWeCanConstruct(id)){
-    tint(100, 255, 100) // this is purely esthetic
+  if(isUi === true){
+    yPositionTiles = (currentTileSize*y + cameraVector.y + playerVector.y -45);
+    image(uiData[id].image, xPositionTiles , yPositionTiles, currentTileSize, currentTileSize); 
+  }else{
+    image(tilesData[id].image, xPositionTiles , yPositionTiles, currentTileSize * xTileWidth, currentTileSize * yTileHeight); 
   }
-  if(tileIsDestructibleAndWeCanDestruct(id)){
-    tint(255, 100, 100) // this is purely esthetic too
-  }
-  This code isn't usefull actually, i just preshot for a next features :3
-  */
-
-  image(tilesData[id].image, xPositionTiles , yPositionTiles, currentTileSize * xTileWidth, currentTileSize * yTileHeight); 
 
   //noTint()
 }

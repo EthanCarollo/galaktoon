@@ -9,6 +9,10 @@
             "id" : "1",
             "spriteId" : "2",
             "name" : "DarkWoaf"
+        },{
+            "id" : "2",
+            "spriteId" : "3",
+            "name" : "Salatonion"
         }
     ]
 }
