@@ -37,14 +37,18 @@ const pathNpc = (npc) => {
   let nextPos = npc.path[currentPath]
   switch(actualPosition[0] < nextPos[0]){
     case true :
+      actualPosition[0] += 0.025
       break;
     case false :
+      actualPosition[0] -= 0.025
       break;
   }
   switch(actualPosition[1] < nextPos[1]){
     case true :
+      actualPosition[1] += 0.025
       break;
     case false :
+      actualPosition[1] -= 0.025
       break;
   }
 }
