@@ -29,6 +29,10 @@ const ressourceToLoad = [
         typeOfRessource : "planets",
         path : "./json/engineOne/planetExplorable.json"
     },
+    {
+        typeOfRessource : "npc",
+        path : "./json/engineOne/npc.json"
+    }
 ]
 
 let tilesData = [];
@@ -38,6 +42,8 @@ let mapData = [];
 let spritesFightData = [];
 let uiData = [];
 let planetsData = [];
+let npcData = [];
+let pixelFont;
 
 // variables that follow the resource loading course
 
@@ -47,6 +53,7 @@ let loadingCounterItemsData = 0;
 let loadingCounterSpritesFightData = 0;
 let loadingCounterUIData = 0;
 let loadingCounterPlanetsData = 0;
+let loadingCounterNPCData = 0
 let totalLoadCounter = 0;
 let totalLoad = ressourceToLoad.length;
 
@@ -55,6 +62,7 @@ let totalLoad = ressourceToLoad.length;
 let ressourceIsLoaded = false; // boolean who tell if ALL the ressources has been loaded or no, while this bool is false, the game won't launch
 
 const loadAssets = () => {
+    pixelFont = loadFont('../assets/fonts/PublicPixel.ttf');
     for(let i = 0 ; i < ressourceToLoad.length ; i++)
     {
         fetch(ressourceToLoad[i].path)
@@ -147,6 +155,11 @@ const loadRessource = (ressource, typeOfRessource) => {
             successfullLoadingRessource(typeOfRessource)
             break;
 
+        case "npc" :
+            npcData = ressource;
+            successfullLoadingRessource(typeOfRessource)
+            break;
+
         default :
             throw new Error("this is not an accepted type of ressource : " + typeOfRessource);
         
@@ -197,10 +210,18 @@ const successfullLoadingRessource = (typeOfRessource) => {
         case "planets" :
             totalLoadCounter ++;
             break;
+        case "npc" :
+            totalLoadCounter ++;
+            break;
         default :
             throw new Error("this cannot load that type of ressource : " + typeOfRessource);
     }
 
+    checkAllRessource()
+    
+}
+
+const checkAllRessource = () => {
     if(totalLoadCounter === totalLoad)
     {
         loadAllRessource()
@@ -226,9 +247,9 @@ const setEngineOneVariableAfterLoadingAllAssets = () => {
     }
 
     playerOnMap = mapData[0];
-    actualPlayerMap = playerOnMap.map.slice();
+    actualPlayerMap = playerOnMap.map;
 
-    playerVector = createVector(playerOnMap.start[0], playerOnMap.start[1]);
+    playerVector = getCoordWithTileCoord(playerOnMap.start[0], playerOnMap.start[1]);
     cameraVector = createVector(windowWidth/2, windowHeight/2);
     mapVector = createVector(0,0);
 }

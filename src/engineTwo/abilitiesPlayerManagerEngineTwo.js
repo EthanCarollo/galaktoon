@@ -11,23 +11,24 @@ const createAbilityPlayer = (currentPlayerTurn) => {
         let iconSize = 80;
         let xIcon = iconSize + (iconSize*1.25) *i
         let yIcon = iconSize / 1.5
-        createIconAbility(xIcon, yIcon, iconSize, currentAbility.id, i)
+        createIconAbility(xIcon, yIcon, iconSize, currentAbility, i)
     }
 }
 
-const createIconAbility = (x, y, size, abilityID, abilityIndexOnCharacter) => {
+const createIconAbility = (x, y, size, ability, abilityIndexOnCharacter) => {
     if(abilityIndexOnCharacter > 2)
     {
         throw new Error("can't create Ability UI cause abilityIndex is out of array")
     }
     if(abilityIndexOnCharacter === currentAbilityUsed)
     {
-        image(uiData[abilityID].image, x, y, size, size)
+        image(uiData[ability.id].image, x, y, size, size)
         image(uiData[6].image, x, y, size, size)
     }else{
-        image(uiData[abilityID].image, x, y, size, size)
+        image(uiData[ability.id].image, x, y, size, size)
     }
     createAblityIndication( x, y, size, abilityIndexOnCharacter);
+    showLevelUI( x, y, size, ability.abilityLevel) // using the tool used in engine one
 }
 
 const createAblityIndication = (x, y, size, abilityIndexOnCharacter) => {
@@ -46,36 +47,38 @@ const createAblityIndication = (x, y, size, abilityIndexOnCharacter) => {
     }
 }
 
-const useAbilityOnTarget = (currentAttack, currentTarget) => {
-
+const useAbilityOnTarget = (currentAttack, currentTarget, attackerRef = null) => {
+    
+    attackerRef.state = currentAttack.type;
+    let amountOfDamage = currentAttack.baseAmount * (currentAttack.abilityLevel / 1.5)
     switch(currentAttack.type){
         case "attack":
-            currentTarget.hp.current = currentTarget.hp.current - currentAttack.amount;
+            currentTarget.hp.current = currentTarget.hp.current - amountOfDamage;
             break;
         case "heal":
-            healCharacterPlayerTeam(currentAttack.amount, currentTurn)
+            healCharacterPlayerTeam(amountOfDamage, currentTurn)
             break;
         case "healAll":
-            healAllCharacter(currentAttack.amount)
+            healAllCharacter(amountOfDamage)
             break;
         default :
             throw new Error("Player abilities don't actually work cause there is no good type")
-            break;
     }
     if(currentTarget.hp.current <= 0){
         currentTarget.hp.current = 0;
     }
 
-    debugLogFightArray(currentAttack, currentTarget);
+    debugLogFightArray(attackerRef, currentAttack, currentTarget, currentAttack.type);
 }
 
-const debugLogFightArray = (currentAttack, currentTarget) => {
-    if(turnTeam === "player")
-    {
-        fightLog.push(playerTeam[0].name + " " + currentAttack.name + " on " + currentTarget.name)
-    }else{
-        fightLog.push(enemyTeam[0].name + " " + currentAttack.name + " on " + currentTarget.name)
+const debugLogFightArray = (currentAttacker ,currentAttack, currentTarget, attackType) => {
+    let logFight;
+    switch(attackType){
+        case "attack" : logFight = currentAttacker.name + " " + currentAttack.name + " on " + currentTarget.name; break;
+        case "heal" : logFight = currentAttacker.name + " healed himself "; break;
+        case "healAll" : logFight = currentAttacker.name + " healed the team "; break;
     }
+    fightLog.push(logFight)
 }
 
 const healAllCharacter = (amount) => {

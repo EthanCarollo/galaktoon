@@ -40,6 +40,8 @@ This game only use the p5.js library.
 * Camera smooth follow the player.
 * Player can travel through planets from the control panel.
 * Player can fight enemy !
+* Player can now level Up ! 
+* A tool for create map is disponible here ! : https://github.com/JackyTuneur/GalaktoonToolMapCreator
 
 ## 5. Studio Informations
 

@@ -4,9 +4,14 @@ const playerInputInteractForEngineOne = () => {
         let playerCaseInteract = tileNextToThePlayer()
     
         if(keyIsDown(69)) {
-          interactWithATile(playerCaseInteract);
+            playerInteraction(playerCaseInteract)
         }
     }
+}
+
+const playerInteraction = (caseInteraction) => {
+    interactWithATile(caseInteraction);
+    interactWithNPC(caseInteraction);
 }
 
 const tileNextToThePlayer = () => {
@@ -16,13 +21,13 @@ const tileNextToThePlayer = () => {
 const playerInputForEngineOne=()=>{
     if(playerCanMove === true){
 
-        playerDirection = []; // reset player direction every frame
-
+        playerDirection = [0, 0]; // reset player direction every frame
+        playerIsMooving = false;
         if (keyIsDown(RIGHT_ARROW) || keyIsDown(68)) { // When players touch right arrow or D
             cameraVector.x += playerSpeed
             playerVector.x -= playerSpeed
             mapVector.x += playerSpeed
-            playerDirection.push("right");
+            playerDirection[0] += 1;
             playerIsMooving = true;
             if(getPlayerCollision(createVector(-10, 0)))
             {
@@ -35,7 +40,7 @@ const playerInputForEngineOne=()=>{
             cameraVector.x -= playerSpeed
             playerVector.x += playerSpeed
             mapVector.x -= playerSpeed
-            playerDirection.push("left");
+            playerDirection[0] -= 1;
             playerIsMooving = true;
             if(getPlayerCollision(createVector(20, 0)))
             {
@@ -48,7 +53,7 @@ const playerInputForEngineOne=()=>{
             cameraVector.y -= playerSpeed
             playerVector.y += playerSpeed
             mapVector.y -= playerSpeed
-            playerDirection.push("up");
+            playerDirection[1] -= 1;
             playerIsMooving = true;
             if(getPlayerCollision(createVector(0, 35))){
                 cameraVector.y += playerSpeed
@@ -59,8 +64,8 @@ const playerInputForEngineOne=()=>{
         if(keyIsDown(DOWN_ARROW) || keyIsDown(83)) { // When players touch down arrow or S
             cameraVector.y += playerSpeed
             playerVector.y -= playerSpeed
-            mapVector.y += playerSpeed  
-            playerDirection.push("down");  
+            mapVector.y += playerSpeed
+            playerDirection[1] += 1;  
             playerIsMooving = true; 
             if(getPlayerCollision(createVector(0, 0))){
                 cameraVector.y -= playerSpeed
@@ -68,30 +73,32 @@ const playerInputForEngineOne=()=>{
                 mapVector.y -= playerSpeed
             }
         }
-
-
-        if(keyIsDown(DOWN_ARROW) || keyIsDown(UP_ARROW) || keyIsDown(LEFT_ARROW) || keyIsDown(RIGHT_ARROW) || keyIsDown(83) || keyIsDown(90) || keyIsDown(81) || keyIsDown(68))
-        {
-            // potential code here
-        }else{
-            playerIsMooving = false;
-        }
     }else{
         playerIsMooving = false;
     }
 
     if(playerCanInteract === true){
-
         let playerCaseInteract = [actualPlayerTile()[0] + playerLastDirection[0], actualPlayerTile()[1] + playerLastDirection[1]]
+        checkForInteraction(playerCaseInteract)
+        
+    }
+}
 
-        /*if(keyIsUp(69)) {
-          interactWithATile(playerCaseInteract);
-        }*/
-        if(getTileData(playerCaseInteract[0], playerCaseInteract[1]).type !== "useless")
-        {
-          let interactType = getTileData(playerCaseInteract[0], playerCaseInteract[1]).type;
-          createInteractionPopup(playerCaseInteract[0], playerCaseInteract[1], interactType)
-        }
+const checkForInteraction = (playerCaseInteract) => {
+    if(getTileData(playerCaseInteract[0], playerCaseInteract[1], actualPlayerMap.objectLayer) !== undefined)
+    {
+        if(getTileData(playerCaseInteract[0], playerCaseInteract[1], actualPlayerMap.objectLayer).type !== "useless")
+            {
+            let interactType = getTileData(playerCaseInteract[0], playerCaseInteract[1], actualPlayerMap.objectLayer).type;
+            createInteractionPopup(playerCaseInteract[0], playerCaseInteract[1], interactType)
+            }
+    }
+    
+    // just for set pnj interactible
+    let pnjInteractible = playerOnMap.npcOnMap.filter(npc => npc.position[0] === playerCaseInteract[0] && npc.position[1] === playerCaseInteract[1])
+    if(pnjInteractible.length > 0)
+    {
+        createInteractionPopup(playerCaseInteract[0], playerCaseInteract[1], "npc")
     }
 }
 

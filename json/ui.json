@@ -3,31 +3,55 @@
     [
         {
             "id" : "0",
-            "path" : "assets/ui/fightUI/healthbar.png"
+            "path" : "assets/ui/fightUI/healthbar.png",
+            "image" : null
         },
         {
             "id" : "1",
-            "path" : "assets/ui/ability/abilityTest.png"
+            "path" : "assets/ui/ability/abilityTest.png",
+            "image" : null
         },
         {
             "id" : "2",
-            "path" : "assets/ui/fightUI/empty_healthbar.png"
+            "path" : "assets/ui/fightUI/empty_healthbar.png",
+            "image" : null
         },
         {
             "id" : "3",
-            "path" : "assets/ui/fightUI/background_healthbar.png"
+            "path" : "assets/ui/fightUI/background_healthbar.png",
+            "image" : null
         },
         {
             "id" : "4",
-            "path" : "assets/ui/ability/abilityTest2.png"
+            "path" : "assets/ui/ability/abilityTest2.png",
+            "image" : null
         },
         {
             "id" : "5",
-            "path" : "assets/ui/ability/abilityTest3.png"
+            "path" : "assets/ui/ability/abilityTest3.png",
+            "image" : null
         },
         {
             "id" : "6",
-            "path" : "assets/ui/ability/selectedAbility.png"
+            "path" : "assets/ui/ability/selectedAbility.png",
+            "image" : null
+        },
+        {
+            "id" : "7",
+            "path" : "assets/ui/playerPortrait.png",
+            "image" : null
+        },{
+            "id" : "8",
+            "path" : "assets/ui/roundCaseUi.png",
+            "image" : null
+        },{
+            "id" : "9",
+            "path" : "assets/ui/talkPopup.png",
+            "image" : null
+        },{
+            "id" : "10",
+            "path" : "assets/ui/popup.png",
+            "image" : null
         }
     ]
 }

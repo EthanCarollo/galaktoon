@@ -1,9 +1,9 @@
+
 let playerVector;
 let cameraVector;
 let mapVector;
 
 // Player Var
-let playerSpeed = 5;
 let playerSpriteSize = 100;
 let playerCanMove = true;
 let cameraSmoothStep = 0.98;
@@ -13,9 +13,9 @@ let playerIsExploringMap = false;
 // Player anim
 let playerIsMooving = false;
 let playerAnimationIndex = 0;
-let playerAnimationLength = 4;
-let playerDirection = ["right"]; // stock the direction of the player in a array
-let playerLastDirection = [0,1]; // orientation naturally down
+const playerAnimationLength = 4;
+let playerDirection = [0, 0]; // stock the direction of the player in a array
+let playerLastDirection = [0, 1]; // orientation naturally down
 // Player anim
 
 // Player Var
@@ -34,12 +34,12 @@ let destructionMode = false;
 
 // Construction Mode
 
-// Player interaction
+// PLayer can fight
+const playerCanFight = () => playerTeam[0].hp.current > 0
+// PLayer can fight
 
-let playerCanInteract = true;
+// Player dialog
 
-// Player interaction
+let playerIsInDialog = false;
 
-// Player exploration list
-
-// Player exploration list
+// Player dialog
