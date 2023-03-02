@@ -22,21 +22,38 @@ const displayNPCOnMap = (orientation = "back") => {
 
 const displayNpc = (npc) => {
     let spriteNpcId = npcData[npc.id].spriteId
-    if(npc.path.length > 0){
-      console.log("launch")
-      pathNpc(npc)
-    }
     let positionTemp = getCoordWithTileCoord(npc.position[0]-1, npc.position[1]-1)
     positionTemp.x = positionTemp.x + cameraVector.x + playerVector.x
     positionTemp.y = positionTemp.y + cameraVector.y + playerVector.y
-    animateNpc(positionTemp.x, positionTemp.y, playerSpriteSize, [0, 1], spriteNpcId, npc.state)
+    switch(npc.pathing){
+      case "around" :
+        if(npc.currentPath === 0){
+          setTimeout(() => {
+            npc.currentPath = 1
+          }, 2000);
+          pathNpc(npc, "right")
+          animateNpc(positionTemp.x, positionTemp.y, playerSpriteSize, [1, 0], spriteNpcId, npc.state)
+        }else{
+          setTimeout(() => {
+            npc.currentPath = 0
+          },2000);
+          pathNpc(npc, "left")
+          animateNpc(positionTemp.x, positionTemp.y, playerSpriteSize, [-1, 0], spriteNpcId, npc.state)
+        }
+        break;
+    }
     
 }
 
-const pathNpc = (npc) => {
-  let actualPosition = getCoordWithTileCoord(npc.position[0]-1, npc.position[1]-1)
-  let nextPos = getCoordWithTileCoord(npc.path[npc.currentPath][0]-1, npc.path[npc.currentPath][1]-1);
-  
+const pathNpc = (npc, direction) => {
+  switch(direction){
+    case "left" :
+      npc.position[0] -= 0.025
+      break
+    case "right" :
+      npc.position[0] += 0.025
+      break
+  }
 }
 
 const animateNpc = (x, y, size, direction /* ! = Array ! */, npcId, state = "idle") => {

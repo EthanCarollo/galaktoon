@@ -64,10 +64,10 @@ const interactWithATile = (tileInteract) => {
         case "useless":
             break;
         case "goDownInSpaceShip":
-            loadNewMap(mapData[1], mapData[1].start)
+            // New Func
             break;
         case "goUpInSpaceShip":
-            loadNewMap(mapData[0], mapData[0].secondStart)
+            // New Func
             break;
         case "fight":
             // ! TEMP 
