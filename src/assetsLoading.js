@@ -2,10 +2,6 @@
 
 const ressourceToLoad = [
     {
-        typeOfRessource : "tile",
-        path : "./json/engineOne/tiles.json"
-    },
-    {
         typeOfRessource : "sprite",
         path : "./json/engineOne/sprites.json"
     },
@@ -35,7 +31,6 @@ const ressourceToLoad = [
     }
 ]
 
-let tilesData = [];
 let spritesData = [];
 let itemsData = [];
 let mapData = [];
@@ -47,13 +42,12 @@ let pixelFont;
 
 // variables that follow the resource loading course
 
-let loadingCounterTilesData = 0;
 let loadingCounterSpritesData = 0;
 let loadingCounterItemsData = 0;
 let loadingCounterSpritesFightData = 0;
 let loadingCounterUIData = 0;
 let loadingCounterPlanetsData = 0;
-let loadingCounterNPCData = 0
+let loadingCounterNPCData = 0;
 let totalLoadCounter = 0;
 let totalLoad = ressourceToLoad.length;
 
@@ -85,18 +79,6 @@ const loadAssets = () => {
 
 const loadRessource = (ressource, typeOfRessource) => {
     switch(typeOfRessource){
-        case "tile" :
-            tilesData = ressource;
-            for(let i = 0; i < tilesData.length; i++)
-            {
-                tilesData[i].image = loadImage(
-                    tilesData[i].path, 
-                    () => successfullLoadingRessource(typeOfRessource),
-                    () => failureLoadingRessource(tilesData[i], typeOfRessource)
-                );
-            }
-            break;
-        
         case "sprite" :
             spritesData = ressource;
             for(let i = 0; i < spritesData.length; i++)
@@ -122,9 +104,15 @@ const loadRessource = (ressource, typeOfRessource) => {
             break;
 
         case "map" :
+            // ! NEED AN UPDATE HERE ! //
             mapData = ressource;
-            successfullLoadingRessource(typeOfRessource)
+            console.log(mapData);
+            for(let i = 0; i < mapData.length; i++){
+                loadJsonForMap(mapData[i])
+            }
+            // successfullLoadingRessource(typeOfRessource)
             break;
+            // ! NEED AN UPDATE HERE ! //
 
         case "spriteFight" :
             spritesFightData = ressource;
@@ -135,7 +123,11 @@ const loadRessource = (ressource, typeOfRessource) => {
                     () => successfullLoadingRessource(typeOfRessource),
                     () => failureLoadingRessource(spritesFightData[i], typeOfRessource)
                 );
-            }
+            };
+            setTimeout(() => {
+                successfullLoadingRessource("map")    
+            }, 1500);
+
             break;
 
         case "ui" :
@@ -166,6 +158,30 @@ const loadRessource = (ressource, typeOfRessource) => {
     }
 }
 
+const loadJsonForMap = (map) => {
+    console.log(map.tileRessource)
+    fetch(map.tileRessource)
+        .then(res => res.json())
+        .then(res => res.data)
+        .then(res => { 
+            map.tileRessource = res;
+            loadTileFromJson(map); 
+        }) // ! LOAD THE JSON
+        .catch(err => console.log(err))
+}
+
+const loadTileFromJson = (map) => {
+    console.log(map.tileRessource)
+    for(let j = 0; j < map.tileRessource.length; j++)
+    {
+        map.tileRessource[j].image = loadImage(
+            map.tileRessource[j].path, 
+            () => { console.log("successfully loaded tile") },
+            () => failureLoadingRessource(map.tileRessource[j], "map Tiles")
+        );
+    }
+}
+
 const failureLoadingRessource = (ressource, typeOfRessource) => {
     // error handling
     throw new Error("failed to load a " + typeOfRessource + " from the " + ressource.id + " case, check the following json to fix that or check if the image exists");
@@ -174,12 +190,6 @@ const failureLoadingRessource = (ressource, typeOfRessource) => {
 const successfullLoadingRessource = (typeOfRessource) => {
 
     switch(typeOfRessource){
-        case "tile" :
-            loadingCounterTilesData ++;
-            if(loadingCounterTilesData === tilesData.length){
-                totalLoadCounter ++;
-            }
-            break;
         case "sprite" :
             loadingCounterSpritesData ++;
             if(loadingCounterSpritesData === spritesData.length){

@@ -32,7 +32,7 @@ const createFloorOfSideMap = () => {
             let xPositionTiles = tileSizeTemp*x;
             let yPositionTiles = window.innerHeight - tileSizeTemp*y;
 
-            image(tilesData[0].image, xPositionTiles, yPositionTiles, tileSizeTemp, tileSizeTemp)
+            image(actualPlayerMap.tileRessource[0].image, xPositionTiles, yPositionTiles, tileSizeTemp, tileSizeTemp)
         }
     }
     //temp code for initializing floor of side map
