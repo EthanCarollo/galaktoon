@@ -88,7 +88,7 @@ const interactWithNPC = (tileInteract) => {
     let npcInteracted = playerOnMap.npcOnMap.filter(npc => npc.position[0] === tileInteract[0] && npc.position[1] === tileInteract[1])
     if(npcInteracted.length > 0)
     {
-        if(npcInteracted[0].isInteractible === true){
+        if(npcInteracted[0].isInteractible === true && npcInteracted[0].state === "idle"){
             console.log("INTERACTED")
             console.log(npcInteracted)
             console.log("INTERACTED")
@@ -116,7 +116,7 @@ const createInteractionPopup = (x ,y ,typeOfInteract) => {
         default:
             createImageWithIdOn2dArray(x, y-1, 10, 65, true)
             break;
-    }
+    } // Create pop with the option true who said this is a UI image
 }
 
 // ************************ Player Interaction

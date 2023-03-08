@@ -110,7 +110,6 @@ const loadRessource = (ressource, typeOfRessource) => {
             for(let i = 0; i < mapData.length; i++){
                 loadJsonForMap(mapData[i])
             }
-            // successfullLoadingRessource(typeOfRessource)
             break;
             // ! NEED AN UPDATE HERE ! //
 

@@ -10,7 +10,7 @@
                         "id" : 0,
                         "position" : [10, 8],
                         "isInteractible" : true,
-                        "state" : "moove",
+                        "state" : "idle",
                         "pathing" : "around",
                         "currentPath" : 0
                     },
