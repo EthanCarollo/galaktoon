@@ -116,13 +116,29 @@ const displayDialogNpc = (npcDialoged) => {
   let paddingSizeXBox = paddingXText*2;
   let paddingSizeYBox = paddingYText*2;
 
-  let actualDialogNpc = npcDialoged.dialogs[actualDialog];
+  let actualDialogNpc = creatingStringWithDelay(npcDialoged.dialogs[actualDialog]);
 
   text(actualDialogNpc, xStartDialog +paddingXText, yStartDialog+paddingYText, sizeXDialog-paddingSizeXBox, sizeYDialog-paddingSizeYBox);
   createInputButtonWithCallback(xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, goNextDialog);
 
 }
 
+var dialogTextIndex = 0;
+
+const creatingStringWithDelay = (string) => {
+  if(dialogTextIndex < string.length)
+  {
+    dialogTextIndex += 0.25;
+  }
+  return string.substr(0, Math.floor(dialogTextIndex));
+}
+
 const goNextDialog = () => {
+  dialogTextIndex = 0;
   actualDialog++;
+  if(actualDialog >= npcDialoged.dialogs.length){
+    actualDialog = 0;
+    npcDialoged = null;
+    return;
+  }
 }
