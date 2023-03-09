@@ -83,3 +83,17 @@ const animateNpc = (x, y, size, direction /* ! = Array ! */, npcId, state = "idl
 }
 
 const isInFrontOfANpc = () => playerOnMap.npcOnMap.filter(npc => npc.position[0] === tileInteract[0] && npc.position[1] === tileInteract[1])
+
+const launchNpcDialog = (npc) => {
+
+  npcInteractedData = npcData[npc.id]
+
+  if(npcInteractedData.dialogs !== undefined)
+  {
+    console.log("launch a dialog")
+    console.log(npc)
+    console.log(npcInteractedData)
+  }else{
+    console.log("no dialog disponible")
+  }
+}

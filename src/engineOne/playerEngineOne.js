@@ -90,17 +90,9 @@ const interactWithNPC = (tileInteract) => {
     {
         if(npcInteracted[0].isInteractible === true && npcInteracted[0].state === "idle"){
             console.log("INTERACTED")
-            console.log(npcInteracted)
+            launchNpcDialog(npcInteracted[0]);
             console.log("INTERACTED")
         }
-    }
-}
-
-const launchInteractionWithNPC = (interaction) => {
-    switch(interaction)
-    {
-        default :
-            throw new Error("No Interaction Set")
     }
 }
 
