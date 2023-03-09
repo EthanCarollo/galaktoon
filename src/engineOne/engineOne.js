@@ -5,9 +5,9 @@ const runEngineOne = () => {
     displayTopDown2D();
     updateAnimationIndex();
     displayUserInterfaceEngineOne();
-    if(actualDialog !== null)
+    if(npcDialoged !== null)
     {
-      displayDialogNpc(actualDialog)
+      displayDialogNpc(npcDialoged)
     }
 }
 

@@ -5,7 +5,7 @@
             "id" : "0",
             "spriteId" : "1",
             "name" : "Bob",
-            "dialogs" : [ "Hey ! You look good :) qd dd ddd  ddd dd qd qd q dq dqd qdq dqd qd qdq dq " ]
+            "dialogs" : [ "Hey ! You look good :) qd dd ddd  ddd dd qd qd q dq dqd qdq dqd qd qdq dq ", "Coucou mec" ]
         },{
             "id" : "1",
             "spriteId" : "2",
