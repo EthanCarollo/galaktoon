@@ -5,6 +5,10 @@ const runEngineOne = () => {
     displayTopDown2D();
     updateAnimationIndex();
     displayUserInterfaceEngineOne();
+    if(actualDialog !== null)
+    {
+      displayDialogNpc(actualDialog)
+    }
 }
 
 // ************************ Display game && camera

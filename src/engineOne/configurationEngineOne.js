@@ -41,5 +41,6 @@ const playerCanFight = () => playerTeam[0].hp.current > 0
 // Player dialog
 
 let playerIsInDialog = false;
+let actualDialog = null;
 
 // Player dialog

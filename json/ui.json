@@ -52,6 +52,10 @@
             "id" : "10",
             "path" : "assets/ui/popup.png",
             "image" : null
+        },{
+            "id" : "11",
+            "path" : "assets/ui/dialogBox.png",
+            "image" : null
         }
     ]
 }

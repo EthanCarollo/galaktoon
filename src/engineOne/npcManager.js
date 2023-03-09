@@ -93,7 +93,26 @@ const launchNpcDialog = (npc) => {
     console.log("launch a dialog")
     console.log(npc)
     console.log(npcInteractedData)
+    actualDialog = npcInteractedData.dialogs[0]
   }else{
     console.log("no dialog disponible")
   }
+}
+
+const displayDialogNpc = (dialog) => {
+  let dialogBox = uiData[11].image;
+  console.log(dialog);
+  let sizeYDialog = 250;
+  let sizeXDialog = 1250;
+  let xStartDialog = (window.innerWidth /2) - (sizeXDialog/2);
+  let yStartDialog = window.innerHeight - sizeYDialog;
+  fill(0, 0, 0);
+  image(dialogBox, xStartDialog, yStartDialog, sizeXDialog, sizeYDialog)
+  textSize(24);
+  let paddingXText = 125;
+  let paddingYText = 80;
+  let paddingSizeXBox = paddingXText*2;
+  let paddingSizeYBox = paddingYText*2;
+  text(dialog, xStartDialog +paddingXText, yStartDialog+paddingYText, sizeXDialog-paddingSizeXBox, sizeYDialog-paddingSizeYBox)
+
 }
