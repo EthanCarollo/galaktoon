@@ -9,9 +9,11 @@ const createAbilityPlayer = (currentPlayerTurn) => {
     {
         let currentAbility = currentPlayerTurn.abilities[i]
         let iconSize = 80;
-        let xIcon = iconSize + (iconSize*1.25) *i
-        let yIcon = iconSize / 1.5
+        let paddingBetween = iconSize /3;
+        let xIcon = (window.innerWidth/2) + iconSize * i -(iconSize * 1.5) + paddingBetween * i - (paddingBetween*1.5)
+        let yIcon = iconSize / 1.5 + (window.innerHeight) - iconSize * 2
         createIconAbility(xIcon, yIcon, iconSize, currentAbility, i)
+        createInputButtonWithCallback(xIcon, yIcon, iconSize, iconSize, () => { changeCurrentAbility(i) })
     }
 }
 
