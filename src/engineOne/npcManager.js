@@ -131,7 +131,7 @@ var dialogTextIndex = 0;
 const creatingStringWithDelay = (string) => {
   if(dialogTextIndex < string.length)
   {
-    dialogTextIndex += 0.275;
+    dialogTextIndex += 0.3;
   }
   return string.substr(0, Math.floor(dialogTextIndex));
 }

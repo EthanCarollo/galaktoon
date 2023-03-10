@@ -1,13 +1,5 @@
-const changeCurrentAbilityOnInput = () => {
-    if(keyIsDown(65)){
-        currentAbilityUsed = 0;
-    }
-    if(keyIsDown(90)){
-        currentAbilityUsed = 1;
-    }
-    if(keyIsDown(69)){
-        currentAbilityUsed = 2;
-    }
+const changeCurrentAbility = (i) => {
+    currentAbilityUsed = i;
 }
 
 

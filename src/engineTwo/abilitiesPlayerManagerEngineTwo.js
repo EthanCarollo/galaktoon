@@ -34,19 +34,22 @@ const createIconAbility = (x, y, size, ability, abilityIndexOnCharacter) => {
 }
 
 const createAblityIndication = (x, y, size, abilityIndexOnCharacter) => {
-    fill(255,0,0)
+    fill(255,255,255)
     textSize(32)
+    strokeWeight(4);
+    stroke(0)
     switch(abilityIndexOnCharacter){
         case 0:
-            text("A",x,y+size,size)
+            text("A",x-5,y+size+5,size)
             break;
         case 1:
-            text("Z",x,y+size,size)
+            text("Z",x-5,y+size+5,size)
             break;
         case 2:
-            text("E",x,y+size,size)
+            text("E",x-5,y+size+5,size)
             break;
     }
+    strokeWeight(0);
 }
 
 const useAbilityOnTarget = (currentAttack, currentTarget, attackerRef = null) => {
