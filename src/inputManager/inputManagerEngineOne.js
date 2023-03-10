@@ -24,12 +24,16 @@ const playerInputForEngineOne=()=>{
             playerInputMoove();
             playerInputInteraction();
             break;
-        case "interacting" :
-            playerIsMooving = false;
+        case "dialoging" :
+            playerDialogInput();
             break;
         default :
             throw new Error("PlayerState isn't set or doesn't exist in input")
     }
+}
+
+const playerDialogInput = () => {
+    playerIsMooving = false;
 }
 
 const playerInputMoove = () => {

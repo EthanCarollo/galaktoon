@@ -101,7 +101,7 @@ const launchNpcDialog = (npc) => {
 
 const displayDialogNpc = (npcDialoged) => {
   
-  playerState = "interacting"
+  playerState = "dialoging"
 
   let dialogBox = uiData[11].image;
 
@@ -131,7 +131,7 @@ var dialogTextIndex = 0;
 const creatingStringWithDelay = (string) => {
   if(dialogTextIndex < string.length)
   {
-    dialogTextIndex += 0.25;
+    dialogTextIndex += 0.275;
   }
   return string.substr(0, Math.floor(dialogTextIndex));
 }
