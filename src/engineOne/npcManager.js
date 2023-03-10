@@ -100,6 +100,9 @@ const launchNpcDialog = (npc) => {
 }
 
 const displayDialogNpc = (npcDialoged) => {
+  
+  playerState = "interacting"
+
   let dialogBox = uiData[11].image;
 
   let sizeYDialog = 250;
@@ -137,6 +140,7 @@ const goNextDialog = () => {
   dialogTextIndex = 0;
   actualDialog++;
   if(actualDialog >= npcDialoged.dialogs.length){
+    playerState = "normal"
     actualDialog = 0;
     npcDialoged = null;
     return;

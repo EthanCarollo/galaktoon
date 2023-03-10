@@ -4,6 +4,8 @@ let cameraVector;
 let mapVector;
 
 // Player Var
+let playerState = "normal";
+
 let playerSpriteSize = 100;
 let playerCanMove = true;
 let cameraSmoothStep = 0.98;
