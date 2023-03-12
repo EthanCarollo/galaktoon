@@ -110,6 +110,8 @@ const displayDialogNpc = (npcDialoged) => {
   let xStartDialog = (window.innerWidth /2) - (sizeXDialog/2);
   let yStartDialog = window.innerHeight - sizeYDialog;
 
+  showNpcSpriteInDialog(npcDialoged);
+
   fill(0, 0, 0);
   let box = image(dialogBox, xStartDialog, yStartDialog, sizeXDialog, sizeYDialog)
   textSize(24);
@@ -124,6 +126,20 @@ const displayDialogNpc = (npcDialoged) => {
   text(actualDialogNpc, xStartDialog +paddingXText, yStartDialog+paddingYText, sizeXDialog-paddingSizeXBox, sizeYDialog-paddingSizeYBox);
   createInputButtonWithCallback(xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, goNextDialog);
 
+}
+
+const showNpcSpriteInDialog = (npcDialoged) => {
+  let sizeSpriteDialog = 450;
+
+  let xSprite1 = window.innerWidth - (sizeSpriteDialog * 1);
+  let xSprite2 = 0;
+
+  let ySprite = window.innerHeight - sizeSpriteDialog / 1.2;
+  
+  let spritePlayerAnimate = spritesData[0].image.get(0,0,30,30)
+  let spriteNpcAnimate = spritesData[npcDialoged.spriteId].image.get(0,0,30,30)
+  let spritePres1 = image(spriteNpcAnimate, xSprite1, ySprite, sizeSpriteDialog, sizeSpriteDialog)
+  let spritePres2 = image(spritePlayerAnimate, xSprite2, ySprite, sizeSpriteDialog, sizeSpriteDialog)
 }
 
 var dialogTextIndex = 0;
