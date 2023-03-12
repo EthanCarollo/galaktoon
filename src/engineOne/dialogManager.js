@@ -12,17 +12,12 @@ const launchNpcDialog = (npc) => {
       console.log("no dialog disponible")
     }
   }
-  
-  let backgroundTransition = 0;
-  const displayDialogNpc = (npcDialoged) => {
+
+
+const displayDialogNpc = (npcDialoged) => {
     textAlign(LEFT, TOP);
   
-    // Background transition
-    if(backgroundTransition < 115){
-      backgroundTransition+= 5;
-    }
-    background(0,0,0,backgroundTransition)
-    // Background transition
+    backgroundTransitionEffect();
   
     playerState = "dialoging"
   
@@ -57,7 +52,32 @@ const launchNpcDialog = (npc) => {
   
   }
 
-  const showDialogChoiceBox = (xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, quest) => {
+  // ! Dialog Effect
+
+  let backgroundTransition = 0;
+const backgroundTransitionEffect = () => {
+    // Background transition
+    if(backgroundTransition < 115){
+      backgroundTransition+= 5;
+    }
+    background(0,0,0,backgroundTransition)
+    // Background transition
+  }
+
+  var dialogTextIndex = 0;
+const creatingStringWithDelay = (string) => {
+    if(dialogTextIndex < string.length)
+    {
+      dialogTextIndex += 0.3;
+    }
+    return string.substr(0, Math.floor(dialogTextIndex));
+  }
+
+  // ! Dialog Effect
+
+  // Dialog Component
+
+const showDialogChoiceBox = (xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, quest) => {
     
     textSize(18);
     textAlign(CENTER, CENTER);
@@ -89,7 +109,7 @@ const launchNpcDialog = (npc) => {
         });
   }
   
-  const showNpcSpriteInDialog = (npcDialoged) => {
+const showNpcSpriteInDialog = (npcDialoged) => {
     let sizeSpriteDialog = 450;
   
     let xSprite1 = window.innerWidth - (sizeSpriteDialog * 1);
@@ -102,25 +122,27 @@ const launchNpcDialog = (npc) => {
     let spritePres1 = image(spriteNpcAnimate, xSprite1, ySprite, sizeSpriteDialog, sizeSpriteDialog)
     let spritePres2 = image(spritePlayerAnimate, xSprite2, ySprite, sizeSpriteDialog, sizeSpriteDialog)
   }
+
+  // Dialog Component
   
-  var dialogTextIndex = 0;
-  
-  const creatingStringWithDelay = (string) => {
-    if(dialogTextIndex < string.length)
-    {
-      dialogTextIndex += 0.3;
-    }
-    return string.substr(0, Math.floor(dialogTextIndex));
-  }
-  
-  const goNextDialog = () => {
+  // ? Dialog Logic
+
+const goNextDialog = () => {
     dialogTextIndex = 0;
     actualDialog++;
+
     if(actualDialog >= npcDialoged.dialogs.length){
-      backgroundTransition = 0;
-      playerState = "normal"
-      actualDialog = 0;
-      npcDialoged = null;
-      return;
+      exitDialog()
     }
+
   }
+
+const exitDialog = () => {
+    backgroundTransition = 0;
+    playerState = "normal"
+    actualDialog = 0;
+    npcDialoged = null;
+    return;
+  }
+
+  // ? Dialog Logic
