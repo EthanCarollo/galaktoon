@@ -97,7 +97,7 @@ const playerInputMoove = () => {
 }
 
 const playerInputInteraction = () => {
-    if(playerCanInteract === true){
+    if(playerCanInteract === true && playerCanMove === true){
         let playerCaseInteract = [actualPlayerTile()[0] + playerLastDirection[0], actualPlayerTile()[1] + playerLastDirection[1]]
         checkForInteraction(playerCaseInteract)
         

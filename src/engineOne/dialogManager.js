@@ -22,9 +22,8 @@ const displayDialogNpc = (npcDialoged) => {
     playerState = "dialoging"
   
     let dialogBox = uiData[11].image;
-  
-    let sizeYDialog = 250;
-    let sizeXDialog = 1250;
+    let sizeXDialog = window.innerWidth/ 1.45;
+    let sizeYDialog = sizeXDialog/5;
     let xStartDialog = (window.innerWidth /2) - (sizeXDialog/2);
     let yStartDialog = window.innerHeight - sizeYDialog;
   
@@ -32,10 +31,10 @@ const displayDialogNpc = (npcDialoged) => {
   
     fill(0, 0, 0);
     let box = image(dialogBox, xStartDialog, yStartDialog, sizeXDialog, sizeYDialog)
-    textSize(24);
+    textSize(sizeYDialog/10);
   
-    let paddingXText = 125;
-    let paddingYText = 80;
+    let paddingXText = sizeYDialog/2;
+    let paddingYText = sizeYDialog/3.5;
     let paddingSizeXBox = paddingXText*2;
     let paddingSizeYBox = paddingYText*2;
   
@@ -79,19 +78,25 @@ const creatingStringWithDelay = (string) => {
 
 const showDialogChoiceBox = (xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, quest) => {
     
+  
+
     textSize(18);
     textAlign(CENTER, CENTER);
     
     let sizeYChoice = sizeYDialog / 2.4;
     let sizeXChoice = sizeXDialog / 2.4;
-    let paddingXChoice = 100;
-    let paddingYChoice = 95;
+    let paddingXChoice = sizeYDialog/2.75;
+    let paddingYChoice = sizeYDialog/2.5;
 
     let dialogBox = uiData[11].image;
     let xBoxTrue = xStartDialog + paddingXChoice;
     let boxChoiceTrue = image(dialogBox, xBoxTrue, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice)
-    text("Accept", xBoxTrue, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice)
+    
+    fill(0)
+    changeFillOnHover(xBoxTrue, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice, 0, 180, 0)
 
+    text("Accept", xBoxTrue, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice)
+  
     createInputButtonWithCallback(xBoxTrue, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice, 
         () => {
             quest.questIsGived = true;
@@ -101,6 +106,10 @@ const showDialogChoiceBox = (xStartDialog, yStartDialog, sizeXDialog, sizeYDialo
 
     let xBoxFalse = xStartDialog + sizeXDialog - sizeXChoice - paddingXChoice;
     let boxChoiceFalse = image(dialogBox, xBoxFalse, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice)
+
+    fill(0)
+    changeFillOnHover(xBoxFalse, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice, 180, 0, 0)
+
     text("Refuse", xBoxFalse, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice)
 
     createInputButtonWithCallback(xBoxFalse, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice, 
@@ -110,9 +119,9 @@ const showDialogChoiceBox = (xStartDialog, yStartDialog, sizeXDialog, sizeYDialo
   }
   
 const showNpcSpriteInDialog = (npcDialoged) => {
-    let sizeSpriteDialog = 450;
+    let sizeSpriteDialog = window.innerWidth/4.5;
   
-    let xSprite1 = window.innerWidth - (sizeSpriteDialog * 1);
+    let xSprite1 = window.innerWidth - sizeSpriteDialog;
     let xSprite2 = 0;
   
     let ySprite = window.innerHeight - sizeSpriteDialog / 1.2;
