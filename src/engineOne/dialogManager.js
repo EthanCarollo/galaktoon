@@ -15,8 +15,7 @@ const launchNpcDialog = (npc) => {
 
 
 const displayDialogNpc = (npcDialoged) => {
-    textAlign(LEFT, TOP);
-  
+    
     backgroundTransitionEffect();
   
     playerState = "dialoging"
@@ -38,16 +37,25 @@ const displayDialogNpc = (npcDialoged) => {
     let paddingSizeXBox = paddingXText*2;
     let paddingSizeYBox = paddingYText*2;
   
-    let actualDialogNpc = creatingStringWithDelay(npcDialoged.dialogs[actualDialog].text);
+    let actualDialogNpc = creatingStringWithDelay(npcDialoged.dialogs[actualDialog].text);;
   
-    text(actualDialogNpc, xStartDialog +paddingXText, yStartDialog+paddingYText, sizeXDialog-paddingSizeXBox, sizeYDialog-paddingSizeYBox);
 
     if(npcDialoged.dialogs[actualDialog].quest === undefined || npcDialoged.dialogs[actualDialog].questIsGived === true){
-        console.log(npcDialoged.dialogs[actualDialog])
         createInputButtonWithCallback(xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, goNextDialog);
     }else{
         showDialogChoiceBox(xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, npcDialoged.dialogs[actualDialog])
     }
+
+    // Verify if the quest is gived or not and so change the text
+    if(npcDialoged.dialogs[actualDialog].questIsGived === true)
+    {
+      actualDialogNpc = creatingStringWithDelay(npcDialoged.dialogs[actualDialog].altText);
+    }
+    // Verify if the quest is gived or not and so change the text
+
+    textSize(sizeYDialog/10);
+    textAlign(LEFT, TOP)
+    text(actualDialogNpc, xStartDialog +paddingXText, yStartDialog+paddingYText, sizeXDialog-paddingSizeXBox, sizeYDialog-paddingSizeYBox);
   
   }
 
@@ -116,6 +124,7 @@ const showDialogChoiceBox = (xStartDialog, yStartDialog, sizeXDialog, sizeYDialo
         () => {
             goNextDialog();
         });
+    fill(0)
   }
   
 const showNpcSpriteInDialog = (npcDialoged) => {

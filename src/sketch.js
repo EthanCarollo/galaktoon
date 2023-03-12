@@ -21,5 +21,7 @@ function draw() {
 }
 
 function windowResized() {
+  windowHeight = window.innerHeight
+  windowWidth = window.innerWidth
 	resizeCanvas(windowWidth, windowHeight);
 }
