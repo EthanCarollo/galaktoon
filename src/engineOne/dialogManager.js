@@ -15,6 +15,7 @@ const launchNpcDialog = (npc) => {
   
   let backgroundTransition = 0;
   const displayDialogNpc = (npcDialoged) => {
+    textAlign(LEFT, TOP);
   
     // Background transition
     if(backgroundTransition < 115){
@@ -46,7 +47,7 @@ const launchNpcDialog = (npc) => {
     let actualDialogNpc = creatingStringWithDelay(npcDialoged.dialogs[actualDialog].text);
   
     text(actualDialogNpc, xStartDialog +paddingXText, yStartDialog+paddingYText, sizeXDialog-paddingSizeXBox, sizeYDialog-paddingSizeYBox);
-    
+
     if(npcDialoged.dialogs[actualDialog].quest === undefined || npcDialoged.dialogs[actualDialog].questIsGived === true){
         console.log(npcDialoged.dialogs[actualDialog])
         createInputButtonWithCallback(xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, goNextDialog);
@@ -58,6 +59,9 @@ const launchNpcDialog = (npc) => {
 
   const showDialogChoiceBox = (xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, quest) => {
     
+    textSize(18);
+    textAlign(CENTER, CENTER);
+    
     let sizeYChoice = sizeYDialog / 2.4;
     let sizeXChoice = sizeXDialog / 2.4;
     let paddingXChoice = 100;
@@ -66,6 +70,7 @@ const launchNpcDialog = (npc) => {
     let dialogBox = uiData[11].image;
     let xBoxTrue = xStartDialog + paddingXChoice;
     let boxChoiceTrue = image(dialogBox, xBoxTrue, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice)
+    text("Accept", xBoxTrue, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice)
 
     createInputButtonWithCallback(xBoxTrue, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice, 
         () => {
@@ -76,6 +81,7 @@ const launchNpcDialog = (npc) => {
 
     let xBoxFalse = xStartDialog + sizeXDialog - sizeXChoice - paddingXChoice;
     let boxChoiceFalse = image(dialogBox, xBoxFalse, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice)
+    text("Refuse", xBoxFalse, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice)
 
     createInputButtonWithCallback(xBoxFalse, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice, 
         () => {
