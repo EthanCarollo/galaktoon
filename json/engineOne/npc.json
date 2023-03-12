@@ -7,7 +7,7 @@
             "name" : "Bob",
             "dialogs" : [ 
                 { "text" : "Hey ! You look good :) qd dd ddd  ddd dd qd qd q dq dqd qdq dqd qd qdq dq " }, 
-                { "text" : "Coucou mec :D !" } 
+                { "text" : "Coucou mec :D !", "quest" : 0 } 
             ]
         },{
             "id" : "1",

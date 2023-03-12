@@ -5,6 +5,7 @@ const runEngineOne = () => {
     displayTopDown2D();
     updateAnimationIndex();
     displayUserInterfaceEngineOne();
+    showQuestList();
     if(npcDialoged !== null)
     {
       displayDialogNpc(npcDialoged)
