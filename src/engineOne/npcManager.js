@@ -99,8 +99,16 @@ const launchNpcDialog = (npc) => {
   }
 }
 
+let backgroundTransition = 0;
 const displayDialogNpc = (npcDialoged) => {
-  
+
+  // Background transition
+  if(backgroundTransition < 115){
+    backgroundTransition+= 5;
+  }
+  background(0,0,0,backgroundTransition)
+  // Background transition
+
   playerState = "dialoging"
 
   let dialogBox = uiData[11].image;
@@ -121,7 +129,7 @@ const displayDialogNpc = (npcDialoged) => {
   let paddingSizeXBox = paddingXText*2;
   let paddingSizeYBox = paddingYText*2;
 
-  let actualDialogNpc = creatingStringWithDelay(npcDialoged.dialogs[actualDialog]);
+  let actualDialogNpc = creatingStringWithDelay(npcDialoged.dialogs[actualDialog].text);
 
   text(actualDialogNpc, xStartDialog +paddingXText, yStartDialog+paddingYText, sizeXDialog-paddingSizeXBox, sizeYDialog-paddingSizeYBox);
   createInputButtonWithCallback(xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, goNextDialog);
@@ -156,6 +164,7 @@ const goNextDialog = () => {
   dialogTextIndex = 0;
   actualDialog++;
   if(actualDialog >= npcDialoged.dialogs.length){
+    backgroundTransition = 0;
     playerState = "normal"
     actualDialog = 0;
     npcDialoged = null;

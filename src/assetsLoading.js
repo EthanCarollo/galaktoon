@@ -28,6 +28,10 @@ const ressourceToLoad = [
     {
         typeOfRessource : "npc",
         path : "./json/engineOne/npc.json"
+    },
+    {
+        typeOfRessource : "quest",
+        path : "./json/engineOne/quests.json"
     }
 ]
 
@@ -38,6 +42,7 @@ let spritesFightData = [];
 let uiData = [];
 let planetsData = [];
 let npcData = [];
+let questData = [];
 let pixelFont;
 
 // variables that follow the resource loading course
@@ -48,6 +53,8 @@ let loadingCounterSpritesFightData = 0;
 let loadingCounterUIData = 0;
 let loadingCounterPlanetsData = 0;
 let loadingCounterNPCData = 0;
+let loadingCounterQuestData = 0;
+
 let totalLoadCounter = 0;
 let totalLoad = ressourceToLoad.length;
 
@@ -151,6 +158,11 @@ const loadRessource = (ressource, typeOfRessource) => {
             successfullLoadingRessource(typeOfRessource)
             break;
 
+        case "quest" :
+            questData = ressource;
+            successfullLoadingRessource(typeOfRessource)
+            break;
+
         default :
             throw new Error("this is not an accepted type of ressource : " + typeOfRessource);
         
@@ -220,6 +232,9 @@ const successfullLoadingRessource = (typeOfRessource) => {
             totalLoadCounter ++;
             break;
         case "npc" :
+            totalLoadCounter ++;
+            break;
+        case "quest" :
             totalLoadCounter ++;
             break;
         default :
