@@ -15,9 +15,9 @@ const displaySideScroller2D = () => {
         createInterfaceForFight()
     }
     // DEBUG
-    text("actual turn is " + turnTeam, 50, 250)
+    /*text("actual turn is " + turnTeam, 50, 250)
     text("Click on an enemy to target him ", window.innerWidth-500, 250)
-    text("Press space to attack ", window.innerWidth/2-175, 250)
+    text("Press space to attack ", window.innerWidth/2-175, 250)*/
 }
 
 const createMapSideScroller = (map) => {
@@ -32,7 +32,7 @@ const createFloorOfSideMap = () => {
             let xPositionTiles = tileSizeTemp*x;
             let yPositionTiles = window.innerHeight - tileSizeTemp*y;
 
-            image(tilesData[0].image, xPositionTiles, yPositionTiles, tileSizeTemp, tileSizeTemp)
+            image(mapData[0].tileRessource[0].image, xPositionTiles, yPositionTiles, tileSizeTemp, tileSizeTemp)
         }
     }
     //temp code for initializing floor of side map

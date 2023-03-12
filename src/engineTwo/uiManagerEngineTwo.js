@@ -27,7 +27,7 @@ const returnMainEngine = () => {
 }
 
 const createLogDebugFight = () => {
-    let sizeX = 600;
+    /*let sizeX = 600;
     let sizeY = 400;
     let textDebugLogSize = 20;
     let marginTextSize = 8;
@@ -42,5 +42,5 @@ const createLogDebugFight = () => {
     {
         fill(255,0,0)
         text(fightLog[fightLog.length-1-i], offsetXLog+marginTextSize, offsetYLog+textDebugLogSize+marginTextSize+(textDebugLogSize+marginTextSize)*i,sizeX)
-    }
+    }*/
 }

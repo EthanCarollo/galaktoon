@@ -13,7 +13,38 @@ const createInputButtonWithCallback = (xStartButton, yStartButton, sizeXButton, 
         mouseY < yStartButton + sizeYButton && 
         mouseIsPressed === true )
     {
-        callbackFunction()
+        canvas.mouseReleased(callbackFunction)
+    }
+}
+
+const createShowTextOnHover = (xStartButton, yStartButton, sizeXButton, sizeYButton, textToShow = "Hovered", fontSize = 16) => { // callback function is naturally an error !
+    if( mouseX > xStartButton && 
+        mouseY > yStartButton && 
+        mouseX < xStartButton + sizeXButton && 
+        mouseY < yStartButton + sizeYButton)
+    {
+        fill(255,255,255)
+
+        textSize(fontSize)
+        textAlign(CENTER,CENTER);
+
+        drawingContext.shadowBlur = 10;
+        drawingContext.shadowColor = 'black';
+
+        text(textToShow, mouseX, mouseY-10)
+
+        drawingContext.shadowBlur = 0;
+
+    }
+}
+
+const changeFillOnHover = (xStartButton, yStartButton, sizeXButton, sizeYButton, red = 255, green = 255, blue = 255) => { // callback function is naturally an error !
+    if( mouseX > xStartButton && 
+        mouseY > yStartButton && 
+        mouseX < xStartButton + sizeXButton && 
+        mouseY < yStartButton + sizeYButton)
+    {
+        fill(red,green,blue)
     }
 }
 

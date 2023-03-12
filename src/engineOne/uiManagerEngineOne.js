@@ -69,6 +69,8 @@ const createPlanetMenuObject = (x, y, sizeX, sizeY, planetID) => {
     textAlign(LEFT, BASELINE)
     noFill()
     let mapToExplore = mapData[planetsData[planetID].map]
+    
+    createShowTextOnHover(x, y, sizeX, sizeY, "Voyager vers")
     createInputButtonWithCallback(x, y, sizeX, sizeY, () => {loadMapAndExitExploringMenu(mapToExplore)})
 
 }
@@ -84,13 +86,14 @@ const exitCross = () => {
     createInputButtonWithCallback(75, 20, 40, 40, exitExploringMenu)
     textSize(20);
     fill(150,150,255)
+    textAlign(LEFT,TOP);
     text("quit menu", 75, 20, 150,40)
     // text is temporary
     noFill()
 }
 
 const exitExploringMenu = () => {
-    playerCanMove = true
+    playerCanMove = true;
     playerIsExploringMap = false;
 }
 

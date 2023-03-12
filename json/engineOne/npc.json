@@ -4,7 +4,11 @@
         {
             "id" : "0",
             "spriteId" : "1",
-            "name" : "Bob"
+            "name" : "Bob",
+            "dialogs" : [ 
+                { "text" : "Hey ! You look good :) qd dd ddd  ddd dd qd qd q dq dqd qdq dqd qd qdq dq " }, 
+                { "text" : "Tiens, prends ta première quête ! (ps : t'es vraiment trop cool)", "quest" : 0, "altText" : "Oh tu as déja pris ta quête !" } 
+            ]
         },{
             "id" : "1",
             "spriteId" : "2",

@@ -4,6 +4,8 @@ let cameraVector;
 let mapVector;
 
 // Player Var
+let playerState = "normal";
+
 let playerSpriteSize = 100;
 let playerCanMove = true;
 let cameraSmoothStep = 0.98;
@@ -40,6 +42,7 @@ const playerCanFight = () => playerTeam[0].hp.current > 0
 
 // Player dialog
 
-let playerIsInDialog = false;
+let npcDialoged = null;
+let actualDialog = 0;
 
 // Player dialog

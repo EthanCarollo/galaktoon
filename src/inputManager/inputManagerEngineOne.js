@@ -19,6 +19,24 @@ const tileNextToThePlayer = () => {
 }
 
 const playerInputForEngineOne=()=>{
+    switch(playerState){
+        case "normal" :
+            playerInputMoove();
+            playerInputInteraction();
+            break;
+        case "dialoging" :
+            playerDialogInput();
+            break;
+        default :
+            throw new Error("PlayerState isn't set or doesn't exist in input")
+    }
+}
+
+const playerDialogInput = () => {
+    playerIsMooving = false;
+}
+
+const playerInputMoove = () => {
     if(playerCanMove === true){
 
         playerDirection = [0, 0]; // reset player direction every frame
@@ -76,8 +94,10 @@ const playerInputForEngineOne=()=>{
     }else{
         playerIsMooving = false;
     }
+}
 
-    if(playerCanInteract === true){
+const playerInputInteraction = () => {
+    if(playerCanInteract === true && playerCanMove === true){
         let playerCaseInteract = [actualPlayerTile()[0] + playerLastDirection[0], actualPlayerTile()[1] + playerLastDirection[1]]
         checkForInteraction(playerCaseInteract)
         

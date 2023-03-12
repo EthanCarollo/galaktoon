@@ -9,9 +9,11 @@ const createAbilityPlayer = (currentPlayerTurn) => {
     {
         let currentAbility = currentPlayerTurn.abilities[i]
         let iconSize = 80;
-        let xIcon = iconSize + (iconSize*1.25) *i
-        let yIcon = iconSize / 1.5
+        let paddingBetween = iconSize /3;
+        let xIcon = (window.innerWidth/2) + iconSize * i -(iconSize * 1.5) + paddingBetween * i - (paddingBetween*1.5)
+        let yIcon = iconSize / 1.5 + (window.innerHeight) - iconSize * 2
         createIconAbility(xIcon, yIcon, iconSize, currentAbility, i)
+        createInputButtonWithCallback(xIcon, yIcon, iconSize, iconSize, () => { changeCurrentAbility(i) })
     }
 }
 
@@ -32,19 +34,22 @@ const createIconAbility = (x, y, size, ability, abilityIndexOnCharacter) => {
 }
 
 const createAblityIndication = (x, y, size, abilityIndexOnCharacter) => {
-    fill(255,0,0)
+    fill(255,255,255)
     textSize(32)
+    strokeWeight(4);
+    stroke(0)
     switch(abilityIndexOnCharacter){
         case 0:
-            text("A",x,y+size,size)
+            text("A",x-5,y+size+5,size)
             break;
         case 1:
-            text("Z",x,y+size,size)
+            text("Z",x-5,y+size+5,size)
             break;
         case 2:
-            text("E",x,y+size,size)
+            text("E",x-5,y+size+5,size)
             break;
     }
+    strokeWeight(0);
 }
 
 const useAbilityOnTarget = (currentAttack, currentTarget, attackerRef = null) => {

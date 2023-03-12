@@ -5,6 +5,11 @@ const runEngineOne = () => {
     displayTopDown2D();
     updateAnimationIndex();
     displayUserInterfaceEngineOne();
+    showQuestList();
+    if(npcDialoged !== null)
+    {
+      displayDialogNpc(npcDialoged)
+    }
 }
 
 // ************************ Display game && camera
@@ -69,8 +74,8 @@ const createMapTopDown = (orientation, map = actualPlayerMap) => {
 const createImageWithIdOn2dArray = (x, y, id, currentTileSize, isUi = false) => {
 
   // size of the current tile according to the data
-  let xTileWidth = tilesData[id].xWidth;
-  let yTileHeight = tilesData[id].yWidth;
+  let xTileWidth = playerOnMap.tileRessource[id].xWidth;
+  let yTileHeight = playerOnMap.tileRessource[id].yWidth;
   // position of the current tile in the array and the size
   let xPositionTiles = currentTileSize*x + cameraVector.x + playerVector.x -45;
   let yPositionTiles = (currentTileSize*(y+1-yTileHeight) + cameraVector.y + playerVector.y -45);
@@ -79,7 +84,7 @@ const createImageWithIdOn2dArray = (x, y, id, currentTileSize, isUi = false) => 
     yPositionTiles = (currentTileSize*y + cameraVector.y + playerVector.y -45);
     image(uiData[id].image, xPositionTiles , yPositionTiles, currentTileSize, currentTileSize); 
   }else{
-    image(tilesData[id].image, xPositionTiles , yPositionTiles, currentTileSize * xTileWidth, currentTileSize * yTileHeight); 
+    image(playerOnMap.tileRessource[id].image, xPositionTiles , yPositionTiles, currentTileSize * xTileWidth, currentTileSize * yTileHeight); 
   }
 
   //noTint()
@@ -89,22 +94,22 @@ const tileIsEmpty = (x, y, map) => {
   if(y >= map.length || y < 0){
     return -1;
   }
-  return map[y][x]<=-1 || map[y][x] >= tilesData.length// In this case, a tile with a value <= to -1 is an empty case or if the value is >= to the length of the tilesData
+  return map[y][x]<=-1 || map[y][x] >= playerOnMap.tileRessource.length// In this case, a tile with a value <= to -1 is an empty case or if the value is >= to the length of the playerOnMap.tileRessource
 }
 
-const tileIsConstructibleAndWeCanConstruct = (id) => tilesData[id].canConstruct === "true" && constructionMode === true && destructionMode === false
+const tileIsConstructibleAndWeCanConstruct = (id) => playerOnMap.tileRessource[id].canConstruct === "true" && constructionMode === true && destructionMode === false
 
-const tileIsDestructibleAndWeCanDestruct = (id) => tilesData[id].destructible === "true" && constructionMode === true && destructionMode === true
+const tileIsDestructibleAndWeCanDestruct = (id) => playerOnMap.tileRessource[id].destructible === "true" && constructionMode === true && destructionMode === true
 
-const tileIsAnObject = (id) => tilesData[id].isAnObject === true
+const tileIsAnObject = (id) => playerOnMap.tileRessource[id].isAnObject === true
 
 const getTileData = (x, y, map) => {
 
-  if(y >= 0 && y < map.length && map[y][x] < tilesData.length)
+  if(y >= 0 && y < map.length && map[y][x] < playerOnMap.tileRessource.length)
   {
-    return tilesData[map[y][x]]
+    return playerOnMap.tileRessource[map[y][x]]
   }else{
-    return tilesData[1];
+    return playerOnMap.tileRessource[1];
   }
 
 }

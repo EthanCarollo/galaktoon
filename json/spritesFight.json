@@ -3,7 +3,7 @@
     [
         {
             "id" : "0",
-            "path" : "assets/sprites/fightSprites/fightSpriteTest.png",
+            "path" : "assets/sprites/fightSprites/fightSpriteVoid.png",
             "image" : "null",
             "size" : 60
         },

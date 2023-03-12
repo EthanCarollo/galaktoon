@@ -12,10 +12,16 @@ function setup() {
 }
 
 function draw() {
+
+    canvas.mouseReleased(() => { }) // Resetting canvas function
+
     cursor('auto') // Resetting the cursor to auto
+
     sceneManager();
 }
 
 function windowResized() {
+  windowHeight = window.innerHeight
+  windowWidth = window.innerWidth
 	resizeCanvas(windowWidth, windowHeight);
 }
