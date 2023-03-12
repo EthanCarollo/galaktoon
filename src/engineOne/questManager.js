@@ -1,8 +1,9 @@
 let questList = [
-    
+
 ];
 
 const addQuestToList = (questId) => {
+    console.log(questId)
     questList.push(questData[questId]);
 }
 

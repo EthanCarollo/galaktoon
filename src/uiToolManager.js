@@ -14,8 +14,6 @@ const createInputButtonWithCallback = (xStartButton, yStartButton, sizeXButton, 
         mouseIsPressed === true )
     {
         canvas.mouseReleased(callbackFunction)
-    }else{
-        canvas.mouseReleased(() => { })
     }
 }
 

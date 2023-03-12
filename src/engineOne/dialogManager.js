@@ -46,31 +46,41 @@ const launchNpcDialog = (npc) => {
     let actualDialogNpc = creatingStringWithDelay(npcDialoged.dialogs[actualDialog].text);
   
     text(actualDialogNpc, xStartDialog +paddingXText, yStartDialog+paddingYText, sizeXDialog-paddingSizeXBox, sizeYDialog-paddingSizeYBox);
-    if(npcDialoged.dialogs[actualDialog].quest === undefined){
+    
+    if(npcDialoged.dialogs[actualDialog].quest === undefined || npcDialoged.dialogs[actualDialog].questIsGived === true){
         console.log(npcDialoged.dialogs[actualDialog])
         createInputButtonWithCallback(xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, goNextDialog);
     }else{
-        let sizeYChoice = sizeYDialog / 2.4;
-        let sizeXChoice = sizeXDialog / 2.4;
-        let paddingXChoice = 100;
-        let paddingYChoice = 95;
-
-        let xBoxTrue = xStartDialog + paddingXChoice;
-        let boxChoiceTrue = image(dialogBox, xBoxTrue, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice)
-        createInputButtonWithCallback(xBoxTrue, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice, 
-            () => {
-                addQuestToList(npcDialoged.dialogs[actualDialog].quest.id)
-                goNextDialog();
-            });
-
-        let xBoxFalse = xStartDialog + sizeXDialog - sizeXChoice - paddingXChoice;
-        let boxChoiceFalse = image(dialogBox, xBoxFalse, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice)
-        createInputButtonWithCallback(xBoxFalse, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice, 
-            () => {
-                goNextDialog();
-            });
+        showDialogChoiceBox(xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, npcDialoged.dialogs[actualDialog])
     }
   
+  }
+
+  const showDialogChoiceBox = (xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, quest) => {
+    
+    let sizeYChoice = sizeYDialog / 2.4;
+    let sizeXChoice = sizeXDialog / 2.4;
+    let paddingXChoice = 100;
+    let paddingYChoice = 95;
+
+    let dialogBox = uiData[11].image;
+    let xBoxTrue = xStartDialog + paddingXChoice;
+    let boxChoiceTrue = image(dialogBox, xBoxTrue, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice)
+
+    createInputButtonWithCallback(xBoxTrue, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice, 
+        () => {
+            quest.questIsGived = true;
+            addQuestToList(quest.quest)
+            goNextDialog();
+        });
+
+    let xBoxFalse = xStartDialog + sizeXDialog - sizeXChoice - paddingXChoice;
+    let boxChoiceFalse = image(dialogBox, xBoxFalse, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice)
+
+    createInputButtonWithCallback(xBoxFalse, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice, 
+        () => {
+            goNextDialog();
+        });
   }
   
   const showNpcSpriteInDialog = (npcDialoged) => {
