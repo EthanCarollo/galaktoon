@@ -42,5 +42,13 @@ const addQuestProgression = (questIdProgression) => {
         {
             questList[i].currentProgression ++;
         }
+        checkQuestIsFinish(questList[i]);
+    }
+}
+
+const checkQuestIsFinish = (quest) => {
+    if(quest.currentProgression >= quest.maxProgression)
+    {
+        quest.isFinished = true;
     }
 }
