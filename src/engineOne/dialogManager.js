@@ -83,6 +83,34 @@ const showDialogChoiceBoxForQuest = (xStartDialog, yStartDialog, sizeXDialog, si
         });
     fill(0)
 }
+
+const showRewardBox = (xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, dialog) => {
+  
+  textAlign(CENTER, CENTER);
+    
+  let sizeYChoice = sizeYDialog / 2.2;
+  let sizeXChoice = sizeXDialog / 2.2;
+  let paddingXChoice = sizeYDialog/2.75;
+  let paddingYChoice = sizeYDialog/2.3;
+
+  textSize(sizeYChoice/4.5);
+
+  let dialogBox = uiData[11].image;
+  let xBoxTrue = window.innerWidth / 2 - sizeXChoice / 2;
+  let boxAcceptReward = image(dialogBox, xBoxTrue, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice)
+  
+  fill(0)
+  changeFillOnHover(xBoxTrue, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice, 0, 180, 0)
+
+  text("Accept Reward", xBoxTrue, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice)
+
+  createInputButtonWithCallback(xBoxTrue, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice, 
+      () => {
+          console.log("ACCEPT REWARD HERE AND START ANOTHER BRANCH OF DIALOG")
+      });
+  fill(0)
+
+}
   
 const showNpcSpriteInDialog = (npcDialoged) => {
     let sizeSpriteDialog = window.innerWidth/4.5;
@@ -143,7 +171,7 @@ const setDialogInput = (xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, di
       createInputButtonWithCallback(xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, goNextDialog);
       break;
     case "Reward" :
-      createInputButtonWithCallback(xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, goNextDialog);
+      showRewardBox(xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, goNextDialog);
       break;
     default :
       throw new Error("State isn't defined or doesn't exist")
