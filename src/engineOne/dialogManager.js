@@ -32,55 +32,19 @@ const displayDialogNpc = (npcDialoged) => {
     let box = image(dialogBox, xStartDialog, yStartDialog, sizeXDialog, sizeYDialog)
     textSize(sizeYDialog/10);
   
-    let paddingXText = sizeYDialog/2;
-    let paddingYText = sizeYDialog/3.5;
-    let paddingSizeXBox = paddingXText*2;
-    let paddingSizeYBox = paddingYText*2;
-  
-    let actualDialogNpc = creatingStringWithDelay(npcDialoged.dialogs[actualDialog].text);;
-  
-
-    if(npcDialoged.dialogs[actualDialog].quest === undefined || npcDialoged.dialogs[actualDialog].questIsGived === true){
-        createInputButtonWithCallback(xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, goNextDialog);
-    }else{
-        showDialogChoiceBox(xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, npcDialoged.dialogs[actualDialog])
-    }
-
-    // Verify if the quest is gived or not and so change the text
-    if(npcDialoged.dialogs[actualDialog].questIsGived === true)
-    {
-      actualDialogNpc = creatingStringWithDelay(npcDialoged.dialogs[actualDialog].altText);
-    }
-    // Verify if the quest is gived or not and so change the text
+    showDialogText(xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, npcDialoged.dialogs[actualDialog])
 
     textSize(sizeYDialog/11);
     textAlign(LEFT, TOP)
-    text(actualDialogNpc, xStartDialog +paddingXText, yStartDialog+paddingYText, sizeXDialog-paddingSizeXBox, sizeYDialog-paddingSizeYBox);
   
-  }
-
-  // ! Dialog Effect
-
-  let backgroundTransition = 0;
-const backgroundTransitionEffect = () => {
-    // Background transition
-    if(backgroundTransition < 115){
-      backgroundTransition+= 5;
+    if(npcDialoged.dialogs[actualDialog].quest === undefined || npcDialoged.dialogs[actualDialog].questIsGived === true){
+      createInputButtonWithCallback(xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, goNextDialog);
+    }else{
+      showDialogChoiceBox(xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, npcDialoged.dialogs[actualDialog])
     }
-    background(0,0,0,backgroundTransition)
-    // Background transition
-  }
 
-  var dialogTextIndex = 0;
-const creatingStringWithDelay = (string) => {
-    if(dialogTextIndex < string.length)
-    {
-      dialogTextIndex += 0.3;
-    }
-    return string.substr(0, Math.floor(dialogTextIndex));
-  }
 
-  // ! Dialog Effect
+  }
 
   // Dialog Component
 
@@ -140,7 +104,67 @@ const showNpcSpriteInDialog = (npcDialoged) => {
     let spritePres2 = image(spritePlayerAnimate, xSprite2, ySprite, sizeSpriteDialog, sizeSpriteDialog)
   }
 
+const showDialogText = (xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, dialog) => {
+  let paddingXText = sizeYDialog/2;
+  let paddingYText = sizeYDialog/3.5;
+  let paddingSizeXBox = paddingXText*2;
+  let paddingSizeYBox = paddingYText*2;
+  
+  let actualDialogNpc;
+
+  dialog.state = "Normal"
+  if(dialog.questIsGived === true) {
+    dialog.state = "GotQuest"
+    if(questData[dialog.quest].isFinished === true){
+      dialog.state = "Reward"
+    }
+  }
+
+  switch(dialog.state)
+  {
+    case "Normal" :
+      actualDialogNpc = creatingStringWithDelay(dialog.text);
+      break;
+    case "GotQuest" :
+      actualDialogNpc = creatingStringWithDelay(dialog.altText);
+      break;
+    case "Reward" :
+      actualDialogNpc = creatingStringWithDelay(dialog.rewardText);
+      break;
+    default :
+      throw new Error("State isn't defined or doesn't exist")
+  }
+
+  textSize(sizeYDialog/11);
+  textAlign(LEFT, TOP)
+  
+  text(actualDialogNpc, xStartDialog +paddingXText, yStartDialog+paddingYText, sizeXDialog-paddingSizeXBox, sizeYDialog-paddingSizeYBox);
+}
+
   // Dialog Component
+
+  // ! Dialog Effect
+
+  let backgroundTransition = 0;
+const backgroundTransitionEffect = () => {
+    // Background transition
+    if(backgroundTransition < 115){
+      backgroundTransition+= 5;
+    }
+    background(0,0,0,backgroundTransition)
+    // Background transition
+  }
+
+  var dialogTextIndex = 0;
+const creatingStringWithDelay = (textToDelay) => {
+    if(dialogTextIndex < textToDelay.length)
+    {
+      dialogTextIndex += 0.3;
+    }
+    return textToDelay.substr(0, Math.floor(dialogTextIndex));
+  }
+
+  // ! Dialog Effect
   
   // ? Dialog Logic
 
