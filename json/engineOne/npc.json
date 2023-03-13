@@ -5,8 +5,9 @@
             "id" : "0",
             "spriteId" : "1",
             "name" : "Bob",
+            "actualDialogIndex" : 0,
             "dialogs" : [ 
-                { 
+                [{ 
                     "text" : "Hey ! You look good :) qd dd ddd  ddd dd qd qd q dq dqd qdq dqd qd qdq dq " 
                 }, { 
                     "questIsGived" : false,
@@ -14,7 +15,19 @@
                     "quest" : 0, 
                     "altText" : "Oh tu as déja pris ta quête !",
                     "rewardText" : "Merci beaucoup, tiens pour te récompenser !" 
-                } 
+                }],
+                [{ 
+                    "text" : "Hey ! C'est le deuxième pattern de quête, tu te rends compte ?! " 
+                }, { 
+                    "questIsGived" : false,
+                    "text" : "Tiens, prends ta deuxième quête ! (ps : t'es encore vraiment trop cool)", 
+                    "quest" : 0, 
+                    "altText" : "Oh tu as déja pris ta deuxième quête !",
+                    "rewardText" : "Merci beaucoup, tiens pour te récompenser !" 
+                }],
+                [{ 
+                    "text" : "Merci d'avoir sauvé la ville ! " 
+                }]
             ]
         },{
             "id" : "1",

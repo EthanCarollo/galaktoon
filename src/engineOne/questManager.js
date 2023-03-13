@@ -61,3 +61,14 @@ const checkQuestIsFinish = (quest) => { // Check if a specific quest is finshed
     }
     return false;
 }
+
+const finishQuest = (questId) => {
+    for(let i = 0; i < questList.length; i++)
+    {
+        if(questList[i].id === questId)
+        {
+            questList.splice(i, 1)
+            return;
+        }
+    }
+}

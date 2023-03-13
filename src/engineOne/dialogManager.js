@@ -19,6 +19,8 @@ const displayDialogNpc = (npcDialoged) => {
   backgroundTransitionEffect();
   
   playerState = "dialoging"
+
+  let actualDialogIndex = npcDialoged.actualDialogIndex;
   
   let dialogBox = uiData[11].image;
   let sizeXDialog = window.innerWidth/ 1.45;
@@ -32,10 +34,10 @@ const displayDialogNpc = (npcDialoged) => {
   let box = image(dialogBox, xStartDialog, yStartDialog, sizeXDialog, sizeYDialog)
   textSize(sizeYDialog/10);
   
-  setQuestState(npcDialoged.dialogs[actualDialog])
+  setQuestState(npcDialoged.dialogs[actualDialogIndex][actualDialog])
 
-  showDialogText(xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, npcDialoged.dialogs[actualDialog])
-  setDialogInput(xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, npcDialoged.dialogs[actualDialog]);
+  showDialogText(xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, npcDialoged.dialogs[actualDialogIndex][actualDialog])
+  setDialogInput(xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, npcDialoged.dialogs[actualDialogIndex][actualDialog], npcDialoged);
       
 
 }
@@ -84,7 +86,7 @@ const showDialogChoiceBoxForQuest = (xStartDialog, yStartDialog, sizeXDialog, si
     fill(0)
 }
 
-const showRewardBox = (xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, dialog) => {
+const showRewardBox = (xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, npc, dialog) => {
   
   textAlign(CENTER, CENTER);
     
@@ -106,13 +108,19 @@ const showRewardBox = (xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, dia
 
   createInputButtonWithCallback(xBoxTrue, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice, 
       () => {
-          console.log("ACCEPT REWARD HERE AND START ANOTHER BRANCH OF DIALOG")
+        finishQuest(dialog.quest);
+        actualDialog = 0;
+        dialogTextIndex = 0;
+        if(npc.actualDialogIndex < npc.dialogs.length-1)
+        {
+          npc.actualDialogIndex++;
+        }
       });
   fill(0)
 
 }
   
-const showNpcSpriteInDialog = (npcDialoged) => {
+const showNpcSpriteInDialog = (npcDialoged, whoDialog = 1) => {
     let sizeSpriteDialog = window.innerWidth/4.5;
   
     let xSprite1 = window.innerWidth - sizeSpriteDialog;
@@ -122,8 +130,26 @@ const showNpcSpriteInDialog = (npcDialoged) => {
     
     let spritePlayerAnimate = spritesData[0].image.get(0,0,30,30)
     let spriteNpcAnimate = spritesData[npcDialoged.spriteId].image.get(0,0,30,30)
-    let spritePres1 = image(spriteNpcAnimate, xSprite1, ySprite, sizeSpriteDialog, sizeSpriteDialog)
-    let spritePres2 = image(spritePlayerAnimate, xSprite2, ySprite, sizeSpriteDialog, sizeSpriteDialog)
+
+    let spritePres1
+    let spritePres2
+
+    switch(whoDialog){
+      case 1 :
+        spritePres1 = image(spriteNpcAnimate, xSprite1, ySprite, sizeSpriteDialog, sizeSpriteDialog)
+        tint(80, 80, 80);
+        spritePres2 = image(spritePlayerAnimate, xSprite2, ySprite, sizeSpriteDialog, sizeSpriteDialog)
+        noTint();
+        break;
+      case 0 :
+        tint(80, 80, 80);
+        spritePres1 = image(spriteNpcAnimate, xSprite1, ySprite, sizeSpriteDialog, sizeSpriteDialog)
+        noTint();
+        spritePres2 = image(spritePlayerAnimate, xSprite2, ySprite, sizeSpriteDialog, sizeSpriteDialog)
+        break;
+      default :
+      throw new Error("Error in the show Sprite in dialog, the whoDialog variable should be 1 or 0 and it's actually : " + whoDialog)
+    }
 }
 
 const showDialogText = (xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, dialog) => {
@@ -158,7 +184,7 @@ const showDialogText = (xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, di
   text(actualDialogNpc, xStartDialog +paddingXText, yStartDialog+paddingYText, sizeXDialog-paddingSizeXBox, sizeYDialog-paddingSizeYBox);
 }
 
-const setDialogInput = (xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, dialog) => {
+const setDialogInput = (xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, dialog, npc) => {
   switch(dialog.state)
   {
     case "Normal" :
@@ -171,7 +197,7 @@ const setDialogInput = (xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, di
       createInputButtonWithCallback(xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, goNextDialog);
       break;
     case "Reward" :
-      showRewardBox(xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, goNextDialog);
+      showRewardBox(xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, npc, dialog);
       break;
     default :
       throw new Error("State isn't defined or doesn't exist")
@@ -222,8 +248,7 @@ const creatingStringWithDelay = (textToDelay) => {
 const goNextDialog = () => {
     dialogTextIndex = 0;
     actualDialog++;
-
-    if(actualDialog >= npcDialoged.dialogs.length){
+    if(actualDialog >= npcDialoged.dialogs[npcDialoged.actualDialogIndex].length){
       exitDialog()
     }
 
