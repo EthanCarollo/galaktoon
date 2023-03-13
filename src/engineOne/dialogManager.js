@@ -53,7 +53,7 @@ const displayDialogNpc = (npcDialoged) => {
     }
     // Verify if the quest is gived or not and so change the text
 
-    textSize(sizeYDialog/10);
+    textSize(sizeYDialog/11);
     textAlign(LEFT, TOP)
     text(actualDialogNpc, xStartDialog +paddingXText, yStartDialog+paddingYText, sizeXDialog-paddingSizeXBox, sizeYDialog-paddingSizeYBox);
   
@@ -86,15 +86,14 @@ const creatingStringWithDelay = (string) => {
 
 const showDialogChoiceBox = (xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, quest) => {
     
-  
-
-    textSize(18);
     textAlign(CENTER, CENTER);
     
     let sizeYChoice = sizeYDialog / 2.4;
     let sizeXChoice = sizeXDialog / 2.4;
     let paddingXChoice = sizeYDialog/2.75;
     let paddingYChoice = sizeYDialog/2.5;
+
+    textSize(sizeYChoice/4.5);
 
     let dialogBox = uiData[11].image;
     let xBoxTrue = xStartDialog + paddingXChoice;
