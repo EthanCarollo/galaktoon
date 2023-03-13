@@ -46,6 +46,14 @@ const addQuestProgression = (questIdProgression) => {
     }
 }
 
+const addQuestProgressionOnEndFight = (teamProgressionToAdd) => {
+    for(let i = 0; i < teamProgressionToAdd.length; i++)
+    {
+        console.log(teamProgressionToAdd[i].id)
+        addQuestProgression(teamProgressionToAdd[i].id)
+    }
+}
+
 const checkQuestIsFinish = (quest) => {
     if(quest.currentProgression >= quest.maxProgression)
     {
