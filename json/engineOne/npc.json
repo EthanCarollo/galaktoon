@@ -7,10 +7,9 @@
             "name" : "Bob",
             "dialogs" : [ 
                 { 
-                    "dialogState" : "normal",
                     "text" : "Hey ! You look good :) qd dd ddd  ddd dd qd qd q dq dqd qdq dqd qd qdq dq " 
                 }, { 
-                    "dialogState" : "normal",
+                    "questIsGived" : false,
                     "text" : "Tiens, prends ta première quête ! (ps : t'es vraiment trop cool)", 
                     "quest" : 0, 
                     "altText" : "Oh tu as déja pris ta quête !",

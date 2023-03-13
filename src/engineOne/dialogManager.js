@@ -16,39 +16,33 @@ const launchNpcDialog = (npc) => {
 
 const displayDialogNpc = (npcDialoged) => {
     
-    backgroundTransitionEffect();
+  backgroundTransitionEffect();
   
-    playerState = "dialoging"
+  playerState = "dialoging"
   
-    let dialogBox = uiData[11].image;
-    let sizeXDialog = window.innerWidth/ 1.45;
-    let sizeYDialog = sizeXDialog/5;
-    let xStartDialog = (window.innerWidth /2) - (sizeXDialog/2);
-    let yStartDialog = window.innerHeight - sizeYDialog;
-  
-    showNpcSpriteInDialog(npcDialoged);
-  
-    fill(0, 0, 0);
-    let box = image(dialogBox, xStartDialog, yStartDialog, sizeXDialog, sizeYDialog)
-    textSize(sizeYDialog/10);
-  
-    showDialogText(xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, npcDialoged.dialogs[actualDialog])
+  let dialogBox = uiData[11].image;
+  let sizeXDialog = window.innerWidth/ 1.45;
+  let sizeYDialog = sizeXDialog/5;
+  let xStartDialog = (window.innerWidth /2) - (sizeXDialog/2);
+  let yStartDialog = window.innerHeight - sizeYDialog;
 
-    textSize(sizeYDialog/11);
-    textAlign(LEFT, TOP)
+  showNpcSpriteInDialog(npcDialoged);
   
-    if(npcDialoged.dialogs[actualDialog].quest === undefined || npcDialoged.dialogs[actualDialog].questIsGived === true){
-      createInputButtonWithCallback(xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, goNextDialog);
-    }else{
-      showDialogChoiceBox(xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, npcDialoged.dialogs[actualDialog])
-    }
+  fill(0, 0, 0);
+  let box = image(dialogBox, xStartDialog, yStartDialog, sizeXDialog, sizeYDialog)
+  textSize(sizeYDialog/10);
+  
+  setQuestState(npcDialoged.dialogs[actualDialog])
 
+  showDialogText(xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, npcDialoged.dialogs[actualDialog])
+  setDialogInput(xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, npcDialoged.dialogs[actualDialog]);
+      
 
-  }
+}
 
   // Dialog Component
 
-const showDialogChoiceBox = (xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, quest) => {
+const showDialogChoiceBoxForQuest = (xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, quest) => {
     
     textAlign(CENTER, CENTER);
     
@@ -88,7 +82,7 @@ const showDialogChoiceBox = (xStartDialog, yStartDialog, sizeXDialog, sizeYDialo
             goNextDialog();
         });
     fill(0)
-  }
+}
   
 const showNpcSpriteInDialog = (npcDialoged) => {
     let sizeSpriteDialog = window.innerWidth/4.5;
@@ -102,7 +96,7 @@ const showNpcSpriteInDialog = (npcDialoged) => {
     let spriteNpcAnimate = spritesData[npcDialoged.spriteId].image.get(0,0,30,30)
     let spritePres1 = image(spriteNpcAnimate, xSprite1, ySprite, sizeSpriteDialog, sizeSpriteDialog)
     let spritePres2 = image(spritePlayerAnimate, xSprite2, ySprite, sizeSpriteDialog, sizeSpriteDialog)
-  }
+}
 
 const showDialogText = (xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, dialog) => {
   let paddingXText = sizeYDialog/2;
@@ -112,20 +106,15 @@ const showDialogText = (xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, di
   
   let actualDialogNpc;
 
-  dialog.state = "Normal"
-  if(dialog.questIsGived === true) {
-    dialog.state = "GotQuest"
-    if(questData[dialog.quest].isFinished === true){
-      dialog.state = "Reward"
-    }
-  }
-
   switch(dialog.state)
   {
     case "Normal" :
       actualDialogNpc = creatingStringWithDelay(dialog.text);
       break;
-    case "GotQuest" :
+    case "HaveQuestToGive" :
+      actualDialogNpc = creatingStringWithDelay(dialog.text);
+      break;
+    case "GivedQuest" :
       actualDialogNpc = creatingStringWithDelay(dialog.altText);
       break;
     case "Reward" :
@@ -139,6 +128,40 @@ const showDialogText = (xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, di
   textAlign(LEFT, TOP)
   
   text(actualDialogNpc, xStartDialog +paddingXText, yStartDialog+paddingYText, sizeXDialog-paddingSizeXBox, sizeYDialog-paddingSizeYBox);
+}
+
+const setDialogInput = (xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, dialog) => {
+  switch(dialog.state)
+  {
+    case "Normal" :
+      createInputButtonWithCallback(xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, goNextDialog);
+      break;
+    case "HaveQuestToGive" :
+      showDialogChoiceBoxForQuest(xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, dialog);
+      break;
+    case "GivedQuest" :
+      createInputButtonWithCallback(xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, goNextDialog);
+      break;
+    case "Reward" :
+      createInputButtonWithCallback(xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, goNextDialog);
+      break;
+    default :
+      throw new Error("State isn't defined or doesn't exist")
+  }
+}
+
+const setQuestState = (dialog) => {
+  dialog.state = "Normal"
+
+  if(dialog.questIsGived === true) {
+    dialog.state = "GivedQuest"
+    if(checkQuestIsFinish(questData[dialog.quest]) === true){
+      dialog.state = "Reward"
+    }
+  }else if(dialog.questIsGived === false)
+  {
+    dialog.state = "HaveQuestToGive"
+  }
 }
 
   // Dialog Component
