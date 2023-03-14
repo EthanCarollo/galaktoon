@@ -45,5 +45,6 @@ let vectorCameraEngineTwo;
 let selectedChar = null;
 let selectedEntity = null;
 
-let whichEntityTurn = null;
+let whichEntityTurn = 0;
+let selectedAbility = 0;
 

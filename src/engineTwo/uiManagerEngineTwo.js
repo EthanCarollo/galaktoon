@@ -25,4 +25,5 @@ const displayAbility = () => {
 
 const selectAbility = (ability) => {
     console.log("Selected ability = " + ability);
+    selectedAbility = ability;
 }

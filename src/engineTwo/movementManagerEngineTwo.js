@@ -95,4 +95,4 @@ const mooveEntityToNextCase = (entity) => {
     entity.nextCase = null;
     return false;
 
-}
+} // Moove Entity to the next case insered in her "nextCase" array value
