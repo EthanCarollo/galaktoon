@@ -43,6 +43,7 @@ let uiData = [];
 let planetsData = [];
 let npcData = [];
 let questData = [];
+let mapFightData = [];
 let pixelFont;
 
 // variables that follow the resource loading course
@@ -54,6 +55,7 @@ let loadingCounterUIData = 0;
 let loadingCounterPlanetsData = 0;
 let loadingCounterNPCData = 0;
 let loadingCounterQuestData = 0;
+let loadingMapFightData = 0;
 
 let totalLoadCounter = 0;
 let totalLoad = ressourceToLoad.length;
@@ -163,6 +165,19 @@ const loadRessource = (ressource, typeOfRessource) => {
             successfullLoadingRessource(typeOfRessource)
             break;
 
+        case "mapFight" :
+            mapFightData = ressource;
+            console.log(mapFightData)
+            for(let i = 0; i < mapFightData.length; i++)
+            {
+                mapFightData[i].image = loadImage(
+                    mapFightData[i].path, 
+                    () => successfullLoadingRessource(typeOfRessource),
+                    () => failureLoadingRessource(mapFightData[i], typeOfRessource)
+                );
+            }
+            break;
+
         default :
             throw new Error("this is not an accepted type of ressource : " + typeOfRessource);
         
@@ -236,6 +251,19 @@ const successfullLoadingRessource = (typeOfRessource) => {
             break;
         case "quest" :
             totalLoadCounter ++;
+            break;
+        case "ui" :
+            loadingCounterUIData ++;
+            if(loadingCounterUIData === uiData.length){
+                totalLoadCounter ++;
+            }
+            break;
+        case "mapFight" :
+            loadingMapFightData++;
+            if(loadingMapFightData === mapFightData.length)
+            {
+                totalLoadCounter ++;
+            }
             break;
         default :
             throw new Error("this cannot load that type of ressource : " + typeOfRessource);
