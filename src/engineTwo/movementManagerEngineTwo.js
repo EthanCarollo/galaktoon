@@ -60,37 +60,39 @@ const mooveEntityToNextCase = (entity) => {
     {
         if(entity.nextCase[0] - entity.pos[0] < (movementSpeed/2) && entity.nextCase[0] - entity.pos[0] > -(movementSpeed/2)){
             entity.pos[0] = Math.round(entity.pos[0])
+            return false
         }
         switch(entity.nextCase[0] > entity.pos[0])
         {
             case true :
                 animationMooveSprite(positionOnMap[0], positionOnMap[1], playerSpriteSize, [1, 0], entity.id)
                 entity.pos[0]+= movementSpeed
-                return
+                return true
             case false :
                 animationMooveSprite(positionOnMap[0], positionOnMap[1], playerSpriteSize, [-1, 0], entity.id)
                 entity.pos[0]-= movementSpeed
-                return
+                return true
         }
     }
     if(entity.nextCase[1] > entity.pos[1] || entity.nextCase[1] < entity.pos[1])
     {
         if(entity.nextCase[1] - entity.pos[1] < (movementSpeed/2) && entity.nextCase[1] - entity.pos[1] >  -(movementSpeed/2)){
             entity.pos[1] = Math.round(entity.pos[1])
+            return false
         }
         switch(entity.nextCase[1] > entity.pos[1])
         {
             case true :
                 animationMooveSprite(positionOnMap[0], positionOnMap[1], playerSpriteSize, [0, 1], entity.id)
                 entity.pos[1]+= movementSpeed
-                return
+                return true
             case false :
                 animationMooveSprite(positionOnMap[0], positionOnMap[1], playerSpriteSize, [0,-1], entity.id)
                 entity.pos[1]-= movementSpeed
-                return
+                return true
         }
     }
-    animationIdleSprite(positionOnMap[0], positionOnMap[1], playerSpriteSize, [0, 1], entity.id)
     entity.nextCase = null;
+    return false;
 
 }

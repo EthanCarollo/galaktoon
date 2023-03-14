@@ -94,7 +94,10 @@ const showSpriteOnTactical = (entity) => {
     ]
     if(entity.nextCase !== null)
     {
-        mooveEntityToNextCase(entity)
+        if(mooveEntityToNextCase(entity) === false)
+        {
+            animationIdleSprite(positionOnMap[0], positionOnMap[1], playerSpriteSize, [0, 1], entity.id)
+        }
     }else{
         animationIdleSprite(positionOnMap[0], positionOnMap[1], playerSpriteSize, [0, 1], entity.id)
     }
