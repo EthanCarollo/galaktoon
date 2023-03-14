@@ -15,37 +15,41 @@ const playerInputForEngineTwo=()=>{
 
 const InputOnArray = () => {
     let arrayMousePos = getCoordTileWithMouseClickEngineTwo();
-    console.log(arrayMousePos)
+
     if(!isAMovableCase(arrayMousePos[0], arrayMousePos[1])){
         resetMovableAndEntityVar()
         selectedEntity = getSpriteWithCoord(arrayMousePos[0], arrayMousePos[1])
-    }
-    if(selectedEntity !== null && selectedChar !== 0)
+    }// Set selected Entity
+
+    if(selectedEntity !== null && selectedEntity.id === 0)
     {
-        canvas.mouseReleased(()=>{
-            getMovableCase(arrayMousePos[0], arrayMousePos[1], 2);
-            selectedChar = 0;
-            selectedEntity = getSpriteWithCoord(arrayMousePos[0], arrayMousePos[1]);
-        })
-    }else if(getTacticalTileOnMouseClick() === 0 && selectedChar === 0 && selectedEntity !== null){
-        canvas.mouseReleased(()=>{
-            resetMovableAndEntityVar()
-        })
-    }
-    if(selectedEntity !== null && selectedChar === 0)
-    {
-        console.log("---------------- CLICKED HERE")
-        console.log(isAMovableCase(arrayMousePos[0], arrayMousePos[1]))
-        canvas.mouseReleased(()=>{
-            console.log("clicked")
-            if(isAMovableCase(arrayMousePos[0], arrayMousePos[1]))
-            {
-                console.log("clicked2")
-                selectedEntity.nextCase = [arrayMousePos[0], arrayMousePos[1]];
+        if(canMoveCase.length > 0)
+        {
+            canvas.mouseReleased(()=>{
+                if(isAMovableCase(arrayMousePos[0], arrayMousePos[1]))
+                {
+                    selectedEntity.nextCase = [arrayMousePos[0], arrayMousePos[1]];
+                    resetMovableAndEntityVar()
+                }
+            })
+        }else{
+            canvas.mouseReleased(()=>{
+                getMovableCase(arrayMousePos[0], arrayMousePos[1], 2);
+                selectedEntity = getSpriteWithCoord(arrayMousePos[0], arrayMousePos[1]);
+            })
+        }
+        
+    } // Set or moove the player with an ID who is Equal to 0
+
+    if(getTacticalTileOnMouseClick() === 0 && selectedEntity !== null){
+        if(selectedEntity.id !== 0){
+            canvas.mouseReleased(()=>{
                 resetMovableAndEntityVar()
-            }
-        })
+            })
+        }
     }
+
+
 }
 
 const resetMovableAndEntityVar = () => {

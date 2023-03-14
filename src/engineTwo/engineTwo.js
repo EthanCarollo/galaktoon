@@ -4,6 +4,7 @@ const runEngineTwo = () => {
     background(180)
     displayTopDownMapEngineTwo();
     setCameraEngineTwo();
+    displayEngineTwoUI();
 }
 
 const setCameraEngineTwo = () => {
@@ -69,6 +70,7 @@ const getSpriteTactical = (x, y) => {
             return actualMapEngineTwo.entityOnTactical[i];
         }
     }
+    return null;
 }
 
 const showRectOnTactical = (x, y, id) => {
@@ -85,17 +87,31 @@ const showRectOnTactical = (x, y, id) => {
 }
 
 const showSpriteOnTactical = (entity) => {
+    let positionOnMap = 
+    [
+        entity.pos[0] * tileSize - (playerSpriteSize-tileSize)/2 +vectorCameraEngineTwo.x,
+        entity.pos[1] * tileSize - (playerSpriteSize-tileSize)/2 +vectorCameraEngineTwo.y
+    ]
     if(entity.nextCase !== null)
     {
         mooveEntityToNextCase(entity)
     }else{
-        let positionOnMap = 
-        [
-            entity.pos[0] * tileSize - (playerSpriteSize-tileSize)/2 +vectorCameraEngineTwo.x,
-            entity.pos[1] * tileSize - (playerSpriteSize-tileSize)/2 +vectorCameraEngineTwo.y
-        ]
         animationIdleSprite(positionOnMap[0], positionOnMap[1], playerSpriteSize, [0, 1], entity.id)
     }
+    showHealthSpriteTactical(positionOnMap, entity)
+}
+
+const showHealthSpriteTactical = (position, entity) => {
+    if(entity.health === undefined){
+        return
+    }
+    let health = entity.health
+    image(uiData[3].image, position[0], position[1], playerSpriteSize, playerSpriteSize) // Background HP
+
+    let actualHealthPercent = health.actualHealth / health.maxHealth * 100 + 0.0001;
+    image(uiData[0].image, position[0], position[1], actualHealthPercent, playerSpriteSize) // Bar HP
+
+    image(uiData[2].image, position[0], position[1], playerSpriteSize, playerSpriteSize) // Border HP
 }
 
 const createImageWithIdOn2dArrayEngineTwo = (x, y, id, currentTileSize, mapInfo = actualMapEngineTwo) => {
@@ -128,7 +144,7 @@ const getSpriteWithCoord = (x, y) => {
 }
 
 const getTacticalTileOnMouseClick = () => {
-    return actualMapEngineTwo.tacticalMap[Math.floor(mouseY / tileSize)][Math.floor(mouseX / tileSize)];
+    return actualMapEngineTwo.tacticalMap[Math.floor((mouseY - vectorCameraEngineTwo.y) / tileSize)][Math.floor((mouseX - vectorCameraEngineTwo.x) / tileSize)];
 }
 
 const getCoordTileWithMouseClickEngineTwo = () => [Math.floor((mouseX - vectorCameraEngineTwo.x) / tileSize), Math.floor((mouseY - vectorCameraEngineTwo.y) / tileSize)]
