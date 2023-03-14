@@ -97,12 +97,12 @@ const createMapTopDown = (orientation, mapLayer, mapInfo = playerOnMap, offsetPo
 }
 
 const createImageWithIdOn2dArray = (x, y, id, currentTileSize, isUi = false, mapInfo = playerOnMap, offsetPositionOnScreen = [cameraVector.x + playerVector.x, cameraVector.y + playerVector.y]) => {
-
+  imageMode(CORNER)
   // size of the current tile according to the data
   let xTileWidth = mapInfo.tileRessource[id].xWidth;
   let yTileHeight = mapInfo.tileRessource[id].yWidth;
   // position of the current tile in the array and the size
-  let xPositionTiles = currentTileSize*x + offsetPositionOnScreen[0] - 45;
+  let xPositionTiles = currentTileSize*x + offsetPositionOnScreen[0] -45;
   let yPositionTiles = (currentTileSize*(y+1-yTileHeight) + offsetPositionOnScreen[1] -45);
   let normalYPositionTiles = currentTileSize*y + offsetPositionOnScreen[1] -45; // normal position of a tiles (usefull when you need to instantiate a normal tile behind a special tile)
   if(isUi === true){

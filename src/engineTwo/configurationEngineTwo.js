@@ -1,4 +1,6 @@
 
 let actualMapEngineTwo;
 
-let vectorMapEngineTwo = [0,0]
+let vectorMapEngineTwo = [0,0];
+
+let selectedChar = null;
