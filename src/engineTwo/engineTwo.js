@@ -25,7 +25,7 @@ const createMapSideScroller = (map) => {
 }
 
 const createFloorOfSideMap = () => {
-    for(let y = 0; y < 6; y++){
+    /*for(let y = 0; y < 6; y++){
         for(let x = 0; x < 25; x++)
         {
             let tileSizeTemp = 90;
@@ -34,7 +34,10 @@ const createFloorOfSideMap = () => {
 
             image(mapData[0].tileRessource[0].image, xPositionTiles, yPositionTiles, tileSizeTemp, tileSizeTemp)
         }
-    }
+    }*/
+
+    image(mapFightData[0].image, 0, 0, window.innerWidth, window.innerHeight)
+
     //temp code for initializing floor of side map
 }
 
@@ -95,9 +98,9 @@ const showEnemyTeam = () => {
 
 const showSpriteOnMap = (sprite, x, y, size, charObject, isTarget, playerSelectedCharacter, indexInArray, isAnEnemy) => {
     if(playerSelectedCharacter === true){
-        tint(150,150,255)
+        //tint(150,150,255)
         spriteAnimationFight(sprite, x, y, size, isAnEnemy, indexInArray)
-        noTint()
+        //noTint()
     }else if(isTarget === true){
         tint(155,0,0)
         spriteAnimationFight(sprite, x, y, size, isAnEnemy, indexInArray)

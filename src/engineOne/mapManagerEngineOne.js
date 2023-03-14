@@ -6,6 +6,7 @@ const loadNewMap = (mapToLoad, start) => {
         playerVector = getCoordWithTileCoord(start[0], start[1]);
         cameraVector = createVector(windowWidth/2, windowHeight/2);
         mapVector = createVector(0,0);
+        checkMapForCinematic(mapToLoad)
     }
 }
 

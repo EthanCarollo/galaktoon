@@ -117,6 +117,7 @@ const playerWinFight = () => {
     whoWin = "Player";
     fightIsEnd = true
     fightLog.push("Player Won !")
+    addQuestProgressionOnEndFight(enemyTeam)
 }
 
 const playerLooseFight = () => {

@@ -1,15 +1,40 @@
+let engineOneState = "Playing"
 
 const runEngineOne = () => {
-    updatePlayerLevel(playerTeam[0]); // temp call of the function
-    setPlayerCamera();
-    displayTopDown2D();
-    updateAnimationIndex();
-    displayUserInterfaceEngineOne();
-    showQuestList();
-    if(npcDialoged !== null)
-    {
-      displayDialogNpc(npcDialoged)
-    }
+  switch(engineOneState)
+  {
+    case "Playing" :
+      runPlayingStateEngineOne()
+      break;
+    case "Cinematic" :
+      runCinematicStateEngineOne()
+      break;
+    default :
+      throw new Error("engine one state isn't set : " + engineOneState)
+  }
+}
+
+const runCinematicStateEngineOne = () => {
+  playerCanMove = false;
+  setCameraCinematic();
+  
+  displayTopDown2D();
+  updateAnimationIndex();
+
+  showBorderCinematic();
+}
+
+const runPlayingStateEngineOne = () => {
+  updatePlayerLevel(playerTeam[0]); // temp call of the function
+  setPlayerCamera();
+  displayTopDown2D();
+  updateAnimationIndex();
+  displayUserInterfaceEngineOne();
+  showQuestList();
+  if(npcDialoged !== null)
+  {
+    displayDialogNpc(npcDialoged)
+  }
 }
 
 // ************************ Display game && camera
@@ -77,7 +102,7 @@ const createImageWithIdOn2dArray = (x, y, id, currentTileSize, isUi = false) => 
   let xTileWidth = playerOnMap.tileRessource[id].xWidth;
   let yTileHeight = playerOnMap.tileRessource[id].yWidth;
   // position of the current tile in the array and the size
-  let xPositionTiles = currentTileSize*x + cameraVector.x + playerVector.x -45;
+  let xPositionTiles = currentTileSize*x + cameraVector.x + playerVector.x - 45;
   let yPositionTiles = (currentTileSize*(y+1-yTileHeight) + cameraVector.y + playerVector.y -45);
   let normalYPositionTiles = currentTileSize*y + cameraVector.y + playerVector.y -45; // normal position of a tiles (usefull when you need to instantiate a normal tile behind a special tile)
   if(isUi === true){

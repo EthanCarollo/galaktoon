@@ -35,12 +35,40 @@ const showQuestList = () => {
     }
 }
 
-const addQuestProgression = (questIdProgression) => {
+const addQuestProgression = (questIdProgression) => { // Update a progression using an ID
     for(let i = 0; i< questList.length; i++)
     {
         if(questList[i].idQuestProgression === questIdProgression && questList[i].currentProgression < questList[i].maxProgression)
         {
             questList[i].currentProgression ++;
+        }
+        checkQuestIsFinish(questList[i]);
+    }
+}
+
+const addQuestProgressionOnEndFight = (teamProgressionToAdd) => { // Update the progression after a fight 
+    for(let i = 0; i < teamProgressionToAdd.length; i++)
+    {
+        addQuestProgression(teamProgressionToAdd[i].id)
+    }
+}
+
+const checkQuestIsFinish = (quest) => { // Check if a specific quest is finshed
+    if(quest.currentProgression >= quest.maxProgression)
+    {
+        quest.isFinished = true;
+        return true
+    }
+    return false;
+}
+
+const finishQuest = (questId) => {
+    for(let i = 0; i < questList.length; i++)
+    {
+        if(questList[i].id === questId)
+        {
+            questList.splice(i, 1)
+            return;
         }
     }
 }

@@ -3,14 +3,20 @@
     [
         {
             "id" : "0",
-            "map" : "1",
-            "name" : "Earth",
+            "map" : "2",
+            "name" : "Bob's Planet",
             "description" : "A basic explorable planets !"
         },
         {
             "id" : "1",
-            "map" : "2",
-            "name" : "Bob's Planet",
+            "map" : "1",
+            "name" : "Earth Planet",
+            "description" : "A basic explorable planets !"
+        },
+        {
+            "id" : "1",
+            "map" : "3",
+            "name" : "Dark Woaf's Planet",
             "description" : "A basic explorable planets !"
         }
     ]
