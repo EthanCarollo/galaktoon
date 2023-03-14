@@ -14,6 +14,7 @@ const displayDebug = () => {
     fill(255,0,0,100)
     text("Actual turn is " + whichEntityTurn, 0, 0)
     text("Actual selected ability is " + selectedAbility, 0, 25)
+    text("Actual PM of the player is " + actualMapEngineTwo.entityOnTactical[0].pm, 0, 50)
     noFill()
     displayAbility()
     displayEndTurnButton()

@@ -9,7 +9,9 @@ const turnManager = () => {
         throw new Error("which entity turn is out of length or is null : " + whichEntityTurn)
     }
 
+    
     whichEntityTurn ++;
+
 
     if(whichEntityTurn >= actualMapEngineTwo.entityOnTactical.length)
     {
@@ -22,6 +24,7 @@ const turnManager = () => {
     }
     
     resetMovableAndEntityVar()
+    actualMapEngineTwo.entityOnTactical[whichEntityTurn].pm = 2;
     selectedEntity = actualMapEngineTwo.entityOnTactical[whichEntityTurn]
 }
 

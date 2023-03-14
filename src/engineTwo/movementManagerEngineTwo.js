@@ -48,6 +48,15 @@ const addCanMoveCase = (position) => {
 const setEntityNextCase = (entity, nextCase) => {
     entity.nextCase = nextCase;
 }
+const applyDifferencePmWithNextCase = (entity) => {
+    let actualPos = entity.pos;
+    let nextPos = entity.nextCase;
+    let newDim = [entity.pos[0] - entity.nextCase[0], entity.pos[1] - entity.nextCase[1]]
+    if(newDim[0] < 0){ newDim[0] = -newDim[0] }
+    if(newDim[1] < 0){ newDim[1] = -newDim[1] }
+    newDim = newDim[0] + newDim[1]
+    entity.pm -= newDim
+}
 
 
 let movementSpeed = 0.045;

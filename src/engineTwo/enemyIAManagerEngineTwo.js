@@ -5,15 +5,17 @@ function getRandomInt(max) {
 const runIaTurn = () => {
 
     let entityIa = actualMapEngineTwo.entityOnTactical[whichEntityTurn]
-
+    let timeSet = 450;
     mooveOneCaseIA(entityIa)
-
-    setTimeout(() => {
-        mooveOneCaseIA(entityIa)
-    }, 500);
+    for(let i = 0; i < entityIa.pm; i++)
+    {
+        setTimeout(() => {
+            mooveOneCaseIA(entityIa)
+        }, timeSet * i);
+    }
     setTimeout(() => {
         endTurn();
-    }, 1500);
+    }, timeSet + timeSet * entityIa.pm);
 }
 
 const mooveOneCaseIA = (entityIa) => {

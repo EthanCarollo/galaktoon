@@ -29,12 +29,13 @@ const InputOnArray = () => {
                 if(isAMovableCase(arrayMousePos[0], arrayMousePos[1]))
                 {
                     selectedEntity.nextCase = [arrayMousePos[0], arrayMousePos[1]];
+                    applyDifferencePmWithNextCase(selectedEntity)
                     resetMovableAndEntityVar()
                 }
             })
         }else{
             canvas.mouseReleased(()=>{
-                getMovableCase(arrayMousePos[0], arrayMousePos[1], 2);
+                getMovableCase(arrayMousePos[0], arrayMousePos[1], selectedEntity.pm);
                 selectedEntity = getSpriteWithCoord(arrayMousePos[0], arrayMousePos[1]);
             })
         }
