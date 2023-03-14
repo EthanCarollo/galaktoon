@@ -34,6 +34,7 @@ const getMovableCase = (x, y, movementPoint) => {
             
         }
     }
+    return canMoveCase;
 }
 const addCanMoveCase = (position) => {
     if(position[0] > 0 && position[1] > 0 && position[0] < actualMapEngineTwo.tacticalMap.length && position[1] < actualMapEngineTwo.tacticalMap.length && getSpriteTactical(position[0], position[1]) === null){
@@ -45,7 +46,7 @@ const addCanMoveCase = (position) => {
     }
 }
 const setEntityNextCase = (entity, nextCase) => {
-
+    entity.nextCase = nextCase;
 }
 
 
