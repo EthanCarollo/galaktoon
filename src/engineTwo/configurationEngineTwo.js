@@ -1,6 +1,7 @@
 
 let actualMapEngineTwo;
 
-let vectorMapEngineTwo = [0,0];
+let vectorCameraEngineTwo;
 
 let selectedChar = null;
+let selectedEntity = null;

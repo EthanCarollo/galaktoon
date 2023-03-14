@@ -19,7 +19,6 @@ const runCinematicStateEngineOne = () => {
   setCameraCinematic();
   
   displayTopDown2D();
-  updateAnimationIndex();
 
   showBorderCinematic();
 }
@@ -28,7 +27,6 @@ const runPlayingStateEngineOne = () => {
   updatePlayerLevel(playerTeam[0]); // temp call of the function
   setPlayerCamera();
   displayTopDown2D();
-  updateAnimationIndex();
   displayUserInterfaceEngineOne();
   showQuestList();
   if(npcDialoged !== null)
