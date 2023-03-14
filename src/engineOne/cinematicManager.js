@@ -39,7 +39,7 @@ const showBorderCinematic = () => {
     {
         positionBorderCinematic[0]+=2;
     }
-    if(positionBorderCinematic[1] > window.innerHeight-ySize)
+    if(positionBorderCinematic[1] > window.innerHeight-ySize+2)
     {
         positionBorderCinematic[1]-=2;
     }
