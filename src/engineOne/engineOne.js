@@ -66,28 +66,28 @@ const setPlayerCamera = () => {
 
 // ************************ MAP LOGIC (create and verification on array)
 
-const createMapTopDown = (orientation, map = actualPlayerMap) => {
-
-    for(let y = 0;y < map.length; y++)
+const createMapTopDown = (orientation, mapLayer, mapInfo = playerOnMap, offsetPositionOnScreen = [cameraVector.x + playerVector.x, cameraVector.y + playerVector.y]) => {
+    
+    for(let y = 0;y < mapLayer.length; y++)
     {
-      for(let x = 0;x < map[0].length; x++)
+      for(let x = 0;x < mapLayer[0].length; x++)
       {
-        if(!tileIsEmpty(x, y, map)){
+        if(!tileIsEmpty(x, y, mapLayer)){
           switch(orientation){
             case "back" :
               if(actualPlayerTile()[1] >= y)
               {
-                createImageWithIdOn2dArray(x, y, map[y][x], tileSize);
+                createImageWithIdOn2dArray(x, y, mapLayer[y][x], tileSize, false, mapInfo, offsetPositionOnScreen);
               }
               break;
             case "front":
               if(actualPlayerTile()[1] < y)
               {
-                createImageWithIdOn2dArray(x, y, map[y][x], tileSize);
+                createImageWithIdOn2dArray(x, y, mapLayer[y][x], tileSize, false, mapInfo, offsetPositionOnScreen);
               }
               break;
             default :
-              createImageWithIdOn2dArray(x, y, map[y][x], tileSize);
+              createImageWithIdOn2dArray(x, y, mapLayer[y][x], tileSize, false, mapInfo, offsetPositionOnScreen);
               break;
           }
         }
@@ -96,20 +96,20 @@ const createMapTopDown = (orientation, map = actualPlayerMap) => {
 
 }
 
-const createImageWithIdOn2dArray = (x, y, id, currentTileSize, isUi = false) => {
+const createImageWithIdOn2dArray = (x, y, id, currentTileSize, isUi = false, mapInfo = playerOnMap, offsetPositionOnScreen = [cameraVector.x + playerVector.x, cameraVector.y + playerVector.y]) => {
 
   // size of the current tile according to the data
-  let xTileWidth = playerOnMap.tileRessource[id].xWidth;
-  let yTileHeight = playerOnMap.tileRessource[id].yWidth;
+  let xTileWidth = mapInfo.tileRessource[id].xWidth;
+  let yTileHeight = mapInfo.tileRessource[id].yWidth;
   // position of the current tile in the array and the size
-  let xPositionTiles = currentTileSize*x + cameraVector.x + playerVector.x - 45;
-  let yPositionTiles = (currentTileSize*(y+1-yTileHeight) + cameraVector.y + playerVector.y -45);
-  let normalYPositionTiles = currentTileSize*y + cameraVector.y + playerVector.y -45; // normal position of a tiles (usefull when you need to instantiate a normal tile behind a special tile)
+  let xPositionTiles = currentTileSize*x + offsetPositionOnScreen[0] - 45;
+  let yPositionTiles = (currentTileSize*(y+1-yTileHeight) + offsetPositionOnScreen[1] -45);
+  let normalYPositionTiles = currentTileSize*y + offsetPositionOnScreen[1] -45; // normal position of a tiles (usefull when you need to instantiate a normal tile behind a special tile)
   if(isUi === true){
-    yPositionTiles = (currentTileSize*y + cameraVector.y + playerVector.y -45);
+    yPositionTiles = (currentTileSize*y + offsetPositionOnScreen[1] -45);
     image(uiData[id].image, xPositionTiles , yPositionTiles, currentTileSize, currentTileSize); 
   }else{
-    image(playerOnMap.tileRessource[id].image, xPositionTiles , yPositionTiles, currentTileSize * xTileWidth, currentTileSize * yTileHeight); 
+    image(mapInfo.tileRessource[id].image, xPositionTiles , yPositionTiles, currentTileSize * xTileWidth, currentTileSize * yTileHeight); 
   }
 
   //noTint()

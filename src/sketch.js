@@ -14,7 +14,6 @@ function setup() {
 function draw() {
 
     canvas.mouseReleased(() => { }) // Resetting canvas function
-
     cursor('auto') // Resetting the cursor to auto
 
     sceneManager();
