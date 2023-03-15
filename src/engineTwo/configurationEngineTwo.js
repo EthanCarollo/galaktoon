@@ -14,7 +14,7 @@ let playerTeam = [
                 abilityLevel : 2,
                 baseAmount : 20,
                 id : 1,
-                couldown : 1
+                range : 2
             },
             {
                 name : "Heal",
@@ -22,7 +22,7 @@ let playerTeam = [
                 abilityLevel : 1,
                 baseAmount : 20,
                 id : 4,
-                couldown : 2
+                range : 1
             },
             {
                 name : "HealAll",
@@ -30,7 +30,7 @@ let playerTeam = [
                 abilityLevel : 2,
                 baseAmount : 20,
                 id : 5,
-                couldown : 3
+                range : 1
             }
         ],
         isAlive : true,

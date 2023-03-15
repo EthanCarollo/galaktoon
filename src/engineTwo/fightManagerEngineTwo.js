@@ -41,3 +41,41 @@ const useAbility = (entity, target = 1, selectedAbility = 0) => {
         }
     }
 }
+
+let canAttackCase = []
+const getAttackableCase = (x, y, attackPoint) => {
+    canAttackCase = [[x, y]]
+    for(let i = 1; i<attackPoint+1;i++)
+    {
+        addCanAttackCase([x +  i, y])
+        addCanAttackCase([x - i, y])
+        addCanAttackCase([x, y +i])
+        addCanAttackCase([x, y -i])
+        //console.log((attackPoint+i - attackPoint-i) <= attackPoint)
+        for(let j = 0; j < attackPoint;j++)
+        {
+                //addCanAttackCase([x + j -i,y+j])
+                if(0 < i-j && j > 0){
+                    addCanAttackCase([x + j - i,y+j])  
+                    addCanAttackCase([x - j + i,y-j])  
+                    addCanAttackCase([x - j + i,y+j])  
+                    addCanAttackCase([x + j - i,y-j])  
+                }
+            
+        }
+    }
+    if(canAttackCase.length === 1)
+    {
+        canAttackCase = []
+    }
+    return canAttackCase;
+}
+const addCanAttackCase = (position) => {
+    if(position[0] > 0 && position[1] > 0 && position[0] < actualMapEngineTwo.tacticalMap.length && position[1] < actualMapEngineTwo.tacticalMap.length && getSpriteTactical(position[0], position[1]) === null){
+        if(actualMapEngineTwo.tacticalMap[position[1]][position[0]] !== -1)
+        {
+            return
+        }
+        canAttackCase.push(position)  
+    }
+}

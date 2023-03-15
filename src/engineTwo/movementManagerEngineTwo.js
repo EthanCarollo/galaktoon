@@ -34,6 +34,10 @@ const getMovableCase = (x, y, movementPoint) => {
             
         }
     }
+    if(canMoveCase.length === 1)
+    {
+        canMoveCase = []
+    }
     return canMoveCase;
 }
 const addCanMoveCase = (position) => {

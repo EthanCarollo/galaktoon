@@ -20,7 +20,13 @@ const runIaTurn = () => {
 
 const mooveOneCaseIA = (entityIa) => {
     let movableIaCase = getMovableCase(entityIa.pos[0], entityIa.pos[1], 1)
-    let nextCase = movableIaCase[getRandomInt(movableIaCase.length -1)+1];
+    let casePlayer = actualMapEngineTwo.entityOnTactical[0].pos;
+    let nextCase;
+    for(let i = 0; i < movableIaCase.length; i ++)
+    {
+        
+    } // Pattern Path finding
+    nextCase = movableIaCase[getRandomInt(movableIaCase.length -1)+1];
     resetMovableCase()
     setEntityNextCase(entityIa, nextCase)
 }
