@@ -94,6 +94,55 @@ const animationMooveSprite = (positionX, positionY, size, direction, id = 0) => 
     image(spritePlayerAnimationMoove, positionX, positionY, size, size)
 }
 
+const animationFightprite = (positionX, positionY, size, direction = [0, 1], id = 0) => {
+    let fightAmount = 4;
+    updateFightAnimationIndex();
+    xStartCut = spriteSizeCut*Math.floor(playerFightAnimationIndex);
+    switch(direction[0]){
+        case 1 :
+            spritePlayerAnimationMoove = spritesData[id].image.get(xStartCut,spriteSizeCut* (1 + fightAmount),spriteSizeCut,spriteSizeCut);
+            break;
+        case -1 :
+            spritePlayerAnimationMoove = spritesData[id].image.get(xStartCut,spriteSizeCut*(2 + fightAmount),spriteSizeCut,spriteSizeCut);
+            break;
+        case 0 :
+            break;
+        default :
+            throw new Error("failed to animate the sprite, there is an error in the X direction array, the id of the sprite who don't want to be animate is " + id);
+    }// set animation for X direction
+
+    switch(direction[1]){
+        case -1 :
+            spritePlayerAnimationMoove = spritesData[id].image.get(xStartCut,spriteSizeCut*(3 + fightAmount),spriteSizeCut,spriteSizeCut);
+            break;
+        case 1 :
+            spritePlayerAnimationMoove = spritesData[id].image.get(xStartCut,spriteSizeCut* fightAmount,spriteSizeCut,spriteSizeCut);
+            break;
+        case 0 :
+            break;
+         default :
+            throw new Error("failed to animate the sprite, there is an error in the Y direction array, the id of the sprite who don't want to be animate is " + id);
+    }// set animation for Y direction
+
+
+    image(spritePlayerAnimationMoove, positionX, positionY, size, size)
+}
+
+// ---------------
+
+
+
+
+let playerFightAnimationIndex = 0;
+const updateFightAnimationIndex = () => {
+    playerFightAnimationIndex += 0.1;
+
+    if(fightAnimationIndexIsOutOfLength()) 
+    {
+        playerFightAnimationIndex = 0;
+    }
+}
+
 const updateAnimationIndex = () => {
     playerAnimationIndex += 0.1;
 
@@ -104,3 +153,5 @@ const updateAnimationIndex = () => {
 }
 
 const animationIndexIsOutOfLength = () => playerAnimationIndex >= (playerAnimationLength -1)
+
+const fightAnimationIndexIsOutOfLength = () => playerFightAnimationIndex >= (playerAnimationLength -1)

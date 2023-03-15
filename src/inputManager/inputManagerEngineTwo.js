@@ -16,10 +16,14 @@ const playerInputForEngineTwo=()=>{
 const InputOnArray = () => {
     let arrayMousePos = getCoordTileWithMouseClickEngineTwo();
 
-    if(!isAMovableCase(arrayMousePos[0], arrayMousePos[1])){
-        resetMovableAndEntityVar()
-        selectedEntity = getSpriteWithCoord(arrayMousePos[0], arrayMousePos[1])
-    }// Set selected Entity
+    if(isAnAttackableCase(arrayMousePos[0], arrayMousePos[1]) && selectedEntity !== null)
+    {
+        if(getSpriteTactical(arrayMousePos[0], arrayMousePos[1]) !== null)
+        {
+            launchAttack()
+            return;
+        }
+    }
 
     if(selectedEntity !== null && selectedEntity.id === 0)
     {
@@ -35,8 +39,13 @@ const InputOnArray = () => {
             })
         }else{
             canvas.mouseReleased(()=>{
-                getMovableCase(arrayMousePos[0], arrayMousePos[1], selectedEntity.pm);
-                selectedEntity = getSpriteWithCoord(arrayMousePos[0], arrayMousePos[1]);
+                if(getSpriteTactical(arrayMousePos[0], arrayMousePos[1]) !== null){
+                    if(getSpriteTactical(arrayMousePos[0], arrayMousePos[1]).id === 0)
+                    {
+                        getMovableCase(actualMapEngineTwo.entityOnTactical[whichEntityTurn].pos[0], actualMapEngineTwo.entityOnTactical[whichEntityTurn].pos[1], selectedEntity.pm);
+                        selectedEntity = getSpriteWithCoord(arrayMousePos[0], arrayMousePos[1]);
+                    }
+                }// Verify if the sprite clicked is the player sprite 
             })
         }
         

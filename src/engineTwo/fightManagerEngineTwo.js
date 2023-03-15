@@ -42,6 +42,8 @@ const useAbility = (entity, target = 1, selectedAbility = 0) => {
     }
 }
 
+
+
 let canAttackCase = []
 const getAttackableCase = (x, y, attackPoint) => {
     canAttackCase = [[x, y]]
@@ -91,4 +93,20 @@ const isAnAttackableCase = (x, y) => {
         }
     }
     return false
+}
+
+
+
+const launchAttack = (entity = actualMapEngineTwo.entityOnTactical[whichEntityTurn], abilityIndex = selectedAbility) => {
+    console.log("Launched an attack")
+    switch(playerTeam[0].abilities[selectedAbility].type)
+    {
+        default :
+            entity.state = "fight";
+            setTimeout(() => {
+                entity.state = "idle";
+            }, 1000);
+            break;
+    }
+    resetMovableAndEntityVar();
 }

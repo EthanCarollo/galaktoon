@@ -1,10 +1,15 @@
 
 
 const runEngineTwo = () => {
+    setSelectedEntity();
     background(180)
     displayTopDownMapEngineTwo();
     setCameraEngineTwo();
     displayEngineTwoUI();
+}
+
+const setSelectedEntity = () =>{
+    selectedEntity = actualMapEngineTwo.entityOnTactical[whichEntityTurn]
 }
 
 const setCameraEngineTwo = () => {
@@ -103,7 +108,15 @@ const showSpriteOnTactical = (entity) => {
             animationIdleSprite(positionOnMap[0], positionOnMap[1], playerSpriteSize, [0, 1], entity.id)
         }
     }else{
-        animationIdleSprite(positionOnMap[0], positionOnMap[1], playerSpriteSize, [0, 1], entity.id)
+        switch(entity.state)
+        {
+            case "fight":
+                animationFightprite(positionOnMap[0], positionOnMap[1], playerSpriteSize, [0, 1], entity.id)
+                break;
+            default :
+                animationIdleSprite(positionOnMap[0], positionOnMap[1], playerSpriteSize, [0, 1], entity.id)
+                break;
+        }
     }
     showHealthSpriteTactical(positionOnMap, entity)
 }
