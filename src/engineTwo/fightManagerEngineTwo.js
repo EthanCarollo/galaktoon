@@ -95,19 +95,46 @@ const isAnAttackableCase = (x, y) => {
     return false
 }
 
-
+// Universal launch Attack Function
 
 const launchAttack = (entity = actualMapEngineTwo.entityOnTactical[whichEntityTurn], abilityIndex = selectedAbility, target) => {
     console.log("Launched an attack")
+    if(entity.id === 0){
+        launchAttackOfThePlayer(entity, abilityIndex, target)
+        resetMovableAndEntityVar();
+    }else{
+        console.log("AI Attack")
+    }
+}
+
+const launchAttackOfThePlayer = (entity, abilityIndex, target) => {
     switch(playerTeam[0].abilities[selectedAbility].type)
     {
         default :
-            target.health.actualHealth -= 10;
+            target.health.actualHealth -= playerTeam[0].abilities[selectedAbility].baseAmount;
             entity.state = "fight";
             setTimeout(() => {
                 entity.state = "idle";
             }, 1000);
             break;
     }
-    resetMovableAndEntityVar();
+}
+
+// Check if all enemies (so except id 0) are dead (and return true or false)
+const checkAllEnemiesDead = () => {
+    let count = 0;
+    for(let i = 1; i < actualMapEngineTwo.entityOnTactical.length; i++)
+    {
+        if(actualMapEngineTwo.entityOnTactical[i].health.actualHealth <= 0)
+        {
+            count ++;
+        }
+    } 
+
+    if(count >= (actualMapEngineTwo.entityOnTactical.length-1))
+    {
+        return true;
+    }else{
+        return false;
+    }
 }
