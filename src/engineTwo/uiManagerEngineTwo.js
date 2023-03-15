@@ -1,4 +1,17 @@
 const displayEngineTwoUI = () => {
+    switch(engineTwoState){
+        case "Playing" : 
+            displayEngineTwoPlayingUi();
+            break;
+        case "endFight" :
+            displayEngineTwoEndFightUi();
+            break;
+        default : 
+            throw new Error("Engine Two State isn't set for UI : " + engineTwoState)
+    }
+}
+
+const displayEngineTwoPlayingUi = () => {
     switch(whichEntityTurn){
         case 0 :
             displayDebug();
@@ -8,6 +21,22 @@ const displayEngineTwoUI = () => {
             // UI WHEN ITS IA TURN
             break;
     }
+}
+
+const displayEngineTwoEndFightUi = () => {
+    console.log("display end")
+    displayEndDebug();
+}
+
+const displayEndDebug = () => {
+    let size = 200;
+    let x = (window.innerWidth/2) - (size/2)
+    let y = (window.innerHeight/2) - (size/2)
+    fill(255,0,0,100)
+    rect(x ,y ,size ,size)
+    createInputButtonWithCallback(x ,y ,size ,size, () => {
+        returnEngineOneAfterFight();
+    })
 }
 
 const displayDebug = () => {

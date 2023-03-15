@@ -1,11 +1,36 @@
-
+let engineTwoState = "Playing";
 
 const runEngineTwo = () => {
+    switch(engineTwoState){
+        case "Playing" :
+            engineTwoPlaying();
+            break;
+        case "endFight" :
+            engineTwoEndFight();
+            break;
+        default :
+            throw new Error("Engine Two State isn't defined : " + engineTwoState)
+    }
+}
+
+const engineTwoPlaying = () => {
     setSelectedEntity();
-    background(180)
+    background(20)
     displayTopDownMapEngineTwo();
     setCameraEngineTwo();
     displayEngineTwoUI();
+    setGameState();
+}
+
+const engineTwoEndFight = () => {
+    background('rgba(20,20,20, 0.1)');
+    displayEngineTwoUI();
+}
+
+const setGameState = () => {
+    if(checkAllEnemiesDead() === true){
+        engineTwoState = "endFight";
+    }
 }
 
 const setSelectedEntity = () =>{
@@ -36,7 +61,6 @@ const displayTopDownMapEngineTwo = () => {
 
     displayTacticalTopDownMapEngineTwo();
     displaySpriteTacticalTopDownMapEngineTwo();
-
     //createMapTopDown("front", actualMapEngineTwo.map.groundLayer, actualMapEngineTwo, vectorMapEngineTwo);
     //createMapTopDown("front", actualMapEngineTwo.map.objectLayer, actualMapEngineTwo, vectorMapEngineTwo);
 }
@@ -127,9 +151,9 @@ const showHealthSpriteTactical = (position, entity) => {
     }
     let health = entity.health
     image(uiData[3].image, position[0], position[1], playerSpriteSize, playerSpriteSize) // Background HP
-    if(health.actualHealth < 0)
+    if(entity.health.actualHealth < 0)
     {
-        entity.actualHealth = 0;
+        entity.health.actualHealth = 0;
     }
     let actualHealthPercent = health.actualHealth / health.maxHealth * 100 + 0.0001;
     image(uiData[0].image, position[0], position[1], actualHealthPercent, playerSpriteSize) // Bar HP

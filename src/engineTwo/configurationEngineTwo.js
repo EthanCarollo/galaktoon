@@ -12,7 +12,7 @@ let playerTeam = [
                 name : "Attack",
                 type : "attack",
                 abilityLevel : 2,
-                baseAmount : 20,
+                baseAmount : 80,
                 id : 1,
                 range : 2
             },
