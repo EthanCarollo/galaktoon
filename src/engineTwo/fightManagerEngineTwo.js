@@ -71,11 +71,24 @@ const getAttackableCase = (x, y, attackPoint) => {
     return canAttackCase;
 }
 const addCanAttackCase = (position) => {
-    if(position[0] > 0 && position[1] > 0 && position[0] < actualMapEngineTwo.tacticalMap.length && position[1] < actualMapEngineTwo.tacticalMap.length && getSpriteTactical(position[0], position[1]) === null){
+    if(position[0] > 0 && position[1] > 0 && position[0] < actualMapEngineTwo.tacticalMap.length && position[1] < actualMapEngineTwo.tacticalMap.length){
         if(actualMapEngineTwo.tacticalMap[position[1]][position[0]] !== -1)
         {
             return
         }
         canAttackCase.push(position)  
     }
+}
+const resetAttackableCase = () => {
+    canAttackCase = []
+}
+const isAnAttackableCase = (x, y) => {
+    for(let i = 0; i < canAttackCase.length; i++)
+    {
+        if(x === canAttackCase[i][0] && y === canAttackCase[i][1])
+        {
+            return true
+        }
+    }
+    return false
 }

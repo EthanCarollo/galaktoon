@@ -81,6 +81,10 @@ const showRectOnTactical = (x, y, id) => {
             {
                 fill(155,155,255,100)
             }
+            if(isAnAttackableCase(x, y) === true)
+            {
+                fill(255,100,100,100)
+            }
             rect(x*tileSize+vectorCameraEngineTwo.x, y*tileSize+vectorCameraEngineTwo.y, tileSize, tileSize);
             break;
     }

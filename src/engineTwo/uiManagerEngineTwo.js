@@ -29,6 +29,7 @@ const displayAbility = () => {
         image(uiData[playerTeam[0].abilities[i].id].image, x, window.innerHeight-size, size, size)
         rect(x,window.innerHeight-size,size,size)
         createInputButtonWithCallback(x, window.innerHeight-size,size,size, () => {
+            getAttackableCase(actualMapEngineTwo.entityOnTactical[0].pos[0], actualMapEngineTwo.entityOnTactical[0].pos[1], playerTeam[0].abilities[i].range)
             selectAbility(i);
         })
     }
@@ -47,6 +48,11 @@ const displayEndTurnButton = () => {
 }
 
 const selectAbility = (ability) => {
+    if(selectedAbility === ability)
+    {
+        resetMovableAndEntityVar();
+        return;
+    }
     console.log("Selected ability = " + ability);
     selectedAbility = ability;
 }

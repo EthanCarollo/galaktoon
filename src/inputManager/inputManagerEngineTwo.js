@@ -54,9 +54,11 @@ const InputOnArray = () => {
 }
 
 const resetMovableAndEntityVar = () => {
+    resetAttackableCase();
     resetMovableCase()
     selectedChar = null;
     selectedEntity = null;
+    selectedAbility = null;
 }
 
 const playerKeyPressedForEngineTwo = () => {

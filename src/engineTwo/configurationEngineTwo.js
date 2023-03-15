@@ -22,7 +22,7 @@ let playerTeam = [
                 abilityLevel : 1,
                 baseAmount : 20,
                 id : 4,
-                range : 1
+                range : 5
             },
             {
                 name : "HealAll",
