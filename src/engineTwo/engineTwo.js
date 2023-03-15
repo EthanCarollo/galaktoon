@@ -127,7 +127,10 @@ const showHealthSpriteTactical = (position, entity) => {
     }
     let health = entity.health
     image(uiData[3].image, position[0], position[1], playerSpriteSize, playerSpriteSize) // Background HP
-
+    if(health.actualHealth < 0)
+    {
+        entity.actualHealth = 0;
+    }
     let actualHealthPercent = health.actualHealth / health.maxHealth * 100 + 0.0001;
     image(uiData[0].image, position[0], position[1], actualHealthPercent, playerSpriteSize) // Bar HP
 

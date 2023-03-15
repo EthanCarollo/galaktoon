@@ -29,6 +29,7 @@ const displayAbility = () => {
         image(uiData[playerTeam[0].abilities[i].id].image, x, window.innerHeight-size, size, size)
         rect(x,window.innerHeight-size,size,size)
         createInputButtonWithCallback(x, window.innerHeight-size,size,size, () => {
+            console.log("they got clicked here wtf")
             getAttackableCase(actualMapEngineTwo.entityOnTactical[0].pos[0], actualMapEngineTwo.entityOnTactical[0].pos[1], playerTeam[0].abilities[i].range)
             selectAbility(i);
         })
@@ -53,6 +54,5 @@ const selectAbility = (ability) => {
         resetMovableAndEntityVar();
         return;
     }
-    console.log("Selected ability = " + ability);
     selectedAbility = ability;
 }

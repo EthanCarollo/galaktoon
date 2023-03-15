@@ -97,11 +97,12 @@ const isAnAttackableCase = (x, y) => {
 
 
 
-const launchAttack = (entity = actualMapEngineTwo.entityOnTactical[whichEntityTurn], abilityIndex = selectedAbility) => {
+const launchAttack = (entity = actualMapEngineTwo.entityOnTactical[whichEntityTurn], abilityIndex = selectedAbility, target) => {
     console.log("Launched an attack")
     switch(playerTeam[0].abilities[selectedAbility].type)
     {
         default :
+            target.health.actualHealth -= 10;
             entity.state = "fight";
             setTimeout(() => {
                 entity.state = "idle";
