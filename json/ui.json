@@ -8,7 +8,7 @@
         },
         {
             "id" : "1",
-            "path" : "assets/ui/ability/abilityTest.png",
+            "path" : "assets/ui/ability/CaseBlue.png",
             "image" : null
         },
         {
@@ -23,12 +23,12 @@
         },
         {
             "id" : "4",
-            "path" : "assets/ui/ability/abilityTest2.png",
+            "path" : "assets/ui/ability/CaseBlue.png",
             "image" : null
         },
         {
             "id" : "5",
-            "path" : "assets/ui/ability/abilityTest3.png",
+            "path" : "assets/ui/ability/CaseBlue.png",
             "image" : null
         },
         {
@@ -55,6 +55,18 @@
         },{
             "id" : "11",
             "path" : "assets/ui/dialogBox.png",
+            "image" : null
+        },{
+            "id" : "12",
+            "path" : "assets/ui/nextTurnButton.png",
+            "image" : null
+        },{
+            "id" : "13",
+            "path" : "assets/ui/fightUI/healthbarNormal.png",
+            "image" : null
+        },{
+            "id" : "14",
+            "path" : "assets/ui/fightUI/healthbarNormalFilled.png",
             "image" : null
         }
     ]

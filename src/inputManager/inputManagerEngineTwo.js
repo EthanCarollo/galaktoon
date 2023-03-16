@@ -1,7 +1,7 @@
 const playerInputForEngineTwo=()=>{
     if(mouseIsPressed === true)
     {
-        if(mouseIsInArrayEngineTwo() === true && whichEntityTurn < 1){
+        if(mouseIsInArrayEngineTwo() === true && whichEntityTurn < 1 && abilityIsOpen === false){
             InputOnArray()
         }
     }

@@ -48,3 +48,10 @@ let selectedEntity = null;
 let whichEntityTurn = 0;
 let selectedAbility = 0;
 
+// UI CONFIGURATION :
+
+let transitionLight = [0, 0, 0];
+let transitionSpeed = 1;
+let abilitySize = 175;
+let abilityPosition = [];
+let abilityIsOpen = false;

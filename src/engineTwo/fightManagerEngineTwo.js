@@ -95,6 +95,8 @@ const isAnAttackableCase = (x, y) => {
     return false
 }
 
+
+
 // Universal launch Attack Function
 
 const launchAttack = (entity = actualMapEngineTwo.entityOnTactical[whichEntityTurn], abilityIndex = selectedAbility, target = null) => {
