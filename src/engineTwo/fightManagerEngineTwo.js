@@ -150,3 +150,13 @@ const checkAllEnemiesDead = () => {
         return false;
     }
 }
+
+const checkAllAlliesDead = () => {
+    if(playerTeam[0].hp.current <= 0)
+    {
+        playerTeam[0].hp.current = 0;
+        return true;
+    }else{
+        return false;
+    }
+}

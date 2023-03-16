@@ -51,7 +51,7 @@ const displayEndDebug = () => {
 // * -----------------------------
 
 const displayPlayerInformationUiEngineTwo = () => {
-
+    checkAllAlliesDead();
     let tempSize = 125
     let padding = 25;
     let tempPosX = window.innerWidth/2 - tempSize *3.6

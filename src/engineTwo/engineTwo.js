@@ -31,6 +31,9 @@ const setGameState = () => {
     if(checkAllEnemiesDead() === true){
         engineTwoState = "endFight";
     }
+    if(checkAllAlliesDead() === true){
+        engineTwoState = "endFight";
+    }
 }
 
 const setSelectedEntity = () =>{
@@ -105,16 +108,17 @@ const getSpriteTactical = (x, y) => {
 const showRectOnTactical = (x, y, id) => {
     switch(id){
         case -1 :
-            fill(255,100,100,50)
+            noStroke()
             if(isAMovableCase(x, y) === true)
             {
                 fill(155,155,255,100)
+                rect(x*tileSize+vectorCameraEngineTwo.x, y*tileSize+vectorCameraEngineTwo.y, tileSize, tileSize);
             }
             if(isAnAttackableCase(x, y) === true)
             {
                 fill(255,100,100,100)
+                rect(x*tileSize+vectorCameraEngineTwo.x, y*tileSize+vectorCameraEngineTwo.y, tileSize, tileSize);
             }
-            rect(x*tileSize+vectorCameraEngineTwo.x, y*tileSize+vectorCameraEngineTwo.y, tileSize, tileSize);
             break;
     }
 }

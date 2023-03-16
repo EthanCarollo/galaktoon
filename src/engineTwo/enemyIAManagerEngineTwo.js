@@ -77,9 +77,11 @@ const attackIA = (entityIa) => {
     {
         console.log("launch attack")
         launchAttack(entityIa, selectAbilityIa);
+        resetAttackableCase()
         return true;
     }else{
         console.log("cant attack")
+        resetAttackableCase()
         return false
     }
 }

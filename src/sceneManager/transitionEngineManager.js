@@ -16,8 +16,11 @@ const launchEngineOne = () => {
 // Engine Two
 
 const launchFightOnEngineTwo = () => { // this take in parameters debug enemies for the prototype
-    actualMapEngineTwo = mapData[4];
-    launchEngineTwo();
+    if(checkAllAlliesDead() === false)
+    {
+        actualMapEngineTwo = mapData[4];
+        launchEngineTwo();
+    }
 }
 
 const launchEngineTwo = () => {
