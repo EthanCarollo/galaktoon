@@ -38,10 +38,11 @@ const showLevelUI = (x, y, spriteSize, level) => {
     textAlign(LEFT, BASELINE)
 }
 
+
 const showHealthUI = (posX, posY, size, percentOfLife) => {
-    image(uiData[3].image, posX, 25, size+25, size+25)
-    image(uiData[0].image, posX, 25, (size+25)*percentOfLife, size+25)
-    image(uiData[2].image, posX, 25, size+25, size+25)
+    image(uiData[3].image, posX, posY+5, size+25, size+25)
+    image(uiData[0].image, posX, posY+5, (size+25)*percentOfLife, size+25)
+    image(uiData[2].image, posX, posY+5, size+25, size+25)
 }
 
 // * Player Information

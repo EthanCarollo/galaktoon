@@ -15,10 +15,12 @@ const displayEngineTwoPlayingUi = () => {
     switch(whichEntityTurn){
         case 0 :
             displayDebug();
+            displayPlayerInformationUiEngineTwo();
             // UI WHEN ITS PLAYER TURN
             break;
         default :
             // UI WHEN ITS IA TURN
+            displayPlayerInformationUiEngineTwo();
             break;
     }
 }
@@ -37,6 +39,22 @@ const displayEndDebug = () => {
     createInputButtonWithCallback(x ,y ,size ,size, () => {
         returnEngineOneAfterFight();
     })
+}
+
+// * -----------------------------
+// * -----------------------------
+
+const displayPlayerInformationUiEngineTwo = () => {
+
+    let tempSize = 175
+    let padding = 75;
+    let tempPosX = window.innerWidth - tempSize - (padding * 2) 
+    let tempPosXForHealth = tempPosX-12.5;
+    let tempPosY = window.innerHeight - tempSize - padding;
+    let percentLifeOfPlayer = playerTeam[0].hp.current / playerTeam[0].hp.max +0.00001;
+    image(uiData[7].image, tempPosX, tempPosY ,tempSize, tempSize)
+    showHealthUI(tempPosXForHealth, tempPosY, tempSize, percentLifeOfPlayer)
+
 }
 
 const displayDebug = () => {
@@ -69,20 +87,24 @@ const displayAbility = () => {
 
 const displayEndTurnButton = () => {
     fill(255,0,255,100)
-    let width = 300;
+    let width = 200;
     let height = 100;
-    rect(window.innerWidth-width, window.innerHeight-height, width, height)
-    createInputButtonWithCallback(window.innerWidth-width, window.innerHeight-height, width, height, () => {
+    let xPosButton = window.innerWidth/2-width/2;
+    rect(xPosButton, window.innerHeight-height, width, height)
+    createInputButtonWithCallback(xPosButton, window.innerHeight-height, width, height, () => {
         endTurn();
     })
     noFill()
 }
 
 const selectAbility = (ability) => {
-    if(selectedAbility === ability)
+    if(actualMapEngineTwo.entityOnTactical[0].pm > 0)
     {
-        resetMovableAndEntityVar();
-        return;
+        if(selectedAbility === ability)
+        {
+            resetMovableAndEntityVar();
+            return;
+        }
+        selectedAbility = ability;
     }
-    selectedAbility = ability;
 }
