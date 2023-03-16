@@ -29,6 +29,9 @@ const attackInputInSecondEngine = () => {
                             getSpriteTactical(arrayMousePos[0], arrayMousePos[1]) /* target */
                             )
                 return;
+            }else{
+                resetAttackableCase();
+                getMovableCase(actualMapEngineTwo.entityOnTactical[whichEntityTurn].pos[0], actualMapEngineTwo.entityOnTactical[whichEntityTurn].pos[1], selectedEntity.pm);
             }
         }
     }
@@ -42,7 +45,7 @@ const mooveInputInSecondEngine = () => {
         if(canMoveCase.length > 0)
         {
             canvas.mouseReleased(()=>{
-                if(isAMovableCase(arrayMousePos[0], arrayMousePos[1]))
+                if(isAMovableCase(arrayMousePos[0], arrayMousePos[1]) && getSpriteTactical(arrayMousePos[0], arrayMousePos[1]) === null)
                 {
                     selectedEntity.nextCase = [arrayMousePos[0], arrayMousePos[1]];
                     applyDifferencePmWithNextCase(selectedEntity)

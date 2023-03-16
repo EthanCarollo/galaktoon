@@ -39,7 +39,7 @@ const displayGameUi = () => {
 const displayEndDebug = () => {
     let size = 200;
     let x = (window.innerWidth/2) - (size/2)
-    let y = (window.innerHeight/2) - (size/2)
+    let y = (window.innerHeight) - (size)
     fill(255,0,0,100)
     rect(x ,y ,size ,size)
     createInputButtonWithCallback(x ,y ,size ,size, () => {
@@ -93,11 +93,18 @@ const displayAbility = () => {
             // rect(xInteract,yInteract,abilitySizeX,abilitySizeY) Debug Rect
 
             createInputButtonWithCallback(xInteract, yInteract,abilitySizeX,abilitySizeY, () => {
+
                 abilityIsOpen = false;
                 selectAbility(i);
             })
 
-            if(mouseIsHover(xInteract, yInteract,abilitySizeX,abilitySizeY)){ updateInteractionIndex(i) } /* On Hover Effect */
+            if(mouseIsHover(xInteract, yInteract,abilitySizeX,abilitySizeY)){ 
+                updateInteractionIndex(i)
+                if(actualMapEngineTwo.entityOnTactical[0].pa <= 0)
+                {
+                    tint(255 - 10*transitionLight[i], 255-10*transitionLight[i], 255-10*transitionLight[i])
+                }
+            } /* On Hover Effect */
             // Set transition on Thing 
             abilitySizeX = abilitySize + transitionLight[i];
             abilitySizeY = abilitySizeX * 1.2
@@ -109,8 +116,9 @@ const displayAbility = () => {
             context.shadowBlur = 0;
             if(transitionLight[i] > 0)
             {
-                transitionLight[i] -= 0.25;
+                transitionLight[i] -= transitionSpeed/2;
             }
+            noTint()
             abilitySizeX = abilitySize
             abilitySizeY = abilitySizeX * 1.2
         }
@@ -221,12 +229,8 @@ const displayEndTurnButton = () => {
 const selectAbility = (ability) => {
     if(actualMapEngineTwo.entityOnTactical[0].pa > 0)
     {
+        resetMovableAndEntityVar();
         getAttackableCase(actualMapEngineTwo.entityOnTactical[0].pos[0], actualMapEngineTwo.entityOnTactical[0].pos[1], playerTeam[0].abilities[ability].range)
-        if(selectedAbility === ability)
-        {
-            resetMovableAndEntityVar();
-            return;
-        }
         selectedAbility = ability;
     }
 }

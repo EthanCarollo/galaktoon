@@ -11,8 +11,6 @@ const turnManager = () => {
 
     
     whichEntityTurn ++;
-
-
     if(whichEntityTurn >= actualMapEngineTwo.entityOnTactical.length)
     {
         whichEntityTurn = 0;
@@ -25,6 +23,7 @@ const turnManager = () => {
     
     resetMovableAndEntityVar()
     actualMapEngineTwo.entityOnTactical[whichEntityTurn].pm = 2;
+    actualMapEngineTwo.entityOnTactical[whichEntityTurn].pa = 2;
     selectedEntity = actualMapEngineTwo.entityOnTactical[whichEntityTurn]
 }
 
