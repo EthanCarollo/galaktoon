@@ -27,6 +27,7 @@ function windowResized() {
   windowHeight = window.innerHeight
   windowWidth = window.innerWidth
 	resizeCanvas(windowWidth, windowHeight);
+  setVariablesOnResize();
 } // Reset the size of the canvas to be responsive on se resize of the window
 
 function resetCanvasVar(){

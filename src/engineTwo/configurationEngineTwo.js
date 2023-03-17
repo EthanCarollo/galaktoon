@@ -52,6 +52,6 @@ let selectedAbility = 0;
 
 let transitionLight = [0, 0, 0];
 let transitionSpeed = 1;
-let abilitySize = 175;
+let abilitySize = window.innerWidth/10.5;
 let abilityPosition = [];
 let abilityIsOpen = false;

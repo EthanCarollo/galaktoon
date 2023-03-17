@@ -52,15 +52,15 @@ const displayEndDebug = () => {
 
 const displayPlayerInformationUiEngineTwo = () => {
     checkAllAlliesDead();
-    let tempSize = 125
+    let tempSize = window.innerWidth/12;
     let padding = 25;
-    let tempPosX = window.innerWidth/2 - tempSize *3.6
+    let tempPosX = 0 + tempSize / 2
     let tempPosY = window.innerHeight - tempSize - padding;
     let percentLifeOfPlayer = playerTeam[0].hp.current / playerTeam[0].hp.max +0.00001;
     image(uiData[7].image, tempPosX, tempPosY ,tempSize, tempSize)
     let barSize = tempSize * 2;
-    let xBar = tempPosX - barSize*1.05;
-    let yBar = tempPosY;
+    let xBar = tempPosX + tempSize * 1.15;
+    let yBar = tempPosY + tempSize / 3;
     console.log(percentLifeOfPlayer)
     showBarWithPercentUi(xBar, yBar, barSize, percentLifeOfPlayer);
 
@@ -215,7 +215,7 @@ const displayOpenAbility = () => {
 
 const displayEndTurnButton = () => {
     fill(255,0,255,100)
-    let tempSize = 125
+    let tempSize = window.innerWidth/12;
     let padding = 25;
     let tempPosX = window.innerWidth/2 + tempSize *3.6 - tempSize
     let tempPosY = window.innerHeight - tempSize - padding;
