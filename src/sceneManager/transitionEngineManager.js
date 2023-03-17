@@ -26,3 +26,15 @@ const launchFightOnEngineTwo = () => { // this take in parameters debug enemies 
 const launchEngineTwo = () => {
     actualEngine = EngineTwo;
 }
+
+// ! Aesthetic transtion
+
+
+let actualTransitionState = null;
+const transitionManager = () => {
+    switch(actualTransitionState)
+    {
+        default : 
+            break;
+    }
+}
