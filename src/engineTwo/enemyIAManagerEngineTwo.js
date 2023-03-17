@@ -6,7 +6,6 @@ const runIaTurn = () => {
 
     let entityIa = actualMapEngineTwo.entityOnTactical[whichEntityTurn]
     let timeSet = 450;
-    mooveOneCaseIA(entityIa)
 
     for(let i = 0; i < entityIa.pm; i++)
     {
