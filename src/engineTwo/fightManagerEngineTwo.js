@@ -98,7 +98,8 @@ const isAnAttackableCase = (x, y) => {
 
 
 
-// Universal launch Attack Function
+// ! --------------------------------------------------------------
+// ! Function Used universally for use a specific ability on a target
 
 const launchAttack = (entity = actualMapEngineTwo.entityOnTactical[whichEntityTurn], target, abilityIndex = selectedAbility) => {
     if(entity.pa > 0){
@@ -112,13 +113,16 @@ const attackWithTheCurrentAbility = (entity, abilityIndex, target) => {
     {
         default :
             entity.state = "fight";
+            entity.pa --;
             setTimeout(() => {
                 target.health.actualHealth -= entity.abilities[abilityIndex].baseAmount;
                 entity.state = "idle";
             }, 450);
         break;
     }
-}
+} 
+// ! Function Used universally for use a specific ability on a target
+// ! --------------------------------------------------------------
 
 // Check if all enemies (so except id 0) are dead (and return true or false)
 const checkAllEnemiesDead = () => {
