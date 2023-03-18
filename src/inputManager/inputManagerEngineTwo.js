@@ -25,8 +25,8 @@ const attackInputInSecondEngine = () => {
             {
                 launchAttack(
                             actualMapEngineTwo.entityOnTactical[whichEntityTurn] /* attacker */, 
-                            selectedAbility, /* ability */
-                            getSpriteTactical(arrayMousePos[0], arrayMousePos[1]) /* target */
+                            getSpriteTactical(arrayMousePos[0], arrayMousePos[1]), /* target */
+                            selectedAbility /* ability */
                             )
                 return;
             }else{

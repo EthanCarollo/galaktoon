@@ -75,7 +75,7 @@ const attackIA = (entityIa) => {
     if(target !== null)
     {
         console.log("launch attack")
-        launchAttack(entityIa, selectAbilityIa);
+        launchAttack(entityIa, actualMapEngineTwo.entityOnTactical[0], selectAbilityIa);
         resetAttackableCase()
         return true;
     }else{

@@ -100,37 +100,23 @@ const isAnAttackableCase = (x, y) => {
 
 // Universal launch Attack Function
 
-const launchAttack = (entity = actualMapEngineTwo.entityOnTactical[whichEntityTurn], abilityIndex = selectedAbility, target = null) => {
+const launchAttack = (entity = actualMapEngineTwo.entityOnTactical[whichEntityTurn], target, abilityIndex = selectedAbility) => {
     if(entity.pa > 0){
-        if(entity.id === 0 && target !== null){ // If it's the player then use the player Attack
-            launchAttackOfThePlayer(entity, abilityIndex, target)
-            resetMovableAndEntityVar();
-        }else{ // Else use the attack of the entity
-
-            playerTeam[0].health.actualHealth -= entity.abilities[abilityIndex].baseAmount;
-            entity.state = "fight";
-
-            setTimeout(() => {
-                entity.pa ++; // Add the lost PA
-                entity.state = "idle";
-            }, 450);
-            
-        }
-        entity.pa--; // Retire the PA to the entity
+        attackWithTheCurrentAbility(entity, abilityIndex, target)
+        resetMovableAndEntityVar();
     }
 }
 
-const launchAttackOfThePlayer = (entity, abilityIndex, target) => {
-    switch(playerTeam[0].abilities[selectedAbility].type)
+const attackWithTheCurrentAbility = (entity, abilityIndex, target) => {
+    switch(entity.abilities[abilityIndex].type)
     {
         default :
-
-            target.health.actualHealth -= playerTeam[0].abilities[selectedAbility].baseAmount;
             entity.state = "fight";
             setTimeout(() => {
+                target.health.actualHealth -= entity.abilities[abilityIndex].baseAmount;
                 entity.state = "idle";
-            }, 1000);
-            break;
+            }, 450);
+        break;
     }
 }
 
