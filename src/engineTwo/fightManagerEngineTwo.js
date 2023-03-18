@@ -33,7 +33,9 @@ const useAbility = (entity, target = 1, selectedAbility = 0) => {
         switch(entity.abilities[selectedAbility].type)
         {
             case "attack" :
-                actualMapEngineTwo.entityOnTactical[target].health.actualHealth -= entity.abilities[selectedAbility].baseAmount;
+                setTimeout(() => {
+                    actualMapEngineTwo.entityOnTactical[target].health.actualHealth -= entity.abilities[selectedAbility].baseAmount;
+                }, 450);
                 break;
             default :
                 throw new Error("Type of attack isn't specified : " + entity.abilities[selectedAbility].type + " of the ability : " + entity.abilities[selectedAbility].name)
@@ -105,7 +107,7 @@ const launchAttack = (entity = actualMapEngineTwo.entityOnTactical[whichEntityTu
             resetMovableAndEntityVar();
         }else{ // Else use the attack of the entity
 
-            playerTeam[0].hp.current -= entity.abilities[abilityIndex].baseAmount;
+            playerTeam[0].health.actualHealth -= entity.abilities[abilityIndex].baseAmount;
             entity.state = "fight";
 
             setTimeout(() => {
@@ -152,9 +154,9 @@ const checkAllEnemiesDead = () => {
 }
 
 const checkAllAlliesDead = () => {
-    if(playerTeam[0].hp.current <= 0)
+    if(playerTeam[0].health.actualHealth <= 0)
     {
-        playerTeam[0].hp.current = 0;
+        playerTeam[0].health.actualHealth = 0;
         return true;
     }else{
         return false;

@@ -3,9 +3,9 @@ let playerTeam = [
     {
         name : "You",
         level : 1,
-        hp : {
-            current : 50,
-            max : 50
+        health : {
+            actualHealth : 50,
+            maxHealth : 50
         },
         abilities : [
             {

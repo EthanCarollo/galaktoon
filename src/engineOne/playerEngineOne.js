@@ -97,7 +97,7 @@ const interactWithNPC = (tileInteract) => {
 }
 
 const playSleepAnimation = () => {
-    playerTeam[0].hp.current = playerTeam[0].hp.max
+    playerTeam[0].health.actualHealth = playerTeam[0].health.maxHealth
 }
 
 const createInteractionPopup = (x ,y ,typeOfInteract) => {

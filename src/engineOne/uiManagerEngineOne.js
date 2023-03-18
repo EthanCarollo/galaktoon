@@ -17,7 +17,7 @@ const displayPlayerInformationUI = () => {
     let tempPosX = window.innerWidth - tempSize - 40 
     let tempPosXForHealth = tempPosX-12.5;
     let tempPosY = 20;
-    let percentLifeOfPlayer = playerTeam[0].hp.current / playerTeam[0].hp.max +0.00001;
+    let percentLifeOfPlayer = playerTeam[0].health.actualHealth / playerTeam[0].health.maxHealth +0.00001;
     image(uiData[7].image, tempPosX, tempPosY ,tempSize, tempSize)
     showHealthBehindRectUI(tempPosXForHealth, tempPosY, tempSize, percentLifeOfPlayer)
     showLevelUI(tempPosX, tempPosY, tempSize, playerTeam[0].level);

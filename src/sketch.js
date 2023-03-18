@@ -15,12 +15,12 @@ function draw() {
 
     resetCanvasVar()
 
-    
     updateAnimationIndex(); // Update the animation index 
 
     sceneManager(); // Manage to display which scene is selected (engine one or two)
 
     transitionManager(); // Apply transition effect on screen
+    
 }
 
 function windowResized() {

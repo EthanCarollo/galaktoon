@@ -10,8 +10,8 @@ const updatePlayerLevel = (char) => {
         let valueMultiplier = 1.2;
         actualPlayerXP -= maxPlayerXP;
         char.level ++;
-        char.hp.max = Math.floor(char.hp.max * valueMultiplier);
-        char.hp.current = Math.floor(char.hp.current * valueMultiplier);
+        char.health.maxHealth = Math.floor(char.health.maxHealth * valueMultiplier);
+        char.health.actualHealth = Math.floor(char.health.actualHealth * valueMultiplier);
         maxPlayerXP = Math.floor(maxPlayerXP * valueMultiplier);
     }
 }
