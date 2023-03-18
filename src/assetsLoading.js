@@ -298,6 +298,7 @@ const setEngineOneVariableAfterLoadingAllAssets = () => {
         throw new Error("mapData isn't set for map creation");
     }
 
+
     playerOnMap = mapData[0];
     actualPlayerMap = playerOnMap.map;
 

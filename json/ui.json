@@ -68,6 +68,10 @@
             "id" : "14",
             "path" : "assets/ui/fightUI/healthbarNormalFilled.png",
             "image" : null
+        },{
+            "id" : "15",
+            "path" : "assets/ui/wallpaperTemp.png",
+            "image" : null
         }
     ]
 }
