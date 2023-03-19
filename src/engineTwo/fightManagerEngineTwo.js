@@ -116,7 +116,6 @@ const attackWithTheCurrentAbility = (entity, abilityIndex, target) => {
             entity.pa --;
             setTimeout(() => {
                 target.health.actualHealth -= entity.abilities[abilityIndex].baseAmount;
-                entity.state = "idle";
             }, 450);
         break;
     }

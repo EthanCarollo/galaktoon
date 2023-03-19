@@ -96,7 +96,6 @@ const animationMooveSprite = (positionX, positionY, size, direction, id = 0) => 
 
 const animationFightprite = (positionX, positionY, size, direction = [0, 1], id = 0) => {
     let fightAmount = 4;
-    updateFightAnimationIndex();
     xStartCut = spriteSizeCut*Math.floor(playerFightAnimationIndex);
     switch(direction[0]){
         case 1 :
@@ -123,9 +122,8 @@ const animationFightprite = (positionX, positionY, size, direction = [0, 1], id 
          default :
             throw new Error("failed to animate the sprite, there is an error in the Y direction array, the id of the sprite who don't want to be animate is " + id);
     }// set animation for Y direction
-
-
     image(spritePlayerAnimationMoove, positionX, positionY, size, size)
+    return updateFightAnimationIndex();
 }
 
 // ---------------
@@ -140,7 +138,9 @@ const updateFightAnimationIndex = () => {
     if(fightAnimationIndexIsOutOfLength()) 
     {
         playerFightAnimationIndex = 0;
+        return false;
     }
+    return true;
 }
 
 const updateAnimationIndex = () => {

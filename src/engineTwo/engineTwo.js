@@ -139,7 +139,11 @@ const showSpriteOnTactical = (entity) => {
         switch(entity.state)
         {
             case "fight":
-                animationFightprite(positionOnMap[0], positionOnMap[1], playerSpriteSize, [0, 1], entity.id)
+                if(animationFightprite(positionOnMap[0], positionOnMap[1], playerSpriteSize, [0, 1], entity.id) === false)
+                {
+                    console.log("reset state entity")
+                    entity.state = "idle";
+                }
                 break;
             default :
                 animationIdleSprite(positionOnMap[0], positionOnMap[1], playerSpriteSize, [0, 1], entity.id)
