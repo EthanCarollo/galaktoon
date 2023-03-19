@@ -44,7 +44,7 @@ const setCameraEngineTwo = () => {
     let vectorMoove;
     if(selectedEntity !== null)
     {   
-        vectorEntity = createVector((selectedEntity.pos[0] + 0.5)*tileSize, (selectedEntity.pos[1] + 0.5)*tileSize)
+        vectorEntity = createVector((selectedEntity.pos[0] + 0.5)*tileSize, (selectedEntity.pos[1] + 0.5)*tileSize) // 0.5 is the margin for centering the center of a tile
         vectorToCover = createVector(-vectorEntity.x + (window.innerWidth/2), -vectorEntity.y  + (window.innerHeight/2));
         vectorMoove = p5.Vector.lerp(vectorToCover, vectorCameraEngineTwo, cameraSmoothStep); // interpolate the camera with the player by using vector.lerp by p5
     }else{
@@ -139,7 +139,7 @@ const showSpriteOnTactical = (entity) => {
             case "fight":
                 if(animationFightprite(positionOnMap[0], positionOnMap[1], playerSpriteSize, [0, 1], entity.id) === false)
                 {
-                    console.log("reset state entity")
+                    // This is resseting the entity state on idle when the fight animation is finish (when it returns false)
                     entity.state = "idle";
                 }
                 break;
@@ -152,9 +152,11 @@ const showSpriteOnTactical = (entity) => {
 }
 
 const showHealthSpriteTactical = (position, entity) => {
+
     if(entity.health === undefined){
-        return
+        throw new Error("Entity doesn't have health which is impossible, check : " + entity.id)
     }
+
     let health = entity.health
     image(uiData[3].image, position[0], position[1], playerSpriteSize, playerSpriteSize) // Background HP
     if(entity.health.actualHealth < 0)
@@ -170,8 +172,8 @@ const showHealthSpriteTactical = (position, entity) => {
 const createImageWithIdOn2dArrayEngineTwo = (x, y, id, currentTileSize, mapInfo = actualMapEngineTwo) => {
     if(id < 0)
     {
-        return
-    }
+        return // If there is no tile, just return and doesn't write a tile on map
+    } 
     // size of the current tile according to the data
     let yTileHeight = mapInfo.tileRessource[id].yWidth;
     // position of the current tile in the array and the size
@@ -191,7 +193,7 @@ const createImageWithIdOn2dArrayEngineTwo = (x, y, id, currentTileSize, mapInfo 
 const getSpriteWithCoord = (x, y) => {
     if(getSpriteTactical(x, y) === undefined)
     {
-        return null;
+        return null; // Just return null if there is no sprite at this case
     }
     return getSpriteTactical(x, y);
 }
@@ -200,11 +202,11 @@ const getTacticalTileOnMouseClick = () => {
     return actualMapEngineTwo.tacticalMap[Math.floor((mouseY - vectorCameraEngineTwo.y) / tileSize)][Math.floor((mouseX - vectorCameraEngineTwo.x) / tileSize)];
 }
 
-const getCoordTileWithMouseClickEngineTwo = () => [Math.floor((mouseX - vectorCameraEngineTwo.x) / tileSize), Math.floor((mouseY - vectorCameraEngineTwo.y) / tileSize)]
+const getCoordTileWithMouseClickEngineTwo = () => [Math.floor((mouseX - vectorCameraEngineTwo.x) / tileSize), Math.floor((mouseY - vectorCameraEngineTwo.y) / tileSize)] // Return coord on map
 
 const mouseIsInArrayEngineTwo = () => {
     return Math.floor((mouseX - vectorCameraEngineTwo.x) / tileSize) >= 0 
     && Math.floor((mouseY - vectorCameraEngineTwo.y) / tileSize) >= 0
     && Math.floor((mouseY - vectorCameraEngineTwo.y) / tileSize) < actualMapEngineTwo.tacticalMap.length
     && Math.floor((mouseX - vectorCameraEngineTwo.x) / tileSize) < actualMapEngineTwo.tacticalMap[0].length
-}
+} // Return true or false

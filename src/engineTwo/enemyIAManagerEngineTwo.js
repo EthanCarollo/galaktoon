@@ -5,7 +5,7 @@ function getRandomInt(max) {
 const runIaTurn = () => {
 
     let entityIa = actualMapEngineTwo.entityOnTactical[whichEntityTurn]
-    let timeSet = 450;
+    let timeBetweenAction = 500; // time between action of the IA
 
     for(let i = 0; i < entityIa.pm; i++)
     {
@@ -20,12 +20,12 @@ const runIaTurn = () => {
 
             // Action Ia 
 
-        }, timeSet * i);
+        }, timeBetweenAction * i);
     }
 
     setTimeout(() => {
         endTurn();
-    }, timeSet + timeSet * entityIa.pm);
+    }, timeBetweenAction + timeBetweenAction * entityIa.pm);
 }
 
 const mooveOneCaseIA = (entityIa) => {
@@ -68,19 +68,17 @@ const attackIA = (entityIa) => {
         {
             if(getSpriteTactical(attackableCase[i][0], attackableCase[i][1]).id === 0)
             {
-                target = getSpriteTactical(attackableCase[i][0], attackableCase[i][1]);
+                target = getSpriteTactical(attackableCase[i][0], attackableCase[i][1]); // Select the target 
             }
         }
     }
-    if(target !== null)
-    {
-        console.log("launch attack")
+    if(target !== null){
         launchAttack(entityIa, actualMapEngineTwo.entityOnTactical[0], selectAbilityIa);
         resetAttackableCase()
         return true;
     }else{
-        console.log("cant attack")
         resetAttackableCase()
-        return false
+        return false;
     }
+    
 }
