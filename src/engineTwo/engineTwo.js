@@ -44,13 +44,11 @@ const setCameraEngineTwo = () => {
     let vectorMoove;
     if(selectedEntity !== null)
     {   
-        vectorEntity = createVector(selectedEntity.pos[0]*tileSize, selectedEntity.pos[1]*tileSize)
+        vectorEntity = createVector((selectedEntity.pos[0] + 0.5)*tileSize, (selectedEntity.pos[1] + 0.5)*tileSize)
         vectorToCover = createVector(-vectorEntity.x + (window.innerWidth/2), -vectorEntity.y  + (window.innerHeight/2));
         vectorMoove = p5.Vector.lerp(vectorToCover, vectorCameraEngineTwo, cameraSmoothStep); // interpolate the camera with the player by using vector.lerp by p5
     }else{
-        vectorMap= createVector(actualMapEngineTwo.tacticalMap.length*tileSize/2, actualMapEngineTwo.tacticalMap.length*tileSize/2)
-        vectorToCover = createVector(-vectorMap.x + (window.innerWidth/2), -vectorMap.y  + (window.innerHeight/2));
-        vectorMoove = p5.Vector.lerp(vectorToCover, vectorCameraEngineTwo, cameraSmoothStep);
+        throw new Error("selectedEntity is null, which is not possible normally");
     }
     vectorCameraEngineTwo = vectorMoove;
     

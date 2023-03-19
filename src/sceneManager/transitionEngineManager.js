@@ -70,15 +70,15 @@ const transitionManager = () => {
 }
 
 const enterInTransition = () => {
-    for(let y = 0; y < 4; y++){
-        for(let x = 0; x < 8; x++)
-        {
-            createImageTransition(x, y);
-        }
-    }
-    if(transitionEngineIndex < 100)
+   
+    let alpha = Math.floor(transitionEngineIndex);
+    let colorRectFill = color(255, alpha);
+    tint(colorRectFill);
+    createImageTransition();
+        
+    if(transitionEngineIndex < 500)
     {
-        transitionEngineIndex+=1.5;
+        transitionEngineIndex+=10;
     }else{
         actualTransitionState = "goOut"
         callbackWhenTransitionFinish();
@@ -86,18 +86,17 @@ const enterInTransition = () => {
 }
 
 const goOutTransition = () => {
-    for(let y = 0; y < 4; y++){
-        for(let x = 0; x < 8; x++)
-        {
-            createImageTransition(x, y);
-        }
-    }
+
+    let alpha = Math.floor(transitionEngineIndex);
+    let colorRectFill = color(255, alpha);
+    tint(colorRectFill);
+    createImageTransition();
+
     noTint();
     if(transitionEngineIndex > 0)
     {
-        transitionEngineIndex-=1.5;
+        transitionEngineIndex-=10;
     }else{
-        noTint();
         actualTransitionState = null
     }
 }
@@ -108,18 +107,11 @@ const goOutTransition = () => {
 
 // ! Tools used for transition
 
-const createImageTransition = (x, y, id = 15) => {
+const createImageTransition = (id = 15) => {
     // ! 15 Is the id of the wallpaper in the uiData array
-    let width = window.innerWidth/8;
-    let height = window.innerHeight/4;
-    let xPos = width * x
-    let yPos = height * y
-    let multiplier = (x+y)/2+4;
-    let alpha = multiplier*Math.floor(transitionEngineIndex);
-    tint(255, 255, 255 , alpha);
-    //let imageToCut = uiData[15].image.resize(window.innerWidth, window.innerHeight);
-    let imageToShow = uiData[id].image.get(xPos, yPos, width, height);
-    image(imageToShow, xPos ,yPos ,width, height+1);
-    //rect(xPos, yPos, width, width)
+    let width = window.innerWidth;
+    let height = window.innerHeight;
+    
+    image(uiData[id].image , 0 ,0 ,width, height+1);
 
 }

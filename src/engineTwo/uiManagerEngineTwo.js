@@ -61,7 +61,7 @@ const displayPlayerInformationUiEngineTwo = () => {
     let barSize = tempSize * 2;
     let xBar = tempPosX + tempSize * 1.15;
     let yBar = tempPosY + tempSize / 3;
-    console.log(percentLifeOfPlayer)
+    
     showBarWithPercentUi(xBar, yBar, barSize, percentLifeOfPlayer);
 
     let percentPmOfPlayer = actualMapEngineTwo.entityOnTactical[0].pm / 2 +0.00001;
