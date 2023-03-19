@@ -72,6 +72,10 @@
             "id" : "15",
             "path" : "assets/ui/wallpaperTemp.png",
             "image" : null
+        },{
+            "id" : "16",
+            "path" : "assets/ui/cadenas.png",
+            "image" : null
         }
     ]
 }

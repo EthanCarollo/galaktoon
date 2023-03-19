@@ -111,14 +111,19 @@ const displayAbility = () => {
             context.shadowBlur = transitionLight[i];
             context.shadowColor = "white";
 
-
             image(uiData[playerTeam[0].abilities[i].id].image, x, y, abilitySizeX, abilitySizeY)
+            noTint()
             context.shadowBlur = 0;
+
             if(transitionLight[i] > 0)
             {
                 transitionLight[i] -= transitionSpeed/2;
             }
-            noTint()
+
+            if(mouseIsHover(xInteract, yInteract,abilitySizeX,abilitySizeY) && actualMapEngineTwo.entityOnTactical[0].pa <= 0){ 
+                image(uiData[16].image, x, y, abilitySizeX, abilitySizeY)
+            }
+
             abilitySizeX = abilitySize
             abilitySizeY = abilitySizeX * 1.2
         }
