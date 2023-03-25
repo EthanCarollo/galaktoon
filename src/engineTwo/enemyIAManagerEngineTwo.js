@@ -13,7 +13,7 @@ const runIaTurn = () => {
 
             // Action Ia
             if(attackIA(entityIa) === true){
-                setTimeout(() => { mooveOneCaseIA(entityIa) }, timeSet) // Attack and then wait for Moove
+                setTimeout(() => { mooveOneCaseIA(entityIa) }, timeBetweenAction) // Attack and then wait for Moove
             }else{
                 mooveOneCaseIA(entityIa)
             }
