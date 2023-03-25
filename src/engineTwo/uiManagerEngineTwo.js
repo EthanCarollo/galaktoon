@@ -51,13 +51,17 @@ const displayEndDebug = () => {
 // * -----------------------------
 
 const displayPlayerInformationUiEngineTwo = () => {
+    
     checkAllAlliesDead();
+
     let tempSize = window.innerWidth/12;
     let padding = 25;
     let tempPosX = 0 + tempSize / 2
     let tempPosY = window.innerHeight - tempSize - padding;
     let percentLifeOfPlayer = playerTeam[0].health.actualHealth / playerTeam[0].health.maxHealth +0.00001;
+
     image(uiData[7].image, tempPosX, tempPosY ,tempSize, tempSize)
+
     let barSize = tempSize * 2;
     let xBar = tempPosX + tempSize * 1.15;
     let yBar = tempPosY + tempSize / 3;

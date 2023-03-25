@@ -1,3 +1,5 @@
+// Movable Case Logics
+
 let canMoveCase = [];
 
 const isAMovableCase = (x, y) => {
@@ -38,6 +40,7 @@ const getMovableCase = (x, y, movementPoint) => {
     {
         canMoveCase = []
     }
+    checkCanMoveCase();
     return canMoveCase;
 }
 const addCanMoveCase = (position) => {
@@ -49,6 +52,26 @@ const addCanMoveCase = (position) => {
         canMoveCase.push(position)  
     }
 }
+const checkCanMoveCase = () => {
+    console.log(canMoveCase)
+    for(let i = 0; i < canMoveCase.length; i++)
+    {
+        console.log([canMoveCase[i][0]-1, canMoveCase[i][1]])
+        console.log(canMoveCase.find(element => element[0] === canMoveCase[i][0]-1 && element[1] === canMoveCase[i][1]))
+        if( canMoveCase.find(element => element[0] === canMoveCase[i][0]-1 && element[1] === canMoveCase[i][1]) === undefined &&
+            canMoveCase.find(element => element[0] === canMoveCase[i][0]+1 && element[1] === canMoveCase[i][1]) === undefined &&
+            canMoveCase.find(element => element[0] === canMoveCase[i][0] && element[1] === canMoveCase[i][1]-1) === undefined &&
+            canMoveCase.find(element => element[0] === canMoveCase[i][0] && element[1] === canMoveCase[i][1]+1) === undefined  )
+        {
+            canMoveCase.splice(i, 1)
+        }else{
+            
+        }
+    }
+}
+
+// Movable Case Logics
+
 const setEntityNextCase = (entity, nextCase) => {
     entity.nextCase = nextCase;
 }
