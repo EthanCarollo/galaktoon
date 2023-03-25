@@ -97,31 +97,9 @@ const animationMooveSprite = (positionX, positionY, size, direction, id = 0) => 
 const animationFightprite = (positionX, positionY, size, direction = [0, 1], id = 0) => {
     let fightAmount = 4;
     xStartCut = spriteSizeCut*Math.floor(playerFightAnimationIndex);
-    switch(direction[0]){
-        case 1 :
-            spritePlayerAnimationMoove = spritesData[id].image.get(xStartCut,spriteSizeCut* (1 + fightAmount),spriteSizeCut,spriteSizeCut);
-            break;
-        case -1 :
-            spritePlayerAnimationMoove = spritesData[id].image.get(xStartCut,spriteSizeCut*(2 + fightAmount),spriteSizeCut,spriteSizeCut);
-            break;
-        case 0 :
-            break;
-        default :
-            throw new Error("failed to animate the sprite, there is an error in the X direction array, the id of the sprite who don't want to be animate is " + id);
-    }// set animation for X direction
+    // Fight animation just have one direction
+    spritePlayerAnimationMoove = spritesData[id].image.get(xStartCut,spriteSizeCut* fightAmount,spriteSizeCut,spriteSizeCut);
 
-    switch(direction[1]){
-        case -1 :
-            spritePlayerAnimationMoove = spritesData[id].image.get(xStartCut,spriteSizeCut*(3 + fightAmount),spriteSizeCut,spriteSizeCut);
-            break;
-        case 1 :
-            spritePlayerAnimationMoove = spritesData[id].image.get(xStartCut,spriteSizeCut* fightAmount,spriteSizeCut,spriteSizeCut);
-            break;
-        case 0 :
-            break;
-         default :
-            throw new Error("failed to animate the sprite, there is an error in the Y direction array, the id of the sprite who don't want to be animate is " + id);
-    }// set animation for Y direction
     image(spritePlayerAnimationMoove, positionX, positionY, size, size)
     return updateFightAnimationIndex();
 }
