@@ -87,12 +87,13 @@ const applyDifferencePmWithNextCase = (entity) => {
 
 
 let movementSpeed = 0.045;
-const mooveEntityToNextCase = (entity) => {
+const mooveEntityToNextCase = (entity, cameraVector = vectorCameraEngineTwo) => {
     let positionOnMap = 
         [
-            entity.pos[0] * tileSize - (playerSpriteSize-tileSize)/2 +vectorCameraEngineTwo.x,
-            entity.pos[1] * tileSize - (playerSpriteSize-tileSize)/2 +vectorCameraEngineTwo.y
+            entity.pos[0] * tileSize - (playerSpriteSize-tileSize)/2 + cameraVector.x,
+            entity.pos[1] * tileSize - (playerSpriteSize-tileSize)/2 + cameraVector.y
         ]
+        
     if(entity.nextCase[0] > entity.pos[0] || entity.nextCase[0] < entity.pos[0])
     {
         if(entity.nextCase[0] - entity.pos[0] < (movementSpeed/2) && entity.nextCase[0] - entity.pos[0] > -(movementSpeed/2)){
@@ -102,11 +103,11 @@ const mooveEntityToNextCase = (entity) => {
         switch(entity.nextCase[0] > entity.pos[0])
         {
             case true :
-                animationMooveSprite(positionOnMap[0], positionOnMap[1], playerSpriteSize, [1, 0], entity.id)
+                entity.dir = [1, 0];
                 entity.pos[0]+= movementSpeed
                 return true
             case false :
-                animationMooveSprite(positionOnMap[0], positionOnMap[1], playerSpriteSize, [-1, 0], entity.id)
+                entity.dir = [-1, 0];
                 entity.pos[0]-= movementSpeed
                 return true
         }
@@ -120,11 +121,11 @@ const mooveEntityToNextCase = (entity) => {
         switch(entity.nextCase[1] > entity.pos[1])
         {
             case true :
-                animationMooveSprite(positionOnMap[0], positionOnMap[1], playerSpriteSize, [0, 1], entity.id)
+                entity.dir = [0, 1];
                 entity.pos[1]+= movementSpeed
                 return true
             case false :
-                animationMooveSprite(positionOnMap[0], positionOnMap[1], playerSpriteSize, [0,-1], entity.id)
+                entity.dir = [0,-1];
                 entity.pos[1]-= movementSpeed
                 return true
         }

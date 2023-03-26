@@ -3,7 +3,7 @@ const displayNPCOnMap = (orientation = "back") => {
     switch(orientation){
         case "back":
             for(let i = 0; i < playerOnMap.npcOnMap.length; i++){
-                if(actualPlayerTile()[1] > playerOnMap.npcOnMap[i].position[1])
+                if(actualPlayerTile()[1] > playerOnMap.npcOnMap[i].pos[1])
                   {
                     displayNpc(playerOnMap.npcOnMap[i])
                   }
@@ -11,7 +11,7 @@ const displayNPCOnMap = (orientation = "back") => {
             break;
         case "front":
             for(let i = 0; i < playerOnMap.npcOnMap.length; i++){
-                if(actualPlayerTile()[1] <= playerOnMap.npcOnMap[i].position[1])
+                if(actualPlayerTile()[1] <= playerOnMap.npcOnMap[i].pos[1])
                   {
                     displayNpc(playerOnMap.npcOnMap[i])
                   }
@@ -22,60 +22,31 @@ const displayNPCOnMap = (orientation = "back") => {
 
 const displayNpc = (npc) => {
   let spriteNpcId = npcData[npc.id].spriteId
-  let positionTemp = getCoordWithTileCoord(npc.position[0]-1, npc.position[1]-1)
-  positionTemp.x = positionTemp.x + cameraVector.x + playerVector.x
-  positionTemp.y = positionTemp.y + cameraVector.y + playerVector.y
-    if(npc.state !== "idle"){
-      mooveNpcOnPathing(npc)
-    }else{
-      animateNpc(positionTemp.x, positionTemp.y, playerSpriteSize, [0, 1], spriteNpcId, npc.state)
-    }
+  let positionTemp = getCoordWithTileCoord(npc.pos[0]-1, npc.pos[1]-1)
+  positionTemp.x = positionTemp.x + cameraVector.x + playerVector.x;
+  positionTemp.y = positionTemp.y + cameraVector.y + playerVector.y;
+  if(npc.nextCase !== null)
+  {
+    npc.state = "moove";
+  }else{
+    npc.state = "idle";
+  }
+  animateNpc(positionTemp.x, positionTemp.y, playerSpriteSize, npc.dir, spriteNpcId, npc)
     
 }
 
-const mooveNpcOnPathing = (npc) => {
-  
-  let spriteNpcId = npcData[npc.id].spriteId
-  let positionTemp = getCoordWithTileCoord(npc.position[0]-1, npc.position[1]-1)
-  positionTemp.x = positionTemp.x + cameraVector.x + playerVector.x
-  positionTemp.y = positionTemp.y + cameraVector.y + playerVector.y
-  switch(npc.pathing){
-    case "around" :
-      if(npc.currentPath === 0){
-        setTimeout(() => {
-          npc.currentPath = 1
-        }, 2000);
-        pathNpc(npc, "right")
-        animateNpc(positionTemp.x, positionTemp.y, playerSpriteSize, [1, 0], spriteNpcId, npc.state)
-      }else{
-        setTimeout(() => {
-          npc.currentPath = 0
-        },2000);
-        pathNpc(npc, "left")
-        animateNpc(positionTemp.x, positionTemp.y, playerSpriteSize, [-1, 0], spriteNpcId, npc.state)
-      }
-      break;
-  }
-}
-
-const pathNpc = (npc, direction) => {
-  switch(direction){
-    case "left" :
-      npc.position[0] -= 0.025
-      break
-    case "right" :
-      npc.position[0] += 0.025
-      break
-  }
-}
-
-const animateNpc = (x, y, size, direction /* ! = Array ! */, npcId, state = "idle") => {
-    switch(state){
+const animateNpc = (x, y, size, direction /* ! = Array ! */, npcId, npc) => {
+    switch(npc.state){
       case "idle" :
         animationIdleSprite(x, y, size, direction, npcId)
         break;
       case "moove" :
-        animationMooveSprite(x, y, size, direction, npcId)
+        if(mooveEntityToNextCase(npc, createVector(cameraVector.x + playerVector.x, cameraVector.y + playerVector.y)) === true)
+        {
+          animationMooveSprite(x, y, size, direction, npcId)
+        }else{
+          animationIdleSprite(x, y, size, direction, npcId)
+        }
         break;
       default :
         break;

@@ -133,6 +133,8 @@ const showSpriteOnTactical = (entity) => {
         {
             animationIdleSprite(positionOnMap[0], positionOnMap[1], playerSpriteSize, [0, 1], entity.id)
             showHealthSpriteTactical(positionOnMap, entity)
+        }else{
+            animationMooveSprite(positionOnMap[0], positionOnMap[1], playerSpriteSize, entity.dir, entity.id)
         }
     }else{
         switch(entity.state)
