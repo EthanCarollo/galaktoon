@@ -84,7 +84,15 @@
                                                             "abilityLevel" : 2,
                                                             "baseAmount" : 20,
                                                             "id" : 1,
-                                                            "range" : 2}]}],
+                                                            "range" : 2}]},
+                                                            { "id" : 2, "pos" : [8,4], "nextCase" : null, "pm" : 2, "pa" : 1, "state" : "idle",
+                                                              "health" : { "actualHealth" : 75, "maxHealth" : 100 },
+                                                              "abilities" : [{"name" : "Attack",
+                                                                              "type" : "attack",
+                                                                              "abilityLevel" : 2,
+                                                                              "baseAmount" : 20,
+                                                                              "id" : 1,
+                                                                              "range" : 2}]}],
                     "tileRessource":"./json/engineOne/mapTileData/tileMapDarkWoaf.json"
                 }
             ]

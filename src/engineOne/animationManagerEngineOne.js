@@ -94,7 +94,7 @@ const animationMooveSprite = (positionX, positionY, size, direction, id = 0) => 
     image(spritePlayerAnimationMoove, positionX, positionY, size, size)
 }
 
-const animationFightprite = (positionX, positionY, size, direction = [0, 1], id = 0) => {
+const animationFightSprite = (positionX, positionY, size, direction = [0, 1], id = 0) => {
     let fightAmount = 4;
     xStartCut = spriteSizeCut*Math.floor(playerFightAnimationIndex);
     // Fight animation just have one direction
@@ -102,6 +102,15 @@ const animationFightprite = (positionX, positionY, size, direction = [0, 1], id 
 
     image(spritePlayerAnimationMoove, positionX, positionY, size, size)
     return updateFightAnimationIndex();
+}
+
+const animationDeadSprite = (positionX, positionY, size, direction = [0, 1], id = 0) => {
+    let offsetAnimAmount = 5;
+    xStartCut = 0;
+    // Dead animation just have one direction
+    spritePlayerAnimationMoove = spritesData[id].image.get(xStartCut,spriteSizeCut* offsetAnimAmount,spriteSizeCut,spriteSizeCut);
+
+    image(spritePlayerAnimationMoove, positionX, positionY, size, size)
 }
 
 // ---------------

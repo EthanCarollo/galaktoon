@@ -130,6 +130,7 @@ const checkAllEnemiesDead = () => {
     {
         if(actualMapEngineTwo.entityOnTactical[i].health.actualHealth <= 0)
         {
+            actualMapEngineTwo.entityOnTactical[i].state = "dead";
             count ++;
         }
     } 

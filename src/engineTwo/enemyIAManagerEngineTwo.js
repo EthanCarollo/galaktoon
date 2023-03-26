@@ -4,6 +4,12 @@ function getRandomInt(max) {
 
 const runIaTurn = () => {
 
+    if(actualMapEngineTwo.entityOnTactical[whichEntityTurn].state === "dead")
+    {
+        endTurn();
+        return;
+    }
+
     let entityIa = actualMapEngineTwo.entityOnTactical[whichEntityTurn]
     let timeBetweenAction = 500; // time between action of the IA
 
@@ -16,6 +22,9 @@ const runIaTurn = () => {
                 setTimeout(() => { mooveOneCaseIA(entityIa) }, timeBetweenAction) // Attack and then wait for Moove
             }else{
                 mooveOneCaseIA(entityIa)
+                setTimeout(() => { 
+                    attackIA(entityIa)
+                }, timeBetweenAction)
             }
 
             // Action Ia 

@@ -101,7 +101,7 @@ const getSpriteTactical = (x, y) => {
         }
     }
     return null;
-}
+}// Return an entity object or null
 
 const showRectOnTactical = (x, y, id) => {
     switch(id){
@@ -119,7 +119,7 @@ const showRectOnTactical = (x, y, id) => {
             }
             break;
     }
-}
+}// Usefull for debug
 
 const showSpriteOnTactical = (entity) => {
     let positionOnMap = 
@@ -127,28 +127,32 @@ const showSpriteOnTactical = (entity) => {
         entity.pos[0] * tileSize - (playerSpriteSize-tileSize)/2 +vectorCameraEngineTwo.x,
         entity.pos[1] * tileSize - (playerSpriteSize-tileSize)/2 +vectorCameraEngineTwo.y
     ]
-    if(entity.nextCase !== null)
+    if(entity.nextCase !== null) // If entity has a next case to moove
     {
         if(mooveEntityToNextCase(entity) === false)
         {
             animationIdleSprite(positionOnMap[0], positionOnMap[1], playerSpriteSize, [0, 1], entity.id)
+            showHealthSpriteTactical(positionOnMap, entity)
         }
     }else{
         switch(entity.state)
         {
             case "fight":
-                if(animationFightprite(positionOnMap[0], positionOnMap[1], playerSpriteSize, [0, 1], entity.id) === false)
+                if(animationFightSprite(positionOnMap[0], positionOnMap[1], playerSpriteSize, [0, 1], entity.id) === false)
                 {
                     // This is resseting the entity state on idle when the fight animation is finish (when it returns false)
                     entity.state = "idle";
                 }
+                showHealthSpriteTactical(positionOnMap, entity)
+                break;
+            case "dead" :
                 break;
             default :
                 animationIdleSprite(positionOnMap[0], positionOnMap[1], playerSpriteSize, [0, 1], entity.id)
+                showHealthSpriteTactical(positionOnMap, entity)
                 break;
         }
     }
-    showHealthSpriteTactical(positionOnMap, entity)
 }
 
 const showHealthSpriteTactical = (position, entity) => {
