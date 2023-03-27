@@ -17,9 +17,9 @@
                     "npcOnMap": [{
                         "id" : 2,
                         "pos" : [17, 17],
-                        "nextCase" : [19, 15],
+                        "nextCase" : null,
                         "isInteractible" : true,
-                        "dir" : [1, 0],
+                        "dir" : [0, 1],
                         "state" : "idle",
                         "pathing" : "around",
                         "currentPath" : 1
@@ -36,9 +36,9 @@
                     "npcOnMap": [{
                         "id" : 0,
                         "pos" : [8, 5],
-                        "nextCase" : [10, 10],
+                        "nextCase" : null,
                         "isInteractible" : true,
-                        "dir" : [1, 0],
+                        "dir" : [0, 1],
                         "state" : "idle",
                         "pathing" : "around",
                         "currentPath" : 1
