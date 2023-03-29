@@ -6,9 +6,9 @@
             "description" : "Retourner parler à l'IA",
             "questType" : "talk",
             "eventOnStart" : "goNextTutoStep",
-            "idQuestProgression" : 1,
+            "idQuestProgression" : 3,
             "currentProgression": 0,
-            "maxProgression" : 2,
+            "maxProgression" : 1,
             "reward" : null
         }
     ]

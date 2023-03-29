@@ -4,9 +4,13 @@ const launchNpcDialog = (npc) => {
   
     if(npcInteractedData.dialogs !== undefined)
     {
-      npcDialoged = npcInteractedData
-    }else{
 
+      addQuestProgression(npcInteractedData.id, "talk") // Add the quest progression if a quest exist with the type : "talk" and the id of the npc
+
+      npcDialoged = npcInteractedData
+      
+    }else{
+      // probably some annexe events
     }
   }
 

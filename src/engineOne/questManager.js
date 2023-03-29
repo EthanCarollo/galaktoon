@@ -38,10 +38,14 @@ const showQuestList = () => {
     }
 }
 
-const addQuestProgression = (questIdProgression) => { // Update a progression using an ID
+
+// ? There is some questType : fight, talk
+const addQuestProgression = (questIdProgression, questType) => { // Update a progression using an ID
     for(let i = 0; i< questList.length; i++)
     {
-        if(questList[i].idQuestProgression === questIdProgression && questList[i].currentProgression < questList[i].maxProgression)
+        if(questList[i].idQuestProgression+"" === questIdProgression && 
+            questList[i].currentProgression < questList[i].maxProgression &&
+            questList[i].questType === questType)
         {
             questList[i].currentProgression ++;
         }
