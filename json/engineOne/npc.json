@@ -26,16 +26,21 @@
                     "text" : "C'est génial, suis moi, je vais tout t'expliquer.", 
                     "quest" : 0, 
                     "altText" : "Oh tu as déja pris ta quête !",
-                    "rewardText" : "Merci beaucoup, tiens pour te récompenser !" 
+                    "rewardText" : "Allons-y, tu dois te poser une tonne de question." 
                 }],
                 [{ 
-                    "text" : "Hey ! C'est le deuxième pattern de quête, tu te rends compte ?! " 
+                    "text" : "Pour commencer, tu t'appelles Void, cela fait bientot 200 ans que tu dormais dans cette cuve alimenté par ce liquide étrange... " 
+                },{ 
+                    "text" : "Je suis l'intelligence artificielle de ce vaisseau, tu as choisi il y a longtemps de cela de ne pas me nommer pour m'humilier... " 
+                },{ 
+                    "text" : "Bref, il y a un truc louche qui se trame, mes systèmes ont capté un chien nain qui souhaite faire de ce monde... son chien. " 
                 }, { 
                     "questIsGived" : false,
-                    "text" : "Tiens, prends ta deuxième quête ! (ps : t'es encore vraiment trop cool)", 
+                    "text" : "J'ai été prit de pitié par ce monde, et vu que je te deteste, je me suis dis que j'allais te réveiller, accepte tu de m'aider ?.", 
                     "quest" : 0, 
-                    "altText" : "Oh tu as déja pris ta deuxième quête !",
-                    "rewardText" : "Merci beaucoup, tiens pour te récompenser !" 
+                    "interactionType" : "cannotRefuse",
+                    "altText" : "Bonne chance dans ce monde !",
+                    "rewardText" : "Allons-y, tu dois te poser une tonne de question." 
                 }],
                 [{ 
                     "text" : "Merci d'avoir sauvé la ville ! " 
