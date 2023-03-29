@@ -37,7 +37,7 @@
                 }, { 
                     "questIsGived" : false,
                     "text" : "J'ai été prit de pitié par ce monde, et vu que je te deteste, je me suis dis que j'allais te réveiller, accepte tu de m'aider ?.", 
-                    "quest" : 0, 
+                    "quest" : 1, 
                     "interactionType" : "cannotRefuse",
                     "altText" : "Bonne chance dans ce monde !",
                     "rewardText" : "Allons-y, tu dois te poser une tonne de question." 

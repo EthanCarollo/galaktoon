@@ -8,7 +8,7 @@ const launchNpcDialog = (npc) => {
       addQuestProgression(npcInteractedData.id, "talk") // Add the quest progression if a quest exist with the type : "talk" and the id of the npc
 
       npcDialoged = npcInteractedData
-      
+
     }else{
       // probably some annexe events
     }
@@ -33,7 +33,7 @@ const displayDialogNpc = (npcDialoged) => {
   
   fill(0, 0, 0);
   let box = image(dialogBox, xStartDialog, yStartDialog, sizeXDialog, sizeYDialog)
-  textSize(sizeYDialog/10);
+  textSize(sizeYDialog/11);
   
   setQuestState(npcDialoged.dialogs[actualDialogIndex][actualDialog])
 
@@ -43,7 +43,47 @@ const displayDialogNpc = (npcDialoged) => {
 
 }
 
+const showChoiceBoxForQuestDependingToTheType = (xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, dialog) => {
+  console.log(dialog.interactionType)
+  switch(dialog.interactionType)
+  {
+    case "cannotRefuse" :
+      showAcceptOnlyButton(xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, dialog);
+      break;
+    default :
+      showDialogChoiceBoxForQuest(xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, dialog);
+      break;
+  }
+}// Set the different choice depending on which quest type it is  
+
   // Dialog Component
+
+const showAcceptOnlyButton = (xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, quest) => {
+    textAlign(CENTER, CENTER);
+    
+    let sizeYChoice = sizeYDialog / 2.4;
+    let sizeXChoice = sizeXDialog / 2.4;
+    let paddingXChoice = sizeXDialog/2 - sizeXChoice/2;
+    let paddingYChoice = sizeYDialog/2.5;
+
+    textSize(sizeYChoice/4.5);
+
+    let dialogBox = uiData[11].image;
+    let xBoxTrue = xStartDialog + paddingXChoice;
+    let boxChoiceTrue = image(dialogBox, xBoxTrue, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice)
+    
+    fill(0)
+    changeFillOnHover(xBoxTrue, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice, 0, 180, 0)
+
+    text("Accept", xBoxTrue, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice)
+  
+    createInputButtonWithCallback(xBoxTrue, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice, 
+        () => {
+            quest.questIsGived = true;
+            addQuestToList(quest.quest)
+            goNextDialog();
+        });
+}
 
 const showDialogChoiceBoxForQuest = (xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, quest) => {
     
@@ -71,10 +111,9 @@ const showDialogChoiceBoxForQuest = (xStartDialog, yStartDialog, sizeXDialog, si
             addQuestToList(quest.quest)
             goNextDialog();
         });
-
     let xBoxFalse = xStartDialog + sizeXDialog - sizeXChoice - paddingXChoice;
     let boxChoiceFalse = image(dialogBox, xBoxFalse, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice)
-
+          
     fill(0)
     changeFillOnHover(xBoxFalse, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice, 180, 0, 0)
 
@@ -85,6 +124,7 @@ const showDialogChoiceBoxForQuest = (xStartDialog, yStartDialog, sizeXDialog, si
             goNextDialog();
         });
     fill(0)
+    
 }
 
 const showRewardBox = (xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, npc, dialog) => {
@@ -154,8 +194,9 @@ const showNpcSpriteInDialog = (npcDialoged, whoDialog = 1) => {
 }
 
 const showDialogText = (xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, dialog) => {
-  let paddingXText = sizeYDialog/2;
-  let paddingYText = sizeYDialog/3.5;
+  let paddingXText = sizeYDialog/2.5;
+  let paddingYText = sizeYDialog/3.75;
+
   let paddingSizeXBox = paddingXText*2;
   let paddingSizeYBox = paddingYText*2;
   
@@ -192,7 +233,7 @@ const setDialogInput = (xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, di
       createInputButtonWithCallback(xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, goNextDialog);
       break;
     case "HaveQuestToGive" :
-      showDialogChoiceBoxForQuest(xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, dialog);
+      showChoiceBoxForQuestDependingToTheType(xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, dialog);
       break;
     case "GivedQuest" :
       createInputButtonWithCallback(xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, goNextDialog);
