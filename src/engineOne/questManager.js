@@ -3,8 +3,11 @@ let questList = [
 ];
 
 const addQuestToList = (questId) => {
-    console.log(questId)
     questList.push(questData[questId]);
+    if(questData[questId].eventOnStart !== null)
+    {
+        startSpecificQuestEvents(questData[questId].eventOnStart);
+    }
 }
 
 const showQuestList = () => {
@@ -70,5 +73,18 @@ const finishQuest = (questId) => {
             questList.splice(i, 1)
             return;
         }
+    }
+}
+
+// ! Quest specific events
+
+const startSpecificQuestEvents = (questEventString) => {
+    switch(questEventString)
+    {
+        case "goNextTutoStep" :
+            mapData[0].npcOnMap[0].nextCase = [12, 10];
+            break;
+        default :
+            throw new Error("Specific event isn't set inside the startSpecificQuestEvents() : " + questEventString)
     }
 }

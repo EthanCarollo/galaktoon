@@ -4,12 +4,9 @@ const launchNpcDialog = (npc) => {
   
     if(npcInteractedData.dialogs !== undefined)
     {
-      console.log("launch a dialog")
-      console.log(npc)
-      console.log(npcInteractedData)
       npcDialoged = npcInteractedData
     }else{
-      console.log("no dialog disponible")
+
     }
   }
 

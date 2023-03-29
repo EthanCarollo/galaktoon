@@ -4,14 +4,26 @@
         {
             "id" : "0",
             "spriteId" : "1",
-            "name" : "Bob",
+            "name" : "Bob"
+        },{
+            "id" : "1",
+            "spriteId" : "2",
+            "name" : "DarkWoaf"
+        },{
+            "id" : "2",
+            "spriteId" : "3",
+            "name" : "Salatonion"
+        },{
+            "id" : "3",
+            "spriteId" : "4",
+            "name" : "Ai",
             "actualDialogIndex" : 0,
             "dialogs" : [ 
                 [{ 
-                    "text" : "Hey ! You look good :) qd dd ddd  ddd dd qd qd q dq dqd qdq dqd qd qdq dq " 
+                    "text" : "Ho ! Tu t'es reveillé... " 
                 }, { 
                     "questIsGived" : false,
-                    "text" : "Tiens, prends ta première quête ! (ps : t'es vraiment trop cool)", 
+                    "text" : "C'est génial, suis moi, je vais tout t'expliquer.", 
                     "quest" : 0, 
                     "altText" : "Oh tu as déja pris ta quête !",
                     "rewardText" : "Merci beaucoup, tiens pour te récompenser !" 
@@ -29,14 +41,6 @@
                     "text" : "Merci d'avoir sauvé la ville ! " 
                 }]
             ]
-        },{
-            "id" : "1",
-            "spriteId" : "2",
-            "name" : "DarkWoaf"
-        },{
-            "id" : "2",
-            "spriteId" : "3",
-            "name" : "Salatonion"
         }
     ]
 }
