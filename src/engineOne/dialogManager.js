@@ -5,6 +5,8 @@ const launchNpcDialog = (npc) => {
     if(npcInteractedData.dialogs !== undefined)
     {
 
+      setNpcDirectionWithThePlayerDirection(npc);
+
       addQuestProgression(npcInteractedData.id, "talk") // Add the quest progression if a quest exist with the type : "talk" and the id of the npc
 
       npcDialoged = npcInteractedData
@@ -44,7 +46,6 @@ const displayDialogNpc = (npcDialoged) => {
 }
 
 const showChoiceBoxForQuestDependingToTheType = (xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, dialog) => {
-  console.log(dialog.interactionType)
   switch(dialog.interactionType)
   {
     case "cannotRefuse" :
@@ -72,8 +73,12 @@ const showAcceptOnlyButton = (xStartDialog, yStartDialog, sizeXDialog, sizeYDial
     let xBoxTrue = xStartDialog + paddingXChoice;
     let boxChoiceTrue = image(dialogBox, xBoxTrue, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice)
     
-    fill(0)
-    changeFillOnHover(xBoxTrue, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice, 0, 180, 0)
+    fill(255)
+    changeFillOnHover(xBoxTrue, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice, 125, 255, 125)
+    if(mouseIsHover(xBoxTrue, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice))
+    {
+      let boxChoiceHover = image(uiData[20].image, xBoxTrue, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice)
+    }
 
     text("Accept", xBoxTrue, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice)
   
@@ -100,8 +105,12 @@ const showDialogChoiceBoxForQuest = (xStartDialog, yStartDialog, sizeXDialog, si
     let xBoxTrue = xStartDialog + paddingXChoice;
     let boxChoiceTrue = image(dialogBox, xBoxTrue, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice)
     
-    fill(0)
-    changeFillOnHover(xBoxTrue, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice, 0, 180, 0)
+    fill(255)
+    changeFillOnHover(xBoxTrue, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice, 125, 255, 125)
+    if(mouseIsHover(xBoxTrue, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice))
+    {
+      let boxChoiceHover = image(uiData[20].image, xBoxTrue, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice)
+    }
 
     text("Accept", xBoxTrue, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice)
   
@@ -114,8 +123,12 @@ const showDialogChoiceBoxForQuest = (xStartDialog, yStartDialog, sizeXDialog, si
     let xBoxFalse = xStartDialog + sizeXDialog - sizeXChoice - paddingXChoice;
     let boxChoiceFalse = image(dialogBox, xBoxFalse, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice)
           
-    fill(0)
-    changeFillOnHover(xBoxFalse, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice, 180, 0, 0)
+    fill(255)
+    changeFillOnHover(xBoxFalse, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice, 255, 125, 125)
+    if(mouseIsHover(xBoxFalse, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice))
+    {
+      let boxChoiceHover = image(uiData[20].image, xBoxFalse, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice)
+    }
 
     text("Refuse", xBoxFalse, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice)
 
@@ -142,7 +155,7 @@ const showRewardBox = (xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, npc
   let xBoxTrue = window.innerWidth / 2 - sizeXChoice / 2;
   let boxAcceptReward = image(dialogBox, xBoxTrue, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice)
   
-  fill(0)
+  fill(255)
   changeFillOnHover(xBoxTrue, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice, 0, 180, 0)
 
   text("Accept Reward", xBoxTrue, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice)
@@ -157,7 +170,7 @@ const showRewardBox = (xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, npc
           npc.actualDialogIndex++;
         }
       });
-  fill(0)
+  fill(255)
 
 }
   
@@ -222,7 +235,7 @@ const showDialogText = (xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, di
 
   textSize(sizeYDialog/11);
   textAlign(LEFT, TOP)
-  
+  fill(255)
   text(actualDialogNpc, xStartDialog +paddingXText, yStartDialog+paddingYText, sizeXDialog-paddingSizeXBox, sizeYDialog-paddingSizeYBox);
 }
 

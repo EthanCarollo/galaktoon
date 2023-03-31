@@ -84,6 +84,30 @@
             "id" : "18",
             "path" : "assets/ui/caseQuestPng.png",
             "image" : null
+        },{
+            "id" : "19",
+            "path" : "assets/ui/QuestListUi.png",
+            "image" : null
+        },{
+            "id" : "20",
+            "path" : "assets/ui/dialogBoxColored.png",
+            "image" : null
+        },{
+            "id" : "21",
+            "path" : "assets/ui/Gradient.png",
+            "image" : null
+        },{
+            "id" : "22",
+            "path" : "assets/ui/PlanetsContainer.png",
+            "image" : null
+        },{
+            "id" : "23",
+            "path" : "assets/ui/BackgroundQuestList.png",
+            "image" : null
+        },{
+            "id" : "24",
+            "path" : "assets/ui/CaseQuit.png",
+            "image" : null
         }
     ]
 }

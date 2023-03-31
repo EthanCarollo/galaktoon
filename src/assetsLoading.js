@@ -305,5 +305,6 @@ const setEngineOneVariableAfterLoadingAllAssets = () => {
     playerVector = getCoordWithTileCoord(playerOnMap.start[0], playerOnMap.start[1]);
     cameraVector = createVector(windowWidth/2, windowHeight/2);
     mapVector = createVector(0,0);
+    vector2ExploringMenu = createVector(-500, 0); // For the transition in menu exploring mode
     vectorCameraEngineTwo = createVector(0, 0);
 }

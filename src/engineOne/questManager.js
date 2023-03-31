@@ -11,29 +11,28 @@ const addQuestToList = (questId) => {
 }
 
 const showQuestList = () => {
-    let sizeQuestList = 500;
+    let sizeXContainerQuest = 500;
+    let sizeYContainerQuest = sizeXContainerQuest/5; // Width : 500 Height : 100
     let xPosQuestList = 40;
     let yPosQuestList = 25;
     let fontSize = 20;
     textSize(fontSize)
     textAlign(LEFT, TOP);
-    text("- Quests List", xPosQuestList, yPosQuestList, sizeQuestList, sizeQuestList)
-
+    image(uiData[21].image, 0, 0, sizeXContainerQuest / 1.5, 1000)
+    image(uiData[19].image, xPosQuestList, yPosQuestList, sizeXContainerQuest, sizeYContainerQuest)
 
     let yStartList = yPosQuestList * 2 + 15;
-    let sizeXContainerQuest = sizeQuestList;
-    let sizeYContainerQuest = 100;
     for(let i = 0; i < questList.length; i++)
     {
         let paddingQuest = 20;
-        image(uiData[18].image, xPosQuestList, yStartList + sizeYContainerQuest* i, sizeQuestList, sizeYContainerQuest)
+        image(uiData[18].image, xPosQuestList, yStartList + sizeYContainerQuest* i, sizeXContainerQuest, sizeYContainerQuest)
 
         textSize(12)
         textAlign(RIGHT, BOTTOM);
         text(questList[i].currentProgression + " / " + questList[i].maxProgression, 
             xPosQuestList + paddingQuest / 2, 
             yStartList + sizeYContainerQuest* i + paddingQuest / 2, 
-            sizeQuestList - paddingQuest, 
+            sizeXContainerQuest - paddingQuest, 
             sizeYContainerQuest - paddingQuest)
 
         textAlign(LEFT, TOP);
@@ -41,13 +40,13 @@ const showQuestList = () => {
         text(questList[i].name, 
             xPosQuestList + paddingQuest / 2, 
             yStartList + sizeYContainerQuest* i + paddingQuest / 2, 
-            sizeQuestList - paddingQuest, 
+            sizeXContainerQuest - paddingQuest, 
             sizeYContainerQuest - paddingQuest)
 
         textSize(8)
         text(questList[i].description, xPosQuestList +  + paddingQuest / 2, 
             yStartList + sizeYContainerQuest* i + 25  + paddingQuest / 2, 
-            sizeQuestList - paddingQuest, 
+            sizeXContainerQuest - paddingQuest, 
             sizeYContainerQuest - paddingQuest)
     }
 }

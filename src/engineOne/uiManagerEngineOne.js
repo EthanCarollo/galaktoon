@@ -2,9 +2,11 @@
 
 const displayUserInterfaceEngineOne = () => {
     displayPlayerInformationUI()
+    displayExploringMenu();
     if(playerIsExploringMap === true){
-        displayExploringMenu();
+        setVectorLerpEaseInExploringMenu();
     }else{
+        setVectorLerpEaseOutExploringMenu();
         showQuestList();
     }
 }
@@ -57,22 +59,43 @@ const showBarWithPercentUi = (posX, posY, size, percentOfLife) => {
 
 // * Exploring Menu 
 
+
+let vector2ExploringMenu;
 const displayExploringMenu = () => {
     fill(0,0,0,155)
-    rect(50,50,400,800)
+    let xSizeBg = window.innerHeight /1.75;
+    let ySizeBg = window.innerHeight;
+
+    let xPosition = vector2ExploringMenu.x;
+
+    let padding = 100;
+    let paddingInner = 40;
+    image(uiData[23].image, xPosition+padding/2,padding/2,xSizeBg-padding,ySizeBg-padding)
     for(let i =0; i < planetsData.length; i++)
     {
-        createPlanetMenuObject(75,75+125*i,350,100, i)
+        let xSizePlanets = xSizeBg-padding-paddingInner;
+        let ySizePlanets = (xSizeBg-padding-paddingInner)/3.85;
+        createPlanetMenuObject(xPosition+padding/2+paddingInner/2,(padding/2+paddingInner/2)+125*i,xSizePlanets, ySizePlanets, i)
     }
     exitCross();
 }
 
+const setVectorLerpEaseInExploringMenu = () => {
+    vectorToCover = createVector(0, 0);
+    vectorMoove = p5.Vector.lerp(vectorToCover, vector2ExploringMenu, 0.8);
+    vector2ExploringMenu = vectorMoove;
+}
+const setVectorLerpEaseOutExploringMenu = () => {
+    vectorToCover = createVector(-500, 0);
+    vectorMoove = p5.Vector.lerp(vectorToCover, vector2ExploringMenu, 0.8);
+    vector2ExploringMenu = vectorMoove;
+}
+
 const createPlanetMenuObject = (x, y, sizeX, sizeY, planetID) => {
-    fill(200,55,55)
-    rect(x,y,sizeX,sizeY)
+    image(uiData[22].image, x, y, sizeX, sizeY)
     noFill()
-    fill(55,200,55)
-    textSize(40);
+    fill(255,255,255)
+    textSize(25);
     textAlign(CENTER, CENTER)
     text(planetsData[planetID].name, x, y, sizeX, sizeY)
     textAlign(LEFT, BASELINE)
@@ -91,17 +114,13 @@ const loadMapAndExitExploringMenu = (mapToExplore) => {
 
 const exitCross = () => {
     fill(255,150,150)
-    rect(75,20,40,40)
-    createInputButtonWithCallback(75, 20, 40, 40, exitExploringMenu)
+    image(uiData[24].image, 75+vector2ExploringMenu.x,15,45,45)
+    createInputButtonWithCallback(75, 20, 45, 45, exitExploringMenu)
     textSize(20);
-    fill(150,150,255)
-    textAlign(LEFT,TOP);
-    text("quit menu", 75, 20, 150,40)
-    // text is temporary
-    noFill()
 }
 
 const exitExploringMenu = () => {
+    vector2ExploringMenu.x = 0;
     playerCanMove = true;
     playerIsExploringMap = false;
 }
