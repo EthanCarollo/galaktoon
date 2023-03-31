@@ -76,6 +76,10 @@
             "id" : "16",
             "path" : "assets/ui/cadenas.png",
             "image" : null
+        },{
+            "id" : "17",
+            "path" : "assets/ui/crossQuest.png",
+            "image" : null
         }
     ]
 }

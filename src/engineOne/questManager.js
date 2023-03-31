@@ -38,6 +38,38 @@ const showQuestList = () => {
     }
 }
 
+// * Quest Goal Animation
+const showGoalQuest = () => {
+    updateAnimationQuestGoal();
+    for(let i = 0; i < questList.length; i++)
+    {
+        if(playerOnMap.id === questList[i].questGoal.map && questList[i].questGoal.position !== null)
+        {
+            imageMode(CORNER);
+            let positionGoalOnMap = getCoordWithTileCoord(questList[i].questGoal.position[0], questList[i].questGoal.position[1]-1); // get vector position on map
+            let xGoal =  positionGoalOnMap.x + cameraVector.x + playerVector.x - 45, yGoal = positionGoalOnMap.y + cameraVector.y + playerVector.y -60;
+            image(uiData[17].image, xGoal, yGoal + animationIndexUiQuestGoal, tileSize, tileSize)
+        }
+    }
+}
+
+let animationIndexUiQuestGoal = 0;
+let toggleAnimationQuestIndex = false;
+const updateAnimationQuestGoal = () => {
+    if(animationIndexUiQuestGoal > 20 || toggleAnimationQuestIndex === true){
+        animationIndexUiQuestGoal -= 0.25
+        toggleAnimationQuestIndex = true;
+    }
+    if(animationIndexUiQuestGoal > -5 && toggleAnimationQuestIndex === false){
+        animationIndexUiQuestGoal += 0.25
+    }
+    if(toggleAnimationQuestIndex === true && animationIndexUiQuestGoal < 0)
+    {
+        toggleAnimationQuestIndex = false;
+    }
+    
+}
+// * Quest Goal Animation
 
 // ? There is some questType : fight, talk
 const addQuestProgression = (questIdProgression, questType) => { // Update a progression using an ID
