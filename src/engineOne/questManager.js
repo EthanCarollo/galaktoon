@@ -25,16 +25,30 @@ const showQuestList = () => {
     let sizeYContainerQuest = 100;
     for(let i = 0; i < questList.length; i++)
     {
+        let paddingQuest = 20;
+        image(uiData[18].image, xPosQuestList, yStartList + sizeYContainerQuest* i, sizeQuestList, sizeYContainerQuest)
+
         textSize(12)
         textAlign(RIGHT, BOTTOM);
-        text(questList[i].currentProgression + " / " + questList[i].maxProgression, xPosQuestList, yStartList + sizeYContainerQuest* i, sizeQuestList, sizeYContainerQuest)
+        text(questList[i].currentProgression + " / " + questList[i].maxProgression, 
+            xPosQuestList + paddingQuest / 2, 
+            yStartList + sizeYContainerQuest* i + paddingQuest / 2, 
+            sizeQuestList - paddingQuest, 
+            sizeYContainerQuest - paddingQuest)
 
         textAlign(LEFT, TOP);
         textSize(15)
-        text(questList[i].name, xPosQuestList, yStartList + sizeYContainerQuest* i, sizeQuestList, sizeYContainerQuest)
+        text(questList[i].name, 
+            xPosQuestList + paddingQuest / 2, 
+            yStartList + sizeYContainerQuest* i + paddingQuest / 2, 
+            sizeQuestList - paddingQuest, 
+            sizeYContainerQuest - paddingQuest)
 
         textSize(8)
-        text(questList[i].description, xPosQuestList, yStartList + sizeYContainerQuest* i + 25, sizeQuestList, sizeYContainerQuest)
+        text(questList[i].description, xPosQuestList +  + paddingQuest / 2, 
+            yStartList + sizeYContainerQuest* i + 25  + paddingQuest / 2, 
+            sizeQuestList - paddingQuest, 
+            sizeYContainerQuest - paddingQuest)
     }
 }
 
@@ -43,12 +57,15 @@ const showGoalQuest = () => {
     updateAnimationQuestGoal();
     for(let i = 0; i < questList.length; i++)
     {
-        if(playerOnMap.id === questList[i].questGoal.map && questList[i].questGoal.position !== null)
+        if(questList[i].questGoal !== null)
         {
-            imageMode(CORNER);
-            let positionGoalOnMap = getCoordWithTileCoord(questList[i].questGoal.position[0], questList[i].questGoal.position[1]-1); // get vector position on map
-            let xGoal =  positionGoalOnMap.x + cameraVector.x + playerVector.x - 45, yGoal = positionGoalOnMap.y + cameraVector.y + playerVector.y -60;
-            image(uiData[17].image, xGoal, yGoal + animationIndexUiQuestGoal, tileSize, tileSize)
+            if(playerOnMap.id === questList[i].questGoal.map && questList[i].questGoal.position !== null)
+            {
+                imageMode(CORNER);
+                let positionGoalOnMap = getCoordWithTileCoord(questList[i].questGoal.position[0], questList[i].questGoal.position[1]-1); // get vector position on map
+                let xGoal =  positionGoalOnMap.x + cameraVector.x + playerVector.x - 45, yGoal = positionGoalOnMap.y + cameraVector.y + playerVector.y -60;
+                image(uiData[17].image, xGoal, yGoal + animationIndexUiQuestGoal, tileSize, tileSize)
+            }
         }
     }
 }

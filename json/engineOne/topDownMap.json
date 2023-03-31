@@ -63,8 +63,9 @@
                     "npcOnMap": [{
                         "id" : 1,
                         "pos" : [20, 7],
+                        "nextCase" : null,
                         "isInteractible" : true,
-                        "dir" : [1, 0],
+                        "dir" : [0, -1],
                         "state" : "idle",
                         "pathing" : "around",
                         "currentPath" : 1

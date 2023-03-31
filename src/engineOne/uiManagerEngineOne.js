@@ -4,6 +4,8 @@ const displayUserInterfaceEngineOne = () => {
     displayPlayerInformationUI()
     if(playerIsExploringMap === true){
         displayExploringMenu();
+    }else{
+        showQuestList();
     }
 }
 

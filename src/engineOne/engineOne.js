@@ -28,7 +28,6 @@ const runPlayingStateEngineOne = () => {
   setPlayerCamera();
   displayTopDown2D();
   displayUserInterfaceEngineOne();
-  showQuestList();
   showGoalQuest();
   if(npcDialoged !== null)
   {

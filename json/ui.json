@@ -80,6 +80,10 @@
             "id" : "17",
             "path" : "assets/ui/crossQuest.png",
             "image" : null
+        },{
+            "id" : "18",
+            "path" : "assets/ui/caseQuestPng.png",
+            "image" : null
         }
     ]
 }

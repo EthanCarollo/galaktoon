@@ -89,10 +89,33 @@ const interactWithNPC = (tileInteract) => {
     if(npcInteracted.length > 0)
     {
         if(npcInteracted[0].isInteractible === true && npcInteracted[0].state === "idle"){
+            setNpcDirectionWithThePlayerDirection(npcInteracted[0]);
             console.log("INTERACTED")
             launchNpcDialog(npcInteracted[0]);
             console.log("INTERACTED")
         }
+    }
+}
+
+const setNpcDirectionWithThePlayerDirection = (npc) => {
+    // Need to set the npc direction wwith the information
+    let currentPlayerPositionOnMap = [-Math.floor(getTileCoordWithCoord(playerVector.x, playerVector.y)[0]), -Math.floor(getTileCoordWithCoord(playerVector.x, playerVector.y)[1])];
+    
+    if(npc.pos[0] > currentPlayerPositionOnMap[0]){
+        npc.dir = [-1, 0];
+        return;
+    }
+    if(npc.pos[0] < currentPlayerPositionOnMap[0]){
+        npc.dir = [1,0];
+        return;
+    }
+    if(npc.pos[1] > currentPlayerPositionOnMap[1]){
+        npc.dir = [0, -1];
+        return;
+    }
+    if(npc.pos[1] < currentPlayerPositionOnMap[1]){
+        npc.dir = [0, 1];
+        return;
     }
 }
 
