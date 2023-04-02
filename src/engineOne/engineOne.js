@@ -19,7 +19,7 @@ const runCinematicStateEngineOne = () => {
   setCameraCinematic();
   
   displayTopDown2D();
-
+  setVectorLerpEaseOutExploringMenu();
   showBorderCinematic();
 }
 

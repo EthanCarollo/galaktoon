@@ -93,6 +93,9 @@ const setVectorLerpEaseOutExploringMenu = () => {
 
 const createPlanetMenuObject = (x, y, sizeX, sizeY, planetID) => {
     image(uiData[22].image, x, y, sizeX, sizeY)
+    if(mouseIsHover(x, y, sizeX, sizeY)){
+        image(uiData[25].image, x, y, sizeX, sizeY)
+    }
     noFill()
     fill(255,255,255)
     textSize(25);
@@ -101,8 +104,7 @@ const createPlanetMenuObject = (x, y, sizeX, sizeY, planetID) => {
     textAlign(LEFT, BASELINE)
     noFill()
     let mapToExplore = mapData[planetsData[planetID].map]
-    
-    createShowTextOnHover(x, y, sizeX, sizeY, "Voyager vers")
+    //createShowTextOnHover(x, y, sizeX, sizeY, "Voyager vers")
     createInputButtonWithCallback(x, y, sizeX, sizeY, () => {loadMapAndExitExploringMenu(mapToExplore)})
 
 }

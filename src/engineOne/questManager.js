@@ -26,7 +26,7 @@ const showQuestList = () => {
     {
         let paddingQuest = 20;
         image(uiData[18].image, xPosQuestList, yStartList + sizeYContainerQuest* i, sizeXContainerQuest, sizeYContainerQuest)
-
+        fill(255);
         textSize(12)
         textAlign(RIGHT, BOTTOM);
         text(questList[i].currentProgression + " / " + questList[i].maxProgression, 
