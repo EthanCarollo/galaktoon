@@ -85,19 +85,38 @@ const interactWithATile = (tileInteract) => {
 
 const interactWithNPC = (tileInteract) => {
 
-    let npcInteracted = playerOnMap.npcOnMap.filter(npc => npc.position[0] === tileInteract[0] && npc.position[1] === tileInteract[1])
+    let npcInteracted = playerOnMap.npcOnMap.filter(npc => npc.pos[0] === tileInteract[0] && npc.pos[1] === tileInteract[1])
     if(npcInteracted.length > 0)
     {
         if(npcInteracted[0].isInteractible === true && npcInteracted[0].state === "idle"){
-            console.log("INTERACTED")
             launchNpcDialog(npcInteracted[0]);
-            console.log("INTERACTED")
         }
     }
 }
 
+const setNpcDirectionWithThePlayerDirection = (npc) => {
+    // Need to set the npc direction wwith the information
+
+    if(npc.pos[0] > actualPlayerTile()[0]){
+        npc.dir = [-1, 0];
+        return;
+    }
+    if(npc.pos[0] < actualPlayerTile()[0]){
+        npc.dir = [1,0];
+        return;
+    }
+    if(npc.pos[1] > actualPlayerTile()[1]){
+        npc.dir = [0, -1];
+        return;
+    }
+    if(npc.pos[1] < actualPlayerTile()[1]){
+        npc.dir = [0, 1];
+        return;
+    }
+}
+
 const playSleepAnimation = () => {
-    playerTeam[0].hp.current = playerTeam[0].hp.max
+    playerTeam[0].health.actualHealth = playerTeam[0].health.maxHealth
 }
 
 const createInteractionPopup = (x ,y ,typeOfInteract) => {

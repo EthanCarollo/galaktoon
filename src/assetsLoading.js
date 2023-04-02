@@ -32,10 +32,6 @@ const ressourceToLoad = [
     {
         typeOfRessource : "quest",
         path : "./json/engineOne/quests.json"
-    },
-    {
-        typeOfRessource : "mapFight",
-        path : "./json/engineTwo/sideScrollMap.json"
     }
 ]
 
@@ -214,7 +210,7 @@ const loadTileFromJson = (map) => {
 
 const failureLoadingRessource = (ressource, typeOfRessource) => {
     // error handling
-    throw new Error("failed to load a " + typeOfRessource + " from the " + ressource.id + " case, check the following json to fix that or check if the image exists");
+    throw new Error("failed to load a " + typeOfRessource + " from the " + ressource.id + " (path : " + ressource.path + ") case, check the following json to fix that or check if the image exists");
 }
 
 const successfullLoadingRessource = (typeOfRessource) => {
@@ -302,10 +298,13 @@ const setEngineOneVariableAfterLoadingAllAssets = () => {
         throw new Error("mapData isn't set for map creation");
     }
 
+
     playerOnMap = mapData[0];
     actualPlayerMap = playerOnMap.map;
 
     playerVector = getCoordWithTileCoord(playerOnMap.start[0], playerOnMap.start[1]);
     cameraVector = createVector(windowWidth/2, windowHeight/2);
     mapVector = createVector(0,0);
+    vector2ExploringMenu = createVector(-500, 0); // For the transition in menu exploring
+    vectorCameraEngineTwo = createVector(0, 0);
 }

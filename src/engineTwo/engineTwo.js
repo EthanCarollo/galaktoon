@@ -1,200 +1,218 @@
-
+let engineTwoState = "Playing";
 
 const runEngineTwo = () => {
-    background(180)
-    displaySideScroller2D();
-    showTeamOnMap();
-    displayUserInterfaceEngineTwo();
-}
-
-// ---- Display
-
-const displaySideScroller2D = () => {
-    createMapSideScroller("nothing")
-    if(turnTeam === "player"){
-        createInterfaceForFight()
-    }
-    // DEBUG
-    /*text("actual turn is " + turnTeam, 50, 250)
-    text("Click on an enemy to target him ", window.innerWidth-500, 250)
-    text("Press space to attack ", window.innerWidth/2-175, 250)*/
-}
-
-const createMapSideScroller = (map) => {
-    createFloorOfSideMap()
-}
-
-const createFloorOfSideMap = () => {
-    /*for(let y = 0; y < 6; y++){
-        for(let x = 0; x < 25; x++)
-        {
-            let tileSizeTemp = 90;
-            let xPositionTiles = tileSizeTemp*x;
-            let yPositionTiles = window.innerHeight - tileSizeTemp*y;
-
-            image(mapData[0].tileRessource[0].image, xPositionTiles, yPositionTiles, tileSizeTemp, tileSizeTemp)
-        }
-    }*/
-
-    image(mapFightData[0].image, 0, 0, window.innerWidth, window.innerHeight)
-
-    //temp code for initializing floor of side map
-}
-
-const showTeamOnMap = () => {
-    showPlayerTeam()
-    showEnemyTeam()
-}
-
-const showPlayerTeam = () => {
-    if(playerTeam.length > 3)
-    {
-        throw new Error("Player team is too big")
-    }
-    if(playerTeam.length < 1) 
-    {
-        throw new Error("Player team is too short")
-    }
-
-    for(let i = playerTeam.length -1; i >= 0; i--)
-    {
-        
-        let characterObject = playerTeam[i]
-        let sizeSprite = 200;
-        let xPositionSprite = 120;
-        let yPositionSprite = window.innerHeight - (sizeSprite+sizeSprite*(i/1.25)) - 50;
-        let tempSpriteToShow = spritesFightData[characterObject.id].image;
-        // set all variables for the showSpriteOnMap function
-        const isTurnOfThisCharacter = i === currentTurn;
-        showSpriteOnMap(tempSpriteToShow, xPositionSprite, yPositionSprite, sizeSprite, characterObject, false, isTurnOfThisCharacter, i, false);
-
+    switch(engineTwoState){
+        case "Playing" :
+            engineTwoPlaying();
+            break;
+        case "endFight" :
+            engineTwoEndFight();
+            break;
+        default :
+            throw new Error("Engine Two State isn't defined : " + engineTwoState)
     }
 }
 
-const showEnemyTeam = () => {
-    if(enemyTeam.length > 3)
-    {
-        throw new Error("Player team is too big")
-    }
-    if(enemyTeam.length < 1) 
-    {
-        throw new Error("Player team is too short")
-    }
+const engineTwoPlaying = () => {
+    setSelectedEntity();
+    background(20)
+    displayTopDownMapEngineTwo();
+    setCameraEngineTwo();
+    displayEngineTwoUI();
+    setGameState();
+}
 
-    for(let i = enemyTeam.length-1; i >= 0; i--)
-    {
+const engineTwoEndFight = () => {
+    background('rgba(20,20,20, 0.1)');
+    displayEngineTwoUI();
+}
 
-        let characterObject = enemyTeam[i]
-        let sizeSprite = 200;
-        let xPositionSprite = window.innerWidth - (120 + sizeSprite);
-        let yPositionSprite = window.innerHeight - (sizeSprite+sizeSprite*(i/1.25)) - 50;
-        let tempSpriteToShow = spritesFightData[characterObject.id].image
-        // set all variables for the showSpriteOnMap function
-        const isTargeted = i === currentTarget
-        showSpriteOnMap(tempSpriteToShow, xPositionSprite, yPositionSprite, sizeSprite, characterObject, isTargeted, false, i, true)
-        createInputButtonWithCallback(xPositionSprite, yPositionSprite, sizeSprite, sizeSprite, () => { changeCurrentTarget(i) })
+const setGameState = () => {
+    if(checkAllEnemiesDead() === true){
+        engineTwoState = "endFight";
+    }
+    if(checkAllAlliesDead() === true){
+        engineTwoState = "endFight";
     }
 }
 
-const showSpriteOnMap = (sprite, x, y, size, charObject, isTarget, playerSelectedCharacter, indexInArray, isAnEnemy) => {
-    if(playerSelectedCharacter === true){
-        //tint(150,150,255)
-        spriteAnimationFight(sprite, x, y, size, isAnEnemy, indexInArray)
-        //noTint()
-    }else if(isTarget === true){
-        tint(155,0,0)
-        spriteAnimationFight(sprite, x, y, size, isAnEnemy, indexInArray)
-        noTint()
+const setSelectedEntity = () =>{
+    selectedEntity = actualMapEngineTwo.entityOnTactical[whichEntityTurn]
+}
+
+const setCameraEngineTwo = () => {
+    let vectorMoove;
+    if(selectedEntity !== null)
+    {   
+        vectorEntity = createVector((selectedEntity.pos[0] + 0.5)*tileSize, (selectedEntity.pos[1] + 0.5)*tileSize) // 0.5 is the margin for centering the center of a tile
+        vectorToCover = createVector(-vectorEntity.x + (window.innerWidth/2), -vectorEntity.y  + (window.innerHeight/2));
+        vectorMoove = p5.Vector.lerp(vectorToCover, vectorCameraEngineTwo, cameraSmoothStep); // interpolate the camera with the player by using vector.lerp by p5
     }else{
-        spriteAnimationFight(sprite, x, y, size, isAnEnemy, indexInArray)
+        throw new Error("selectedEntity is null, which is not possible normally");
     }
-    showSpriteHealthOnMap(x, y, size, charObject);
-    showSpriteLevelOnMap(x, y, size, charObject)
-}
-
-const showSpriteLevelOnMap = (x, y, spriteSize, charObject) => {
-    let spriteLevel = charObject.level;
-    let caseLevel = uiData[8].image;
-    let caseSize = 35;
-    let xCase = x+spriteSize;
-    let yCase = y+spriteSize-caseSize;
-    image(caseLevel, xCase, yCase, caseSize, caseSize)
-    textAlign(CENTER, CENTER)
-    textSize(12)
-    text(spriteLevel, xCase, yCase, caseSize, caseSize)
-    textAlign(LEFT, BASELINE)
-}
-
-const spriteAnimationFight = (sprite, x, y, size, isAnEnemy, index) => {
-    let actualTeamSprite;
-    switch(isAnEnemy){
-        case true : 
-            actualTeamSprite = enemyTeam;
-            break;
-        case false :
-            actualTeamSprite = playerTeam;
-            break;
-    }
-
-    switch(actualTeamSprite[index].state){
-        case "idle" :
-            idleSpriteAnimationFight(sprite, x, y, size)
-            break;
-        case "attack" :
-            fightSpriteAnimationFight(sprite, x, y, size)
-            break;
-        case "dead" :
-            deadSpriteAnimationFight(sprite, x, y, size)
-            break;
-        case "heal" :
-            healSpriteAnimationFight(sprite, x, y, size)
-            break;
-        case "healAll" :
-            healAllSpriteAnimationFight(sprite, x, y, size)
-            break;
-        default : 
-            throw new Error ("Sprite can't animate cause state doesn't exist")
-    }
-}
-
-const idleSpriteAnimationFight = (spriteToAnim, x, y, size) => {
-    image(spriteToAnim.get(0,0,60,60), x, y, size, size);
-}
-
-const fightSpriteAnimationFight = (spriteToAnim, x, y, size) => {
-    image(spriteToAnim.get(0+(60*Math.floor(indexAnimationFight)),60,60,60), x, y, size, size);
-    if(indexAnimationFight < 3){
-        indexAnimationFight += 0.1;
-    }
-}
-
-const healSpriteAnimationFight = (spriteToAnim, x, y, size) => {
-    image(spriteToAnim.get(0+(60*Math.floor(indexAnimationFight)),180,60,60), x, y, size, size);
-    if(indexAnimationFight < 3){
-        indexAnimationFight += 0.1;
-    }
-}
-
-const healAllSpriteAnimationFight = (spriteToAnim, x, y, size) => {
-    image(spriteToAnim.get(0+(60*Math.floor(indexAnimationFight)),240,60,60), x, y, size, size);
-    if(indexAnimationFight < 3){
-        indexAnimationFight += 0.1;
-    }
-}
-
-const deadSpriteAnimationFight = (spriteToAnim, x, y, size) => {
-    image(spriteToAnim.get(0,120,60,60), x, y, size, size);
-}
-
-const showSpriteHealthOnMap = (x, y, size, charObject) => {
-    let percentOfSpriteLife = charObject.hp.current / charObject.hp.max +0.00001; // adding 0.00001 on that var cause size can't be 0 :(
-    let currentHealthBarUIImage = uiData[0].image;
-    let currentEmptyHealthBarUIImage = uiData[2].image;
-    let currentBackgroundHealthBar = uiData[3].image;
+    vectorCameraEngineTwo = vectorMoove;
     
-    image(currentBackgroundHealthBar,x,y,size, size)
-    image(currentHealthBarUIImage,x,y,size * percentOfSpriteLife, size)
-    image(currentEmptyHealthBarUIImage,x,y,size, size) 
 }
 
-// ---- Display
+// * BASE CODE
+
+const displayTopDownMapEngineTwo = () => {
+    displayAestheticTopDownMapEngineTwo(actualMapEngineTwo.map.groundLayer);
+    displayAestheticTopDownMapEngineTwo(actualMapEngineTwo.map.objectLayer);
+
+    displayTacticalTopDownMapEngineTwo();
+    displaySpriteTacticalTopDownMapEngineTwo();
+    //createMapTopDown("front", actualMapEngineTwo.map.groundLayer, actualMapEngineTwo, vectorMapEngineTwo);
+    //createMapTopDown("front", actualMapEngineTwo.map.objectLayer, actualMapEngineTwo, vectorMapEngineTwo);
+}
+
+const displayAestheticTopDownMapEngineTwo = (map) => {
+    for(let y = 0; y < map.length; y++)
+    {
+        for(let x = 0; x < map[y].length; x++)
+        {
+            createImageWithIdOn2dArrayEngineTwo(x, y, map[y][x],tileSize);
+        }
+    }
+}
+
+const displayTacticalTopDownMapEngineTwo = () => {
+    for(let y = 0; y < actualMapEngineTwo.tacticalMap.length; y++)
+    {
+        for(let x = 0; x < actualMapEngineTwo.tacticalMap[y].length; x++)
+        {   
+            showRectOnTactical(x, y, actualMapEngineTwo.tacticalMap[y][x])
+        }
+    }
+}
+
+const displaySpriteTacticalTopDownMapEngineTwo = () => {
+    for(let i = 0; i < actualMapEngineTwo.entityOnTactical.length; i++)
+    {
+        showSpriteOnTactical(actualMapEngineTwo.entityOnTactical[i])
+    }
+}
+
+const getSpriteTactical = (x, y) => {
+    for(let i = 0; i < actualMapEngineTwo.entityOnTactical.length; i++)
+    {
+        if(x === actualMapEngineTwo.entityOnTactical[i].pos[0] && y ===actualMapEngineTwo.entityOnTactical[i].pos[1]){
+            return actualMapEngineTwo.entityOnTactical[i];
+        }
+    }
+    return null;
+}// Return an entity object or null
+
+const showRectOnTactical = (x, y, id) => {
+    switch(id){
+        case -1 :
+            noStroke()
+            if(isAMovableCase(x, y) === true)
+            {
+                fill(155,155,255,100)
+                rect(x*tileSize+vectorCameraEngineTwo.x, y*tileSize+vectorCameraEngineTwo.y, tileSize, tileSize);
+            }
+            if(isAnAttackableCase(x, y) === true)
+            {
+                fill(255,100,100,100)
+                rect(x*tileSize+vectorCameraEngineTwo.x, y*tileSize+vectorCameraEngineTwo.y, tileSize, tileSize);
+            }
+            break;
+    }
+}// Usefull for debug
+
+const showSpriteOnTactical = (entity) => {
+    let positionOnMap = 
+    [
+        entity.pos[0] * tileSize - (playerSpriteSize-tileSize)/2 +vectorCameraEngineTwo.x,
+        entity.pos[1] * tileSize - (playerSpriteSize-tileSize)/2 +vectorCameraEngineTwo.y
+    ]
+    if(entity.nextCase !== null) // If entity has a next case to moove
+    {
+        if(mooveEntityToNextCase(entity) === false)
+        {
+            animationIdleSprite(positionOnMap[0], positionOnMap[1], playerSpriteSize, [0, 1], entity.id)
+            showHealthSpriteTactical(positionOnMap, entity)
+        }else{
+            animationMooveSprite(positionOnMap[0], positionOnMap[1], playerSpriteSize, entity.dir, entity.id)
+        }
+    }else{
+        switch(entity.state)
+        {
+            case "fight":
+                if(animationFightSprite(positionOnMap[0], positionOnMap[1], playerSpriteSize, [0, 1], entity.id) === false)
+                {
+                    // This is resseting the entity state on idle when the fight animation is finish (when it returns false)
+                    entity.state = "idle";
+                }
+                showHealthSpriteTactical(positionOnMap, entity)
+                break;
+            case "dead" :
+                break;
+            default :
+                animationIdleSprite(positionOnMap[0], positionOnMap[1], playerSpriteSize, [0, 1], entity.id)
+                showHealthSpriteTactical(positionOnMap, entity)
+                break;
+        }
+    }
+}
+
+const showHealthSpriteTactical = (position, entity) => {
+
+    if(entity.health === undefined){
+        throw new Error("Entity doesn't have health which is impossible, check : " + entity.id)
+    }
+
+    let health = entity.health
+    image(uiData[3].image, position[0], position[1], playerSpriteSize, playerSpriteSize) // Background HP
+    if(entity.health.actualHealth < 0)
+    {
+        entity.health.actualHealth = 0;
+    }
+    let actualHealthPercent = health.actualHealth / health.maxHealth * 100 + 0.0001;
+    image(uiData[0].image, position[0], position[1], actualHealthPercent, playerSpriteSize) // Bar HP
+
+    image(uiData[2].image, position[0], position[1], playerSpriteSize, playerSpriteSize) // Border HP
+}
+
+const createImageWithIdOn2dArrayEngineTwo = (x, y, id, currentTileSize, mapInfo = actualMapEngineTwo) => {
+    if(id < 0)
+    {
+        return // If there is no tile, just return and doesn't write a tile on map
+    } 
+    // size of the current tile according to the data
+    let yTileHeight = mapInfo.tileRessource[id].yWidth;
+    // position of the current tile in the array and the size
+    let xPositionTiles = currentTileSize*x+vectorCameraEngineTwo.x;
+    let yPositionTiles = (currentTileSize*(y+1-yTileHeight))+vectorCameraEngineTwo.y;
+     
+    image(mapInfo.tileRessource[id].image, xPositionTiles , yPositionTiles, currentTileSize, currentTileSize * yTileHeight); 
+  
+  }
+
+
+
+
+
+// ! Tools
+
+const getSpriteWithCoord = (x, y) => {
+    if(getSpriteTactical(x, y) === undefined)
+    {
+        return null; // Just return null if there is no sprite at this case
+    }
+    return getSpriteTactical(x, y);
+}
+
+const getTacticalTileOnMouseClick = () => {
+    return actualMapEngineTwo.tacticalMap[Math.floor((mouseY - vectorCameraEngineTwo.y) / tileSize)][Math.floor((mouseX - vectorCameraEngineTwo.x) / tileSize)];
+}
+
+const getCoordTileWithMouseClickEngineTwo = () => [Math.floor((mouseX - vectorCameraEngineTwo.x) / tileSize), Math.floor((mouseY - vectorCameraEngineTwo.y) / tileSize)] // Return coord on map
+
+const mouseIsInArrayEngineTwo = () => {
+    return Math.floor((mouseX - vectorCameraEngineTwo.x) / tileSize) >= 0 
+    && Math.floor((mouseY - vectorCameraEngineTwo.y) / tileSize) >= 0
+    && Math.floor((mouseY - vectorCameraEngineTwo.y) / tileSize) < actualMapEngineTwo.tacticalMap.length
+    && Math.floor((mouseX - vectorCameraEngineTwo.x) / tileSize) < actualMapEngineTwo.tacticalMap[0].length
+} // Return true or false

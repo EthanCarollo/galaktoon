@@ -26,3 +26,7 @@ const runEngine = () => {
             break;
     }
 }
+
+const setVariablesOnResize = () => {
+    abilitySize = window.innerWidth/10.5;
+}

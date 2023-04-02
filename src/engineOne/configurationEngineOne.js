@@ -37,7 +37,7 @@ let destructionMode = false;
 // Construction Mode
 
 // PLayer can fight
-const playerCanFight = () => playerTeam[0].hp.current > 0
+const playerCanFight = () => playerTeam[0].health.actualHealth > 0
 // PLayer can fight
 
 // Player dialog

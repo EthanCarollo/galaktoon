@@ -2,8 +2,12 @@
 
 const displayUserInterfaceEngineOne = () => {
     displayPlayerInformationUI()
+    displayExploringMenu();
     if(playerIsExploringMap === true){
-        displayExploringMenu();
+        setVectorLerpEaseInExploringMenu();
+    }else{
+        setVectorLerpEaseOutExploringMenu();
+        showQuestList();
     }
 }
 
@@ -17,9 +21,9 @@ const displayPlayerInformationUI = () => {
     let tempPosX = window.innerWidth - tempSize - 40 
     let tempPosXForHealth = tempPosX-12.5;
     let tempPosY = 20;
-    let percentLifeOfPlayer = playerTeam[0].hp.current / playerTeam[0].hp.max +0.00001;
+    let percentLifeOfPlayer = playerTeam[0].health.actualHealth / playerTeam[0].health.maxHealth +0.00001;
     image(uiData[7].image, tempPosX, tempPosY ,tempSize, tempSize)
-    showHealthUI(tempPosXForHealth, tempPosY, tempSize, percentLifeOfPlayer)
+    showHealthBehindRectUI(tempPosXForHealth, tempPosY, tempSize, percentLifeOfPlayer)
     showLevelUI(tempPosX, tempPosY, tempSize, playerTeam[0].level);
 
 }
@@ -38,39 +42,69 @@ const showLevelUI = (x, y, spriteSize, level) => {
     textAlign(LEFT, BASELINE)
 }
 
-const showHealthUI = (posX, posY, size, percentOfLife) => {
-    image(uiData[3].image, posX, 25, size+25, size+25)
-    image(uiData[0].image, posX, 25, (size+25)*percentOfLife, size+25)
-    image(uiData[2].image, posX, 25, size+25, size+25)
+
+const showHealthBehindRectUI = (posX, posY, size, percentOfLife) => {
+    image(uiData[3].image, posX, posY+5, size+25, size+25)
+    image(uiData[0].image, posX, posY+5, (size+25)*percentOfLife, size+25)
+    image(uiData[2].image, posX, posY+5, size+25, size+25)
+}
+
+const showBarWithPercentUi = (posX, posY, size, percentOfLife) => {
+    image(uiData[14].image, posX, posY+5, (size)*percentOfLife, size/12)
+    noTint()
+    image(uiData[13].image, posX, posY+5, size, size/12)
 }
 
 // * Player Information
 
 // * Exploring Menu 
 
+
+let vector2ExploringMenu;
 const displayExploringMenu = () => {
     fill(0,0,0,155)
-    rect(50,50,400,800)
+    let xSizeBg = window.innerHeight /1.75;
+    let ySizeBg = window.innerHeight;
+
+    let xPosition = vector2ExploringMenu.x;
+
+    let padding = 100;
+    let paddingInner = 40;
+    image(uiData[23].image, xPosition+padding/2,padding/2,xSizeBg-padding,ySizeBg-padding)
     for(let i =0; i < planetsData.length; i++)
     {
-        createPlanetMenuObject(75,75+125*i,350,100, i)
+        let xSizePlanets = xSizeBg-padding-paddingInner;
+        let ySizePlanets = (xSizeBg-padding-paddingInner)/3.85;
+        createPlanetMenuObject(xPosition+padding/2+paddingInner/2,(padding/2+paddingInner/2)+125*i,xSizePlanets, ySizePlanets, i)
     }
     exitCross();
 }
 
+const setVectorLerpEaseInExploringMenu = () => {
+    vectorToCover = createVector(0, 0);
+    vectorMoove = p5.Vector.lerp(vectorToCover, vector2ExploringMenu, 0.8);
+    vector2ExploringMenu = vectorMoove;
+}
+const setVectorLerpEaseOutExploringMenu = () => {
+    vectorToCover = createVector(-500, 0);
+    vectorMoove = p5.Vector.lerp(vectorToCover, vector2ExploringMenu, 0.8);
+    vector2ExploringMenu = vectorMoove;
+}
+
 const createPlanetMenuObject = (x, y, sizeX, sizeY, planetID) => {
-    fill(200,55,55)
-    rect(x,y,sizeX,sizeY)
+    image(uiData[22].image, x, y, sizeX, sizeY)
+    if(mouseIsHover(x, y, sizeX, sizeY)){
+        image(uiData[25].image, x, y, sizeX, sizeY)
+    }
     noFill()
-    fill(55,200,55)
-    textSize(40);
+    fill(255,255,255)
+    textSize(25);
     textAlign(CENTER, CENTER)
     text(planetsData[planetID].name, x, y, sizeX, sizeY)
     textAlign(LEFT, BASELINE)
     noFill()
     let mapToExplore = mapData[planetsData[planetID].map]
-    
-    createShowTextOnHover(x, y, sizeX, sizeY, "Voyager vers")
+    //createShowTextOnHover(x, y, sizeX, sizeY, "Voyager vers")
     createInputButtonWithCallback(x, y, sizeX, sizeY, () => {loadMapAndExitExploringMenu(mapToExplore)})
 
 }
@@ -82,17 +116,13 @@ const loadMapAndExitExploringMenu = (mapToExplore) => {
 
 const exitCross = () => {
     fill(255,150,150)
-    rect(75,20,40,40)
-    createInputButtonWithCallback(75, 20, 40, 40, exitExploringMenu)
+    image(uiData[24].image, 75+vector2ExploringMenu.x,15,45,45)
+    createInputButtonWithCallback(75, 20, 45, 45, exitExploringMenu)
     textSize(20);
-    fill(150,150,255)
-    textAlign(LEFT,TOP);
-    text("quit menu", 75, 20, 150,40)
-    // text is temporary
-    noFill()
 }
 
 const exitExploringMenu = () => {
+    vector2ExploringMenu.x = 0;
     playerCanMove = true;
     playerIsExploringMap = false;
 }

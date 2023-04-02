@@ -23,6 +23,11 @@
             "path" : "assets/sprites/topDownSprite/salatonion/salatonionSprite.png",
             "nb" : "1",
             "image" : "null"
+        },{
+            "id" : "4",
+            "path" : "assets/sprites/topDownSprite/ai/MainAi.png",
+            "nb" : "1",
+            "image" : "null"
         }
     ]
 }

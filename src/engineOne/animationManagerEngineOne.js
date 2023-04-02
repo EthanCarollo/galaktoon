@@ -94,6 +94,42 @@ const animationMooveSprite = (positionX, positionY, size, direction, id = 0) => 
     image(spritePlayerAnimationMoove, positionX, positionY, size, size)
 }
 
+const animationFightSprite = (positionX, positionY, size, direction = [0, 1], id = 0) => {
+    let fightAmount = 4;
+    xStartCut = spriteSizeCut*Math.floor(playerFightAnimationIndex);
+    // Fight animation just have one direction
+    spritePlayerAnimationMoove = spritesData[id].image.get(xStartCut,spriteSizeCut* fightAmount,spriteSizeCut,spriteSizeCut);
+
+    image(spritePlayerAnimationMoove, positionX, positionY, size, size)
+    return updateFightAnimationIndex();
+}
+
+const animationDeadSprite = (positionX, positionY, size, direction = [0, 1], id = 0) => {
+    let offsetAnimAmount = 5;
+    xStartCut = 0;
+    // Dead animation just have one direction
+    spritePlayerAnimationMoove = spritesData[id].image.get(xStartCut,spriteSizeCut* offsetAnimAmount,spriteSizeCut,spriteSizeCut);
+
+    image(spritePlayerAnimationMoove, positionX, positionY, size, size)
+}
+
+// ---------------
+
+
+
+
+let playerFightAnimationIndex = 0;
+const updateFightAnimationIndex = () => {
+    playerFightAnimationIndex += 0.1;
+
+    if(fightAnimationIndexIsOutOfLength()) 
+    {
+        playerFightAnimationIndex = 0;
+        return false;
+    }
+    return true;
+}
+
 const updateAnimationIndex = () => {
     playerAnimationIndex += 0.1;
 
@@ -104,3 +140,5 @@ const updateAnimationIndex = () => {
 }
 
 const animationIndexIsOutOfLength = () => playerAnimationIndex >= (playerAnimationLength -1)
+
+const fightAnimationIndexIsOutOfLength = () => playerFightAnimationIndex >= (playerAnimationLength -1)

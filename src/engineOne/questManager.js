@@ -3,42 +3,97 @@ let questList = [
 ];
 
 const addQuestToList = (questId) => {
-    console.log(questId)
     questList.push(questData[questId]);
+    if(questData[questId].eventOnStart !== null)
+    {
+        startSpecificQuestEvents(questData[questId].eventOnStart);
+    }
 }
 
 const showQuestList = () => {
-    let sizeQuestList = 500;
+    let sizeXContainerQuest = 500;
+    let sizeYContainerQuest = sizeXContainerQuest/5; // Width : 500 Height : 100
     let xPosQuestList = 40;
     let yPosQuestList = 25;
     let fontSize = 20;
     textSize(fontSize)
     textAlign(LEFT, TOP);
-    text("- Quests List", xPosQuestList, yPosQuestList, sizeQuestList, sizeQuestList)
-
+    image(uiData[21].image, 0, 0, sizeXContainerQuest / 1.5, 1000)
+    image(uiData[19].image, xPosQuestList, yPosQuestList, sizeXContainerQuest, sizeYContainerQuest)
 
     let yStartList = yPosQuestList * 2 + 15;
-    let sizeXContainerQuest = sizeQuestList;
-    let sizeYContainerQuest = 100;
     for(let i = 0; i < questList.length; i++)
     {
+        let paddingQuest = 20;
+        image(uiData[18].image, xPosQuestList, yStartList + sizeYContainerQuest* i, sizeXContainerQuest, sizeYContainerQuest)
+        fill(255);
         textSize(12)
         textAlign(RIGHT, BOTTOM);
-        text(questList[i].currentProgression + " / " + questList[i].maxProgression, xPosQuestList, yStartList + sizeYContainerQuest* i, sizeQuestList, sizeYContainerQuest)
+        text(questList[i].currentProgression + " / " + questList[i].maxProgression, 
+            xPosQuestList + paddingQuest / 2, 
+            yStartList + sizeYContainerQuest* i + paddingQuest / 2, 
+            sizeXContainerQuest - paddingQuest, 
+            sizeYContainerQuest - paddingQuest)
 
         textAlign(LEFT, TOP);
         textSize(15)
-        text(questList[i].name, xPosQuestList, yStartList + sizeYContainerQuest* i, sizeQuestList, sizeYContainerQuest)
+        text(questList[i].name, 
+            xPosQuestList + paddingQuest / 2, 
+            yStartList + sizeYContainerQuest* i + paddingQuest / 2, 
+            sizeXContainerQuest - paddingQuest, 
+            sizeYContainerQuest - paddingQuest)
 
         textSize(8)
-        text(questList[i].description, xPosQuestList, yStartList + sizeYContainerQuest* i + 25, sizeQuestList, sizeYContainerQuest)
+        text(questList[i].description, xPosQuestList +  + paddingQuest / 2, 
+            yStartList + sizeYContainerQuest* i + 25  + paddingQuest / 2, 
+            sizeXContainerQuest - paddingQuest, 
+            sizeYContainerQuest - paddingQuest)
     }
 }
 
-const addQuestProgression = (questIdProgression) => { // Update a progression using an ID
+// * Quest Goal Animation
+const showGoalQuest = () => {
+    updateAnimationQuestGoal();
+    for(let i = 0; i < questList.length; i++)
+    {
+        if(questList[i].questGoal !== null)
+        {
+            if(playerOnMap.id === questList[i].questGoal.map && questList[i].questGoal.position !== null)
+            {
+                imageMode(CORNER);
+                let positionGoalOnMap = getCoordWithTileCoord(questList[i].questGoal.position[0], questList[i].questGoal.position[1]-1); // get vector position on map
+                let xGoal =  positionGoalOnMap.x + cameraVector.x + playerVector.x - 45, yGoal = positionGoalOnMap.y + cameraVector.y + playerVector.y -60;
+                image(uiData[17].image, xGoal, yGoal + animationIndexUiQuestGoal, tileSize, tileSize)
+            }
+        }
+    }
+}
+
+let animationIndexUiQuestGoal = 0;
+let toggleAnimationQuestIndex = false;
+const updateAnimationQuestGoal = () => {
+    if(animationIndexUiQuestGoal > 20 || toggleAnimationQuestIndex === true){
+        animationIndexUiQuestGoal -= 0.25
+        toggleAnimationQuestIndex = true;
+    }
+    if(animationIndexUiQuestGoal > -5 && toggleAnimationQuestIndex === false){
+        animationIndexUiQuestGoal += 0.25
+    }
+    if(toggleAnimationQuestIndex === true && animationIndexUiQuestGoal < 0)
+    {
+        toggleAnimationQuestIndex = false;
+    }
+    
+}
+// * Quest Goal Animation
+
+// ? There is some questType : fight, talk
+const addQuestProgression = (questIdProgression, questType) => { // Update a progression using an ID
     for(let i = 0; i< questList.length; i++)
     {
-        if(questList[i].idQuestProgression === questIdProgression && questList[i].currentProgression < questList[i].maxProgression)
+        if(questList[i].idQuestProgression+"" === questIdProgression && 
+            questList[i].currentProgression < questList[i].maxProgression &&
+            questList[i].questType === questType)
         {
             questList[i].currentProgression ++;
         }
@@ -70,5 +125,18 @@ const finishQuest = (questId) => {
             questList.splice(i, 1)
             return;
         }
+    }
+}
+
+// ! Quest specific events
+
+const startSpecificQuestEvents = (questEventString) => {
+    switch(questEventString)
+    {
+        case "goNextTutoStep" :
+            mapData[0].npcOnMap[0].nextCase = [12, 10];
+            break;
+        default :
+            throw new Error("Specific event isn't set inside the startSpecificQuestEvents() : " + questEventString)
     }
 }
