@@ -14,10 +14,6 @@ const ressourceToLoad = [
         path : "./json/engineOne/topDownMap.json"
     },
     {
-        typeOfRessource : "spriteFight",
-        path : "./json/engineTwo/spritesFight.json"
-    },
-    {
         typeOfRessource : "ui",
         path : "./json/ui.json"
     },
@@ -32,18 +28,21 @@ const ressourceToLoad = [
     {
         typeOfRessource : "quest",
         path : "./json/engineOne/quests.json"
+    },
+    {
+        typeOfRessource : "tactical",
+        path : "./json/engineTwo/tacticalMap.json"
     }
 ]
 
 let spritesData = [];
 let itemsData = [];
 let mapData = [];
-let spritesFightData = [];
 let uiData = [];
 let planetsData = [];
 let npcData = [];
 let questData = [];
-let mapFightData = [];
+let tacticalMapData = [];
 let pixelFont;
 
 // variables that follow the resource loading course
@@ -55,7 +54,7 @@ let loadingCounterUIData = 0;
 let loadingCounterPlanetsData = 0;
 let loadingCounterNPCData = 0;
 let loadingCounterQuestData = 0;
-let loadingMapFightData = 0;
+let loadingTacticalMapData = 0;
 
 let totalLoadCounter = 0;
 let totalLoad = ressourceToLoad.length;
@@ -79,7 +78,7 @@ const loadAssets = () => {
         })
         .catch(error => { 
             // error handling
-            throw new Error("there is an issue with the ressource path");
+            throw new Error("there is an issue with a ressource : " + error);
 
         })
     } 
@@ -90,26 +89,12 @@ const loadRessource = (ressource, typeOfRessource) => {
     switch(typeOfRessource){
         case "sprite" :
             spritesData = ressource;
-            for(let i = 0; i < spritesData.length; i++)
-            {
-                spritesData[i].image = loadImage(
-                    spritesData[i].path, 
-                    () => successfullLoadingRessource(typeOfRessource),
-                    () => failureLoadingRessource(spritesData[i], typeOfRessource)
-                );
-            }
+            loadImageFromData(spritesData, typeOfRessource);
             break;
         
         case "item" :
             itemsData = ressource;
-            for(let i = 0; i < itemsData.length; i++)
-            {
-                itemsData[i].image = loadImage(
-                    itemsData[i].path, 
-                    () => successfullLoadingRessource(typeOfRessource),
-                    () => failureLoadingRessource(itemsData[i], typeOfRessource)
-                );
-            }
+            loadImageFromData(itemsData, typeOfRessource);
             break;
 
         case "map" :
@@ -119,35 +104,14 @@ const loadRessource = (ressource, typeOfRessource) => {
             for(let i = 0; i < mapData.length; i++){
                 loadJsonForMap(mapData[i])
             }
-            break;
-            // ! NEED AN UPDATE HERE ! //
-
-        case "spriteFight" :
-            spritesFightData = ressource;
-            for(let i = 0; i < spritesFightData.length; i++)
-            {
-                spritesFightData[i].image = loadImage(
-                    spritesFightData[i].path, 
-                    () => successfullLoadingRessource(typeOfRessource),
-                    () => failureLoadingRessource(spritesFightData[i], typeOfRessource)
-                );
-            };
             setTimeout(() => {
                 successfullLoadingRessource("map")    
             }, 1500);
-
             break;
-
+            // ! NEED AN UPDATE HERE ! //
         case "ui" :
             uiData = ressource;
-            for(let i = 0; i < uiData.length; i++)
-            {
-                uiData[i].image = loadImage(
-                    uiData[i].path, 
-                    () => successfullLoadingRessource(typeOfRessource),
-                    () => failureLoadingRessource(uiData[i], typeOfRessource)
-                );
-            }
+            loadImageFromData(uiData, typeOfRessource);
             break;
 
         case "planets" :
@@ -165,22 +129,26 @@ const loadRessource = (ressource, typeOfRessource) => {
             successfullLoadingRessource(typeOfRessource)
             break;
 
-        case "mapFight" :
-            mapFightData = ressource;
-            console.log(mapFightData)
-            for(let i = 0; i < mapFightData.length; i++)
-            {
-                mapFightData[i].image = loadImage(
-                    mapFightData[i].path, 
-                    () => successfullLoadingRessource(typeOfRessource),
-                    () => failureLoadingRessource(mapFightData[i], typeOfRessource)
-                );
-            }
+        case "tactical" :
+            tacticalMapData = ressource;
+            successfullLoadingRessource(typeOfRessource)
             break;
 
         default :
             throw new Error("this is not an accepted type of ressource : " + typeOfRessource);
         
+    }
+}
+
+const loadImageFromData = (data, typeOfRessource) => {
+    console.log(data)
+    for(let i = 0; i < data.length; i++)
+        {
+            data[i].image = loadImage(
+                data[i].path, 
+                () => successfullLoadingRessource(typeOfRessource),
+                () => failureLoadingRessource(data[i], typeOfRessource)
+            );
     }
 }
 
@@ -237,12 +205,6 @@ const successfullLoadingRessource = (typeOfRessource) => {
                 totalLoadCounter ++;
             }
             break;
-        case "ui" :
-            loadingCounterUIData ++;
-            if(loadingCounterUIData === uiData.length){
-                totalLoadCounter ++;
-            }
-            break;
         case "planets" :
             totalLoadCounter ++;
             break;
@@ -258,12 +220,8 @@ const successfullLoadingRessource = (typeOfRessource) => {
                 totalLoadCounter ++;
             }
             break;
-        case "mapFight" :
-            loadingMapFightData++;
-            if(loadingMapFightData === mapFightData.length)
-            {
-                totalLoadCounter ++;
-            }
+        case 'tactical' :
+            totalLoadCounter ++;
             break;
         default :
             throw new Error("this cannot load that type of ressource : " + typeOfRessource);

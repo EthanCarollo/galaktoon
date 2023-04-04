@@ -14,8 +14,8 @@ const runEngineTwo = () => {
 }
 
 const engineTwoPlaying = () => {
-    setSelectedEntity();
     background(20)
+    setSelectedEntity();
     displayTopDownMapEngineTwo();
     setCameraEngineTwo();
     displayEngineTwoUI();
@@ -127,7 +127,7 @@ const showSpriteOnTactical = (entity) => {
         entity.pos[0] * tileSize - (playerSpriteSize-tileSize)/2 +vectorCameraEngineTwo.x,
         entity.pos[1] * tileSize - (playerSpriteSize-tileSize)/2 +vectorCameraEngineTwo.y
     ]
-    if(entity.nextCase !== null) // If entity has a next case to moove
+    if(entity.nextCase !== null ) // If entity has a next case to moove
     {
         if(mooveEntityToNextCase(entity) === false)
         {
@@ -175,7 +175,7 @@ const showHealthSpriteTactical = (position, entity) => {
     image(uiData[2].image, position[0], position[1], playerSpriteSize, playerSpriteSize) // Border HP
 }
 
-const createImageWithIdOn2dArrayEngineTwo = (x, y, id, currentTileSize, mapInfo = actualMapEngineTwo) => {
+const createImageWithIdOn2dArrayEngineTwo = (x, y, id, currentTileSize, mapInfo = actualMapEngineTwoRessource) => {
     if(id < 0)
     {
         return // If there is no tile, just return and doesn't write a tile on map

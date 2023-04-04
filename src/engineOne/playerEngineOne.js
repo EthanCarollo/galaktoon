@@ -71,7 +71,7 @@ const interactWithATile = (tileInteract) => {
             break;
         case "fight":
             // ! TEMP 
-            launchFightOnEngineTwo()
+            launchFightOnEngineTwo(0)
             // ! TEMP
             break;
         case "sleep":

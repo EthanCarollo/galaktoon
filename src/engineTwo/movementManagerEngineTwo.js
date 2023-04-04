@@ -53,7 +53,6 @@ const addCanMoveCase = (position) => {
     }
 }
 const checkCanMoveCase = () => {
-    console.log(canMoveCase)
     for(let i = 0; i < canMoveCase.length; i++)
     {
         if( canMoveCase.find(element => element[0] === canMoveCase[i][0]-1 && element[1] === canMoveCase[i][1]) === undefined &&
@@ -62,8 +61,6 @@ const checkCanMoveCase = () => {
             canMoveCase.find(element => element[0] === canMoveCase[i][0] && element[1] === canMoveCase[i][1]+1) === undefined  )
         {
             canMoveCase.splice(i, 1)
-        }else{
-            
         }
     }
 }
@@ -91,8 +88,9 @@ const mooveEntityToNextCase = (entity, cameraVector = vectorCameraEngineTwo) => 
             entity.pos[0] * tileSize - (playerSpriteSize-tileSize)/2 + cameraVector.x,
             entity.pos[1] * tileSize - (playerSpriteSize-tileSize)/2 + cameraVector.y
         ]
-    if(entity.nextCase === null)
+    if(entity.nextCase === null || entity.nextCase === undefined)
     {
+        console.log(entity.nextCase)
         throw new Error("Entity next case isn't set but the script want to moove");
     }    
     if(entity.nextCase[0] > entity.pos[0] || entity.nextCase[0] < entity.pos[0])

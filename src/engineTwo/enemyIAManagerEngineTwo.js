@@ -37,7 +37,15 @@ const runIaTurn = () => {
     }, timeBetweenAction + timeBetweenAction * entityIa.pm);
 }
 
+
+// ! Different IA Pattern
+
+// ! Different IA Pattern
+
+
 const mooveOneCaseIA = (entityIa) => {
+    entityIa.pos = [Math.round(entityIa.pos[0]), Math.round(entityIa.pos[1])]; 
+    // I'm rounding it cause i don't want to have bug like "Entity pos isn't an int"
     let movableIaCase = getMovableCase(entityIa.pos[0], entityIa.pos[1], 1)
     let casePlayer = actualMapEngineTwo.entityOnTactical[0].pos;
     let nextCase;
@@ -62,7 +70,6 @@ const mooveOneCaseIA = (entityIa) => {
     // 50 % To get the perfect path
 
     nextCase = movableIaCase[chosedPath];
-    console.log(nextCase)
     resetMovableCase()
     setEntityNextCase(entityIa, nextCase)
 }
@@ -82,12 +89,11 @@ const attackIA = (entityIa) => {
         }
     }
     if(target !== null){
-        launchAttack(entityIa, actualMapEngineTwo.entityOnTactical[0], selectAbilityIa);
-        resetAttackableCase()
-        return true;
-    }else{
-        resetAttackableCase()
-        return false;
+        launchAttack(entityIa, actualMapEngineTwo.entityOnTactical[0], selectAbilityIa); 
+        // I don't need to verify if the PA is > 0 cause it already does in the launch attack function 
     }
+    resetAttackableCase()
+    return target !== null; // Return if a target has been selected or not
+    
     
 }
