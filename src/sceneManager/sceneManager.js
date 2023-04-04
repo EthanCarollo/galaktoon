@@ -1,4 +1,7 @@
 const sceneManager = () => {
+    /**
+     * * Launch the engine if all ressource has been loaded
+     */
     if(ressourceIsLoaded === true){
         switch(actualScene){
             case "engine" :
@@ -12,6 +15,9 @@ const sceneManager = () => {
 }
 
 const runEngine = () => {
+    /** 
+     * * Run Engine on different EngineStateEnum
+     */
     switch(actualEngine){
         case EngineStateEnum.EngineOne :
             // Code executing if actualEngine is the first one (in this case it's the 2D Top down Engine)

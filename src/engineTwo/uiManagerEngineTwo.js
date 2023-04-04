@@ -25,7 +25,6 @@ const displayEngineTwoPlayingUi = () => {
 }
 
 const displayEngineTwoEndFightUi = () => {
-    console.log("display end")
     displayEndDebug();
 }
 

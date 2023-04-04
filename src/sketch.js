@@ -3,7 +3,6 @@ function preload() {
   loadAssets(ressourceToLoad); // Launch the function load assets from ressource to load
 }
 
-
 function setup() {
   canvas = createCanvas(windowWidth, windowHeight);
   noSmooth();
@@ -22,6 +21,8 @@ function draw() {
     transitionManager(); // Apply transition effect on screen
     
 }
+
+
 
 function windowResized() {
   windowHeight = window.innerHeight

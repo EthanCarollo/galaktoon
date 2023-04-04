@@ -2,6 +2,7 @@
 let playerVector;
 let cameraVector;
 let mapVector;
+let vector2ExploringMenu;
 
 // Player Var
 let engineOneState = EngineOneStateEnum.Playing;
@@ -25,7 +26,13 @@ let destructionMode = false;
 
 // Construction Mode
 
+// Quest var
 
+let questList = [];
+let animationIndexUiQuestGoal = 0;
+let toggleAnimationQuestIndex = false;
+
+// Quest var
 
 // Player dialog
 

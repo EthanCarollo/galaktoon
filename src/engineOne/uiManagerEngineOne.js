@@ -1,6 +1,9 @@
-// * Display Screen
+
 
 const displayUserInterfaceEngineOne = () => {
+    /**
+     * * Display the normal user interface for the engine One
+     */
     displayPlayerInformationUI()
     displayExploringMenu();
     if(playerIsExploringMap === true){
@@ -11,9 +14,9 @@ const displayUserInterfaceEngineOne = () => {
     }
 }
 
-// * Display Screen
 
-// * Player Information
+
+//#region // * Player Informations Ui region
 
 const displayPlayerInformationUI = () => {
 
@@ -25,7 +28,6 @@ const displayPlayerInformationUI = () => {
     image(uiData[7].image, tempPosX, tempPosY ,tempSize, tempSize)
     showHealthBehindRectUI(tempPosXForHealth, tempPosY, tempSize, percentLifeOfPlayer)
 }
-
 
 const showHealthBehindRectUI = (posX, posY, size, percentOfLife) => {
     image(uiData[3].image, posX, posY+5, size+25, size+25)
@@ -39,12 +41,13 @@ const showBarWithPercentUi = (posX, posY, size, percentOfLife) => {
     image(uiData[13].image, posX, posY+5, size, size/12)
 }
 
-// * Player Information
-
-// * Exploring Menu 
+//#endregion
 
 
-let vector2ExploringMenu;
+
+//#region // * Exploring Menu Region
+
+
 const displayExploringMenu = () => {
     fill(0,0,0,155)
     let xSizeBg = window.innerHeight /1.75;
@@ -111,4 +114,4 @@ const exitExploringMenu = () => {
     playerIsExploringMap = false;
 }
 
-// * Exploring Menu 
+//#endregion
