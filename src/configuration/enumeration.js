@@ -1,7 +1,14 @@
-/** 
- * * This script will hold every enumeration, in that case, it's more organized in a certain way
- * * In that case, i know that every variable who ends with the suffix "Enum" is here !
-*/ 
+/**
+ * This script will hold every enumeration.
+ * ? How the Enum Object of Galaktoon works ?
+ * * The Enum holds every specified value for bunch of things, in my case i usually use it for the differents states
+ * * of my Engine or my SceneManager
+ * ? Why am I using this ?
+ * * I use this cause i think it's more easy to find every existing variables, so if i see the suffix "Enum" in a variable or
+ * * a function, i just need to go here ! This is not for a performance issue it's just to be a little better organized
+ */
+
+
 
 const EngineStateEnum = {
     EngineOne : "engineOne", 
