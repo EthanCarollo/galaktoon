@@ -21,7 +21,7 @@ const displayDialogNpc = (npcDialoged) => {
     
   backgroundTransitionEffect();
   
-  playerState = "dialoging"
+  playerState = PlayerStateEnum.Dialog
 
   let actualDialogIndex = npcDialoged.actualDialogIndex;
   
@@ -311,7 +311,7 @@ const goNextDialog = () => {
 
 const exitDialog = () => {
     backgroundTransition = 0;
-    playerState = "normal"
+    playerState = PlayerStateEnum.Normal
     actualDialog = 0;
     npcDialoged = null;
     return;

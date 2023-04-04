@@ -4,7 +4,7 @@ let cameraVector;
 let mapVector;
 
 // Player Var
-let playerState = "normal";
+let engineOneState = EngineOneStateEnum.Playing;
 
 let cameraSmoothStep = 0.98;
 

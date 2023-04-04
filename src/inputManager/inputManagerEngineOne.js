@@ -20,11 +20,11 @@ const tileNextToThePlayer = () => {
 
 const playerInputForEngineOne=()=>{
     switch(playerState){
-        case "normal" :
+        case PlayerStateEnum.Normal :
             playerInputMoove();
             playerInputInteraction();
             break;
-        case "dialoging" :
+        case PlayerStateEnum.Dialog :
             playerDialogInput();
             break;
         default :

@@ -5,6 +5,8 @@
 
 
 
+let playerState = PlayerStateEnum.Normal;
+
 //#region // * Engine One Player configuration
 
 let playerSpriteSize = 100;

@@ -1,7 +1,14 @@
 /**
+ * * Cinematic have a simple lifecycle : 
+ * * 1 : setCinematic(array[int]) that will set the location in vector2 where the camera will go
+ * * 2 : playCameraCinematic(Vector2 = vectorDestinationCinemation) that will lerp the current camera to the destination
+ * * 3 : endCinematic() that reset the camera position to the player and make the playerCanMove var to true
+ */
+
+/**
  * @param {array} cinematicDestinationFromPlayer array contains [x, y]
  */
-const playCinematic = (cinematicDestinationFromPlayer) => {
+const setCinematic = (cinematicDestinationFromPlayer) => {
     /** 
      * * The cinematicDestinationFromPlayer is where the camera go from the player position, if the cinematicDestinationFromPlayer contains more than 2 cases,
      * * it will returns an error,  the function set the playerMove to false too
@@ -11,7 +18,7 @@ const playCinematic = (cinematicDestinationFromPlayer) => {
         throw new Error("cinematicDestinationFromPlayer is too long to be a real cinematic destination : " + cinematicDestinationFromPlayer)
     }
 
-    engineOneState = "Cinematic"
+    engineOneState = EngineOneStateEnum.Cinematic
     playerCanMove = false;
     vectorDestinationCinemation = [Math.floor(window.innerWidth/2), Math.floor(window.innerHeight/2)]
     vectorDestinationCinemation[0] += cinematicDestinationFromPlayer[0];
@@ -26,7 +33,7 @@ const playCinematic = (cinematicDestinationFromPlayer) => {
 const endCinematic = () => {
     // * Reset the player var to normal
     playerCanMove = true;
-    engineOneState = "Playing";
+    engineOneState = EngineOneStateEnum.Playing;
 }
 
 
@@ -34,7 +41,7 @@ const endCinematic = () => {
 /**
  * @param {Vector2} vectorDestination the destination of the camera (the Vector2 is a p5 type)
  */
-const setCameraCinematic = (vectorDestination = vectorDestinationCinemation) => { // Animate from the player direction
+const playCameraCinematic = (vectorDestination = vectorDestinationCinemation) => { // Animate from the player direction
     /**
      * * Do a vector.lerp with the cameraSmoothStep var used for the lerp on every movement of the player
      * * End the cinematic when the camera is approximatively on the vectorDestination
@@ -87,7 +94,7 @@ const checkMapForCinematic = (map) => {
     switch(map.cinematic)
     {
         case "darkWoaf" : 
-            playCinematic([0, 2000]);
+            setCinematic([0, 2000]);
             break;
     }
 }

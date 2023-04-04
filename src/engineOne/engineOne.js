@@ -1,12 +1,11 @@
-let engineOneState = "Playing"
 
 const runEngineOne = () => {
   switch(engineOneState)
   {
-    case "Playing" :
+    case EngineOneStateEnum.Playing :
       runPlayingStateEngineOne()
       break;
-    case "Cinematic" :
+    case EngineOneStateEnum.Cinematic :
       runCinematicStateEngineOne()
       break;
     default :
@@ -16,7 +15,7 @@ const runEngineOne = () => {
 
 const runCinematicStateEngineOne = () => {
   playerCanMove = false;
-  setCameraCinematic();
+  playCameraCinematic();
   
   displayTopDown2D();
   setVectorLerpEaseOutExploringMenu();

@@ -15,6 +15,16 @@ const EngineStateEnum = {
     EngineTwo : "engineTwo"
 }
 
+const PlayerStateEnum = {
+    Normal : "normal",
+    Dialog : "dialog"
+}
+
+const EngineOneStateEnum = {
+    Playing : 'playing',
+    Cinematic : 'cinematic'
+}
+
 const TransitionStateEnum = {
     EnterIn : "enterIn",
     GoOut : "goOut"
