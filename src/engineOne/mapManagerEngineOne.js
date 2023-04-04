@@ -1,6 +1,6 @@
 /**
  * @param {object} mapToLoad map object to load
- * @param {array} start [x, y] array
+ * @param {array[int]} start [x, y] array
  */
 const loadNewMap = (mapToLoad, start) => {
     /**
@@ -22,15 +22,15 @@ const loadNewMap = (mapToLoad, start) => {
 }
 
 /**
- * @param {*} x xPosition in the world
- * @param {*} y yPosition in the world
- * @returns {Array} position in the tile coord
+ * @param {int} x xPosition in the world
+ * @param {int} y yPosition in the world
+ * @returns {array[int]} position in the tile coord
  */
 const getTileCoordWithCoord = (x, y) => [x / tileSize, y / tileSize] 
 
 /**
- * @param {*} x xPosition in the grid
- * @param {*} y yPosition in the grid
+ * @param {int} x xPosition in the grid
+ * @param {int} y yPosition in the grid
  * @returns {Vector2} position in the world
  */
 const getCoordWithTileCoord = (x, y) => createVector(x*tileSize, y*tileSize)

@@ -46,22 +46,63 @@ const displayNpc = (npc) => {
     
 }
 
+/**
+ * @param {int} x x pos of the npc on the map
+ * @param {int} y y pos of the npc on the map
+ * @param {int} size sze of the npc on the map
+ * @param {array[int]} direction [x, y] contains the direction of the npc animated
+ * @param {int} npcId string that contains npc id
+ * @param {object} npc object that contains npc information
+ */
 const animateNpc = (x, y, size, direction /* ! = Array ! */, npcId, npc) => {
-    switch(npc.state){
-      case "idle" :
+  /**
+   * * Switch on the npc state and show different animation
+   */
+
+  switch(npc.state){
+    case "idle" :
+      animationIdleSprite(x, y, size, direction, npcId)
+      break;
+    case "moove" :
+      if(mooveEntityToNextCase(npc, createVector(cameraVector.x + playerVector.x, cameraVector.y + playerVector.y)) === true) // Using the "pathfinding" from the second Engine
+      {
+        animationMooveSprite(x, y, size, direction, npcId)
+      }else{
         animationIdleSprite(x, y, size, direction, npcId)
-        break;
-      case "moove" :
-        if(mooveEntityToNextCase(npc, createVector(cameraVector.x + playerVector.x, cameraVector.y + playerVector.y)) === true) // Using the "pathfinding" from the second Engine
-        {
-          animationMooveSprite(x, y, size, direction, npcId)
-        }else{
-          animationIdleSprite(x, y, size, direction, npcId)
-        }
-        break;
-      default :
-        break;
+      }
+      break;
+    default :
+      break;
     }
 }
 
+/**
+ * @param {object} npc 
+ */
+const setNpcDirectionWithThePlayerDirection = (npc) => {
+  /** 
+   * * Useful when we talk with a pnj and we want him to look at us
+  */
+
+  if(npc.pos[0] > actualPlayerTile()[0]){
+      npc.dir = [-1, 0];
+      return;
+  }
+  if(npc.pos[0] < actualPlayerTile()[0]){
+      npc.dir = [1,0];
+      return;
+  }
+  if(npc.pos[1] > actualPlayerTile()[1]){
+      npc.dir = [0, -1];
+      return;
+  }
+  if(npc.pos[1] < actualPlayerTile()[1]){
+      npc.dir = [0, 1];
+      return;
+  }
+}
+
+/**
+ * @returns {array[object]} return an array of npc in front of the player else return null
+ */
 const isInFrontOfANpc = () => playerOnMap.npcOnMap.filter(npc => npc.position[0] === tileInteract[0] && npc.position[1] === tileInteract[1])

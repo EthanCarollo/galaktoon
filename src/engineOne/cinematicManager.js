@@ -6,7 +6,7 @@
  */
 
 /**
- * @param {array} cinematicDestinationFromPlayer array contains [x, y]
+ * @param {array[int]} cinematicDestinationFromPlayer array contains [x, y]
  */
 const setCinematic = (cinematicDestinationFromPlayer) => {
     /** 
@@ -85,7 +85,7 @@ const showBorderCinematic = () => {
 
 
 /**
- * @param {array} map
+ * @param {array[int][int]} map 2D array of the map
  */
 const checkMapForCinematic = (map) => {
     /**
