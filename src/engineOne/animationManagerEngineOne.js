@@ -1,15 +1,21 @@
 
+
+
 /**
  * @param {float} positionX posX of the anim
  * @param {float} positionY posY of the anim
  * @param {float} size size of the animation
  * @param {array} direction direction is an array who looks like [0, 1], the 0 case is the x and the 1 case is the y,
- * if the param isn't between [-1, -1] && [1, 1], it will throw an error
+ * if the param isn't between [-1, -1] && [1, 1], it will throw an error, this function actually hold the 'last direction' of a sprites
  * @param {int} id id of the current sprite animated, automatically to 0
  */
 const animationIdleSprite = (positionX, positionY, size, direction, id = 0) => {
     let idleSpriteAnimation;
-
+    /**
+    * * I actually stringify the array in this function cause switch case doesn't take array in parameter, i use it in this case
+    * * because last direction var taken in parameter is in most of case [0, 1] || [1, 0] || [0,-1] || [-1, 0] cause a direction 
+    * * of somebody who doesn't moove cannot be diagonal on a grid. 
+    */
     // ! /!\ switch don't take array, so i stringify it /!\ ! \\
     switch(direction.toString()){
         case "1,0":
@@ -25,12 +31,14 @@ const animationIdleSprite = (positionX, positionY, size, direction, id = 0) => {
             idleSpriteAnimation = spritesData[id].image.get(0,0,spriteSizeCut,spriteSizeCut)
             break;
         default :
-            throw new Error("failed to animate the sprite, there is an error in the lastDirection var");
+            throw new Error("failed to animate the sprite, there is an error in the lastDirection var, id of sprites : " +  id);
     }
     // ! /!\ switch don't take array, so i stringify it /!\ ! \\
 
     image(idleSpriteAnimation, positionX, positionY, size, size)
 }
+
+
 
 /**
  * @param {float} positionX posX of the anim
@@ -41,6 +49,15 @@ const animationIdleSprite = (positionX, positionY, size, direction, id = 0) => {
  * @param {int} id id of the current sprite animated, automatically to 0
  */
 const animationMooveSprite = (positionX, positionY, size, direction, id = 0) => {
+    /**
+     * * This function is flexible for every sprites in the sprites.json. If the direction isn't good, it returns an error. 
+     * * I don't use the same stringify i used the idle animation function cause the moovement can be diagonal.
+     */
+
+    if(direction.length > 2)
+    {
+        throw new Error("Direction isn't an array that contains x, y. It contains other elements. id of sprite failed to animate : " + id)
+    }
     switch(direction[0]){
         case 1 :
             setEntityLastDirection([1, 0], id);
@@ -70,11 +87,16 @@ const animationMooveSprite = (positionX, positionY, size, direction, id = 0) => 
          default :
             throw new Error("failed to animate the sprite, there is an error in the Y direction array, the id of the sprite who don't want to be animate is " + id);
     }// set animation for Y direction
-    
 
     image(spritePlayerAnimationMoove, positionX, positionY, size, size)
 }
 
+
+
+/**
+ * @param {array} direction the last direction
+ * @param {int} entityId the entity targeted to set the last direction
+ */
 const setEntityLastDirection = (direction, entityId) => {
     /**
      * This function set the last direction of an entity
@@ -83,9 +105,11 @@ const setEntityLastDirection = (direction, entityId) => {
     {
         playerLastDirection = direction;
     }else{
-        // TODO : Set the entity last direction here
+        // TODO : Set the entity (other than the player) last direction here
     }
 }
+
+
 
 /**
  * @param {float} positionX posX of the anim
@@ -148,11 +172,7 @@ const animationDeadSprite = (positionX, positionY, size, id = 0) => {
 
 
 
-
-
-
-// ? Animation Index Logics
-//#region 
+//#region // ? Animation Index Logics
 
 /**
  * @returns {boolean} false if the animation restart, true if it is still running
@@ -182,12 +202,16 @@ const updateAnimationIndex = () => {
      */
     playerAnimationIndex += 0.1;
 
-    if(indexIsOutOfLength(playerFightAnimationIndex)) 
+    if(indexIsOutOfLength(playerAnimationIndex)) 
     {
         playerAnimationIndex = 0;
     }
 }
 
-const indexIsOutOfLength = () => playerAnimationIndex >= (playerAnimationLength -1)
+/**
+ * @param {float} animationIndex the animation index we need to know if it's higher than the maximum frames authorized 
+ * @returns {boolean} this boolean is if yes or not the 
+ */
+const indexIsOutOfLength = (animationIndex) => animationIndex >= (playerAnimationLength -1) 
 
 //#endregion
