@@ -140,7 +140,7 @@ const showSpriteOnTactical = (entity) => {
         switch(entity.state)
         {
             case "fight":
-                if(animationFightSprite(positionOnMap[0], positionOnMap[1], playerSpriteSize, [0, 1], entity.id) === false)
+                if(animationFightSprite(positionOnMap[0], positionOnMap[1], playerSpriteSize, 0, entity.id) === false)
                 {
                     // This is resseting the entity state on idle when the fight animation is finish (when it returns false)
                     entity.state = "idle";

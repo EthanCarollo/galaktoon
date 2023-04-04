@@ -13,11 +13,11 @@ const sceneManager = () => {
 
 const runEngine = () => {
     switch(actualEngine){
-        case EngineOne :
+        case EngineStateEnum.EngineOne :
             // Code executing if actualEngine is the first one (in this case it's the 2D Top down Engine)
             runEngineOne()
             break;
-        case EngineTwo :
+        case EngineStateEnum.EngineTwo :
             // Code executing if actualEngine is the second one
             runEngineTwo()
             break;

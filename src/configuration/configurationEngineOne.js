@@ -14,8 +14,6 @@ let playerIsExploringMap = false;
 
 // Player anim
 let playerIsMooving = false;
-let playerAnimationIndex = 0;
-const playerAnimationLength = 4;
 let playerDirection = [0, 0]; // stock the direction of the player in a array
 let playerLastDirection = [0, 1]; // orientation naturally down
 // Player anim
@@ -46,3 +44,4 @@ let npcDialoged = null;
 let actualDialog = 0;
 
 // Player dialog
+

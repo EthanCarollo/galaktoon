@@ -48,7 +48,7 @@ let selectedEntity = null;
 let whichEntityTurn = 0;
 let selectedAbility = 0;
 
-// UI CONFIGURATION :
+// * ENGINE TWO UI CONFIGURATION :
 
 let transitionLight = [0, 0, 0];
 let transitionSpeed = 1;

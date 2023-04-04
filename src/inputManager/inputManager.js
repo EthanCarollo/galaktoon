@@ -1,9 +1,9 @@
 const runInputManager = () => {
     switch(actualEngine){
-        case EngineOne :
+        case EngineStateEnum.EngineOne :
             playerInputForEngineOne();
             break;
-        case EngineTwo :
+        case EngineStateEnum.EngineTwo :
             playerInputForEngineTwo();
             break;
         default :
@@ -14,10 +14,10 @@ const runInputManager = () => {
 
 function keyPressed(){
     switch(actualEngine){
-      case EngineOne :
+      case EngineStateEnum.EngineOne :
         playerKeyPressedForEngineOne()
         break;
-      case EngineTwo :
+      case EngineStateEnum.EngineTwo :
         playerKeyPressedForEngineTwo()
         break;
       default :
@@ -27,10 +27,10 @@ function keyPressed(){
 
 function mouseClicked(){
     switch(actualEngine){
-        case EngineOne :
+        case EngineStateEnum.EngineOne :
 
           break;
-        case EngineTwo :
+        case EngineStateEnum.EngineTwo :
           keyPressedForEngineTwo();
           break;
         default :

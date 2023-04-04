@@ -24,22 +24,6 @@ const displayPlayerInformationUI = () => {
     let percentLifeOfPlayer = playerTeam[0].health.actualHealth / playerTeam[0].health.maxHealth +0.00001;
     image(uiData[7].image, tempPosX, tempPosY ,tempSize, tempSize)
     showHealthBehindRectUI(tempPosXForHealth, tempPosY, tempSize, percentLifeOfPlayer)
-    showLevelUI(tempPosX, tempPosY, tempSize, playerTeam[0].level);
-
-}
-
-const showLevelUI = (x, y, spriteSize, level) => {
-    let characterLevel = level;
-    let caseLevel = uiData[8].image;
-    let caseSize = 35;
-    let xCase = x+spriteSize-caseSize;
-    let yCase = y+spriteSize-(caseSize/1.75);
-    image(caseLevel, xCase, yCase, caseSize, caseSize)
-    textAlign(CENTER, CENTER)
-    fill(255)
-    textSize(12)
-    text(characterLevel, xCase, yCase, caseSize, caseSize)
-    textAlign(LEFT, BASELINE)
 }
 
 

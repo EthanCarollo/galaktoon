@@ -15,7 +15,23 @@ let actualScene = "engine";
 
 // * ENGINE MANAGER
 
-const EngineOne = "engineOne", EngineTwo = "engineTwo";
-let actualEngine = EngineOne;
+let actualEngine = EngineStateEnum.EngineOne;
 
 // * ENGINE MANAGER
+
+// * GLOBAL ANIMATION VAR
+
+let playerFightAnimationIndex = 0;
+let playerAnimationIndex = 0;
+const playerAnimationLength = 4;
+
+// * GLOBAL ANIMATION VAR
+
+// * GLOBAL TRANSITION VAR
+
+let actualTransitionState = null;
+let callbackWhenTransitionFinish = () => { }; // The variable that hold the arrow function to launch at the end of the transition function
+let transitionEngineIndex = 0;
+let transitionImageId = 15;
+
+// * GLOBAL TRANSITION VAR

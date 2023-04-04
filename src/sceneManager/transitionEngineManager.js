@@ -2,19 +2,11 @@
 
 const returnEngineOneAfterFight = () => {
     settingUpEngineOneScene();
-    launchEngineOne();
+    launchEngine(EngineStateEnum.EngineOne);
 }
 
 const settingUpEngineOneScene = () => {
     // If there is some things to set up before launching the engine, this will be here
-}
-
-const launchEngineOne = () => {
-    launchTransitionAndSetCallbackAfter(() => {
-        // Function to do when transition ended
-        actualEngine = EngineOne;
-
-    });
 }
 
 // Engine Two
@@ -25,7 +17,7 @@ const launchFightOnEngineTwo = (idMapOfFight) => { // this take in parameters de
         actualMapEngineTwo = tacticalMapData[idMapOfFight]
         actualMapEngineTwoRessource = mapData[actualMapEngineTwo.attachedMap];
         setPlayerInActualMapEngineTwo();
-        launchEngineTwo();
+        launchEngine(EngineStateEnum.EngineTwo);
     }
 }
 
@@ -34,11 +26,10 @@ const setPlayerInActualMapEngineTwo = () => {
     actualMapEngineTwo.entityOnTactical[0].abilities = playerTeam[0].abilities
 } // Set variables of the player in the entityOnTactical array of the map, in that order, we have the position defined by the map and the health and the ability set by the playerConfig
 
-const launchEngineTwo = () => {
+const launchEngine = (engineToLaunch) => {
     launchTransitionAndSetCallbackAfter(() => {
         // Function to do when transition ended
-        actualEngine = EngineTwo; 
-
+        actualEngine = engineToLaunch; 
     });
 }
 
@@ -48,23 +39,19 @@ const launchTransitionAndSetCallbackAfter = (callbackFunction, idTransition = 15
     transitionImageId = idTransition;
     uiData[idTransition].image.resize(window.innerWidth, window.innerHeight); // ! Set size for transition
 
-    actualTransitionState = "enterIn"
+    actualTransitionState = TransitionStateEnum.EnterIn
 }
 
 // ! Aesthetic transtion
 
 
-let actualTransitionState = null;
-let callbackWhenTransitionFinish = () => { };
-let transitionEngineIndex = 0;
-let transitionImageId = 15;
 const transitionManager = () => {
     switch(actualTransitionState)
     {
-        case "enterIn" : 
+        case TransitionStateEnum.EnterIn : 
             enterInTransition()
             break;
-        case "goOut" :
+        case TransitionStateEnum.GoOut :
             goOutTransition()
             break;
     }
@@ -81,7 +68,7 @@ const enterInTransition = () => {
     {
         transitionEngineIndex+=10;
     }else{
-        actualTransitionState = "goOut"
+        actualTransitionState = TransitionStateEnum.GoOut 
         callbackWhenTransitionFinish();
     }
 }

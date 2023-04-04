@@ -24,7 +24,6 @@ const runCinematicStateEngineOne = () => {
 }
 
 const runPlayingStateEngineOne = () => {
-  updatePlayerLevel(playerTeam[0]); // temp call of the function
   setPlayerCamera();
   displayTopDown2D();
   displayUserInterfaceEngineOne();
@@ -108,8 +107,6 @@ const createImageWithIdOn2dArray = (x, y, id, currentTileSize, isUi = false, map
   }else{
     image(mapInfo.tileRessource[id].image, xPositionTiles , yPositionTiles, currentTileSize * xTileWidth, currentTileSize * yTileHeight); 
   }
-
-  //noTint()
 }
 
 const tileIsEmpty = (x, y, map) => {
