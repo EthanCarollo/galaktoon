@@ -1,68 +1,4 @@
 
-
-const ressourceToLoad = [
-    {
-        typeOfRessource : "sprite",
-        path : "./json/engineOne/sprites.json"
-    },
-    {
-        typeOfRessource : "item",
-        path : "./json/engineOne/items.json"
-    },
-    {
-        typeOfRessource : "map",
-        path : "./json/engineOne/topDownMap.json"
-    },
-    {
-        typeOfRessource : "ui",
-        path : "./json/ui.json"
-    },
-    {
-        typeOfRessource : "planets",
-        path : "./json/engineOne/planetExplorable.json"
-    },
-    {
-        typeOfRessource : "npc",
-        path : "./json/engineOne/npc.json"
-    },
-    {
-        typeOfRessource : "quest",
-        path : "./json/engineOne/quests.json"
-    },
-    {
-        typeOfRessource : "tactical",
-        path : "./json/engineTwo/tacticalMap.json"
-    }
-]
-
-let spritesData = [];
-let itemsData = [];
-let mapData = [];
-let uiData = [];
-let planetsData = [];
-let npcData = [];
-let questData = [];
-let tacticalMapData = [];
-let pixelFont;
-
-// variables that follow the resource loading course
-
-let loadingCounterSpritesData = 0;
-let loadingCounterItemsData = 0;
-let loadingCounterSpritesFightData = 0;
-let loadingCounterUIData = 0;
-let loadingCounterPlanetsData = 0;
-let loadingCounterNPCData = 0;
-let loadingCounterQuestData = 0;
-let loadingTacticalMapData = 0;
-
-let totalLoadCounter = 0;
-let totalLoad = ressourceToLoad.length;
-
-// variables that follow the resource loading course
-
-let ressourceIsLoaded = false; // boolean who tell if ALL the ressources has been loaded or no, while this bool is false, the game won't launch
-
 const loadAssets = () => {
     pixelFont = loadFont('../assets/fonts/PublicPixel.ttf');
     for(let i = 0 ; i < ressourceToLoad.length ; i++)
@@ -84,8 +20,16 @@ const loadAssets = () => {
     } 
     
   }
-
+/**
+ * @param {array} ressource the ressource data
+ * @param {string} typeOfRessource the type of ressource
+ */
 const loadRessource = (ressource, typeOfRessource) => {
+    /**
+     * * This function do a big switch case on every types of ressource renseigned in ressourceToLoad array,
+     * * if we wan't to add a ressource that doesn't fit with the switch case, we will have an error.
+     */
+
     switch(typeOfRessource){
         case "sprite" :
             spritesData = ressource;
@@ -98,17 +42,12 @@ const loadRessource = (ressource, typeOfRessource) => {
             break;
 
         case "map" :
-            // ! NEED AN UPDATE HERE ! //
             mapData = ressource;
-            console.log(mapData);
             for(let i = 0; i < mapData.length; i++){
                 loadJsonForMap(mapData[i])
             }
-            setTimeout(() => {
-                successfullLoadingRessource("map")    
-            }, 1500);
             break;
-            // ! NEED AN UPDATE HERE ! //
+            // TODO : Update the map loading ressource logics
         case "ui" :
             uiData = ressource;
             loadImageFromData(uiData, typeOfRessource);
@@ -141,7 +80,9 @@ const loadRessource = (ressource, typeOfRessource) => {
 }
 
 const loadImageFromData = (data, typeOfRessource) => {
-    console.log(data)
+    /**
+     * * Load the image from the data and send the type of ressource in case of success or in case of failure, it just throw an error
+     */
     for(let i = 0; i < data.length; i++)
         {
             data[i].image = loadImage(
@@ -152,36 +93,40 @@ const loadImageFromData = (data, typeOfRessource) => {
     }
 }
 
+
 const loadJsonForMap = (map) => {
-    console.log(map.tileRessource)
+    /**
+     * * This is a special case, the map also contains a data who contains his personnalized tiles ressources and path but in most of case i use
+     * * the loadImageFromData function or for the text i just do a 'var = ressource;', 
+     * * then i just use the more global function loadImageFromData 
+     */
+
     fetch(map.tileRessource)
         .then(res => res.json())
         .then(res => res.data)
         .then(res => { 
             map.tileRessource = res;
-            loadTileFromJson(map); 
-        }) // ! LOAD THE JSON
+            loadImageFromData(map.tileRessource, "map"); 
+        })
         .catch(err => console.log(err))
 }
 
-const loadTileFromJson = (map) => {
-    console.log(map.tileRessource)
-    for(let j = 0; j < map.tileRessource.length; j++)
-    {
-        map.tileRessource[j].image = loadImage(
-            map.tileRessource[j].path, 
-            () => { console.log("successfully loaded tile") },
-            () => failureLoadingRessource(map.tileRessource[j], "map Tiles")
-        );
-    }
-}
 
 const failureLoadingRessource = (ressource, typeOfRessource) => {
     // error handling
     throw new Error("failed to load a " + typeOfRessource + " from the " + ressource.id + " (path : " + ressource.path + ") case, check the following json to fix that or check if the image exists");
 }
 
+/**
+ * @param {string} typeOfRessource the type of ressource loaded
+ */
 const successfullLoadingRessource = (typeOfRessource) => {
+    /**
+     * * This function do a big switch case on every types of ressource renseigned in ressourceToLoad array,
+     * * if we wan't to add a ressource that doesn't fit with the switch case, we will have an error. In this case
+     * * this function is called when we success a loading ressource. And after every successfullLoad, the function
+     * * check if all ressource has been loaded, in that case we know when we can start the game
+     */
 
     switch(typeOfRessource){
         case "sprite" :
@@ -197,7 +142,11 @@ const successfullLoadingRessource = (typeOfRessource) => {
             }
             break;
         case "map" :
-            totalLoadCounter ++;
+            loadingCounterMapData ++;
+            if(loadingCounterMapData === mapData[0].tileRessource.length){ // If we spawn on the map 0 then we just need to load the map 0 and the rest will load
+                totalLoadCounter ++;
+            }
+            // TODO : This method is still unstable (like if a player change the map that he didn't already load)
             break;
         case "spriteFight" :
             loadingCounterSpritesFightData ++;
@@ -232,12 +181,16 @@ const successfullLoadingRessource = (typeOfRessource) => {
 }
 
 const checkAllRessource = () => {
-    if(totalLoadCounter === totalLoad)
+    /**
+     * * Function just check if we have or not loaded all ressource OR if we have loaded too much ressource and then if all ressource is loaded, load the
+     * * the function
+     */
+
+    if(totalLoadCounter === totalLoad && ressourceIsLoaded != true)
     {
         loadAllRessource()
     }
-
-    // error handling
+    
     if(totalLoadCounter > totalLoad)
     {
         throw new Error("code loaded too much data, there is a problem in the 'successfullLoadingRessource' function");
@@ -245,12 +198,12 @@ const checkAllRessource = () => {
 }
 
 const loadAllRessource = () => {
-    setEngineOneVariableAfterLoadingAllAssets();
-
+    launchEngine(EngineStateEnum.EngineOne);
+    setEngineVariableAfterLoadingAllAssets();
     ressourceIsLoaded = true;
 }
 
-const setEngineOneVariableAfterLoadingAllAssets = () => {
+const setEngineVariableAfterLoadingAllAssets = () => {
     if(mapData.length < 1)
     {
         throw new Error("mapData isn't set for map creation");
