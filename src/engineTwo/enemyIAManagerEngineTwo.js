@@ -11,7 +11,35 @@ const runIaTurn = () => {
     }
 
     let entityIa = actualMapEngineTwo.entityOnTactical[whichEntityTurn]
-    let timeBetweenAction = 500; // time between action of the IA
+    runIaPattern(entityIa)
+    
+}
+
+
+//#region // * Different IA Pattern region
+
+const runIaPattern = (entityIa) => {
+    /** 
+     * * This code will play different gameplay for differents IA patterns, nothing extremely advanced,
+     * * just a 'IA' that play differents playstyle like we can see in old retro games
+     */
+    switch(entityIa.pattern)
+    {
+        case 'normal' : 
+            runNormalIaPattern(entityIa);
+            break;
+        default :
+            throw new Error("Entity Ia Pattern isn't defined or doesnt exist : " + entityIa.pattern)
+    }
+}
+
+const runNormalIaPattern = (entityIa) => {
+    /**
+     * * Normal playstyle for an IA, sometimes IA will go on the player and sometimes not,
+     * * and when entity can attack the player, the entity attack the player
+     */
+
+    let timeBetweenAction = 650; // time between action of the IA
 
     for(let i = 0; i < entityIa.pm; i++)
     {
@@ -37,10 +65,7 @@ const runIaTurn = () => {
     }, timeBetweenAction + timeBetweenAction * entityIa.pm);
 }
 
-
-// ! Different IA Pattern
-
-// ! Different IA Pattern
+//#endregion
 
 
 const mooveOneCaseIA = (entityIa) => {
@@ -53,7 +78,7 @@ const mooveOneCaseIA = (entityIa) => {
 
     let pathLuck = getRandomInt(100)
 
-    if(pathLuck > 50){
+    if(pathLuck > 35){
         for(let i = 0; i < movableIaCase.length; i ++)
         {
             let caseX = Math.abs(movableIaCase[i][0] - casePlayer[0]);
@@ -67,7 +92,7 @@ const mooveOneCaseIA = (entityIa) => {
         chosedPath = getRandomInt(movableIaCase.length -1)+1; // Random Path
     }
 
-    // 50 % To get the perfect path
+    // 65 % To get the perfect path
 
     nextCase = movableIaCase[chosedPath];
     resetMovableCase()
