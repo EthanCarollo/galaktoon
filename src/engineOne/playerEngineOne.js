@@ -1,7 +1,14 @@
 // ************************ Player Animation
 
+/**
+ * @param {float} positionX 
+ * @param {float} positionY 
+ * @param {int} spriteSize 
+ */
 const showPlayerSprite = (positionX, positionY, spriteSize) => {
-
+    /**
+     * * Show the sprite and if he is mooving or not
+     */
       let xSpritePosition = positionX - spriteSize / 2
       let ySpritePosition = positionY - spriteSize
         if(playerIsMooving === true){
@@ -14,12 +21,24 @@ const showPlayerSprite = (positionX, positionY, spriteSize) => {
 
 }
 
+
+
+/**
+ * @param {Vector2} offsetVectorBounds automatically to x 0 y 0, but it can be modified for the collision
+ * @returns {array} [x, y] position of the player in the tile grid
+ */
 const actualPlayerTile = (offsetVectorBounds = createVector(0, 0)) => 
 [
  Math.floor((playerVector.x + offsetVectorBounds.x - (playerSpriteSize / 2)) / tileSize * -1), 
  Math.floor((playerVector.y + offsetVectorBounds.y - (playerSpriteSize / 2) + 20) / tileSize * -1) // y is a little bit offset (by 20) because the spriteY doesnt cut on yPixel = 0
-] // this is a temporary messy function
+]
 
+
+
+/**
+ * @param {Vector2} offsetVectorBounds automatically to x 0 y 0, but it can be modified for the collision
+ * @returns {boolean} return true if it collided to somehting or false if not
+ */
 const getPlayerCollision = (offsetVectorBounds = createVector(0, 0)) => { // offsetVectorBounds is usefull in case we have different collision point on the player
 
     let actualPlayerTileWithOffsetBounds = actualPlayerTile(offsetVectorBounds)

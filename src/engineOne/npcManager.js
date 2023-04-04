@@ -1,5 +1,14 @@
 
+/**
+ * @param {string} orientation string can be back or front, if it's not both of them, it will send an error
+ */
 const displayNPCOnMap = (orientation = "back") => {
+  /**
+   * ? How it works ?
+   * * If the function is called with the parameter "back" the function just show the tile in back of the player
+   * * but if it's "front" it will show the tiles in front of the player so if i put the playerShow function
+   * * between these two functions, i will have illusion of depth
+   */
     switch(orientation){
         case "back":
             for(let i = 0; i < playerOnMap.npcOnMap.length; i++){
@@ -17,6 +26,8 @@ const displayNPCOnMap = (orientation = "back") => {
                   }
             }
             break;
+        default :
+            throw new Error("orientation isn't set : " + orientation);
     }
 }
 
