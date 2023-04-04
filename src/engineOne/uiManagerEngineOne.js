@@ -82,12 +82,12 @@ const displayExploringMenu = () => {
 
 const setVectorLerpEaseInExploringMenu = () => {
     vectorToCover = createVector(0, 0);
-    vectorMoove = p5.Vector.lerp(vectorToCover, vector2ExploringMenu, 0.8);
+    vectorMoove = p5.Vector.lerp(vectorToCover, vector2ExploringMenu, 0.88);
     vector2ExploringMenu = vectorMoove;
 }
 const setVectorLerpEaseOutExploringMenu = () => {
-    vectorToCover = createVector(-500, 0);
-    vectorMoove = p5.Vector.lerp(vectorToCover, vector2ExploringMenu, 0.8);
+    vectorToCover = createVector(-window.innerHeight /1.75, 0);
+    vectorMoove = p5.Vector.lerp(vectorToCover, vector2ExploringMenu, 0.88);
     vector2ExploringMenu = vectorMoove;
 }
 

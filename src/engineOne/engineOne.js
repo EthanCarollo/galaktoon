@@ -28,7 +28,6 @@ const runPlayingStateEngineOne = () => {
   setPlayerCamera();
   displayTopDown2D();
   displayUserInterfaceEngineOne();
-  showGoalQuest();
   if(npcDialoged !== null)
   {
     displayDialogNpc(npcDialoged)
@@ -47,7 +46,7 @@ const displayTopDown2D = () => {
     createMapTopDown("front", actualPlayerMap.objectLayer); // create the layer object in front of the player
     displayNPCOnMap("front");
   
-    
+    showGoalQuest();
     // the double createmap function is used to simulate a 2D perspective
 }
 
