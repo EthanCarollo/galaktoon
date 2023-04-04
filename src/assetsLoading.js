@@ -1,5 +1,8 @@
 
 const loadAssets = () => {
+    /**
+     * * The launch function for the loading of all assets
+     */
     pixelFont = loadFont('../assets/fonts/PublicPixel.ttf');
     for(let i = 0 ; i < ressourceToLoad.length ; i++)
     {
@@ -20,6 +23,8 @@ const loadAssets = () => {
     } 
     
   }
+
+
 /**
  * @param {array} ressource the ressource data
  * @param {string} typeOfRessource the type of ressource
@@ -79,6 +84,10 @@ const loadRessource = (ressource, typeOfRessource) => {
     }
 }
 
+/**
+ * @param {array} data contains every image to load
+ * @param {string} typeOfRessource type of ressource to take in the successfull loading ressource
+ */
 const loadImageFromData = (data, typeOfRessource) => {
     /**
      * * Load the image from the data and send the type of ressource in case of success or in case of failure, it just throw an error
@@ -93,7 +102,10 @@ const loadImageFromData = (data, typeOfRessource) => {
     }
 }
 
-
+/**
+ * @param {array} map this function just work with the precise case that we have a tile ressource attached to the array that we want to load
+ * separately than the actual informations contained in the array
+ */
 const loadJsonForMap = (map) => {
     /**
      * * This is a special case, the map also contains a data who contains his personnalized tiles ressources and path but in most of case i use
@@ -111,9 +123,14 @@ const loadJsonForMap = (map) => {
         .catch(err => console.log(err))
 }
 
-
+/**
+ * @param {array} ressource information good for the error handling
+ * @param {string} typeOfRessource information good too for the error handling
+ */
 const failureLoadingRessource = (ressource, typeOfRessource) => {
-    // error handling
+    /** 
+     * * Throw the error in case that the load failed :(
+     */
     throw new Error("failed to load a " + typeOfRessource + " from the " + ressource.id + " (path : " + ressource.path + ") case, check the following json to fix that or check if the image exists");
 }
 

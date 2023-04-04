@@ -26,7 +26,7 @@ const launchEngine = (engineToLaunch) => {
      * * This is use the function launchTransitionAndSetCallbackAfter who launch the transition and when the state if the transition swap, it just call
      * * the function passed in parameters, it's the easiest way i found to make personnalized transition with differents event
      */
-    if(!Object.values(EngineStateEnum).includes(engineToLaunch))
+    if(!verifyValueIsInEnum(EngineStateEnum, engineToLaunch))
     {
         throw new Error("EngineStateEnum doesn't have the state : " + engineToLaunch)
     }

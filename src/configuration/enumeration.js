@@ -12,3 +12,16 @@ const TransitionStateEnum = {
     EnterIn : "enterIn",
     GoOut : "goOut"
 }
+
+const SceneManagerStateEnum = {
+    Engine : "engine"
+}
+
+
+
+/**
+ * @param {*} enumeration Enum where to verify
+ * @param {*} value value to verify
+ * @returns {boolean} if it is or not in the Enum
+ */
+const verifyValueIsInEnum = (enumeration, value) => Object.values(enumeration).includes(value);
