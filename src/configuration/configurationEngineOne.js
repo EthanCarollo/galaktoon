@@ -34,3 +34,11 @@ let actualDialog = 0;
 
 // Player dialog
 
+// Cinematic var
+
+let vectorDestinationCinemation = [Math.floor(window.innerWidth/2), Math.floor(window.innerHeight/2)] // We need to floors if we want this to works
+let ySizeBorderCinematic = window.innerHeight/9;
+let positionBorderCinematic = [-ySizeBorderCinematic, window.innerHeight]
+
+// Cinematic var
+
