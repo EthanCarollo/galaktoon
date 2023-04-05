@@ -46,7 +46,6 @@ const playerInputMoove = () => {
             playerVector.x -= playerSpeed
             mapVector.x += playerSpeed
             playerDirection[0] += 1;
-            playerIsMooving = true;
             if(getPlayerCollision(createVector(-10, 0)))
             {
                 cameraVector.x -= playerSpeed
@@ -59,7 +58,6 @@ const playerInputMoove = () => {
             playerVector.x += playerSpeed
             mapVector.x -= playerSpeed
             playerDirection[0] -= 1;
-            playerIsMooving = true;
             if(getPlayerCollision(createVector(20, 0)))
             {
                 cameraVector.x += playerSpeed
@@ -72,7 +70,6 @@ const playerInputMoove = () => {
             playerVector.y += playerSpeed
             mapVector.y -= playerSpeed
             playerDirection[1] -= 1;
-            playerIsMooving = true;
             if(getPlayerCollision(createVector(0, 35))){
                 cameraVector.y += playerSpeed
                 playerVector.y -= playerSpeed
@@ -84,12 +81,15 @@ const playerInputMoove = () => {
             playerVector.y -= playerSpeed
             mapVector.y += playerSpeed
             playerDirection[1] += 1;  
-            playerIsMooving = true; 
             if(getPlayerCollision(createVector(0, 0))){
                 cameraVector.y -= playerSpeed
                 playerVector.y += playerSpeed
                 mapVector.y -= playerSpeed
             }
+        }
+        if(playerDirection[0] !== 0 || playerDirection[1] !== 0)
+        {
+            playerIsMooving = true; 
         }
     }else{
         playerIsMooving = false;

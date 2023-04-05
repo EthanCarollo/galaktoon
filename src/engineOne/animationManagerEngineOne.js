@@ -53,7 +53,6 @@ const animationMooveSprite = (positionX, positionY, size, direction, id = 0) => 
      * * This function is flexible for every sprites in the sprites.json. If the direction isn't good, it returns an error. 
      * * I don't use the same stringify i used the idle animation function cause the moovement can be diagonal.
      */
-
     if(direction.length > 2)
     {
         throw new Error("Direction isn't an array that contains x, y. It contains other elements. id of sprite failed to animate : " + id)
