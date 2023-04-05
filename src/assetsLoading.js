@@ -215,7 +215,7 @@ const checkAllRessource = () => {
 }
 
 const loadAllRessource = () => {
-    launchEngine(EngineStateEnum.EngineOne);
+    //launchEngine(EngineStateEnum.EngineOne); // TODO : Launch the engine for the debug
     setEngineVariableAfterLoadingAllAssets();
     ressourceIsLoaded = true;
 }

@@ -112,6 +112,10 @@
             "id" : "25",
             "path" : "assets/ui/PlanetsContainerColored.png",
             "image" : null
+        },{
+            "id" : "26",
+            "path" : "assets/background/spbg.png",
+            "image" : null
         }
     ]
 }

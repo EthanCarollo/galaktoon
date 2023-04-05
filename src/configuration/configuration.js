@@ -9,7 +9,7 @@ const fps = 60;
 
 // * SCENE MANAGER
 
-let actualScene = SceneManagerStateEnum.Engine;
+let actualScene = SceneManagerStateEnum.StartMenu
 
 // * SCENE MANAGER
 

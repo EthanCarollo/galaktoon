@@ -1,7 +1,7 @@
 // launch figth on engine two
 
 const launchFightOnEngineTwo = (idMapOfFight) => { // this take in parameters debug enemies for the prototype
-    if(checkAllAlliesDead() === false)
+    if(checkAllAlliesDead() === false && actualTransitionState === null)
     {
         actualMapEngineTwo = tacticalMapData[idMapOfFight]
         actualMapEngineTwoRessource = mapData[actualMapEngineTwo.attachedMap];
@@ -33,6 +33,7 @@ const launchEngine = (engineToLaunch) => {
 
     launchTransitionAndSetCallbackAfter(() => {
         // Function to do when transition ended
+        actualScene = SceneManagerStateEnum.Engine;
         actualEngine = engineToLaunch; 
     });
 }
@@ -46,8 +47,7 @@ const launchTransitionAndSetCallbackAfter = (callbackFunction, idTransition = 15
      * * This function set the global variable of the transition, this don't give any problems cause we can only have one transition at the same time or
      * * it will just return an error
      */
-
-    if(actualTransitionState != null)
+    if(actualTransitionState !== null)
     {
         throw new Error("The actual transition state is already set so we can't launch transition : " + actualTransitionState)
     }

@@ -1,0 +1,1 @@
+let indexLogoStartMenu = 1;

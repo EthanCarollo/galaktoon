@@ -4,8 +4,11 @@ const sceneManager = () => {
      */
     if(ressourceIsLoaded === true){
         switch(actualScene){
-            case "engine" :
+            case SceneManagerStateEnum.Engine :
                 runEngine();
+                break;
+            case SceneManagerStateEnum.StartMenu :
+                runStartMenu();
                 break;
             default :
                 throw new Error("actualScene isn't set, check the scene manager")
@@ -31,6 +34,10 @@ const runEngine = () => {
             throw new Error("Actual Engine isnt set");
             break;
     }
+}
+
+const runStartMenu = () => {
+    showStartMenu();
 }
 
 const setVariablesOnResize = () => {

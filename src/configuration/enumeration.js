@@ -31,7 +31,8 @@ const TransitionStateEnum = {
 }
 
 const SceneManagerStateEnum = {
-    Engine : "engine"
+    Engine : "engine",
+    StartMenu : "startMenu"
 }
 
 
