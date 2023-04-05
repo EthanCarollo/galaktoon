@@ -47,12 +47,10 @@ const runPlayingStateEngineOne = () => {
 const displayTopDown2D = () => {
     createMapTopDown("not", actualPlayerMap.groundLayer); // create the layer ground in back of the player
     createMapTopDown("back", actualPlayerMap.objectLayer); // create the layer object in back of the player
-    displayNPCOnMap("back");
 
     showPlayerSprite(cameraVector.x, cameraVector.y, playerSpriteSize);
 
     createMapTopDown("front", actualPlayerMap.objectLayer); // create the layer object in front of the player
-    displayNPCOnMap("front");
   
     showGoalQuest();
     // the double createmap function is used to simulate a 2D perspective
@@ -91,18 +89,23 @@ const createMapTopDown = (orientation, mapLayer, mapInfo = playerOnMap, offsetPo
     {
       for(let x = 0;x < mapLayer[0].length; x++)
       {
-        if(!tileIsEmpty(x, y, mapLayer)){
           switch(orientation){
             case "back" :
               if(actualPlayerTile()[1] >= y)
               {
-                createImageWithIdOn2dArray(x, y, mapLayer[y][x], tileSize, false, mapInfo, offsetPositionOnScreen);
+                if(!tileIsEmpty(x, y, mapLayer)){
+                  createImageWithIdOn2dArray(x, y, mapLayer[y][x], tileSize, false, mapInfo, offsetPositionOnScreen);
+                }
+                showSpecificNpcOnMap(x, y)
               }
               break;
             case "front":
               if(actualPlayerTile()[1] < y)
               {
-                createImageWithIdOn2dArray(x, y, mapLayer[y][x], tileSize, false, mapInfo, offsetPositionOnScreen);
+                showSpecificNpcOnMap(x, y)
+                if(!tileIsEmpty(x, y, mapLayer)){
+                  createImageWithIdOn2dArray(x, y, mapLayer[y][x], tileSize, false, mapInfo, offsetPositionOnScreen);
+                }
               }
               break;
             default :
@@ -110,7 +113,7 @@ const createMapTopDown = (orientation, mapLayer, mapInfo = playerOnMap, offsetPo
               break;
           }
         }
-      }
+      
     }
 
 }

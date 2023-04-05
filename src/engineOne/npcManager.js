@@ -1,8 +1,9 @@
 
 /**
  * @param {string} orientation string can be back or front, if it's not both of them, it will send an error
+ * ! Method is Deprecated, now i use showSpecificNpcOnMap() in the for boucle when i display map
  */
-const displayNPCOnMap = (orientation = "back") => {
+const displayAllNPCOnMap = (orientation = "back") => {
   /**
    * ? How it works ?
    * * If the function is called with the parameter "back" the function just show the tile in back of the player
@@ -30,6 +31,26 @@ const displayNPCOnMap = (orientation = "back") => {
             throw new Error("orientation isn't set : " + orientation);
     }
 }
+
+
+/**
+ * @param {int} xPosition xPosition of the npc i want to show
+ * @param {int} yPosition yPosition of the npc i want to show
+ */
+const showSpecificNpcOnMap = (xPosition, yPosition) => {
+  /**
+   * * Get the npc on the current tile position, this function is good because i can show my npc like
+   * * there is a top down with depth 
+   */
+  let npcInteractible = playerOnMap.npcOnMap.filter(npc => 
+    Math.floor(npc.pos[0]) === xPosition && Math.floor(npc.pos[1]+1) === yPosition )
+    if(npcInteractible.length > 0)
+    {
+      displayNpc(npcInteractible[0])
+    }
+}
+
+
 
 const displayNpc = (npc) => {
   let spriteNpcId = npcData[npc.id].spriteId
@@ -102,7 +123,5 @@ const setNpcDirectionWithThePlayerDirection = (npc) => {
   }
 }
 
-/**
- * @returns {array[object]} return an array of npc in front of the player else return null
- */
+// ! Isn't used in the code
 const isInFrontOfANpc = () => playerOnMap.npcOnMap.filter(npc => npc.position[0] === tileInteract[0] && npc.position[1] === tileInteract[1])
