@@ -116,6 +116,10 @@
             "id" : "26",
             "path" : "assets/background/spbg.png",
             "image" : null
+        },{
+            "id" : "27",
+            "path" : "assets/ui/CaseQuestPngColored.png",
+            "image" : null
         }
     ]
 }

@@ -215,10 +215,9 @@ const checkAllRessource = () => {
 }
 
 const loadAllRessource = () => {
-
     setTimeout(() => {
         startMenuState =  StartMenuStateEnum.Normal;
-    }, 2500); // When everything is loaded, it just load the normal menu
+    }, 2500); // set the menu normally if we have load all assets
 
     setEngineVariableAfterLoadingAllAssets();
     ressourceIsLoaded = true;
