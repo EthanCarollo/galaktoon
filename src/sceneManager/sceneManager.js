@@ -2,10 +2,11 @@ const sceneManager = () => {
     /**
      * * Launch the engine if all ressource has been loaded
      */
-    if(ressourceIsLoaded === true){
+    if(totalLoadCounter > 1){
         switch(actualScene){
             case SceneManagerStateEnum.Engine :
                 runEngine();
+                runInputManager();
                 break;
             case SceneManagerStateEnum.StartMenu :
                 runStartMenu();
@@ -13,7 +14,6 @@ const sceneManager = () => {
             default :
                 throw new Error("actualScene isn't set, check the scene manager")
         }
-        runInputManager();
     }
 }
 

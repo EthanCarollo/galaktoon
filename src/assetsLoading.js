@@ -215,7 +215,11 @@ const checkAllRessource = () => {
 }
 
 const loadAllRessource = () => {
-    //launchEngine(EngineStateEnum.EngineOne); // TODO : Launch the engine for the debug
+
+    setTimeout(() => {
+        startMenuState =  StartMenuStateEnum.Normal;
+    }, 2500); // When everything is loaded, it just load the normal menu
+
     setEngineVariableAfterLoadingAllAssets();
     ressourceIsLoaded = true;
 }

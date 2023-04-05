@@ -2,6 +2,10 @@
 
 const ressourceToLoad = [
     {
+        typeOfRessource : "ui",
+        path : "./json/ui.json"
+    },
+    {
         typeOfRessource : "sprite",
         path : "./json/engineOne/sprites.json"
     },
@@ -12,10 +16,6 @@ const ressourceToLoad = [
     {
         typeOfRessource : "map",
         path : "./json/engineOne/topDownMap.json"
-    },
-    {
-        typeOfRessource : "ui",
-        path : "./json/ui.json"
     },
     {
         typeOfRessource : "planets",

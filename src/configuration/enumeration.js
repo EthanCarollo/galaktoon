@@ -35,6 +35,11 @@ const SceneManagerStateEnum = {
     StartMenu : "startMenu"
 }
 
+const StartMenuStateEnum = {
+    Loading : "loading",
+    Normal : "normal"
+}
+
 
 
 /**
