@@ -26,17 +26,28 @@ const runIaPattern = (entityIa) => {
     switch(entityIa.pattern)
     {
         case 'normal' : 
-            runNormalIaPattern(entityIa);
+            runStandardIaPattern(entityIa, 65); // 65 % to go on the player else moove randomly
+            break;
+        case 'aggressive' : 
+            runStandardIaPattern(entityIa, 100); // Agressive just run on the player
+            break;
+        case 'aggro-passive' : 
+            runStandardIaPattern(entityIa, 0); // Moove randomly
             break;
         default :
             throw new Error("Entity Ia Pattern isn't defined or doesnt exist : " + entityIa.pattern)
     }
 }
 
-const runNormalIaPattern = (entityIa) => {
+/**
+ * @param {object} entityIa the object Ia 
+ * @param {int} chance it's the percent of chance that the entity go directly on the player 
+ */
+const runStandardIaPattern = (entityIa, chance) => {
     /**
-     * * Normal playstyle for an IA, sometimes IA will go on the player and sometimes not,
-     * * and when entity can attack the player, the entity attack the player
+     * * Standard playstyle for an IA, sometimes IA will go on the player and sometimes not,
+     * * and when entity can attack the player, the entity attack the player, we can change the
+     * * probability of the next moove of the player by changing the change
      */
 
     let timeBetweenAction = 650; // time between action of the IA
@@ -49,9 +60,9 @@ const runNormalIaPattern = (entityIa) => {
             if(attackIA(entityIa) === true){
                 setTimeout(() => { mooveOneCaseIA(entityIa) }, timeBetweenAction) // Attack and then wait for Moove
             }else{
-                mooveOneCaseIA(entityIa)
+                mooveOneCaseIA(entityIa, chance)
                 setTimeout(() => { 
-                    attackIA(entityIa)
+                    attackIA(entityIa, chance)
                 }, timeBetweenAction)
             }
 
@@ -67,8 +78,11 @@ const runNormalIaPattern = (entityIa) => {
 
 //#endregion
 
-
-const mooveOneCaseIA = (entityIa) => {
+/**
+ * @param {object} entityIa the object Ia 
+ * @param {int} chance it's the percent of chance that the entity go directly on the player 
+ */
+const mooveOneCaseIA = (entityIa , chance) => {
     entityIa.pos = [Math.round(entityIa.pos[0]), Math.round(entityIa.pos[1])]; 
     // I'm rounding it cause i don't want to have bug like "Entity pos isn't an int"
     let movableIaCase = getMovableCase(entityIa.pos[0], entityIa.pos[1], 1)
@@ -78,7 +92,7 @@ const mooveOneCaseIA = (entityIa) => {
 
     let pathLuck = getRandomInt(100)
 
-    if(pathLuck > 35){
+    if(pathLuck > (100 - chance)){
         for(let i = 0; i < movableIaCase.length; i ++)
         {
             let caseX = Math.abs(movableIaCase[i][0] - casePlayer[0]);
