@@ -20,6 +20,7 @@ const runLoadingStartMenuState = () => {
     updateLogoIndexAnimation();
     showBackgroundGalaxy();
     showLogo();
+    showLoadingBarState();
 }
 
 
@@ -35,6 +36,23 @@ const runNormalStartMenuState = () => {
 
 
 //#endregion
+
+
+const showLoadingBarState = () => {
+    let progression = totalLoadCounter / ressourceToLoad.length 
+    let xWidth = window.innerWidth /1.25;
+    let yHeight = xWidth / 40;
+    let xStart = window.innerWidth / 2 - xWidth / 2
+    let yStart = window.innerHeight - yHeight * 1.5
+    image(uiData[28].image, xStart, yStart, xWidth, yHeight)
+    image(uiData[30].image, xStart, yStart, xWidth*progression, yHeight)
+    image(uiData[29].image, xStart, yStart, xWidth, yHeight)
+    textAlign(CENTER, CENTER)
+    fill(255)
+    text(totalLoadCounter + " / " + ressourceToLoad.length + " // Actually loading : " + ressourceToLoad[totalLoadCounter-1].typeOfRessource, xStart, yStart, xWidth, yHeight )
+}
+
+
 
 
 const showChoiceStartMenuState = () => {
