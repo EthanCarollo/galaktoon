@@ -1,39 +1,20 @@
-const runInputManager = () => {
-    switch(actualEngine){
-        case EngineOne :
-            playerInputForEngineOne();
-            break;
-        case EngineTwo :
-            playerInputForEngineTwo();
-            break;
-        default :
-            throw new Error("Actual engine isn't set, the game can't run")
-            break;
-    }
-}
+/**
+ * * Set number of functions for the actualEngine setted in the variable
+ */
 
-function keyPressed(){
-    switch(actualEngine){
-      case EngineOne :
-        playerKeyPressedForEngineOne()
-        break;
-      case EngineTwo :
-        playerKeyPressedForEngineTwo()
-        break;
-      default :
-        break;
-    }
-}
-
-function mouseClicked(){
-    switch(actualEngine){
-        case EngineOne :
-
+ const runInputManager = () => {
+  switch(actualEngine){
+      case EngineStateEnum.EngineOne :
+          playerKeyPressedForEngineOne();
+          playerInputForEngineOne();
           break;
-        case EngineTwo :
+      case EngineStateEnum.EngineTwo :
+          playerInputForEngineTwo();
+          playerKeyPressedForEngineTwo();
           keyPressedForEngineTwo();
           break;
-        default :
+      default :
+          throw new Error("Actual engine isn't set, the game can't run")
           break;
-      }
+  }
 }

@@ -15,7 +15,7 @@
             "sizeXonConstruct": 1
         },
         {
-            "id": "1",
+            "id": "0",
             "path": "assets/tiles/bobTiles/river.b.png",
             "isAnimated": false,
             "image": "null",
@@ -29,7 +29,7 @@
             "sizeXonConstruct": 1
         },
         {
-            "id": "2",
+            "id": "0",
             "path": "assets/tiles/bobTiles/river.png",
             "isAnimated": false,
             "image": "null",
@@ -43,7 +43,7 @@
             "sizeXonConstruct": 1
         },
         {
-            "id": "3",
+            "id": "0",
             "path": "assets/tiles/bobTiles/river.c.png",
             "isAnimated": false,
             "image": "null",
@@ -57,7 +57,7 @@
             "sizeXonConstruct": 1
         },
         {
-            "id": "4",
+            "id": "0",
             "path": "assets/tiles/bobTiles/river.d.png",
             "isAnimated": false,
             "image": "null",
@@ -71,7 +71,7 @@
             "sizeXonConstruct": 1
         },
         {
-            "id": "5",
+            "id": "0",
             "path": "assets/tiles/bobTiles/sucre-d'orge.png",
             "isAnimated": false,
             "image": "null",
@@ -85,7 +85,7 @@
             "sizeXonConstruct": 1
         },
         {
-            "id": "6",
+            "id": "0",
             "path": "assets/tiles/bobTiles/sucre-d'orge2.png",
             "isAnimated": false,
             "image": "null",
@@ -99,7 +99,7 @@
             "sizeXonConstruct": 1
         },
         {
-            "id": "7",
+            "id": "0",
             "path": "assets/tiles/bobTiles/contrast-sucre-d'orge.png",
             "isAnimated": false,
             "image": "null",
@@ -113,7 +113,7 @@
             "sizeXonConstruct": 1
         },
         {
-            "id": "8",
+            "id": "0",
             "path": "assets/tiles/bobTiles/contrast-sucre-d'orge2.png",
             "isAnimated": false,
             "image": "null",
@@ -127,7 +127,7 @@
             "sizeXonConstruct": 1
         },
         {
-            "id": "9",
+            "id": "0",
             "path": "assets/tiles/bobTiles/sol-contrast.png",
             "isAnimated": false,
             "image": "null",
@@ -141,7 +141,7 @@
             "sizeXonConstruct": 1
         },
         {
-            "id": "10",
+            "id": "0",
             "path": "assets/tiles/bobTiles/sol-contrast2.png",
             "isAnimated": false,
             "image": "null",
@@ -155,11 +155,11 @@
             "sizeXonConstruct": 1
         },
         {
-            "id": "11",
+            "id": "0",
             "path": "assets/tiles/bobTiles/sol-contrast3.png",
             "isAnimated": false,
             "image": "null",
-            "collider": true,
+            "collider": false,
             "canConstruct": "true",
             "isAnObject": false,
             "xWidth": 1,
@@ -169,7 +169,7 @@
             "sizeXonConstruct": 1
         },
         {
-            "id": "12",
+            "id": "0",
             "path": "assets/tiles/bobTiles/sol-contrast4.png",
             "isAnimated": false,
             "image": "null",
@@ -183,11 +183,11 @@
             "sizeXonConstruct": 1
         },
         {
-            "id": "13",
+            "id": "0",
             "path": "assets/tiles/bobTiles/arc-1.png",
             "isAnimated": false,
             "image": "null",
-            "collider": true,
+            "collider": false,
             "canConstruct": "true",
             "isAnObject": false,
             "xWidth": 1,
@@ -197,11 +197,11 @@
             "sizeXonConstruct": 1
         },
         {
-            "id": "14",
+            "id": "0",
             "path": "assets/tiles/bobTiles/arc-2.png",
             "isAnimated": false,
             "image": "null",
-            "collider": true,
+            "collider": false,
             "canConstruct": "true",
             "isAnObject": false,
             "xWidth": 1,
@@ -211,7 +211,7 @@
             "sizeXonConstruct": 1
         },
         {
-            "id": "15",
+            "id": "0",
             "path": "assets/tiles/bobTiles/arc-3.png",
             "isAnimated": false,
             "image": "null",
@@ -225,7 +225,7 @@
             "sizeXonConstruct": 1
         },
         {
-            "id": "16",
+            "id": "0",
             "path": "assets/tiles/bobTiles/arc-4.png",
             "isAnimated": false,
             "image": "null",
@@ -239,9 +239,9 @@
             "sizeXonConstruct": 1
         },
         {
-            "id": "17",
-            "path": "assets/tiles/bobTiles/arc-5.png",
-            "isAnimated": true,
+            "id": "0",
+            "path": "assets/tiles/bobTiles/arc-6.png",
+            "isAnimated": false,
             "image": "null",
             "collider": false,
             "canConstruct": "true",
@@ -253,21 +253,7 @@
             "sizeXonConstruct": 1
         },
         {
-            "id": "18",
-            "path": "assets/tiles/bobTiles/arc-6.png",
-            "isAnimated": false,
-            "image": "null",
-            "collider": true,
-            "canConstruct": "true",
-            "isAnObject": false,
-            "xWidth": 1,
-            "yWidth": "3",
-            "type": "useless",
-            "destructible": "false",
-            "sizeXonConstruct": 1
-        },
-        {
-            "id": "19",
+            "id": "0",
             "path": "assets/tiles/bobTiles/arc-7.png",
             "isAnimated": false,
             "image": "null",
@@ -299,7 +285,7 @@
             "path": "assets/tiles/bobTiles/arc-nuage.png",
             "isAnimated": false,
             "image": "null",
-            "collider": true,
+            "collider": false,
             "canConstruct": "true",
             "isAnObject": false,
             "xWidth": 1,
@@ -313,7 +299,7 @@
             "path": "assets/tiles/bobTiles/arc-nuage2.png",
             "isAnimated": false,
             "image": "null",
-            "collider": true,
+            "collider": false,
             "canConstruct": "true",
             "isAnObject": false,
             "xWidth": 1,
@@ -324,7 +310,7 @@
         },
         {
             "id": "0",
-            "path": "assets/tiles/bobTiles/river-J.png",
+            "path": "assets/tiles/bobTiles/arc-en-ciel.png",
             "isAnimated": false,
             "image": "null",
             "collider": false,
@@ -338,70 +324,252 @@
         },
         {
             "id": "0",
-            "path": "assets/tiles/bobTiles/river-K.png",
+            "path": "assets/tiles/bobTiles/Tombe.1.png",
             "isAnimated": false,
             "image": "null",
             "collider": false,
             "canConstruct": "true",
             "isAnObject": false,
             "xWidth": 1,
-            "yWidth": "3",
+            "yWidth": "1",
             "type": "useless",
             "destructible": "false",
             "sizeXonConstruct": 1
         },
         {
             "id": "0",
-            "path": "assets/tiles/bobTiles/river-L.png",
+            "path": "assets/tiles/bobTiles/tombe.2.png",
             "isAnimated": false,
             "image": "null",
             "collider": false,
             "canConstruct": "true",
             "isAnObject": false,
             "xWidth": 1,
-            "yWidth": "3",
+            "yWidth": "1",
             "type": "useless",
             "destructible": "false",
             "sizeXonConstruct": 1
         },
         {
             "id": "0",
-            "path": "assets/tiles/bobTiles/river-M.png",
+            "path": "assets/tiles/bobTiles/chemin.png",
             "isAnimated": false,
             "image": "null",
             "collider": false,
             "canConstruct": "true",
             "isAnObject": false,
             "xWidth": 1,
-            "yWidth": "3",
+            "yWidth": "1",
             "type": "useless",
             "destructible": "false",
             "sizeXonConstruct": 1
         },
         {
             "id": "0",
-            "path": "assets/tiles/bobTiles/river-L-champi.png",
+            "path": "assets/tiles/bobTiles/chemin3.png",
             "isAnimated": false,
             "image": "null",
             "collider": false,
             "canConstruct": "true",
             "isAnObject": false,
             "xWidth": 1,
-            "yWidth": "3",
+            "yWidth": "1",
             "type": "useless",
             "destructible": "false",
             "sizeXonConstruct": 1
         },
         {
             "id": "0",
-            "path": "assets/tiles/bobTiles/river-M-champi.png",
+            "path": "assets/tiles/bobTiles/chateau-J.png",
             "isAnimated": false,
             "image": "null",
             "collider": false,
             "canConstruct": "true",
             "isAnObject": false,
             "xWidth": 1,
-            "yWidth": "3",
+            "yWidth": "4",
+            "type": "useless",
+            "destructible": "false",
+            "sizeXonConstruct": 1
+        },
+        {
+            "id": "0",
+            "path": "assets/tiles/bobTiles/chateau-L.png",
+            "isAnimated": false,
+            "image": "null",
+            "collider": false,
+            "canConstruct": "true",
+            "isAnObject": false,
+            "xWidth": 1,
+            "yWidth": "4",
+            "type": "useless",
+            "destructible": "false",
+            "sizeXonConstruct": 1
+        },
+        {
+            "id": "0",
+            "path": "assets/tiles/bobTiles/chateau-M.png",
+            "isAnimated": false,
+            "image": "null",
+            "collider": false,
+            "canConstruct": "true",
+            "isAnObject": false,
+            "xWidth": 1,
+            "yWidth": "4",
+            "type": "useless",
+            "destructible": "false",
+            "sizeXonConstruct": 1
+        },
+        {
+            "id": "0",
+            "path": "assets/tiles/bobTiles/chateau-K.3.png",
+            "isAnimated": false,
+            "image": "null",
+            "collider": false,
+            "canConstruct": "true",
+            "isAnObject": false,
+            "xWidth": 1,
+            "yWidth": "4",
+            "type": "useless",
+            "destructible": "false",
+            "sizeXonConstruct": 1
+        },
+        {
+            "id": "0",
+            "path": "assets/tiles/bobTiles/chateau-w.png",
+            "isAnimated": false,
+            "image": "null",
+            "collider": false,
+            "canConstruct": "true",
+            "isAnObject": false,
+            "xWidth": 1,
+            "yWidth": "4",
+            "type": "useless",
+            "destructible": "false",
+            "sizeXonConstruct": 1
+        },
+        {
+            "id": "0",
+            "path": "assets/tiles/bobTiles/chateau-x.png",
+            "isAnimated": false,
+            "image": "null",
+            "collider": false,
+            "canConstruct": "true",
+            "isAnObject": false,
+            "xWidth": 1,
+            "yWidth": "4",
+            "type": "useless",
+            "destructible": "false",
+            "sizeXonConstruct": 1
+        },
+        {
+            "id": "0",
+            "path": "assets/tiles/bobTiles/chateau-x2.png",
+            "isAnimated": false,
+            "image": "null",
+            "collider": false,
+            "canConstruct": "true",
+            "isAnObject": false,
+            "xWidth": 1,
+            "yWidth": "4",
+            "type": "useless",
+            "destructible": "false",
+            "sizeXonConstruct": 1
+        },
+        {
+            "id": "0",
+            "path": "assets/tiles/bobTiles/chateau-y.png",
+            "isAnimated": false,
+            "image": "null",
+            "collider": false,
+            "canConstruct": "true",
+            "isAnObject": false,
+            "xWidth": 1,
+            "yWidth": "4",
+            "type": "useless",
+            "destructible": "false",
+            "sizeXonConstruct": 1
+        },
+        {
+            "id": "0",
+            "path": "assets/tiles/bobTiles/chateau-z.png",
+            "isAnimated": false,
+            "image": "null",
+            "collider": false,
+            "canConstruct": "true",
+            "isAnObject": false,
+            "xWidth": 1,
+            "yWidth": "4",
+            "type": "useless",
+            "destructible": "false",
+            "sizeXonConstruct": 1
+        },
+        {
+            "id": "0",
+            "path": "assets/tiles/bobTiles/cuillère-1.png",
+            "isAnimated": false,
+            "image": "null",
+            "collider": false,
+            "canConstruct": "true",
+            "isAnObject": false,
+            "xWidth": 1,
+            "yWidth": "1",
+            "type": "useless",
+            "destructible": "false",
+            "sizeXonConstruct": 1
+        },
+        {
+            "id": "0",
+            "path": "assets/tiles/bobTiles/cuillère-2.png",
+            "isAnimated": false,
+            "image": "null",
+            "collider": false,
+            "canConstruct": "true",
+            "isAnObject": false,
+            "xWidth": 1,
+            "yWidth": "1",
+            "type": "useless",
+            "destructible": "false",
+            "sizeXonConstruct": 1
+        },
+        {
+            "id": "0",
+            "path": "assets/tiles/bobTiles/chemin-A.png",
+            "isAnimated": false,
+            "image": "null",
+            "collider": false,
+            "canConstruct": "true",
+            "isAnObject": false,
+            "xWidth": 1,
+            "yWidth": "1",
+            "type": "useless",
+            "destructible": "false",
+            "sizeXonConstruct": 1
+        },
+        {
+            "id": "0",
+            "path": "assets/tiles/bobTiles/chemin-B2.png",
+            "isAnimated": false,
+            "image": "null",
+            "collider": false,
+            "canConstruct": "true",
+            "isAnObject": false,
+            "xWidth": 1,
+            "yWidth": "1",
+            "type": "useless",
+            "destructible": "false",
+            "sizeXonConstruct": 1
+        },
+        {
+            "id": "0",
+            "path": "assets/tiles/bobTiles/chemin-C.png",
+            "isAnimated": false,
+            "image": "null",
+            "collider": false,
+            "canConstruct": "true",
+            "isAnObject": false,
+            "xWidth": 1,
+            "yWidth": "1",
             "type": "useless",
             "destructible": "false",
             "sizeXonConstruct": 1

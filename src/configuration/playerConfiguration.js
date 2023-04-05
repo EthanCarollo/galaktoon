@@ -1,3 +1,35 @@
+/**
+ * * This script contains all variables that contains prefix 'player'
+ * ! EXCEPT : 'playerOnMap', 'actualPlayerMap', 'actualMapEngineTwo'
+ */
+
+
+
+let playerState = PlayerStateEnum.Normal;
+
+//#region // * Engine One Player configuration
+
+let playerSpriteSize = 100;
+
+let playerCanMove = true;
+let playerSpeed = 5;
+
+let playerCanInteract = true;
+let playerIsExploringMap = false;
+
+
+
+// Player anim
+let playerIsMooving = false;
+let playerDirection = [0, 0]; // stock the direction of the player in a array
+let playerLastDirection = [0, 1]; // orientation naturally down
+// Player anim
+
+//#endregion
+
+
+
+//#region // * Engine Two Player configuration
 
 let playerTeam = [
     {
@@ -38,20 +70,4 @@ let playerTeam = [
     }
 ]
 
-let actualMapEngineTwo;
-
-let vectorCameraEngineTwo;
-
-let selectedChar = null;
-let selectedEntity = null;
-
-let whichEntityTurn = 0;
-let selectedAbility = 0;
-
-// UI CONFIGURATION :
-
-let transitionLight = [0, 0, 0];
-let transitionSpeed = 1;
-let abilitySize = window.innerWidth/10.5;
-let abilityPosition = [];
-let abilityIsOpen = false;
+//#endregion

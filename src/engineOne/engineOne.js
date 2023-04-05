@@ -1,12 +1,14 @@
-let engineOneState = "Playing"
 
 const runEngineOne = () => {
+  /** 
+   * * runEngine function run the engine depending on the current state of the engine
+   */
   switch(engineOneState)
   {
-    case "Playing" :
+    case EngineOneStateEnum.Playing :
       runPlayingStateEngineOne()
       break;
-    case "Cinematic" :
+    case EngineOneStateEnum.Cinematic :
       runCinematicStateEngineOne()
       break;
     default :
@@ -14,9 +16,12 @@ const runEngineOne = () => {
   }
 }
 
+
+//#region // * Differents Engine One State region
+
 const runCinematicStateEngineOne = () => {
   playerCanMove = false;
-  setCameraCinematic();
+  playCameraCinematic();
   
   displayTopDown2D();
   setVectorLerpEaseOutExploringMenu();
@@ -24,18 +29,20 @@ const runCinematicStateEngineOne = () => {
 }
 
 const runPlayingStateEngineOne = () => {
-  updatePlayerLevel(playerTeam[0]); // temp call of the function
   setPlayerCamera();
   displayTopDown2D();
   displayUserInterfaceEngineOne();
-  showGoalQuest();
   if(npcDialoged !== null)
   {
     displayDialogNpc(npcDialoged)
   }
 }
 
-// ************************ Display game && camera
+//#endregion
+
+
+
+//#region // * Display game && camera region
 
 const displayTopDown2D = () => {
     createMapTopDown("not", actualPlayerMap.groundLayer); // create the layer ground in back of the player
@@ -47,7 +54,7 @@ const displayTopDown2D = () => {
     createMapTopDown("front", actualPlayerMap.objectLayer); // create the layer object in front of the player
     displayNPCOnMap("front");
   
-    
+    showGoalQuest();
     // the double createmap function is used to simulate a 2D perspective
 }
 
@@ -60,12 +67,26 @@ const setPlayerCamera = () => {
     }
 }
 
-// ************************ Display game && camera
+//#endregion
 
-// ************************ MAP LOGIC (create and verification on array)
 
+
+//#region // * Top Down Map Logic region
+
+/**
+ * @param {string} orientation string can be back or front, if it's not both of them, it won't send an error and just draw every tiles
+ * @param {array} mapLayer the current layer of map
+ * @param {object} mapInfo contains every information of map
+ * @param {array} offsetPositionOnScreen the offset position of the position for the camera of the map in the current world  
+ */
 const createMapTopDown = (orientation, mapLayer, mapInfo = playerOnMap, offsetPositionOnScreen = [cameraVector.x + playerVector.x, cameraVector.y + playerVector.y]) => {
-    
+    /**
+   * ? How it works ?
+   * * If the function is called with the parameter "back" the function just show the tile in back of the player
+   * * but if it's "front" it will show the tiles in front of the player so if i put the playerShow function
+   * * between these two functions, i will have illusion of depth (in this case, if orientation isn't set, it won't send an
+   * * error and will just draw every image)
+   */
     for(let y = 0;y < mapLayer.length; y++)
     {
       for(let x = 0;x < mapLayer[0].length; x++)
@@ -109,8 +130,6 @@ const createImageWithIdOn2dArray = (x, y, id, currentTileSize, isUi = false, map
   }else{
     image(mapInfo.tileRessource[id].image, xPositionTiles , yPositionTiles, currentTileSize * xTileWidth, currentTileSize * yTileHeight); 
   }
-
-  //noTint()
 }
 
 const tileIsEmpty = (x, y, map) => {
@@ -137,4 +156,4 @@ const getTileData = (x, y, map) => {
 
 }
 
-// ************************ MAP LOGIC (create and verification on array)
+//#endregion

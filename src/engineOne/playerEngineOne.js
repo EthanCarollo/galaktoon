@@ -1,12 +1,19 @@
 // ************************ Player Animation
 
+/**
+ * @param {float} positionX 
+ * @param {float} positionY 
+ * @param {int} spriteSize 
+ */
 const showPlayerSprite = (positionX, positionY, spriteSize) => {
-
+    /**
+     * * Show the sprite and if he is mooving or not
+     */
       let xSpritePosition = positionX - spriteSize / 2
       let ySpritePosition = positionY - spriteSize
         if(playerIsMooving === true){
             // animation "moove" when player moove
-            animationPlayerMooveSprite(xSpritePosition, ySpritePosition, spriteSize, playerDirection, 0)
+            animationMooveSprite(xSpritePosition, ySpritePosition, spriteSize, playerDirection, 0)
         }else{
             // animation "idle" when player doesn't moove (when no key is pressed)
             animationIdleSprite(xSpritePosition, ySpritePosition, spriteSize, playerLastDirection, 0);
@@ -14,12 +21,24 @@ const showPlayerSprite = (positionX, positionY, spriteSize) => {
 
 }
 
+
+
+/**
+ * @param {Vector2} offsetVectorBounds automatically to x 0 y 0, but it can be modified for the collision
+ * @returns {array[int]} [x, y] position of the player in the tile grid
+ */
 const actualPlayerTile = (offsetVectorBounds = createVector(0, 0)) => 
 [
  Math.floor((playerVector.x + offsetVectorBounds.x - (playerSpriteSize / 2)) / tileSize * -1), 
  Math.floor((playerVector.y + offsetVectorBounds.y - (playerSpriteSize / 2) + 20) / tileSize * -1) // y is a little bit offset (by 20) because the spriteY doesnt cut on yPixel = 0
-] // this is a temporary messy function
+]
 
+
+
+/**
+ * @param {Vector2} offsetVectorBounds automatically to x 0 y 0, but it can be modified for the collision
+ * @returns {boolean} return true if it collided to somehting or false if not
+ */
 const getPlayerCollision = (offsetVectorBounds = createVector(0, 0)) => { // offsetVectorBounds is usefull in case we have different collision point on the player
 
     let actualPlayerTileWithOffsetBounds = actualPlayerTile(offsetVectorBounds)
@@ -35,20 +54,29 @@ const getPlayerCollision = (offsetVectorBounds = createVector(0, 0)) => { // off
         return getTileData(actualPlayerTileWithOffsetBounds[0], actualPlayerTileWithOffsetBounds[1], actualPlayerMap.objectLayer).collider
     }
 }
-
 // With this code, if the player is out of range of the array or the value of the tile isn't defined, he won't be able to go further
 
-// ************************ Player Animation
 
-// ************************ Player Interaction
 
+//#region // * Player Interaction region
+
+/**
+ * @param {array} tileInteract [x, y] position of the tile interacted
+ */
 const interactWithATile = (tileInteract) => {
-    // this is the reason why my playerLastDirection is an array
+
+    /**
+     * * This function is the principal reason why my playerLastDirection var is an array, in that case, we can easily recover the tile
+     * * around him, so in our case we get the tileData with the function and we check if the tile is undefined or not so we can continue
+     * * the function and then, big switch for a lot of interactions
+     */
+
     let interactedTile = getTileData(tileInteract[0], tileInteract[1], actualPlayerMap.objectLayer) // get the information of the tile that the player is looking for
 
     if(interactedTile === undefined){
         return;
     }
+
     switch(interactedTile.type){
         case "explore":
             playerCanMove = false
@@ -70,9 +98,8 @@ const interactWithATile = (tileInteract) => {
             // New Func
             break;
         case "fight":
-            // ! TEMP 
-            launchFightOnEngineTwo()
-            // ! TEMP
+            // TODO : This is temporary for the debug
+            launchFightOnEngineTwo(0)
             break;
         case "sleep":
             playSleepAnimation();
@@ -83,8 +110,17 @@ const interactWithATile = (tileInteract) => {
     }
 }
 
-const interactWithNPC = (tileInteract) => {
 
+
+/**
+ * @param {array} tileInteract [x, y] position of the tile interacted to check if a npc is on 
+ */
+const interactWithNPC = (tileInteract) => {
+    /**
+     * * Filter on the array of npcOnMap on playerOnMap var that contains all npc informations
+     * * then we check if we have npc who we can interact with and if we have, we just take the
+     * * first element of the array and we interact with
+     */
     let npcInteracted = playerOnMap.npcOnMap.filter(npc => npc.pos[0] === tileInteract[0] && npc.pos[1] === tileInteract[1])
     if(npcInteracted.length > 0)
     {
@@ -94,32 +130,18 @@ const interactWithNPC = (tileInteract) => {
     }
 }
 
-const setNpcDirectionWithThePlayerDirection = (npc) => {
-    // Need to set the npc direction wwith the information
 
-    if(npc.pos[0] > actualPlayerTile()[0]){
-        npc.dir = [-1, 0];
-        return;
-    }
-    if(npc.pos[0] < actualPlayerTile()[0]){
-        npc.dir = [1,0];
-        return;
-    }
-    if(npc.pos[1] > actualPlayerTile()[1]){
-        npc.dir = [0, -1];
-        return;
-    }
-    if(npc.pos[1] < actualPlayerTile()[1]){
-        npc.dir = [0, 1];
-        return;
-    }
-}
 
-const playSleepAnimation = () => {
-    playerTeam[0].health.actualHealth = playerTeam[0].health.maxHealth
-}
-
+/**
+ * @param {int} x 
+ * @param {int} y 
+ * @param {string} typeOfInteract 
+ */
 const createInteractionPopup = (x ,y ,typeOfInteract) => {
+    /**
+     * * Show the differents interaction by creating image on the 2D array using the 5th parameters of the function to true,
+     * * which said that is UiImage and then load id 9 or 10 image in top of the tile interacted
+     */
     switch(typeOfInteract){
         case "npc" :
             createImageWithIdOn2dArray(x, y-1, 9, 65, true)
@@ -130,4 +152,15 @@ const createInteractionPopup = (x ,y ,typeOfInteract) => {
     } // Create pop with the option true who said this is a UI image
 }
 
-// ************************ Player Interaction
+//#endregion
+
+
+
+const playSleepAnimation = () => {
+    /**
+     * * Actually it doesn't play any animation but it's usefull to debug the playerHealth system
+     * ! Will soon be deprecated
+     * TODO : Update this function soon
+     */
+    playerTeam[0].health.actualHealth = playerTeam[0].health.maxHealth
+}

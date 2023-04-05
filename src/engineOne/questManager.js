@@ -1,14 +1,108 @@
-let questList = [
 
-];
-
+/**
+ * @param {int} questId the id of the quest to add to the Array
+ */
 const addQuestToList = (questId) => {
+    /**
+     * TODO : If we already have a quest, we can't add the quest so
+     */
     questList.push(questData[questId]);
     if(questData[questId].eventOnStart !== null)
     {
         startSpecificQuestEvents(questData[questId].eventOnStart);
     }
 }
+
+
+/**
+ * 
+ * @param {int} questIdProgression the id of the progression that correspond to the quest
+ * @param {string} questType the string type used in the switch
+ */
+const addQuestProgression = (questIdProgression, questType) => { // Update a progression using an ID
+    /**
+     * * For on the questList to add progression to the current quest and then check if the quest is finish, 
+     * * so we can end the quest.
+     */
+    for(let i = 0; i< questList.length; i++)
+    {
+        if(questList[i].idQuestProgression+"" === questIdProgression && 
+            questList[i].currentProgression < questList[i].maxProgression &&
+            questList[i].questType === questType)
+        {
+            questList[i].currentProgression ++;
+        }
+        checkQuestIsFinish(questList[i]);
+    }
+}
+
+
+
+/**
+ * @param {int} teamProgressionToAdd teamArray of every npc killed in the last fight wasn't in the quest list and can be add in the questList progression
+ */
+const addQuestProgressionOnEndFight = (teamProgressionToAdd) => { // Update the progression after a fight 
+    for(let i = 0; i < teamProgressionToAdd.length; i++)
+    {
+        addQuestProgression(teamProgressionToAdd[i].id, "fight") // the progression quest must be type of fight
+    }
+}
+
+
+/**
+ * @param {object} quest the quest object
+ * @returns {boolean} if the quest is finished or not
+ */
+const checkQuestIsFinish = (quest) => { // Check if a specific quest is finshed
+    if(quest.currentProgression >= quest.maxProgression)
+    {
+        quest.isFinished = true;
+        return true
+    }
+    return false;
+}
+
+
+
+/**
+ * @param {int} questId 
+ */
+const finishQuest = (questId) => {
+    for(let i = 0; i < questList.length; i++)
+    {
+        if(questList[i].id === questId)
+        {
+            questList.splice(i, 1) // Delete the quest with the quest id
+            return;
+        }
+    }
+}
+
+
+
+//#region // * Specific event region
+
+/**
+ * 
+ * @param {string} questEventString the start event quest string
+ */
+const startSpecificQuestEvents = (questEventString) => {
+    /** 
+     * * This is usefull in case we need to have some events on start quest
+     */
+    switch(questEventString)
+    {
+        case "goNextTutoStep" :
+            mapData[0].npcOnMap[0].nextCase = [12, 10]; // Here it's the AI who mmoves
+            break;
+        default :
+            throw new Error("Specific event isn't set inside the startSpecificQuestEvents() : " + questEventString)
+    }
+}
+
+//#endregion
+
+//#region // * Show quest on UI or Map region
 
 const showQuestList = () => {
     let sizeXContainerQuest = 500;
@@ -51,8 +145,11 @@ const showQuestList = () => {
     }
 }
 
-// * Quest Goal Animation
 const showGoalQuest = () => {
+    /** 
+     * * This function set the current goal of every quest on the map if the current map is the same
+     * * than the current quest goal
+     */
     updateAnimationQuestGoal();
     for(let i = 0; i < questList.length; i++)
     {
@@ -69,9 +166,11 @@ const showGoalQuest = () => {
     }
 }
 
-let animationIndexUiQuestGoal = 0;
-let toggleAnimationQuestIndex = false;
 const updateAnimationQuestGoal = () => {
+    /**
+     * * Update the animation of the arrow on the top of the current goal
+     */
+
     if(animationIndexUiQuestGoal > 20 || toggleAnimationQuestIndex === true){
         animationIndexUiQuestGoal -= 0.25
         toggleAnimationQuestIndex = true;
@@ -85,58 +184,5 @@ const updateAnimationQuestGoal = () => {
     }
     
 }
-// * Quest Goal Animation
 
-// ? There is some questType : fight, talk
-const addQuestProgression = (questIdProgression, questType) => { // Update a progression using an ID
-    for(let i = 0; i< questList.length; i++)
-    {
-        if(questList[i].idQuestProgression+"" === questIdProgression && 
-            questList[i].currentProgression < questList[i].maxProgression &&
-            questList[i].questType === questType)
-        {
-            questList[i].currentProgression ++;
-        }
-        checkQuestIsFinish(questList[i]);
-    }
-}
-
-const addQuestProgressionOnEndFight = (teamProgressionToAdd) => { // Update the progression after a fight 
-    for(let i = 0; i < teamProgressionToAdd.length; i++)
-    {
-        addQuestProgression(teamProgressionToAdd[i].id)
-    }
-}
-
-const checkQuestIsFinish = (quest) => { // Check if a specific quest is finshed
-    if(quest.currentProgression >= quest.maxProgression)
-    {
-        quest.isFinished = true;
-        return true
-    }
-    return false;
-}
-
-const finishQuest = (questId) => {
-    for(let i = 0; i < questList.length; i++)
-    {
-        if(questList[i].id === questId)
-        {
-            questList.splice(i, 1)
-            return;
-        }
-    }
-}
-
-// ! Quest specific events
-
-const startSpecificQuestEvents = (questEventString) => {
-    switch(questEventString)
-    {
-        case "goNextTutoStep" :
-            mapData[0].npcOnMap[0].nextCase = [12, 10];
-            break;
-        default :
-            throw new Error("Specific event isn't set inside the startSpecificQuestEvents() : " + questEventString)
-    }
-}
+//#endregion

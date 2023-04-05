@@ -112,6 +112,26 @@
             "id" : "25",
             "path" : "assets/ui/PlanetsContainerColored.png",
             "image" : null
+        },{
+            "id" : "26",
+            "path" : "assets/background/spbg.png",
+            "image" : null
+        },{
+            "id" : "27",
+            "path" : "assets/ui/CaseQuestPngColored.png",
+            "image" : null
+        },{
+            "id" : "28",
+            "path" : "assets/ui/LoadingBar.png",
+            "image" : null
+        },{
+            "id" : "29",
+            "path" : "assets/ui/LoadingBarEmpty.png",
+            "image" : null
+        },{
+            "id" : "30",
+            "path" : "assets/ui/LoadingBarFull.png",
+            "image" : null
         }
     ]
 }

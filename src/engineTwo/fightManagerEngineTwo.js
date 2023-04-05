@@ -75,9 +75,9 @@ const getAttackableCase = (x, y, attackPoint) => {
 }
 const addCanAttackCase = (position) => {
     if(position[0] > 0 && position[1] > 0 && position[0] < actualMapEngineTwo.tacticalMap.length && position[1] < actualMapEngineTwo.tacticalMap.length){
-        if(actualMapEngineTwo.tacticalMap[position[1]][position[0]] !== -1)
+        if(actualMapEngineTwo.tacticalMap[Math.round(position[1])][Math.round(position[0])] !== -1)
         {
-            return
+            return;
         }
         canAttackCase.push(position)  
     }

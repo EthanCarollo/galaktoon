@@ -25,7 +25,6 @@ const displayEngineTwoPlayingUi = () => {
 }
 
 const displayEngineTwoEndFightUi = () => {
-    console.log("display end")
     displayEndDebug();
 }
 
@@ -43,7 +42,7 @@ const displayEndDebug = () => {
     fill(255,0,0,100)
     rect(x ,y ,size ,size)
     createInputButtonWithCallback(x ,y ,size ,size, () => {
-        returnEngineOneAfterFight();
+        launchEngine(EngineStateEnum.EngineOne);
     })
 }
 

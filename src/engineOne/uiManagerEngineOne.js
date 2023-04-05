@@ -1,6 +1,9 @@
-// * Display Screen
+
 
 const displayUserInterfaceEngineOne = () => {
+    /**
+     * * Display the normal user interface for the engine One
+     */
     displayPlayerInformationUI()
     displayExploringMenu();
     if(playerIsExploringMap === true){
@@ -11,9 +14,9 @@ const displayUserInterfaceEngineOne = () => {
     }
 }
 
-// * Display Screen
 
-// * Player Information
+
+//#region // * Player Informations Ui region
 
 const displayPlayerInformationUI = () => {
 
@@ -24,24 +27,7 @@ const displayPlayerInformationUI = () => {
     let percentLifeOfPlayer = playerTeam[0].health.actualHealth / playerTeam[0].health.maxHealth +0.00001;
     image(uiData[7].image, tempPosX, tempPosY ,tempSize, tempSize)
     showHealthBehindRectUI(tempPosXForHealth, tempPosY, tempSize, percentLifeOfPlayer)
-    showLevelUI(tempPosX, tempPosY, tempSize, playerTeam[0].level);
-
 }
-
-const showLevelUI = (x, y, spriteSize, level) => {
-    let characterLevel = level;
-    let caseLevel = uiData[8].image;
-    let caseSize = 35;
-    let xCase = x+spriteSize-caseSize;
-    let yCase = y+spriteSize-(caseSize/1.75);
-    image(caseLevel, xCase, yCase, caseSize, caseSize)
-    textAlign(CENTER, CENTER)
-    fill(255)
-    textSize(12)
-    text(characterLevel, xCase, yCase, caseSize, caseSize)
-    textAlign(LEFT, BASELINE)
-}
-
 
 const showHealthBehindRectUI = (posX, posY, size, percentOfLife) => {
     image(uiData[3].image, posX, posY+5, size+25, size+25)
@@ -55,12 +41,13 @@ const showBarWithPercentUi = (posX, posY, size, percentOfLife) => {
     image(uiData[13].image, posX, posY+5, size, size/12)
 }
 
-// * Player Information
-
-// * Exploring Menu 
+//#endregion
 
 
-let vector2ExploringMenu;
+
+//#region // * Exploring Menu Region
+
+
 const displayExploringMenu = () => {
     fill(0,0,0,155)
     let xSizeBg = window.innerHeight /1.75;
@@ -82,12 +69,12 @@ const displayExploringMenu = () => {
 
 const setVectorLerpEaseInExploringMenu = () => {
     vectorToCover = createVector(0, 0);
-    vectorMoove = p5.Vector.lerp(vectorToCover, vector2ExploringMenu, 0.8);
+    vectorMoove = p5.Vector.lerp(vectorToCover, vector2ExploringMenu, 0.88);
     vector2ExploringMenu = vectorMoove;
 }
 const setVectorLerpEaseOutExploringMenu = () => {
-    vectorToCover = createVector(-500, 0);
-    vectorMoove = p5.Vector.lerp(vectorToCover, vector2ExploringMenu, 0.8);
+    vectorToCover = createVector(-window.innerHeight /1.75, 0);
+    vectorMoove = p5.Vector.lerp(vectorToCover, vector2ExploringMenu, 0.88);
     vector2ExploringMenu = vectorMoove;
 }
 
@@ -127,4 +114,4 @@ const exitExploringMenu = () => {
     playerIsExploringMap = false;
 }
 
-// * Exploring Menu 
+//#endregion

@@ -1,8 +1,8 @@
 
 function preload() {
-  loadAssets(ressourceToLoad); // Launch the function load assets from ressource to load
+  loadAssets(); // Launch the function load assets from ressource to load
+  pixelFont = loadFont('../assets/fonts/PublicPixel.ttf');
 }
-
 
 function setup() {
   canvas = createCanvas(windowWidth, windowHeight);
@@ -22,6 +22,8 @@ function draw() {
     transitionManager(); // Apply transition effect on screen
     
 }
+
+
 
 function windowResized() {
   windowHeight = window.innerHeight
