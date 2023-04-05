@@ -194,8 +194,14 @@ const createImageWithIdOn2dArrayEngineTwo = (x, y, id, currentTileSize, mapInfo 
 
 
 
-// ! Tools
+//#region // * Usefull tools functions regions
 
+
+/**
+ * @param {int} x position y coord
+ * @param {int} y position y coord
+ * @returns {object} represents an entity on map references 
+ */
 const getSpriteWithCoord = (x, y) => {
     if(getSpriteTactical(x, y) === undefined)
     {
@@ -204,15 +210,34 @@ const getSpriteWithCoord = (x, y) => {
     return getSpriteTactical(x, y);
 }
 
+
+
+/**
+ * @returns {int} id of a tile on the tactical map
+ */
 const getTacticalTileOnMouseClick = () => {
     return actualMapEngineTwo.tacticalMap[Math.floor((mouseY - vectorCameraEngineTwo.y) / tileSize)][Math.floor((mouseX - vectorCameraEngineTwo.x) / tileSize)];
 }
 
+
+
+/**
+ * @returns {array[int]} [x, y] of the coord tile
+ */
 const getCoordTileWithMouseClickEngineTwo = () => [Math.floor((mouseX - vectorCameraEngineTwo.x) / tileSize), Math.floor((mouseY - vectorCameraEngineTwo.y) / tileSize)] // Return coord on map
 
+
+
+/**
+ * @returns {boolean} return if the mouse is in array or no (true false)
+ */
 const mouseIsInArrayEngineTwo = () => {
     return Math.floor((mouseX - vectorCameraEngineTwo.x) / tileSize) >= 0 
     && Math.floor((mouseY - vectorCameraEngineTwo.y) / tileSize) >= 0
     && Math.floor((mouseY - vectorCameraEngineTwo.y) / tileSize) < actualMapEngineTwo.tacticalMap.length
     && Math.floor((mouseX - vectorCameraEngineTwo.x) / tileSize) < actualMapEngineTwo.tacticalMap[0].length
 } // Return true or false
+
+
+
+//#endregion

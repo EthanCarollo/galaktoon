@@ -15,6 +15,9 @@ const InputOnArray = () => {
 }
 
 const attackInputInSecondEngine = () => {
+    /**
+     * * Check if the case is attackable or if the sprite on the tactical isn't null etc..
+     */
     let arrayMousePos = getCoordTileWithMouseClickEngineTwo();
 
     if(isAnAttackableCase(arrayMousePos[0], arrayMousePos[1]) && selectedEntity !== null)

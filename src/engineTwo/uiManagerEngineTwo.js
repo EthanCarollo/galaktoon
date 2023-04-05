@@ -84,18 +84,6 @@ const showButtonFightEnd = () => {
     textAlign(LEFT, CENTER)
 }
 
-/*
-const displayEndDebug = () => {
-    let size = 200;
-    let x = (window.innerWidth/2) - (size/2)
-    let y = (window.innerHeight) - (size)
-    fill(255,0,0,100)
-    rect(x ,y ,size ,size)
-    createInputButtonWithCallback(x ,y ,size ,size, () => {
-        launchEngine(EngineStateEnum.EngineOne);
-    })
-}*/
-
 // * -----------------------------
 // * -----------------------------
 
@@ -126,6 +114,21 @@ const displayPlayerInformationUiEngineTwo = () => {
     showBarWithPercentUi(xBar, yBar+(barSize/10)*2, barSize, percentPaOfPlayer);
 
 }
+
+const displayEndTurnButton = () => {
+    fill(255,0,255,100)
+    let tempSize = window.innerWidth/12;
+    let padding = 25;
+    let tempPosX = window.innerWidth/2 + tempSize *3.6 - tempSize
+    let tempPosY = window.innerHeight - tempSize - padding;
+
+    image(uiData[12].image, tempPosX, tempPosY, tempSize, tempSize);
+    createInputButtonWithCallback(tempPosX, tempPosY, tempSize, tempSize, () => {
+        endTurn();
+    })
+}
+
+//#region // * display abilities region
 
 const displayAbility = () => {
     setAbilityPosition();
@@ -230,8 +233,6 @@ const setAbilityPosition = () => {
     }
 }
 
-//
-
 const displayOpenAbility = () => {
 
 
@@ -271,19 +272,6 @@ const displayOpenAbility = () => {
     noFill()
 }
 
-const displayEndTurnButton = () => {
-    fill(255,0,255,100)
-    let tempSize = window.innerWidth/12;
-    let padding = 25;
-    let tempPosX = window.innerWidth/2 + tempSize *3.6 - tempSize
-    let tempPosY = window.innerHeight - tempSize - padding;
-
-    image(uiData[12].image, tempPosX, tempPosY, tempSize, tempSize);
-    createInputButtonWithCallback(tempPosX, tempPosY, tempSize, tempSize, () => {
-        endTurn();
-    })
-}
-
 const selectAbility = (ability) => {
     if(actualMapEngineTwo.entityOnTactical[0].pa > 0)
     {
@@ -292,3 +280,5 @@ const selectAbility = (ability) => {
         selectedAbility = ability;
     }
 }
+
+//#endregion

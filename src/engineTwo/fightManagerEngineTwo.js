@@ -45,7 +45,7 @@ const useAbility = (entity, target = 1, selectedAbility = 0) => {
 
 
 
-let canAttackCase = []
+
 const getAttackableCase = (x, y, attackPoint) => {
     canAttackCase = [[x, y]]
     for(let i = 1; i<attackPoint+1;i++)
@@ -85,6 +85,12 @@ const addCanAttackCase = (position) => {
 const resetAttackableCase = () => {
     canAttackCase = []
 }
+
+/**
+ * @param {int} x position x on the tilemap
+ * @param {int} y position y on the tile map
+ * @returns {boolean} true or false if it's an attackable case
+ */
 const isAnAttackableCase = (x, y) => {
     for(let i = 0; i < canAttackCase.length; i++)
     {
@@ -98,8 +104,7 @@ const isAnAttackableCase = (x, y) => {
 
 
 
-// ! --------------------------------------------------------------
-// ! Function Used universally for use a specific ability on a target
+//#region // * Usefull function when we launch an attack
 
 const launchAttack = (entity = actualMapEngineTwo.entityOnTactical[whichEntityTurn], target, abilityIndex = selectedAbility) => {
     if(entity.pa > 0){
@@ -120,11 +125,16 @@ const attackWithTheCurrentAbility = (entity, abilityIndex, target) => {
         break;
     }
 } 
-// ! Function Used universally for use a specific ability on a target
-// ! --------------------------------------------------------------
 
-// Check if all enemies (so except id 0) are dead (and return true or false)
+//#endregion
+
+/**
+ * @returns {boolean} if all enemies are dead or not
+ */
 const checkAllEnemiesDead = () => {
+    /**
+     * * Check if all enemies (so except id 0) are dead (and return true or false)
+     */
     let count = 0;
     for(let i = 1; i < actualMapEngineTwo.entityOnTactical.length; i++)
     {
@@ -143,6 +153,9 @@ const checkAllEnemiesDead = () => {
     }
 }
 
+/**
+ * @returns {boolean} if all allies are dead or not (in our case, we only have our player actually)
+ */
 const checkAllAlliesDead = () => {
     if(playerTeam[0].health.actualHealth <= 0)
     {

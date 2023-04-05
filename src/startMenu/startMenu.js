@@ -37,7 +37,6 @@ const runNormalStartMenuState = () => {
 
 //#endregion
 
-let loadingBarOpacity = 255;
 const showLoadingBarState = () => {
     /**
      * * This function is the reason why using totalLoadCounter variable is usefull, i just take the total length of the ressource to load
@@ -124,8 +123,13 @@ const showLogo = (offset = [0, 0]) => {
 
 /**
  * * This will just update the index of the animation of the logo
+ * @param {int} sizeToGo this is the size that the logo will try to touch 
  */
 const updateLogoIndexAnimation = (sizeToGo = maxSizeOfTheLogo) => {
+    /**
+     * * Here, i'm just using the vector lerp like a transition with the xPos of the Vector2 
+     */
+
     let vectorSize;
     vectorSize = p5.Vector.lerp(createVector(indexLogoStartMenu, 0), createVector(sizeToGo, 0), 0.04); // interpolate the camera with the player by using vector.lerp by p5
 
@@ -133,6 +137,9 @@ const updateLogoIndexAnimation = (sizeToGo = maxSizeOfTheLogo) => {
 }
 
 
+/**
+ * @param {array[float]} positionToGo this is the position that the logo will try to touch ([x , y])
+ */
 const updatePositionLogo = (positionToGo = [0, 0]) => {
     let vectorToGo;
     vectorToGo = p5.Vector.lerp(createVector(logoOffSet[0], logoOffSet[1]), createVector(positionToGo[0], positionToGo[1]), 0.04); // interpolate the camera with the player by using vector.lerp by p5

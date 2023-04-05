@@ -60,6 +60,44 @@ const getPlayerCollision = (offsetVectorBounds = createVector(0, 0)) => { // off
 
 //#region // * Player Interaction region
 
+
+
+/**
+ * @param {array[int]} playerCaseInteract [x , y]
+ */
+const checkForInteraction = (playerCaseInteract) => {
+    /**
+     * * Check if the tile exist or if a pnj is on the tile, then create interaction popup
+     */
+    if(getTileData(playerCaseInteract[0], playerCaseInteract[1], actualPlayerMap.objectLayer) !== undefined)
+    {
+        if(getTileData(playerCaseInteract[0], playerCaseInteract[1], actualPlayerMap.objectLayer).type !== "useless")
+            {
+            let interactType = getTileData(playerCaseInteract[0], playerCaseInteract[1], actualPlayerMap.objectLayer).type;
+            createInteractionPopup(playerCaseInteract[0], playerCaseInteract[1], interactType)
+            }
+    }
+    
+    // just for set pnj interactible
+    let pnjInteractible = playerOnMap.npcOnMap.filter(npc => npc.pos[0] === playerCaseInteract[0] && npc.pos[1] === playerCaseInteract[1])
+    if(pnjInteractible.length > 0)
+    {
+        createInteractionPopup(playerCaseInteract[0], playerCaseInteract[1], "npc")
+    }
+}
+
+
+
+/**
+ * @param {array[int]} caseInteraction [x, y] the case interaction
+ */
+const playerInteraction = (caseInteraction) => {
+    interactWithATile(caseInteraction);
+    interactWithNPC(caseInteraction);
+}
+
+
+
 /**
  * @param {array} tileInteract [x, y] position of the tile interacted
  */
@@ -153,6 +191,13 @@ const createInteractionPopup = (x ,y ,typeOfInteract) => {
 }
 
 //#endregion
+
+
+
+/**
+ * @returns {array[int]} [x, y] the tile next to the player
+ */
+const tileNextToThePlayer = () => [actualPlayerTile()[0] + playerLastDirection[0], actualPlayerTile()[1] + playerLastDirection[1]]
 
 
 
