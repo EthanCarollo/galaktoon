@@ -105,6 +105,7 @@ const showChoiceStartMenuState = () => {
  */
 const showBackgroundGalaxy = (idBackground = 26) => {
     image(uiData[idBackground].image, 0, 0, windowWidth, windowHeight)
+    // applyBrightnessTemp(uiData[idBackground].image)
 }
 
 

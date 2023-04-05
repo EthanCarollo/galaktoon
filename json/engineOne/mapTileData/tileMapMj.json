@@ -1,0 +1,60 @@
+{
+    "data": [
+        {
+            "id": "0",
+            "path": "assets/tiles/DebugTiles.png",
+            "isAnimated": false,
+            "image": "null",
+            "collider": false,
+            "canConstruct": "true",
+            "isAnObject": false,
+            "xWidth": 1,
+            "yWidth": "1",
+            "type": "useless",
+            "destructible": "false",
+            "sizeXonConstruct": 1
+        },
+        {
+            "id": "1",
+            "path": "assets/tiles/tilespaceshiptest2t.png",
+            "isAnimated": false,
+            "image": "null",
+            "collider": true,
+            "canConstruct": "true",
+            "isAnObject": false,
+            "xWidth": 1,
+            "yWidth": "1.5",
+            "type": "useless",
+            "destructible": "false",
+            "sizeXonConstruct": 1
+        },
+        {
+            "id": "2",
+            "path": "assets/tiles/DebugTilesRed.png",
+            "isAnimated": false,
+            "image": "null",
+            "collider": true,
+            "canConstruct": "true",
+            "isAnObject": false,
+            "xWidth": 1,
+            "yWidth": "1",
+            "type": "fight",
+            "destructible": "false",
+            "sizeXonConstruct": 1
+        },
+        {
+            "id": "3",
+            "path": "assets/tiles/DebugTilesBlue.png",
+            "isAnimated": false,
+            "image": "null",
+            "collider": true,
+            "canConstruct": "true",
+            "isAnObject": false,
+            "xWidth": 1,
+            "yWidth": "1",
+            "type": "explore",
+            "destructible": "false",
+            "sizeXonConstruct": 1
+        }
+    ]
+}
