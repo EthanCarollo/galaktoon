@@ -1,6 +1,7 @@
 
 function preload() {
-  loadAssets(ressourceToLoad); // Launch the function load assets from ressource to load
+  loadAssets(); // Launch the function load assets from ressource to load
+  pixelFont = loadFont('../assets/fonts/PublicPixel.ttf');
 }
 
 function setup() {

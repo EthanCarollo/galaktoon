@@ -1,26 +1,30 @@
 
-const loadAssets = () => {
-    /**
-     * * The launch function for the loading of all assets
-     */
-    pixelFont = loadFont('../assets/fonts/PublicPixel.ttf');
-    for(let i = 0 ; i < ressourceToLoad.length ; i++)
-    {
-        fetch(ressourceToLoad[i].path)
-        .then(rep => rep.json())
-        .then(rep => { 
-                loadRessource(
-                    rep.data,
-                    ressourceToLoad[i].typeOfRessource
-                )
-                    
-        })
-        .catch(error => { 
-            // error handling
-            throw new Error("there is an issue with a ressource : " + error);
 
-        })
-    } 
+
+/**
+ * @param {int} indexOfAssetsToLoad it is the index of which asset i need to load
+ */
+const loadAssets = (indexOfAssetsToLoad = totalLoadCounter) => {
+    /**
+     * * The launch function for the loading assets, this functions is periodically recalled
+     * * when we finished to load a json en we need to go to the second, in that case, i can know 
+     * * where i am in the loading of all of my assets
+     */
+    fetch(ressourceToLoad[indexOfAssetsToLoad].path)
+    .then(rep => rep.json())
+    .then(rep => { 
+            loadRessource(
+                rep.data,
+                ressourceToLoad[indexOfAssetsToLoad].typeOfRessource
+            )
+                    
+     })
+    .catch(error => { 
+        // error handling
+        throw new Error("there is an issue with a ressource : " + error + " // On the id of asset : " + indexOfAssetsToLoad);
+
+    })
+    
     
   }
 
@@ -142,7 +146,8 @@ const successfullLoadingRessource = (typeOfRessource) => {
      * * This function do a big switch case on every types of ressource renseigned in ressourceToLoad array,
      * * if we wan't to add a ressource that doesn't fit with the switch case, we will have an error. In this case
      * * this function is called when we success a loading ressource. And after every successfullLoad, the function
-     * * check if all ressource has been loaded, in that case we know when we can start the game
+     * * check if all ressource has been loaded, in that case we know when we can start the game, on every
+     * * total load counter ++, i load the next assets of the assets array
      */
 
     switch(typeOfRessource){
@@ -150,18 +155,21 @@ const successfullLoadingRessource = (typeOfRessource) => {
             loadingCounterSpritesData ++;
             if(loadingCounterSpritesData === spritesData.length){
                 totalLoadCounter ++;
+                loadAssets();
             }
             break;
         case "item" :
             loadingCounterItemsData ++;
             if(loadingCounterItemsData === itemsData.length){
                 totalLoadCounter ++;
+                loadAssets();
             }
             break;
         case "map" :
             loadingCounterMapData ++;
             if(loadingCounterMapData === mapData[0].tileRessource.length){ // If we spawn on the map 0 then we just need to load the map 0 and the rest will load
                 totalLoadCounter ++;
+                loadAssets();
             }
             // TODO : This method is still unstable (like if a player change the map that he didn't already load)
             break;
@@ -169,21 +177,26 @@ const successfullLoadingRessource = (typeOfRessource) => {
             loadingCounterSpritesFightData ++;
             if(loadingCounterSpritesFightData === spritesFightData.length){
                 totalLoadCounter ++;
+                loadAssets();
             }
             break;
         case "planets" :
             totalLoadCounter ++;
+            loadAssets();
             break;
         case "npc" :
             totalLoadCounter ++;
+            loadAssets();
             break;
         case "quest" :
             totalLoadCounter ++;
+            loadAssets();
             break;
         case "ui" :
             loadingCounterUIData ++;
             if(loadingCounterUIData === uiData.length){
                 totalLoadCounter ++;
+                loadAssets();
             }
             break;
         case 'tactical' :
@@ -217,7 +230,7 @@ const checkAllRessource = () => {
 const loadAllRessource = () => {
     setTimeout(() => {
         startMenuState =  StartMenuStateEnum.Normal;
-    }, 2500); // set the menu normally if we have load all assets
+    }, 1000); // set the menu normally if we have load all assets
 
     setEngineVariableAfterLoadingAllAssets();
     ressourceIsLoaded = true;

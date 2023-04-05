@@ -37,19 +37,35 @@ const runNormalStartMenuState = () => {
 
 //#endregion
 
-
+let loadingBarOpacity = 255;
 const showLoadingBarState = () => {
+    /**
+     * * This function is the reason why using totalLoadCounter variable is usefull, i just take the total length of the ressource to load
+     * * and then i just divide it to have the "%" of completion of the load, in that case, i can know which ressource is actually loading
+     * * cause i have type for every elements in the ressourceToLoad array, this function use the loading bar opacity, in that case
+     * * because the load assets function take 1000 ms to set the startMenu state to Normal, i can decrease the loadingBarOpacity int
+     * * So the loading bar disappear
+     */
+    if(totalLoadCounter >= ressourceToLoad.length )
+    {
+        loadingBarOpacity -= 5;
+    }
+    
     let progression = totalLoadCounter / ressourceToLoad.length 
     let xWidth = window.innerWidth /1.25;
     let yHeight = xWidth / 40;
     let xStart = window.innerWidth / 2 - xWidth / 2
     let yStart = window.innerHeight - yHeight * 1.5
+
+    tint(255,loadingBarOpacity);
     image(uiData[28].image, xStart, yStart, xWidth, yHeight)
     image(uiData[30].image, xStart, yStart, xWidth*progression, yHeight)
     image(uiData[29].image, xStart, yStart, xWidth, yHeight)
     textAlign(CENTER, CENTER)
-    fill(255)
+    noTint();
+    fill(255,loadingBarOpacity)
     text(totalLoadCounter + " / " + ressourceToLoad.length + " // Actually loading : " + ressourceToLoad[totalLoadCounter-1].typeOfRessource, xStart, yStart, xWidth, yHeight )
+    fill(255)
 }
 
 
