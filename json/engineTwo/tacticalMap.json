@@ -36,12 +36,12 @@
                         3
                     ],
                     "nextCase": null,
-                    "pattern" : "normal",
+                    "pattern" : "aggressive",
                     "pm": 2,
                     "pa": 1,
                     "state": "idle",
                     "health": {
-                        "actualHealth": 75,
+                        "actualHealth": 10,
                         "maxHealth": 100
                     },
                     "abilities": [

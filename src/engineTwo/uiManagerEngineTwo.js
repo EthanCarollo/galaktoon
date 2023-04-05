@@ -25,7 +25,7 @@ const displayEngineTwoPlayingUi = () => {
 }
 
 const displayEngineTwoEndFightUi = () => {
-    displayEndDebug();
+    displayEndFight();
 }
 
 const displayGameUi = () => {
@@ -35,6 +35,56 @@ const displayGameUi = () => {
     displayEndTurnButton();
 }
 
+const displayEndFight = () => {
+    let size = 200;
+    showEnemiesEndFightList(size);
+    showPlayer(size);
+    showButtonFightEnd();
+}
+
+const showEnemiesEndFightList = (size) => {
+    let x = (window.innerWidth) - (size*2)
+    let y = (window.innerHeight) / 2 - size
+    for(let i = 1; i < actualMapEngineTwo.entityOnTactical.length; i++)
+    {
+        let yPosition = y +(size+25)*(i-1)
+        animationIdleSprite(x, yPosition, size, [0, 1], actualMapEngineTwo.entityOnTactical[i].id)
+        
+        let percentLifeOfEntity = actualMapEngineTwo.entityOnTactical[i].health.actualHealth / actualMapEngineTwo.entityOnTactical[i].health.maxHealth +0.00001;
+        showHealthBehindRectUI(x-25/2, yPosition-10, size, percentLifeOfEntity)
+    }
+}
+
+const showPlayer = (size) => {
+    let x = size
+    let y = (window.innerHeight) / 2 - size
+    animationIdleSprite(x, y, size, [0, 1], 0)
+
+    let percentLifeOfPlayer = playerTeam[0].health.actualHealth / playerTeam[0].health.maxHealth +0.00001;
+    showHealthBehindRectUI(x-25/2, y-10, size, percentLifeOfPlayer)
+}
+
+const showButtonFightEnd = () => {
+    let width = window.innerWidth / 3;
+    let height = width/5;
+    let xStart = (window.innerWidth/2) - (width/2)
+    let yPosition = (window.innerHeight) - (height*1.5)
+    fill(255,0,0,100)
+    image(uiData[18].image, xStart, yPosition, width, height)
+    if(mouseIsHover(xStart, yPosition, width, height) === true)
+    {
+        image(uiData[27].image, xStart, yPosition, width, height)
+    }
+    createInputButtonWithCallback(xStart ,yPosition ,width ,height, () => {
+        launchEngine(EngineStateEnum.EngineOne);
+    })
+    textAlign(CENTER, CENTER)
+    textSize(40); fill(255);
+    text("End Fight", xStart, yPosition, width, height)
+    textAlign(LEFT, CENTER)
+}
+
+/*
 const displayEndDebug = () => {
     let size = 200;
     let x = (window.innerWidth/2) - (size/2)
@@ -44,7 +94,7 @@ const displayEndDebug = () => {
     createInputButtonWithCallback(x ,y ,size ,size, () => {
         launchEngine(EngineStateEnum.EngineOne);
     })
-}
+}*/
 
 // * -----------------------------
 // * -----------------------------
