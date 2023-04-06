@@ -85,12 +85,8 @@ const animateNpc = (x, y, size, direction /* ! = Array ! */, npcId, npc) => {
       animationIdleSprite(x, y, size, direction, npcId)
       break;
     case "moove" :
-      if(mooveEntityToNextCaseInEngineOne(npc, createVector(cameraVector.x + playerVector.x, cameraVector.y + playerVector.y)) === true) // Using the "pathfinding" from the second Engine
-      {
-        animationMooveSprite(x, y, size, direction, npcId)
-      }else{
-        animationIdleSprite(x, y, size, direction, npcId)
-      }
+      mooveEntityToNextCaseInEngineOne(npc, createVector(cameraVector.x + playerVector.x, cameraVector.y + playerVector.y)) === true // Using the "pathfinding" from the second Engine
+      animationMooveSprite(x, y, size, direction, npcId)
       break;
     default :
       break;
