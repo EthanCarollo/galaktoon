@@ -2,6 +2,10 @@ function getRandomInt(max) {
     return Math.floor(Math.random() * max);
 }
 
+
+/**
+ * @returns {boolean} return the value of the action of the IA
+ */
 const runIaTurn = () => {
 
     if(actualMapEngineTwo.entityOnTactical[whichEntityTurn].state === "dead")
@@ -11,14 +15,17 @@ const runIaTurn = () => {
     }
 
     let entityIa = actualMapEngineTwo.entityOnTactical[whichEntityTurn]
-    runIaPattern(entityIa)
+    return runIaPattern(entityIa)
     
 }
 
 
-//#region // * Different IA Pattern region
-
-const runIaPattern = (entityIa) => {
+/**
+ * * Use a big switch on the different patterns of the IA
+ * @param {object} entityIa the ia object
+ * @returns {boolean} return the value of the action of the IA 
+ */
+ const runIaPattern = (entityIa) => {
     /** 
      * * This code will play different gameplay for differents IA patterns, nothing extremely advanced,
      * * just a 'IA' that play differents playstyle like we can see in old retro games
@@ -26,23 +33,25 @@ const runIaPattern = (entityIa) => {
     switch(entityIa.pattern)
     {
         case 'normal' : 
-            runStandardIaPattern(entityIa, 65); // 65 % to go on the player else moove randomly
-            break;
+            return runStandardIaPattern(entityIa, 65); // 65 % to go on the player else moove randomly
         case 'aggressive' : 
-            runStandardIaPattern(entityIa, 100); // Agressive just run on the player
-            break;
+            return runStandardIaPattern(entityIa, 100); // Agressive just run on the player
         case 'aggro-passive' : 
-            runStandardIaPattern(entityIa, 0); // Moove randomly
-            break;
+            return runStandardIaPattern(entityIa, 0); // Moove randomly
         default :
             throw new Error("Entity Ia Pattern isn't defined or doesnt exist : " + entityIa.pattern)
     }
 }
 
 
+//#region // * Different IA Pattern region
+
+
+
 /**
  * @param {object} entityIa the object Ia 
  * @param {int} chance it's the percent of chance that the entity go directly on the player 
+ * @returns {boolean} return if the pattern did an action or not
  */
 const runStandardIaPattern = (entityIa, chance) => {
     /**
@@ -53,22 +62,28 @@ const runStandardIaPattern = (entityIa, chance) => {
 
     if(attackIA(entityIa) === false)
     {
-        console.log("didn't attacked")
-        entityIa.pm -= 1;
-        mooveOneCaseIA(entityIa, chance)
-    }else{
-        console.log("Fighted")
-    }   
-    
+        return mooveOneCaseIA(entityIa, chance)
+    } 
+    return true
 }
 
+
+
 //#endregion
+
+//#region // * The moovability of the IA 
 
 /**
  * @param {object} entityIa the object Ia 
  * @param {int} chance it's the percent of chance that the entity go directly on the player 
+ * @returns {boolean} return if the Ia is mooving or not
  */
 const mooveOneCaseIA = (entityIa , chance) => {
+    if(entityIa.pm <= 0)
+    {
+        return false;
+    }
+    entityIa.pm -= 1;
     entityIa.pos = [Math.round(entityIa.pos[0]), Math.round(entityIa.pos[1])]; 
     // I'm rounding it cause i don't want to have bug like "Entity pos isn't an int"
     let movableIaCase = getMovableCase(entityIa.pos[0], entityIa.pos[1], 1)
@@ -97,8 +112,14 @@ const mooveOneCaseIA = (entityIa , chance) => {
     nextCase = movableIaCase[chosedPath];
     resetMovableCase()
     setEntityNextCase(entityIa, nextCase)
+    return true;
 }
 
+/**
+ * @param {object} entityIa entity of the IA
+ * @param {int} indexAbilityUsed integer of the ability used
+ * @returns {boolean} return if the ia attacked or no
+ */
 const attackIA = (entityIa, indexAbilityUsed = 0) => {
 
     let selectAbilityIa = indexAbilityUsed;
@@ -115,11 +136,14 @@ const attackIA = (entityIa, indexAbilityUsed = 0) => {
         }
     }
     if(target !== null){
+        resetAttackableCase() // Reset the variable of attack
         return launchAttack(entityIa, actualMapEngineTwo.entityOnTactical[0], selectAbilityIa); 
         // I don't need to verify if the PA is > 0 cause it already does in the launch attack function 
     }
-    resetAttackableCase()
+    resetAttackableCase()  // Reset the variable of attack
     return false; // Return if a target has been selected or not
     
     
 }
+
+//#endregion

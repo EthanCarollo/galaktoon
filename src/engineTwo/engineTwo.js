@@ -15,6 +15,7 @@ const runEngineTwo = () => {
 
 const engineTwoPlaying = () => {
     background(20)
+    setAllHealth();
     displayTopDownMapEngineTwo();
     setSelectedEntity();
     setCameraEngineTwo();
@@ -172,14 +173,20 @@ const showHealthSpriteTactical = (position, entity) => {
 
     let health = entity.health
     image(uiData[3].image, position[0], position[1], playerSpriteSize, playerSpriteSize) // Background HP
-    if(entity.health.actualHealth < 0)
-    {
-        entity.health.actualHealth = 0;
-    }
     let actualHealthPercent = health.actualHealth / health.maxHealth * 100 + 0.0001;
     image(uiData[0].image, position[0], position[1], actualHealthPercent, playerSpriteSize) // Bar HP
 
     image(uiData[2].image, position[0], position[1], playerSpriteSize, playerSpriteSize) // Border HP
+}
+
+const setAllHealth = () => {
+    for(let i = 0; i < actualMapEngineTwo.entityOnTactical.length; i ++)
+    {
+        if(actualMapEngineTwo.entityOnTactical[i].health.actualHealth < 0)
+        {
+            actualMapEngineTwo.entityOnTactical[i].health.actualHealth = 0;
+        }
+    }
 }
 
 const createImageWithIdOn2dArrayEngineTwo = (x, y, id, currentTileSize, mapInfo = actualMapEngineTwoRessource) => {

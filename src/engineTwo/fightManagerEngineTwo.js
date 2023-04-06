@@ -11,24 +11,40 @@ const turnManager = () => {
 
     
     nextIndexEntityTurn();
-    resetMovableAndEntityVar()
+    resetMovableAndEntityVar();
     setSelectedEntity();
+
     selectedEntity.pm = 2;
     selectedEntity.pa = 2;
-
     checkIaTurn()
 }
 
 const checkIaTurn = () => {
+    /**
+     * * This function is called at the end of each turn, when an entity is mooving or not or whatever else*
+     * * This algorithms check if the IA still have pm for running the turn, then if the run ia turn is sending
+     * * false, that's mean that the entity can't moove and can't attack so i just decrease the pa by one and
+     * * relaunch the function and then when IA don't have pm or pa, this just end the turn
+     */
     if(whichEntityTurn > 0)
     {
         if(actualMapEngineTwo.entityOnTactical[whichEntityTurn].pm > 0)
         {
-            runIaTurn();
-        }else{
-            endTurn();
+            runIaTurn(); 
+            return;
         }
-        
+        if(actualMapEngineTwo.entityOnTactical[whichEntityTurn].pa > 0)
+        {
+            if(runIaTurn() === false)
+            {
+                actualMapEngineTwo.entityOnTactical[whichEntityTurn].pa--;
+                checkIaTurn();
+                return;
+            }else{
+                return;
+            };
+        }
+        endTurn();
     }
 }
 
@@ -40,6 +56,12 @@ const nextIndexEntityTurn = () => {
     }
 }
 
+
+/**
+ * @param {object} entity entity object 
+ * @param {int} target target of the current map 
+ * @param {int} selectedAbility selected ability index of the 'entity' obj 
+ */
 const useAbility = (entity, target = 1, selectedAbility = 0) => {
     if(entity.pa > 0)
     {
@@ -58,7 +80,12 @@ const useAbility = (entity, target = 1, selectedAbility = 0) => {
 
 
 
-
+/**
+ * @param {int} x the start x of the zoning of where we can attack
+ * @param {int} y the start y of the zoning of where we can attack
+ * @param {int} attackPoint the number of attack point
+ * @returns {array[array[int]]} returns an array of coords who are in an array [[x,y],[x,y+1],...]
+ */
 const getAttackableCase = (x, y, attackPoint) => {
     canAttackCase = [[x, y]]
     for(let i = 1; i<attackPoint+1;i++)
@@ -129,6 +156,11 @@ const launchAttack = (entity = actualMapEngineTwo.entityOnTactical[whichEntityTu
     }
 }
 
+/**
+ * @param {object} entity entity object 
+ * @param {int} abilityIndex the ability index of the entity that it used 
+ * @param {object} target target entity object
+ */
 const attackWithTheCurrentAbility = (entity, abilityIndex, target) => {
     switch(entity.abilities[abilityIndex].type)
     {
