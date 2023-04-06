@@ -93,10 +93,10 @@ const createMapTopDown = (orientation, mapLayer, mapInfo = playerOnMap, offsetPo
             case "back" :
               if(actualPlayerTile()[1] >= y)
               {
+                showSpecificNpcOnMap(x, y)
                 if(!tileIsEmpty(x, y, mapLayer)){
                   createImageWithIdOn2dArray(x, y, mapLayer[y][x], tileSize, false, mapInfo, offsetPositionOnScreen);
-                }
-                showSpecificNpcOnMap(x, y)
+                }    
               }
               break;
             case "front":
@@ -109,7 +109,9 @@ const createMapTopDown = (orientation, mapLayer, mapInfo = playerOnMap, offsetPo
               }
               break;
             default :
-              createImageWithIdOn2dArray(x, y, mapLayer[y][x], tileSize, false, mapInfo, offsetPositionOnScreen);
+              if(!tileIsEmpty(x, y, mapLayer)){
+                createImageWithIdOn2dArray(x, y, mapLayer[y][x], tileSize, false, mapInfo, offsetPositionOnScreen);
+              }
               break;
           }
         }
@@ -128,7 +130,7 @@ const createImageWithIdOn2dArray = (x, y, id, currentTileSize, isUi = false, map
     image(uiData[id].image, xPositionTiles , yPositionTiles, currentTileSize, currentTileSize);
   }else{
     // size of the current tile according to the data
-    let xTileWidth = mapInfo.tileRessource[id].xWidth;
+    let xTileWidth = 1;
     let yTileHeight = mapInfo.tileRessource[id].yWidth;
     let xPositionTiles = currentTileSize*x + offsetPositionOnScreen[0] -45;
     let yPositionTiles = (currentTileSize*(y+1-yTileHeight) + offsetPositionOnScreen[1] -45);
