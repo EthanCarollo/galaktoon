@@ -140,6 +140,14 @@
             "id" : "32",
             "path" : "assets/background/backGroundFond.png",
             "image" : null
+        },{
+            "id" : "33",
+            "path" : "assets/background/backGroundSalatonionPt.png",
+            "image" : null
+        },{
+            "id" : "34",
+            "path" : "assets/ui/LogoGalaktoon.png",
+            "image" : null
         }
     ]
 }

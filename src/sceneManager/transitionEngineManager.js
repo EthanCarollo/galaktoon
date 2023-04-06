@@ -80,7 +80,7 @@ const transitionManager = () => {
 
 
 const getRandomBackGroundId = () => {
-    const arrayId = [31, 15]
+    const arrayId = [31, 15, 33]
     console.log(getRandomInt(arrayId.length))
     return arrayId[getRandomInt(arrayId.length)];
 } 

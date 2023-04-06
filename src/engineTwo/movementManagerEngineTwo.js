@@ -83,6 +83,7 @@ const applyDifferencePmWithNextCase = (entity) => {
 
 let movementSpeed = 0.045;
 const mooveEntityToNextCase = (entity, cameraVector = vectorCameraEngineTwo) => {
+    entity.state = 'moove';
     let positionOnMap = 
         [
             entity.pos[0] * tileSize - (playerSpriteSize-tileSize)/2 + cameraVector.x,

@@ -161,7 +161,7 @@ const animationDeadSprite = (positionX, positionY, size, id = 0) => {
     */
     //#endregion
 
-    let offsetAnimAmount = 5;
+    let offsetAnimAmount = 8;
     xStartCut = 0;
     // Dead animation just have one direction
     spritePlayerAnimationMoove = spritesData[id].image.get(xStartCut,spriteSizeCut* offsetAnimAmount,spriteSizeCut,spriteSizeCut);

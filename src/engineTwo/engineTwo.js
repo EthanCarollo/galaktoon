@@ -15,8 +15,8 @@ const runEngineTwo = () => {
 
 const engineTwoPlaying = () => {
     background(20)
-    setSelectedEntity();
     displayTopDownMapEngineTwo();
+    setSelectedEntity();
     setCameraEngineTwo();
     displayEngineTwoUI();
     setGameState();
@@ -127,34 +127,41 @@ const showSpriteOnTactical = (entity) => {
         entity.pos[0] * tileSize - (playerSpriteSize-tileSize)/2 +vectorCameraEngineTwo.x,
         entity.pos[1] * tileSize - (playerSpriteSize-tileSize)/2 +vectorCameraEngineTwo.y
     ]
+
     if(entity.nextCase !== null ) // If entity has a next case to moove
     {
-        if(mooveEntityToNextCase(entity) === false)
-        {
+        entity.state = "moove";
+    }
+
+    switch(entity.state)
+    {
+        case "fight":
+            if(animationFightSprite(positionOnMap[0], positionOnMap[1], playerSpriteSize, 0, entity.id) === false)
+            {
+                console.log("Finished to fight")
+                entity.state = "idle";
+                checkIaTurn();
+            }
+            showHealthSpriteTactical(positionOnMap, entity)
+            break;
+        case "moove" :
+            if(mooveEntityToNextCase(entity) === false)
+            {
+                console.log("Finished to moove")
+                entity.state = "idle";
+                checkIaTurn();
+            }
+            animationMooveSprite(positionOnMap[0], positionOnMap[1], playerSpriteSize, entity.dir, entity.id)
+            break;
+        case "dead" :
+            animationDeadSprite(positionOnMap[0], positionOnMap[1], playerSpriteSize, entity.id)
+            break;
+        default :
             animationIdleSprite(positionOnMap[0], positionOnMap[1], playerSpriteSize, [0, 1], entity.id)
             showHealthSpriteTactical(positionOnMap, entity)
-        }else{
-            animationMooveSprite(positionOnMap[0], positionOnMap[1], playerSpriteSize, entity.dir, entity.id)
-        }
-    }else{
-        switch(entity.state)
-        {
-            case "fight":
-                if(animationFightSprite(positionOnMap[0], positionOnMap[1], playerSpriteSize, 0, entity.id) === false)
-                {
-                    // This is resseting the entity state on idle when the fight animation is finish (when it returns false)
-                    entity.state = "idle";
-                }
-                showHealthSpriteTactical(positionOnMap, entity)
-                break;
-            case "dead" :
-                break;
-            default :
-                animationIdleSprite(positionOnMap[0], positionOnMap[1], playerSpriteSize, [0, 1], entity.id)
-                showHealthSpriteTactical(positionOnMap, entity)
-                break;
-        }
+            break;
     }
+    
 }
 
 const showHealthSpriteTactical = (position, entity) => {

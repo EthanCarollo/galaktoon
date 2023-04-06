@@ -10,21 +10,34 @@ const turnManager = () => {
     }
 
     
+    nextIndexEntityTurn();
+    resetMovableAndEntityVar()
+    setSelectedEntity();
+    selectedEntity.pm = 2;
+    selectedEntity.pa = 2;
+
+    checkIaTurn()
+}
+
+const checkIaTurn = () => {
+    if(whichEntityTurn > 0)
+    {
+        if(actualMapEngineTwo.entityOnTactical[whichEntityTurn].pm > 0)
+        {
+            runIaTurn();
+        }else{
+            endTurn();
+        }
+        
+    }
+}
+
+const nextIndexEntityTurn = () => {
     whichEntityTurn ++;
     if(whichEntityTurn >= actualMapEngineTwo.entityOnTactical.length)
     {
         whichEntityTurn = 0;
     }
-
-    if(whichEntityTurn > 0)
-    {
-        runIaTurn();
-    }
-    
-    resetMovableAndEntityVar()
-    actualMapEngineTwo.entityOnTactical[whichEntityTurn].pm = 2;
-    actualMapEngineTwo.entityOnTactical[whichEntityTurn].pa = 2;
-    selectedEntity = actualMapEngineTwo.entityOnTactical[whichEntityTurn]
 }
 
 const useAbility = (entity, target = 1, selectedAbility = 0) => {
@@ -110,6 +123,9 @@ const launchAttack = (entity = actualMapEngineTwo.entityOnTactical[whichEntityTu
     if(entity.pa > 0){
         attackWithTheCurrentAbility(entity, abilityIndex, target)
         resetMovableAndEntityVar();
+        return true;
+    }else{
+        return false;
     }
 }
 

@@ -51,30 +51,15 @@ const runStandardIaPattern = (entityIa, chance) => {
      * * probability of the next moove of the player by changing the change
      */
 
-    let timeBetweenAction = 650; // time between action of the IA
-
-    for(let i = 0; i < entityIa.pm; i++)
+    if(attackIA(entityIa) === false)
     {
-        setTimeout(() => {
-
-            // Action Ia
-            if(attackIA(entityIa) === true){
-                setTimeout(() => { mooveOneCaseIA(entityIa) }, timeBetweenAction) // Attack and then wait for Moove
-            }else{
-                mooveOneCaseIA(entityIa, chance)
-                setTimeout(() => { 
-                    attackIA(entityIa, chance)
-                }, timeBetweenAction)
-            }
-
-            // Action Ia 
-
-        }, timeBetweenAction * i);
-    }
-
-    setTimeout(() => {
-        endTurn();
-    }, timeBetweenAction + timeBetweenAction * entityIa.pm);
+        console.log("didn't attacked")
+        entityIa.pm -= 1;
+        mooveOneCaseIA(entityIa, chance)
+    }else{
+        console.log("Fighted")
+    }   
+    
 }
 
 //#endregion
@@ -114,8 +99,9 @@ const mooveOneCaseIA = (entityIa , chance) => {
     setEntityNextCase(entityIa, nextCase)
 }
 
-const attackIA = (entityIa) => {
-    let selectAbilityIa = 0;
+const attackIA = (entityIa, indexAbilityUsed = 0) => {
+
+    let selectAbilityIa = indexAbilityUsed;
     let attackableCase = getAttackableCase(entityIa.pos[0], entityIa.pos[1], entityIa.abilities[selectAbilityIa].range);
     let target = null;
     for(let i = 0; i < attackableCase.length; i++)
@@ -129,11 +115,11 @@ const attackIA = (entityIa) => {
         }
     }
     if(target !== null){
-        launchAttack(entityIa, actualMapEngineTwo.entityOnTactical[0], selectAbilityIa); 
+        return launchAttack(entityIa, actualMapEngineTwo.entityOnTactical[0], selectAbilityIa); 
         // I don't need to verify if the PA is > 0 cause it already does in the launch attack function 
     }
     resetAttackableCase()
-    return target !== null; // Return if a target has been selected or not
+    return false; // Return if a target has been selected or not
     
     
 }

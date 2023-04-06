@@ -243,10 +243,6 @@ const displayOpenAbility = () => {
     let yPosButton = window.innerHeight-heightButton;
 
 
-    /*createInputButtonWithCallback(xPosButton, yPosButton, widthButton, heightButton, () => {
-        endTurn();
-    })*/
-
     let widthHover = widthButton;
     let heightHover = heightButton;
     let xPosHoverButton = xPosButton;
