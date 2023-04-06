@@ -21,6 +21,7 @@ const loadNewMap = (mapToLoad, start) => {
     }
 }
 
+
 /**
  * @param {int} x xPosition in the world
  * @param {int} y yPosition in the world
@@ -34,3 +35,6 @@ const getTileCoordWithCoord = (x, y) => [x / tileSize, y / tileSize]
  * @returns {Vector2} position in the world
  */
 const getCoordWithTileCoord = (x, y) => createVector(x*tileSize, y*tileSize)
+
+
+

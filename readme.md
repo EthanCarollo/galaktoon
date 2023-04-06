@@ -30,10 +30,11 @@ This game only use the p5.js library.
 
 ##### Engine One works with a 2D top down view.
 
-##### Engine Two works with a 2D side view for turn-based fight.
+##### Engine Two works with a 2D the same view but has a turn based fight system.
 
 ## 4. Features Informations
 
+* Start Menu is usable and show what we are actually loading (in terms of assets)
 * Player Movement and collision system.
 * Map creation (with y-axis). 
 * Player can interact with tile.
@@ -41,6 +42,7 @@ This game only use the p5.js library.
 * Player can travel through planets from the control panel.
 * Player can fight enemy !
 * Player can now level Up ! 
+* Npc pathing is displonible & generics for both engine (a* is only working on engine one actually)
 * A tool for create map is disponible here ! : https://github.com/JackyTuneur/GalaktoonToolMapCreator
 
 ## 5. Studio Informations

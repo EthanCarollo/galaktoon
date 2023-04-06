@@ -25,7 +25,7 @@ const displayEngineTwoPlayingUi = () => {
 }
 
 const displayEngineTwoEndFightUi = () => {
-    displayEndDebug();
+    displayEndFight();
 }
 
 const displayGameUi = () => {
@@ -35,15 +35,53 @@ const displayGameUi = () => {
     displayEndTurnButton();
 }
 
-const displayEndDebug = () => {
+const displayEndFight = () => {
     let size = 200;
-    let x = (window.innerWidth/2) - (size/2)
-    let y = (window.innerHeight) - (size)
+    showEnemiesEndFightList(size);
+    showPlayer(size);
+    showButtonFightEnd();
+}
+
+const showEnemiesEndFightList = (size) => {
+    let x = (window.innerWidth) - (size*2)
+    let y = (window.innerHeight) / 2 - size
+    for(let i = 1; i < actualMapEngineTwo.entityOnTactical.length; i++)
+    {
+        let yPosition = y +(size+25)*(i-1)
+        animationIdleSprite(x, yPosition, size, [0, 1], actualMapEngineTwo.entityOnTactical[i].id)
+        
+        let percentLifeOfEntity = actualMapEngineTwo.entityOnTactical[i].health.actualHealth / actualMapEngineTwo.entityOnTactical[i].health.maxHealth +0.00001;
+        showHealthBehindRectUI(x-25/2, yPosition-10, size, percentLifeOfEntity)
+    }
+}
+
+const showPlayer = (size) => {
+    let x = size
+    let y = (window.innerHeight) / 2 - size
+    animationIdleSprite(x, y, size, [0, 1], 0)
+
+    let percentLifeOfPlayer = playerTeam[0].health.actualHealth / playerTeam[0].health.maxHealth +0.00001;
+    showHealthBehindRectUI(x-25/2, y-10, size, percentLifeOfPlayer)
+}
+
+const showButtonFightEnd = () => {
+    let width = window.innerWidth / 3;
+    let height = width/5;
+    let xStart = (window.innerWidth/2) - (width/2)
+    let yPosition = (window.innerHeight) - (height*1.5)
     fill(255,0,0,100)
-    rect(x ,y ,size ,size)
-    createInputButtonWithCallback(x ,y ,size ,size, () => {
+    image(uiData[18].image, xStart, yPosition, width, height)
+    if(mouseIsHover(xStart, yPosition, width, height) === true)
+    {
+        image(uiData[27].image, xStart, yPosition, width, height)
+    }
+    createInputButtonWithCallback(xStart ,yPosition ,width ,height, () => {
         launchEngine(EngineStateEnum.EngineOne);
     })
+    textAlign(CENTER, CENTER)
+    textSize(40); fill(255);
+    text("End Fight", xStart, yPosition, width, height)
+    textAlign(LEFT, CENTER)
 }
 
 // * -----------------------------
@@ -76,6 +114,21 @@ const displayPlayerInformationUiEngineTwo = () => {
     showBarWithPercentUi(xBar, yBar+(barSize/10)*2, barSize, percentPaOfPlayer);
 
 }
+
+const displayEndTurnButton = () => {
+    fill(255,0,255,100)
+    let tempSize = window.innerWidth/12;
+    let padding = 25;
+    let tempPosX = window.innerWidth/2 + tempSize *3.6 - tempSize
+    let tempPosY = window.innerHeight - tempSize - padding;
+
+    image(uiData[12].image, tempPosX, tempPosY, tempSize, tempSize);
+    createInputButtonWithCallback(tempPosX, tempPosY, tempSize, tempSize, () => {
+        endTurn();
+    })
+}
+
+//#region // * display abilities region
 
 const displayAbility = () => {
     setAbilityPosition();
@@ -180,8 +233,6 @@ const setAbilityPosition = () => {
     }
 }
 
-//
-
 const displayOpenAbility = () => {
 
 
@@ -191,10 +242,6 @@ const displayOpenAbility = () => {
     let xPosButton = window.innerWidth/2-widthButton/2;
     let yPosButton = window.innerHeight-heightButton;
 
-
-    /*createInputButtonWithCallback(xPosButton, yPosButton, widthButton, heightButton, () => {
-        endTurn();
-    })*/
 
     let widthHover = widthButton;
     let heightHover = heightButton;
@@ -221,19 +268,6 @@ const displayOpenAbility = () => {
     noFill()
 }
 
-const displayEndTurnButton = () => {
-    fill(255,0,255,100)
-    let tempSize = window.innerWidth/12;
-    let padding = 25;
-    let tempPosX = window.innerWidth/2 + tempSize *3.6 - tempSize
-    let tempPosY = window.innerHeight - tempSize - padding;
-
-    image(uiData[12].image, tempPosX, tempPosY, tempSize, tempSize);
-    createInputButtonWithCallback(tempPosX, tempPosY, tempSize, tempSize, () => {
-        endTurn();
-    })
-}
-
 const selectAbility = (ability) => {
     if(actualMapEngineTwo.entityOnTactical[0].pa > 0)
     {
@@ -242,3 +276,5 @@ const selectAbility = (ability) => {
         selectedAbility = ability;
     }
 }
+
+//#endregion

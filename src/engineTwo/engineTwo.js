@@ -15,8 +15,9 @@ const runEngineTwo = () => {
 
 const engineTwoPlaying = () => {
     background(20)
-    setSelectedEntity();
+    setAllHealth();
     displayTopDownMapEngineTwo();
+    setSelectedEntity();
     setCameraEngineTwo();
     displayEngineTwoUI();
     setGameState();
@@ -127,34 +128,41 @@ const showSpriteOnTactical = (entity) => {
         entity.pos[0] * tileSize - (playerSpriteSize-tileSize)/2 +vectorCameraEngineTwo.x,
         entity.pos[1] * tileSize - (playerSpriteSize-tileSize)/2 +vectorCameraEngineTwo.y
     ]
+
     if(entity.nextCase !== null ) // If entity has a next case to moove
     {
-        if(mooveEntityToNextCase(entity) === false)
-        {
+        entity.state = "moove";
+    }
+
+    switch(entity.state)
+    {
+        case "fight":
+            if(animationFightSprite(positionOnMap[0], positionOnMap[1], playerSpriteSize, 0, entity.id) === false)
+            {
+                console.log("Finished to fight")
+                entity.state = "idle";
+                checkIaTurn();
+            }
+            showHealthSpriteTactical(positionOnMap, entity)
+            break;
+        case "moove" :
+            if(mooveEntityToNextCase(entity) === false)
+            {
+                console.log("Finished to moove")
+                entity.state = "idle";
+                checkIaTurn();
+            }
+            animationMooveSprite(positionOnMap[0], positionOnMap[1], playerSpriteSize, entity.dir, entity.id)
+            break;
+        case "dead" :
+            animationDeadSprite(positionOnMap[0], positionOnMap[1], playerSpriteSize, entity.id)
+            break;
+        default :
             animationIdleSprite(positionOnMap[0], positionOnMap[1], playerSpriteSize, [0, 1], entity.id)
             showHealthSpriteTactical(positionOnMap, entity)
-        }else{
-            animationMooveSprite(positionOnMap[0], positionOnMap[1], playerSpriteSize, entity.dir, entity.id)
-        }
-    }else{
-        switch(entity.state)
-        {
-            case "fight":
-                if(animationFightSprite(positionOnMap[0], positionOnMap[1], playerSpriteSize, 0, entity.id) === false)
-                {
-                    // This is resseting the entity state on idle when the fight animation is finish (when it returns false)
-                    entity.state = "idle";
-                }
-                showHealthSpriteTactical(positionOnMap, entity)
-                break;
-            case "dead" :
-                break;
-            default :
-                animationIdleSprite(positionOnMap[0], positionOnMap[1], playerSpriteSize, [0, 1], entity.id)
-                showHealthSpriteTactical(positionOnMap, entity)
-                break;
-        }
+            break;
     }
+    
 }
 
 const showHealthSpriteTactical = (position, entity) => {
@@ -165,14 +173,20 @@ const showHealthSpriteTactical = (position, entity) => {
 
     let health = entity.health
     image(uiData[3].image, position[0], position[1], playerSpriteSize, playerSpriteSize) // Background HP
-    if(entity.health.actualHealth < 0)
-    {
-        entity.health.actualHealth = 0;
-    }
     let actualHealthPercent = health.actualHealth / health.maxHealth * 100 + 0.0001;
     image(uiData[0].image, position[0], position[1], actualHealthPercent, playerSpriteSize) // Bar HP
 
     image(uiData[2].image, position[0], position[1], playerSpriteSize, playerSpriteSize) // Border HP
+}
+
+const setAllHealth = () => {
+    for(let i = 0; i < actualMapEngineTwo.entityOnTactical.length; i ++)
+    {
+        if(actualMapEngineTwo.entityOnTactical[i].health.actualHealth < 0)
+        {
+            actualMapEngineTwo.entityOnTactical[i].health.actualHealth = 0;
+        }
+    }
 }
 
 const createImageWithIdOn2dArrayEngineTwo = (x, y, id, currentTileSize, mapInfo = actualMapEngineTwoRessource) => {
@@ -194,8 +208,14 @@ const createImageWithIdOn2dArrayEngineTwo = (x, y, id, currentTileSize, mapInfo 
 
 
 
-// ! Tools
+//#region // * Usefull tools functions regions
 
+
+/**
+ * @param {int} x position y coord
+ * @param {int} y position y coord
+ * @returns {object} represents an entity on map references 
+ */
 const getSpriteWithCoord = (x, y) => {
     if(getSpriteTactical(x, y) === undefined)
     {
@@ -204,15 +224,34 @@ const getSpriteWithCoord = (x, y) => {
     return getSpriteTactical(x, y);
 }
 
+
+
+/**
+ * @returns {int} id of a tile on the tactical map
+ */
 const getTacticalTileOnMouseClick = () => {
     return actualMapEngineTwo.tacticalMap[Math.floor((mouseY - vectorCameraEngineTwo.y) / tileSize)][Math.floor((mouseX - vectorCameraEngineTwo.x) / tileSize)];
 }
 
+
+
+/**
+ * @returns {array[int]} [x, y] of the coord tile
+ */
 const getCoordTileWithMouseClickEngineTwo = () => [Math.floor((mouseX - vectorCameraEngineTwo.x) / tileSize), Math.floor((mouseY - vectorCameraEngineTwo.y) / tileSize)] // Return coord on map
 
+
+
+/**
+ * @returns {boolean} return if the mouse is in array or no (true false)
+ */
 const mouseIsInArrayEngineTwo = () => {
     return Math.floor((mouseX - vectorCameraEngineTwo.x) / tileSize) >= 0 
     && Math.floor((mouseY - vectorCameraEngineTwo.y) / tileSize) >= 0
     && Math.floor((mouseY - vectorCameraEngineTwo.y) / tileSize) < actualMapEngineTwo.tacticalMap.length
     && Math.floor((mouseX - vectorCameraEngineTwo.x) / tileSize) < actualMapEngineTwo.tacticalMap[0].length
 } // Return true or false
+
+
+
+//#endregion

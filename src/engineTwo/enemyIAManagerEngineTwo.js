@@ -2,6 +2,10 @@ function getRandomInt(max) {
     return Math.floor(Math.random() * max);
 }
 
+
+/**
+ * @returns {boolean} return the value of the action of the IA
+ */
 const runIaTurn = () => {
 
     if(actualMapEngineTwo.entityOnTactical[whichEntityTurn].state === "dead")
@@ -11,14 +15,17 @@ const runIaTurn = () => {
     }
 
     let entityIa = actualMapEngineTwo.entityOnTactical[whichEntityTurn]
-    runIaPattern(entityIa)
+    return runIaPattern(entityIa)
     
 }
 
 
-//#region // * Different IA Pattern region
-
-const runIaPattern = (entityIa) => {
+/**
+ * * Use a big switch on the different patterns of the IA
+ * @param {object} entityIa the ia object
+ * @returns {boolean} return the value of the action of the IA 
+ */
+ const runIaPattern = (entityIa) => {
     /** 
      * * This code will play different gameplay for differents IA patterns, nothing extremely advanced,
      * * just a 'IA' that play differents playstyle like we can see in old retro games
@@ -26,49 +33,57 @@ const runIaPattern = (entityIa) => {
     switch(entityIa.pattern)
     {
         case 'normal' : 
-            runNormalIaPattern(entityIa);
-            break;
+            return runStandardIaPattern(entityIa, 65); // 65 % to go on the player else moove randomly
+        case 'aggressive' : 
+            return runStandardIaPattern(entityIa, 100); // Agressive just run on the player
+        case 'aggro-passive' : 
+            return runStandardIaPattern(entityIa, 0); // Moove randomly
         default :
             throw new Error("Entity Ia Pattern isn't defined or doesnt exist : " + entityIa.pattern)
     }
 }
 
-const runNormalIaPattern = (entityIa) => {
+
+//#region // * Different IA Pattern region
+
+
+
+/**
+ * @param {object} entityIa the object Ia 
+ * @param {int} chance it's the percent of chance that the entity go directly on the player 
+ * @returns {boolean} return if the pattern did an action or not
+ */
+const runStandardIaPattern = (entityIa, chance) => {
     /**
-     * * Normal playstyle for an IA, sometimes IA will go on the player and sometimes not,
-     * * and when entity can attack the player, the entity attack the player
+     * * Standard playstyle for an IA, sometimes IA will go on the player and sometimes not,
+     * * and when entity can attack the player, the entity attack the player, we can change the
+     * * probability of the next moove of the player by changing the change
      */
 
-    let timeBetweenAction = 650; // time between action of the IA
-
-    for(let i = 0; i < entityIa.pm; i++)
+    if(attackIA(entityIa) === false)
     {
-        setTimeout(() => {
-
-            // Action Ia
-            if(attackIA(entityIa) === true){
-                setTimeout(() => { mooveOneCaseIA(entityIa) }, timeBetweenAction) // Attack and then wait for Moove
-            }else{
-                mooveOneCaseIA(entityIa)
-                setTimeout(() => { 
-                    attackIA(entityIa)
-                }, timeBetweenAction)
-            }
-
-            // Action Ia 
-
-        }, timeBetweenAction * i);
-    }
-
-    setTimeout(() => {
-        endTurn();
-    }, timeBetweenAction + timeBetweenAction * entityIa.pm);
+        return mooveOneCaseIA(entityIa, chance)
+    } 
+    return true
 }
+
+
 
 //#endregion
 
+//#region // * The moovability of the IA 
 
-const mooveOneCaseIA = (entityIa) => {
+/**
+ * @param {object} entityIa the object Ia 
+ * @param {int} chance it's the percent of chance that the entity go directly on the player 
+ * @returns {boolean} return if the Ia is mooving or not
+ */
+const mooveOneCaseIA = (entityIa , chance) => {
+    if(entityIa.pm <= 0)
+    {
+        return false;
+    }
+    entityIa.pm -= 1;
     entityIa.pos = [Math.round(entityIa.pos[0]), Math.round(entityIa.pos[1])]; 
     // I'm rounding it cause i don't want to have bug like "Entity pos isn't an int"
     let movableIaCase = getMovableCase(entityIa.pos[0], entityIa.pos[1], 1)
@@ -78,7 +93,7 @@ const mooveOneCaseIA = (entityIa) => {
 
     let pathLuck = getRandomInt(100)
 
-    if(pathLuck > 35){
+    if(pathLuck > (100 - chance)){
         for(let i = 0; i < movableIaCase.length; i ++)
         {
             let caseX = Math.abs(movableIaCase[i][0] - casePlayer[0]);
@@ -97,10 +112,17 @@ const mooveOneCaseIA = (entityIa) => {
     nextCase = movableIaCase[chosedPath];
     resetMovableCase()
     setEntityNextCase(entityIa, nextCase)
+    return true;
 }
 
-const attackIA = (entityIa) => {
-    let selectAbilityIa = 0;
+/**
+ * @param {object} entityIa entity of the IA
+ * @param {int} indexAbilityUsed integer of the ability used
+ * @returns {boolean} return if the ia attacked or no
+ */
+const attackIA = (entityIa, indexAbilityUsed = 0) => {
+
+    let selectAbilityIa = indexAbilityUsed;
     let attackableCase = getAttackableCase(entityIa.pos[0], entityIa.pos[1], entityIa.abilities[selectAbilityIa].range);
     let target = null;
     for(let i = 0; i < attackableCase.length; i++)
@@ -114,11 +136,14 @@ const attackIA = (entityIa) => {
         }
     }
     if(target !== null){
-        launchAttack(entityIa, actualMapEngineTwo.entityOnTactical[0], selectAbilityIa); 
+        resetAttackableCase() // Reset the variable of attack
+        return launchAttack(entityIa, actualMapEngineTwo.entityOnTactical[0], selectAbilityIa); 
         // I don't need to verify if the PA is > 0 cause it already does in the launch attack function 
     }
-    resetAttackableCase()
-    return target !== null; // Return if a target has been selected or not
+    resetAttackableCase()  // Reset the variable of attack
+    return false; // Return if a target has been selected or not
     
     
 }
+
+//#endregion

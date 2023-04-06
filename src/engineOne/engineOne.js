@@ -47,12 +47,10 @@ const runPlayingStateEngineOne = () => {
 const displayTopDown2D = () => {
     createMapTopDown("not", actualPlayerMap.groundLayer); // create the layer ground in back of the player
     createMapTopDown("back", actualPlayerMap.objectLayer); // create the layer object in back of the player
-    displayNPCOnMap("back");
 
     showPlayerSprite(cameraVector.x, cameraVector.y, playerSpriteSize);
 
     createMapTopDown("front", actualPlayerMap.objectLayer); // create the layer object in front of the player
-    displayNPCOnMap("front");
   
     showGoalQuest();
     // the double createmap function is used to simulate a 2D perspective
@@ -91,43 +89,51 @@ const createMapTopDown = (orientation, mapLayer, mapInfo = playerOnMap, offsetPo
     {
       for(let x = 0;x < mapLayer[0].length; x++)
       {
-        if(!tileIsEmpty(x, y, mapLayer)){
           switch(orientation){
             case "back" :
               if(actualPlayerTile()[1] >= y)
               {
-                createImageWithIdOn2dArray(x, y, mapLayer[y][x], tileSize, false, mapInfo, offsetPositionOnScreen);
+                showSpecificNpcOnMap(x, y)
+                if(!tileIsEmpty(x, y, mapLayer)){
+                  createImageWithIdOn2dArray(x, y, mapLayer[y][x], tileSize, false, mapInfo, offsetPositionOnScreen);
+                }    
               }
               break;
             case "front":
               if(actualPlayerTile()[1] < y)
               {
-                createImageWithIdOn2dArray(x, y, mapLayer[y][x], tileSize, false, mapInfo, offsetPositionOnScreen);
+                showSpecificNpcOnMap(x, y)
+                if(!tileIsEmpty(x, y, mapLayer)){
+                  createImageWithIdOn2dArray(x, y, mapLayer[y][x], tileSize, false, mapInfo, offsetPositionOnScreen);
+                }
               }
               break;
             default :
-              createImageWithIdOn2dArray(x, y, mapLayer[y][x], tileSize, false, mapInfo, offsetPositionOnScreen);
+              if(!tileIsEmpty(x, y, mapLayer)){
+                createImageWithIdOn2dArray(x, y, mapLayer[y][x], tileSize, false, mapInfo, offsetPositionOnScreen);
+              }
               break;
           }
         }
-      }
+      
     }
 
 }
 
 const createImageWithIdOn2dArray = (x, y, id, currentTileSize, isUi = false, mapInfo = playerOnMap, offsetPositionOnScreen = [cameraVector.x + playerVector.x, cameraVector.y + playerVector.y]) => {
   imageMode(CORNER)
-  // size of the current tile according to the data
-  let xTileWidth = mapInfo.tileRessource[id].xWidth;
-  let yTileHeight = mapInfo.tileRessource[id].yWidth;
-  // position of the current tile in the array and the size
-  let xPositionTiles = currentTileSize*x + offsetPositionOnScreen[0] -45;
-  let yPositionTiles = (currentTileSize*(y+1-yTileHeight) + offsetPositionOnScreen[1] -45);
   let normalYPositionTiles = currentTileSize*y + offsetPositionOnScreen[1] -45; // normal position of a tiles (usefull when you need to instantiate a normal tile behind a special tile)
   if(isUi === true){
+    let xPositionTiles = currentTileSize*x + offsetPositionOnScreen[0] -45;
+    let yPositionTiles = (currentTileSize*y + offsetPositionOnScreen[1] -45);
     yPositionTiles = (currentTileSize*y + offsetPositionOnScreen[1] -45);
-    image(uiData[id].image, xPositionTiles , yPositionTiles, currentTileSize, currentTileSize); 
+    image(uiData[id].image, xPositionTiles , yPositionTiles, currentTileSize, currentTileSize);
   }else{
+    // size of the current tile according to the data
+    let xTileWidth = 1;
+    let yTileHeight = mapInfo.tileRessource[id].yWidth;
+    let xPositionTiles = currentTileSize*x + offsetPositionOnScreen[0] -45;
+    let yPositionTiles = (currentTileSize*(y+1-yTileHeight) + offsetPositionOnScreen[1] -45);
     image(mapInfo.tileRessource[id].image, xPositionTiles , yPositionTiles, currentTileSize * xTileWidth, currentTileSize * yTileHeight); 
   }
 }

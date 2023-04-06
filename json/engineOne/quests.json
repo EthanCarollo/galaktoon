@@ -6,7 +6,7 @@
             "description" : "Retourner parler à l'IA",
             "questType" : "talk",
             "eventOnStart" : "goNextTutoStep",
-            "questGoal" : {"map" : 0, "position" : [12, 10]},
+            "questGoal" : {"map" : 0, "position" : [11, 2]},
             "idQuestProgression" : 3,
             "currentProgression": 0,
             "maxProgression" : 1,

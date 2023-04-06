@@ -10,23 +10,58 @@ const turnManager = () => {
     }
 
     
+    nextIndexEntityTurn();
+    resetMovableAndEntityVar();
+    setSelectedEntity();
+
+    selectedEntity.pm = 2;
+    selectedEntity.pa = 2;
+    checkIaTurn()
+}
+
+const checkIaTurn = () => {
+    /**
+     * * This function is called at the end of each turn, when an entity is mooving or not or whatever else*
+     * * This algorithms check if the IA still have pm for running the turn, then if the run ia turn is sending
+     * * false, that's mean that the entity can't moove and can't attack so i just decrease the pa by one and
+     * * relaunch the function and then when IA don't have pm or pa, this just end the turn
+     */
+    if(whichEntityTurn > 0)
+    {
+        if(actualMapEngineTwo.entityOnTactical[whichEntityTurn].pm > 0)
+        {
+            runIaTurn(); 
+            return;
+        }
+        if(actualMapEngineTwo.entityOnTactical[whichEntityTurn].pa > 0)
+        {
+            if(runIaTurn() === false)
+            {
+                actualMapEngineTwo.entityOnTactical[whichEntityTurn].pa--;
+                checkIaTurn();
+                return;
+            }else{
+                return;
+            };
+        }
+        endTurn();
+    }
+}
+
+const nextIndexEntityTurn = () => {
     whichEntityTurn ++;
     if(whichEntityTurn >= actualMapEngineTwo.entityOnTactical.length)
     {
         whichEntityTurn = 0;
     }
-
-    if(whichEntityTurn > 0)
-    {
-        runIaTurn();
-    }
-    
-    resetMovableAndEntityVar()
-    actualMapEngineTwo.entityOnTactical[whichEntityTurn].pm = 2;
-    actualMapEngineTwo.entityOnTactical[whichEntityTurn].pa = 2;
-    selectedEntity = actualMapEngineTwo.entityOnTactical[whichEntityTurn]
 }
 
+
+/**
+ * @param {object} entity entity object 
+ * @param {int} target target of the current map 
+ * @param {int} selectedAbility selected ability index of the 'entity' obj 
+ */
 const useAbility = (entity, target = 1, selectedAbility = 0) => {
     if(entity.pa > 0)
     {
@@ -45,7 +80,12 @@ const useAbility = (entity, target = 1, selectedAbility = 0) => {
 
 
 
-let canAttackCase = []
+/**
+ * @param {int} x the start x of the zoning of where we can attack
+ * @param {int} y the start y of the zoning of where we can attack
+ * @param {int} attackPoint the number of attack point
+ * @returns {array[array[int]]} returns an array of coords who are in an array [[x,y],[x,y+1],...]
+ */
 const getAttackableCase = (x, y, attackPoint) => {
     canAttackCase = [[x, y]]
     for(let i = 1; i<attackPoint+1;i++)
@@ -85,6 +125,12 @@ const addCanAttackCase = (position) => {
 const resetAttackableCase = () => {
     canAttackCase = []
 }
+
+/**
+ * @param {int} x position x on the tilemap
+ * @param {int} y position y on the tile map
+ * @returns {boolean} true or false if it's an attackable case
+ */
 const isAnAttackableCase = (x, y) => {
     for(let i = 0; i < canAttackCase.length; i++)
     {
@@ -98,16 +144,23 @@ const isAnAttackableCase = (x, y) => {
 
 
 
-// ! --------------------------------------------------------------
-// ! Function Used universally for use a specific ability on a target
+//#region // * Usefull function when we launch an attack
 
 const launchAttack = (entity = actualMapEngineTwo.entityOnTactical[whichEntityTurn], target, abilityIndex = selectedAbility) => {
     if(entity.pa > 0){
         attackWithTheCurrentAbility(entity, abilityIndex, target)
         resetMovableAndEntityVar();
+        return true;
+    }else{
+        return false;
     }
 }
 
+/**
+ * @param {object} entity entity object 
+ * @param {int} abilityIndex the ability index of the entity that it used 
+ * @param {object} target target entity object
+ */
 const attackWithTheCurrentAbility = (entity, abilityIndex, target) => {
     switch(entity.abilities[abilityIndex].type)
     {
@@ -120,11 +173,16 @@ const attackWithTheCurrentAbility = (entity, abilityIndex, target) => {
         break;
     }
 } 
-// ! Function Used universally for use a specific ability on a target
-// ! --------------------------------------------------------------
 
-// Check if all enemies (so except id 0) are dead (and return true or false)
+//#endregion
+
+/**
+ * @returns {boolean} if all enemies are dead or not
+ */
 const checkAllEnemiesDead = () => {
+    /**
+     * * Check if all enemies (so except id 0) are dead (and return true or false)
+     */
     let count = 0;
     for(let i = 1; i < actualMapEngineTwo.entityOnTactical.length; i++)
     {
@@ -143,6 +201,9 @@ const checkAllEnemiesDead = () => {
     }
 }
 
+/**
+ * @returns {boolean} if all allies are dead or not (in our case, we only have our player actually)
+ */
 const checkAllAlliesDead = () => {
     if(playerTeam[0].health.actualHealth <= 0)
     {

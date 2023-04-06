@@ -1,3 +1,6 @@
+
+
+
 const playerInputInteractForEngineOne = () => {
     if(playerCanInteract === true){
   
@@ -9,14 +12,7 @@ const playerInputInteractForEngineOne = () => {
     }
 }
 
-const playerInteraction = (caseInteraction) => {
-    interactWithATile(caseInteraction);
-    interactWithNPC(caseInteraction);
-}
 
-const tileNextToThePlayer = () => {
-    return [actualPlayerTile()[0] + playerLastDirection[0], actualPlayerTile()[1] + playerLastDirection[1]]
-}
 
 const playerInputForEngineOne=()=>{
     switch(playerState){
@@ -32,12 +28,19 @@ const playerInputForEngineOne=()=>{
     }
 }
 
+
+
 const playerDialogInput = () => {
     playerIsMooving = false;
 }
 
+
+
 const playerInputMoove = () => {
     if(playerCanMove === true){
+        /**
+         * * Moove the player on different key holded
+         */
 
         playerDirection = [0, 0]; // reset player direction every frame
         playerIsMooving = false;
@@ -96,6 +99,8 @@ const playerInputMoove = () => {
     }
 }
 
+
+
 const playerInputInteraction = () => {
     if(playerCanInteract === true && playerCanMove === true){
         let playerCaseInteract = [actualPlayerTile()[0] + playerLastDirection[0], actualPlayerTile()[1] + playerLastDirection[1]]
@@ -104,23 +109,7 @@ const playerInputInteraction = () => {
     }
 }
 
-const checkForInteraction = (playerCaseInteract) => {
-    if(getTileData(playerCaseInteract[0], playerCaseInteract[1], actualPlayerMap.objectLayer) !== undefined)
-    {
-        if(getTileData(playerCaseInteract[0], playerCaseInteract[1], actualPlayerMap.objectLayer).type !== "useless")
-            {
-            let interactType = getTileData(playerCaseInteract[0], playerCaseInteract[1], actualPlayerMap.objectLayer).type;
-            createInteractionPopup(playerCaseInteract[0], playerCaseInteract[1], interactType)
-            }
-    }
-    
-    // just for set pnj interactible
-    let pnjInteractible = playerOnMap.npcOnMap.filter(npc => npc.pos[0] === playerCaseInteract[0] && npc.pos[1] === playerCaseInteract[1])
-    if(pnjInteractible.length > 0)
-    {
-        createInteractionPopup(playerCaseInteract[0], playerCaseInteract[1], "npc")
-    }
-}
+
 
 const playerKeyPressedForEngineOne = () => {
     playerInputInteractForEngineOne()

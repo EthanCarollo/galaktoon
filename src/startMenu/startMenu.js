@@ -26,8 +26,8 @@ const runLoadingStartMenuState = () => {
 
 
 const runNormalStartMenuState = () => {
-    updatePositionLogo([0, -300]);
-    updateLogoIndexAnimation(-100);
+    updatePositionLogo([0, -270]);
+    updateLogoIndexAnimation(-20);
     showBackgroundGalaxy();
     showChoiceStartMenuState();
     showLogo(logoOffSet);
@@ -37,7 +37,6 @@ const runNormalStartMenuState = () => {
 
 //#endregion
 
-let loadingBarOpacity = 255;
 const showLoadingBarState = () => {
     /**
      * * This function is the reason why using totalLoadCounter variable is usefull, i just take the total length of the ressource to load
@@ -81,7 +80,7 @@ const showChoiceStartMenuState = () => {
     let width = 250*2;
     let height = width/5;
     let xStart = window.innerWidth /2  - width / 2;
-    let yStart = window.innerHeight/2 - height-20;
+    let yStart = window.innerHeight/2 - height+35;
     for(let i = 0; i < startMenuChoices.length; i++)
     {
         let yPosition =  yStart + (height+35) * i
@@ -106,6 +105,7 @@ const showChoiceStartMenuState = () => {
  */
 const showBackgroundGalaxy = (idBackground = 26) => {
     image(uiData[idBackground].image, 0, 0, windowWidth, windowHeight)
+    // applyBrightnessTemp(uiData[idBackground].image)
 }
 
 
@@ -115,17 +115,22 @@ const showBackgroundGalaxy = (idBackground = 26) => {
  */
 const showLogo = (offset = [0, 0]) => {
     let xStart = windowWidth / 2 + offset[0];
-    let yStart = windowHeight /3 - indexLogoStartMenu / 2 + offset[1];
-    let size = windowHeight/3 + indexLogoStartMenu;
-    rect(xStart - size/2, yStart, size, size) // TODO : Replace this rect with the logo
+    let yStart = windowHeight /4 - indexLogoStartMenu / 2 + offset[1];
+    let size = windowHeight/2 + indexLogoStartMenu;
+    image(uiData[34].image, xStart - size/2, yStart, size, size) // TODO : Replace this rect with the logo
 }
 
 
 
 /**
  * * This will just update the index of the animation of the logo
+ * @param {int} sizeToGo this is the size that the logo will try to touch 
  */
 const updateLogoIndexAnimation = (sizeToGo = maxSizeOfTheLogo) => {
+    /**
+     * * Here, i'm just using the vector lerp like a transition with the xPos of the Vector2 
+     */
+
     let vectorSize;
     vectorSize = p5.Vector.lerp(createVector(indexLogoStartMenu, 0), createVector(sizeToGo, 0), 0.04); // interpolate the camera with the player by using vector.lerp by p5
 
@@ -133,6 +138,9 @@ const updateLogoIndexAnimation = (sizeToGo = maxSizeOfTheLogo) => {
 }
 
 
+/**
+ * @param {array[float]} positionToGo this is the position that the logo will try to touch ([x , y])
+ */
 const updatePositionLogo = (positionToGo = [0, 0]) => {
     let vectorToGo;
     vectorToGo = p5.Vector.lerp(createVector(logoOffSet[0], logoOffSet[1]), createVector(positionToGo[0], positionToGo[1]), 0.04); // interpolate the camera with the player by using vector.lerp by p5

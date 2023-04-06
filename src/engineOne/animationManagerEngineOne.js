@@ -116,7 +116,7 @@ const setEntityLastDirection = (direction, entityId) => {
  * @param {float} size size of the animation
  * @param {int} attackType type of the attack, must be between 0 or 3, automatically to 0
  * @param {int} id id of the current sprite animated, automatically to 0
- * @returns {boolean}
+ * @returns {boolean} if yes or not the animation is finish.
  */
 const animationFightSprite = (positionX, positionY, size, attackType = 0, id = 0) => {
 
@@ -161,7 +161,7 @@ const animationDeadSprite = (positionX, positionY, size, id = 0) => {
     */
     //#endregion
 
-    let offsetAnimAmount = 5;
+    let offsetAnimAmount = 8;
     xStartCut = 0;
     // Dead animation just have one direction
     spritePlayerAnimationMoove = spritesData[id].image.get(xStartCut,spriteSizeCut* offsetAnimAmount,spriteSizeCut,spriteSizeCut);

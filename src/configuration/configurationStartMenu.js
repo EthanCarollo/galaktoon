@@ -17,3 +17,5 @@ let startMenuChoices = [
         }
     } // TODO : Are you sure to exit the game ?
 ]
+
+let loadingBarOpacity = 255;
