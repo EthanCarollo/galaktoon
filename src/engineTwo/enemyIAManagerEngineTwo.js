@@ -39,6 +39,7 @@ const runIaPattern = (entityIa) => {
     }
 }
 
+
 /**
  * @param {object} entityIa the object Ia 
  * @param {int} chance it's the percent of chance that the entity go directly on the player 

@@ -21,6 +21,7 @@ const loadNewMap = (mapToLoad, start) => {
     }
 }
 
+
 /**
  * @param {int} x xPosition in the world
  * @param {int} y yPosition in the world

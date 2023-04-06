@@ -57,7 +57,7 @@ const displayNpc = (npc) => {
   let positionTemp = getCoordWithTileCoord(npc.pos[0]-1, npc.pos[1]-1)
   positionTemp.x = positionTemp.x + cameraVector.x + playerVector.x;
   positionTemp.y = positionTemp.y + cameraVector.y + playerVector.y;
-  if(npc.nextCase !== null)
+  if(npc.nextCase !== null && npc.nextCase.length > 0)
   {
     npc.state = "moove";
   }else{
@@ -85,7 +85,7 @@ const animateNpc = (x, y, size, direction /* ! = Array ! */, npcId, npc) => {
       animationIdleSprite(x, y, size, direction, npcId)
       break;
     case "moove" :
-      if(mooveEntityToNextCase(npc, createVector(cameraVector.x + playerVector.x, cameraVector.y + playerVector.y)) === true) // Using the "pathfinding" from the second Engine
+      if(mooveEntityToNextCaseInEngineOne(npc, createVector(cameraVector.x + playerVector.x, cameraVector.y + playerVector.y)) === true) // Using the "pathfinding" from the second Engine
       {
         animationMooveSprite(x, y, size, direction, npcId)
       }else{
@@ -122,6 +122,59 @@ const setNpcDirectionWithThePlayerDirection = (npc) => {
       return;
   }
 }
+
+
+const mooveEntityToNextCaseInEngineOne = (entity, cameraVector = vectorCameraEngineTwo) => {
+  let positionOnMap = 
+      [
+          entity.pos[0] * tileSize - (playerSpriteSize-tileSize)/2 + cameraVector.x,
+          entity.pos[1] * tileSize - (playerSpriteSize-tileSize)/2 + cameraVector.y
+      ]
+
+  if(entity.nextCase[0].posOnGrid === null || entity.nextCase[0].posOnGrid === undefined)
+  {
+      console.log(entity.nextCase[0].posOnGrid +" ----------- This is the entity next case")
+      throw new Error("Entity next case isn't set but the script want to moove");
+  }    
+  if(entity.nextCase[0].posOnGrid[0] > entity.pos[0] || entity.nextCase[0].posOnGrid[0] < entity.pos[0])
+  {
+      if(entity.nextCase[0].posOnGrid[0] - entity.pos[0] < (movementSpeed/2) && entity.nextCase[0].posOnGrid[0] - entity.pos[0] > -(movementSpeed/2)){
+          entity.pos[0] = Math.round(entity.pos[0])
+      }
+      if(entity.nextCase[0].posOnGrid[0] > entity.pos[0]){
+        entity.dir = [1, 0];
+        entity.pos[0]+= movementSpeed
+        return true
+      }
+      if(entity.nextCase[0].posOnGrid[0] < entity.pos[0]){
+        entity.dir = [-1, 0];
+        entity.pos[0]-= movementSpeed
+        return true
+      }
+  }
+  if(entity.nextCase[0].posOnGrid[1] > entity.pos[1] || entity.nextCase[0].posOnGrid[1] < entity.pos[1])
+  {
+      if(entity.nextCase[0].posOnGrid[1] - entity.pos[1] < (movementSpeed/2) && entity.nextCase[0].posOnGrid[1] - entity.pos[1] >  -(movementSpeed/2)){
+          entity.pos[1] = Math.round(entity.pos[1])
+      }
+      if(entity.nextCase[0].posOnGrid[1] > entity.pos[1]){
+        entity.dir = [0, 1];
+        entity.pos[1]+= movementSpeed
+        return true
+      }
+      if(entity.nextCase[0].posOnGrid[1] < entity.pos[1]){
+        entity.dir = [0,-1];
+        entity.pos[1]-= movementSpeed
+        return true
+      }
+  }
+  entity.nextCase.splice(0, 1)
+  return false;
+
+} // Moove Entity to the next case insered in her "nextCase" array value
+
+
+
 
 // ! Isn't used in the code
 const isInFrontOfANpc = () => playerOnMap.npcOnMap.filter(npc => npc.position[0] === tileInteract[0] && npc.position[1] === tileInteract[1])

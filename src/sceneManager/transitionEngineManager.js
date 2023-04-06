@@ -42,7 +42,7 @@ const launchEngine = (engineToLaunch) => {
  * @param {function} callbackFunction the function called at the end of the transition
  * @param {idOfImageTransition} idTransition the id of the image of the transition
  */
-const launchTransitionAndSetCallbackAfter = (callbackFunction, idTransition = 15) => {
+const launchTransitionAndSetCallbackAfter = (callbackFunction) => {
     /**
      * * This function set the global variable of the transition, this don't give any problems cause we can only have one transition at the same time or
      * * it will just return an error
@@ -53,8 +53,8 @@ const launchTransitionAndSetCallbackAfter = (callbackFunction, idTransition = 15
     }
 
     callbackWhenTransitionFinish = callbackFunction
-    transitionImageId = idTransition;
-    uiData[idTransition].image.resize(window.innerWidth, window.innerHeight); // ! Set size for transition
+    transitionImageId = getRandomBackGroundId();
+    console.log(transitionImageId)
 
     actualTransitionState = TransitionStateEnum.EnterIn
 }
@@ -79,6 +79,14 @@ const transitionManager = () => {
 
 
 
+const getRandomBackGroundId = () => {
+    const arrayId = [31, 15]
+    console.log(getRandomInt(arrayId.length))
+    return arrayId[getRandomInt(arrayId.length)];
+} 
+
+
+
 //#region // * Different transition states function
 
 const enterInTransition = () => {
@@ -87,7 +95,7 @@ const enterInTransition = () => {
     let colorRectFill = color(255, alpha);
     tint(colorRectFill);
     createImageTransition();
-        
+    showTextOnTransition();
     if(transitionEngineIndex < 500)
     {
         transitionEngineIndex+=10;
@@ -97,13 +105,21 @@ const enterInTransition = () => {
     }
 }
 
+const showTextOnTransition = () => {
+    textAlign(CENTER, CENTER)
+    fill(255)
+    textSize(32)
+    text("loading...", window.innerWidth-350, window.innerHeight-100, 300, 100)
+    textAlign(CORNER, TOP)
+}
+
 const goOutTransition = () => {
 
     let alpha = Math.floor(transitionEngineIndex);
     let colorRectFill = color(255, alpha);
     tint(colorRectFill);
     createImageTransition();
-
+    showTextOnTransition();
     noTint();
     if(transitionEngineIndex > 0)
     {
@@ -120,7 +136,7 @@ const goOutTransition = () => {
 /**
  * @param {int} id it's the actually id taken in parameters lied to the ui
  */
-const createImageTransition = (id = 15) => {
+const createImageTransition = (id = transitionImageId) => {
     /**
      * * 15 Is the id of the wallpaper in the uiData array
      * * This set the image on the full size of the window
@@ -128,6 +144,7 @@ const createImageTransition = (id = 15) => {
     let width = window.innerWidth;
     let height = window.innerHeight;
     
-    image(uiData[id].image , 0 ,0 ,width, height+1);
+    image(uiData[id].image , 0 ,0 ,width, height+100);
+    image(uiData[32].image , 0 ,0 ,width, height+100);
 
 }

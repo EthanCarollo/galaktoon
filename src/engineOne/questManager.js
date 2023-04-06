@@ -93,7 +93,10 @@ const startSpecificQuestEvents = (questEventString) => {
     switch(questEventString)
     {
         case "goNextTutoStep" :
-            mapData[0].npcOnMap[0].nextCase = [12, 10]; // Here it's the AI who mmoves
+            mapData[0].npcOnMap[0].nextCase = searchPath(mapData[0].npcOnMap[0].pos, [1, 2], mapData[0].map.objectLayer); // Here it's the AI who mmoves
+            console.log("---------------------")
+            console.log(mapData[0].npcOnMap[0].nextCase)
+            console.log("---------------------")
             break;
         default :
             throw new Error("Specific event isn't set inside the startSpecificQuestEvents() : " + questEventString)

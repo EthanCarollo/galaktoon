@@ -132,6 +132,14 @@
             "id" : "30",
             "path" : "assets/ui/LoadingBarFull.png",
             "image" : null
+        },{
+            "id" : "31",
+            "path" : "assets/background/backgroundTransitionMariage.png",
+            "image" : null
+        },{
+            "id" : "32",
+            "path" : "assets/background/backGroundFond.png",
+            "image" : null
         }
     ]
 }
