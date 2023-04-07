@@ -104,7 +104,7 @@ const loadMapAndExitExploringMenu = (mapToExplore) => {
 const exitCross = () => {
     fill(255,150,150)
     image(uiData[24].image, 75+vector2ExploringMenu.x,15,45,45)
-    createInputButtonWithCallback(75, 20, 45, 45, exitExploringMenu)
+    createInputButtonWithCallback(75+vector2ExploringMenu.x, 20, 45, 45, exitExploringMenu)
     textSize(20);
 }
 

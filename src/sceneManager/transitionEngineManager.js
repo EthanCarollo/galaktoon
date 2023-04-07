@@ -54,6 +54,7 @@ const launchTransitionAndSetCallbackAfter = (callbackFunction) => {
 
     callbackWhenTransitionFinish = callbackFunction
     transitionImageId = getRandomBackGroundId();
+    console.log(transitionImageId)
 
     actualTransitionState = TransitionStateEnum.EnterIn
 }
@@ -80,6 +81,7 @@ const transitionManager = () => {
 
 const getRandomBackGroundId = () => {
     const arrayId = [31, 15, 33]
+    console.log(getRandomInt(arrayId.length))
     return arrayId[getRandomInt(arrayId.length)];
 } 
 

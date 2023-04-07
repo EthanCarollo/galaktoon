@@ -40,6 +40,11 @@ const StartMenuStateEnum = {
     Normal : "normal"
 }
 
+const FightCinematicViewStateEnum = {
+    NoAnim : "noAnim",
+    Animation : "animate"
+}
+
 
 
 /**

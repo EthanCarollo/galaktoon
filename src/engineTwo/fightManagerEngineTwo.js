@@ -148,6 +148,7 @@ const isAnAttackableCase = (x, y) => {
 
 const launchAttack = (entity = actualMapEngineTwo.entityOnTactical[whichEntityTurn], target, abilityIndex = selectedAbility) => {
     if(entity.pa > 0){
+        fightCinematicViewState = FightCinematicViewStateEnum.Animation;
         attackWithTheCurrentAbility(entity, abilityIndex, target)
         resetMovableAndEntityVar();
         return true;

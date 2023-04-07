@@ -20,6 +20,7 @@ const engineTwoPlaying = () => {
     setSelectedEntity();
     setCameraEngineTwo();
     displayEngineTwoUI();
+    runCinematicFightView();
     setGameState();
 }
 
@@ -199,7 +200,6 @@ const createImageWithIdOn2dArrayEngineTwo = (x, y, id, currentTileSize, mapInfo 
     // position of the current tile in the array and the size
     let xPositionTiles = currentTileSize*x+vectorCameraEngineTwo.x;
     let yPositionTiles = (currentTileSize*(y+1-yTileHeight))+vectorCameraEngineTwo.y;
-     
     image(mapInfo.tileRessource[id].image, xPositionTiles , yPositionTiles, currentTileSize, currentTileSize * yTileHeight); 
   
   }
