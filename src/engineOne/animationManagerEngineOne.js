@@ -187,14 +187,13 @@ const animationDeadSprite = (positionX, positionY, size, id = 0) => {
  */
 const runSpecificAnimationFromASprite = (positionX, positionY, size, countOfFrame, speedFrame, indexAnimation = 0, id = 0) => {
 
-    updateSpecialAnimationIndex(countOfFrame, speedFrame/1.5);
     let offsetAnimAmount = 8+indexAnimation;
     xStartCut = 0+spriteSizeCut*Math.floor(specificAnimationIndex);
     spritePlayerAnimationMoove = spritesData[id].image.get(xStartCut,spriteSizeCut* offsetAnimAmount,spriteSizeCut,spriteSizeCut);
 
     image(spritePlayerAnimationMoove, positionX, positionY, size, size)
+    return updateSpecialAnimationIndex(countOfFrame, speedFrame/1.5);
 }
-
 
 
 //#endregion

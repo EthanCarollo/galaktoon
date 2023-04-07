@@ -20,7 +20,7 @@ const engineTwoPlaying = () => {
     setSelectedEntity();
     setCameraEngineTwo();
     displayEngineTwoUI();
-    runCinematicFightView();
+    runCinematicFightView()
     setGameState();
 }
 
@@ -138,13 +138,18 @@ const showSpriteOnTactical = (entity) => {
     switch(entity.state)
     {
         case "fight":
+            if(isCinematicFightIsRunning() === true)
+            {
+                animationIdleSprite(positionOnMap[0], positionOnMap[1], playerSpriteSize, [0, 1], entity.id)
+                showHealthSpriteTactical(positionOnMap, entity)
+                return;
+            }
             if(animationFightSprite(positionOnMap[0], positionOnMap[1], playerSpriteSize, 0, entity.id) === false)
             {
-                console.log("Finished to fight")
                 entity.state = "idle";
-                checkIaTurn();
+                checkIaTurn()
             }
-            showHealthSpriteTactical(positionOnMap, entity)
+            
             break;
         case "moove" :
             if(mooveEntityToNextCase(entity) === false)

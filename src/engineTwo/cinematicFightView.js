@@ -20,7 +20,9 @@ const runClassicCinematic = () => {
     let widthRectAnimation = window.innerWidth / 1.5, heightRectAnimation = window.innerHeight / 1.25;
     let xStartRectAnimation = window.innerWidth / 2 - widthRectAnimation / 2;
     let yStartRectAnimation = window.innerHeight / 2 - heightRectAnimation / 2;
+    fill(255,255,255,255)
     rect(xStartRectAnimation, yStartRectAnimation, widthRectAnimation, heightRectAnimation);
+    fill(255,0,0,80)
     showMapOnAnimationSpecific(xStartRectAnimation, yStartRectAnimation, widthRectAnimation, heightRectAnimation);
 
     /**
@@ -47,7 +49,6 @@ const showMapOnAnimationSpecific = (xStartOfMap, yStartOfMap, widthMap, heightMa
     let tileMultiplier = 10;
     let sizeTileOnRect = widthMap / tileMultiplier;
     let yStartTile = yStartOfMap+heightMap-sizeTileOnRect;
-    console.log(widthMap + " ---- " + heightMap)
     stroke(255);
     for(let y = 0; y < 3; y++)
     {
@@ -72,7 +73,6 @@ const showAnimationOnSpecificAnimation = (xStartOfMap, yStartOfMap, widthMap, he
 
 
     let animation = currentAnimationSprites.animations[cinematicUsed.order[indexCurrentOrderOfAnimation].animation] // TODO : Animation to change here 
-    console.log(currentAnimationSprites.animations)
 
     rect(startX, startY, sizeSprite, sizeSprite)
     if(runSpecificAnimationFromASprite(startX, startY, sizeSprite, animation.countAnimation, 
@@ -80,6 +80,7 @@ const showAnimationOnSpecificAnimation = (xStartOfMap, yStartOfMap, widthMap, he
         animation.idAnimation) === false
         )
     {
+        currentAnimationSprites.currentSpriteAssetsPosition[0] = animation.idAnimation;
         addIndexToCurrentOrderAnimation();
     }
 }
@@ -119,6 +120,12 @@ const showSpriteOnSpecificAnimation = (xStartOfMap, yStartOfMap, widthMap, heigh
     let startX = xStartOfMap - offSetX;
     let startY = yStartOfMap+heightMap-sizeSprite - tileSize * currentAnimationSprites.position[1];
 
+    
+    if(currentAnimationSprites.currentSpriteAssetsPosition !== 0)
+    {
+        console.log("things got set")
+        return;
+    }
     animationIdleSprite(startX, startY, sizeSprite, [0, 1], currentAnimationSprites.idSprite)
 }
 
@@ -144,3 +151,5 @@ const launchAnimationCinematicFight = (indexAnimation = 0) => {
 const endAnimationCinematicFight = () => {
     fightCinematicViewState = FightCinematicViewStateEnum.NoAnim;
 }
+
+const isCinematicFightIsRunning = () => fightCinematicViewState !== FightCinematicViewStateEnum.NoAnim
