@@ -1,3 +1,5 @@
+
+
 const runCinematicFightView = () => {
     switch(fightCinematicViewState){
         case FightCinematicViewStateEnum.NoAnim:
@@ -32,8 +34,13 @@ const runClassicCinematic = () => {
     {
         if(i === cinematicUsed.order[indexCurrentOrderOfAnimation].spriteAnimate)
         {
-            mooveSpriteOnSpecificAnimationToPosition(cinematicUsed.sprites[i], cinematicUsed.order[indexCurrentOrderOfAnimation].nextPos)
-            showAnimationOnSpecificAnimation(xStartRectAnimation, yStartRectAnimation, widthRectAnimation, heightRectAnimation);
+            if(!cinematicUsed.isStopped)
+            {
+                mooveSpriteOnSpecificAnimationToPosition(cinematicUsed.sprites[i], cinematicUsed.order[indexCurrentOrderOfAnimation].nextPos)
+                showAnimationOnSpecificAnimation(xStartRectAnimation, yStartRectAnimation, widthRectAnimation, heightRectAnimation);
+            }else{ 
+                showSpriteOnSpecificAnimation(xStartRectAnimation, yStartRectAnimation, widthRectAnimation, heightRectAnimation, i)
+            }
         }else{
             showSpriteOnSpecificAnimation(xStartRectAnimation, yStartRectAnimation, widthRectAnimation, heightRectAnimation, i)
         }
@@ -74,13 +81,12 @@ const showAnimationOnSpecificAnimation = (xStartOfMap, yStartOfMap, widthMap, he
 
     let animation = currentAnimationSprites.animations[cinematicUsed.order[indexCurrentOrderOfAnimation].animation] // TODO : Animation to change here 
 
-    rect(startX, startY, sizeSprite, sizeSprite)
     if(runSpecificAnimationFromASprite(startX, startY, sizeSprite, animation.countAnimation, 
         animation.frameSpeed[Math.floor(specificAnimationIndex)],
-        animation.idAnimation) === false
+        animation.idAnimation, currentAnimationSprites.idSprite) === false
         )
     {
-        currentAnimationSprites.currentSpriteAssetsPosition[0] = animation.idAnimation;
+        currentAnimationSprites.currentSpriteAssetsPosition = animation.idAnimation;
         addIndexToCurrentOrderAnimation();
     }
 }
@@ -123,7 +129,7 @@ const showSpriteOnSpecificAnimation = (xStartOfMap, yStartOfMap, widthMap, heigh
     
     if(currentAnimationSprites.currentSpriteAssetsPosition !== 0)
     {
-        console.log("things got set")
+        runSpecificAnimationFromASprite(startX, startY, sizeSprite, 3, 0, currentAnimationSprites.currentSpriteAssetsPosition, currentAnimationSprites.idSprite)
         return;
     }
     animationIdleSprite(startX, startY, sizeSprite, [0, 1], currentAnimationSprites.idSprite)
@@ -149,7 +155,10 @@ const launchAnimationCinematicFight = (indexAnimation = 0) => {
 }
 
 const endAnimationCinematicFight = () => {
-    fightCinematicViewState = FightCinematicViewStateEnum.NoAnim;
+    cinematicUsed.isStopped = true;
+    setTimeout(() => {
+        fightCinematicViewState = FightCinematicViewStateEnum.NoAnim;
+    }, 1000); 
 }
 
 const isCinematicFightIsRunning = () => fightCinematicViewState !== FightCinematicViewStateEnum.NoAnim

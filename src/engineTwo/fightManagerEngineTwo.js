@@ -148,7 +148,7 @@ const isAnAttackableCase = (x, y) => {
 
 const launchAttack = (entity = actualMapEngineTwo.entityOnTactical[whichEntityTurn], target, abilityIndex = selectedAbility) => {
     if(entity.pa > 0){
-        if(selectedAbility > 1)
+        if(selectedAbility >= 1)
         {
             launchAnimationCinematicFight()
         }

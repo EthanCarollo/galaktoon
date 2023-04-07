@@ -190,7 +190,13 @@ const runSpecificAnimationFromASprite = (positionX, positionY, size, countOfFram
     let offsetAnimAmount = 8+indexAnimation;
     xStartCut = 0+spriteSizeCut*Math.floor(specificAnimationIndex);
     spritePlayerAnimationMoove = spritesData[id].image.get(xStartCut,spriteSizeCut* offsetAnimAmount,spriteSizeCut,spriteSizeCut);
-
+    if(speedFrame === 0)
+    {
+        console.log(0+30*(countOfFrame-1), " : what is showed" + indexAnimation + " : index " + id + " : id")
+        spritePlayerAnimationMoove = spritesData[id].image.get(30*(countOfFrame-1),spriteSizeCut* offsetAnimAmount,spriteSizeCut,spriteSizeCut);
+        image(spritePlayerAnimationMoove, positionX, positionY, size, size)
+        return;
+    }
     image(spritePlayerAnimationMoove, positionX, positionY, size, size)
     return updateSpecialAnimationIndex(countOfFrame, speedFrame/1.5);
 }
