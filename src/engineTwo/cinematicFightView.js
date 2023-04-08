@@ -1,6 +1,10 @@
 
 
 const runCinematicFightView = () => {
+    /**
+     * * In this function, i just do a switch on the fightCinematicViewState using the enum FightCinematicViewStateEnum
+     * * In that case, i can see different moment in the animation and set a start animation feature.
+     */
     switch(fightCinematicViewState){
         case FightCinematicViewStateEnum.NoAnim:
             return false;
@@ -30,6 +34,24 @@ const runClassicCinematic = () => {
     /**
      * * Boucle on every sprites the animations have to show them
      */
+
+    showEverySpriteOnAnimationSpecific(xStartRectAnimation, yStartRectAnimation, widthRectAnimation, heightRectAnimation);
+}
+
+
+
+//#region // * Display map on specific animation logics Region
+
+
+
+/**
+ * @param {int} xStartRectAnimation 
+ * @param {int} yStartRectAnimation 
+ * @param {int} widthRectAnimation 
+ * @param {int} heightRectAnimation 
+ */
+const showEverySpriteOnAnimationSpecific = (xStartRectAnimation, yStartRectAnimation, widthRectAnimation, heightRectAnimation) => {
+
     for(let i =0; i < cinematicUsed.sprites.length;i++)
     {
         if(i === cinematicUsed.order[indexCurrentOrderOfAnimation].spriteAnimate)
@@ -45,12 +67,10 @@ const runClassicCinematic = () => {
             showSpriteOnSpecificAnimation(xStartRectAnimation, yStartRectAnimation, widthRectAnimation, heightRectAnimation, i)
         }
     }
+
 }
 
 
-/**
- * * Display map on specific animation logics
- */
 
 const showMapOnAnimationSpecific = (xStartOfMap, yStartOfMap, widthMap, heightMap) => {
     let tileMultiplier = 10;
@@ -65,6 +85,8 @@ const showMapOnAnimationSpecific = (xStartOfMap, yStartOfMap, widthMap, heightMa
         }
     }
 }
+
+
 
 const showAnimationOnSpecificAnimation = (xStartOfMap, yStartOfMap, widthMap, heightMap, currentIndexAnim = indexCurrentOrderOfAnimation) => {
     let currentAnimation = cinematicUsed
@@ -86,10 +108,12 @@ const showAnimationOnSpecificAnimation = (xStartOfMap, yStartOfMap, widthMap, he
         animation.idAnimation, currentAnimationSprites.idSprite) === false
         )
     {
-        currentAnimationSprites.currentSpriteAssetsPosition = animation.idAnimation;
+        currentAnimationSprites.currentAnimation = animation.idAnimation;
         addIndexToCurrentOrderAnimation();
     }
 }
+
+
 
 const mooveSpriteOnSpecificAnimationToPosition = (sprite, nextPos) => {
     if(sprite.position[1] ===  nextPos[1] && sprite.position[0] === nextPos[0])
@@ -114,6 +138,8 @@ const mooveSpriteOnSpecificAnimationToPosition = (sprite, nextPos) => {
     
 }
 
+
+
 const showSpriteOnSpecificAnimation = (xStartOfMap, yStartOfMap, widthMap, heightMap, index) => {
     let currentAnimation = cinematicUsed
     let currentAnimationSprites = currentAnimation.sprites[index]
@@ -126,39 +152,63 @@ const showSpriteOnSpecificAnimation = (xStartOfMap, yStartOfMap, widthMap, heigh
     let startX = xStartOfMap - offSetX;
     let startY = yStartOfMap+heightMap-sizeSprite - tileSize * currentAnimationSprites.position[1];
 
-    
-    if(currentAnimationSprites.currentSpriteAssetsPosition !== 0)
+    if(currentAnimationSprites.currentAnimation !== null)
     {
-        runSpecificAnimationFromASprite(startX, startY, sizeSprite, 3, 0, currentAnimationSprites.currentSpriteAssetsPosition, currentAnimationSprites.idSprite)
+        runSpecificAnimationFromASprite(startX, startY, sizeSprite, 3, 0, currentAnimationSprites.currentAnimation, currentAnimationSprites.idSprite)
         return;
     }
     animationIdleSprite(startX, startY, sizeSprite, [0, 1], currentAnimationSprites.idSprite)
 }
+
+
 
 const addIndexToCurrentOrderAnimation = () => {
     indexCurrentOrderOfAnimation++;
     if(indexCurrentOrderOfAnimation >= cinematicUsed.order.length)
     {
         indexCurrentOrderOfAnimation = 0;
-        endAnimationCinematicFight(); // TODO : End the fight here
+        endAnimationCinematicFight(); // TODO : End the fight here, i need to find a better logic for launching that
     }
 }
 
 
-// ! Launch Animation Logics
 
+//#endregion
+
+
+
+//#region // * State Animation Logics Region
+
+
+
+/**
+ * @param {int} indexAnimation, this is the index of the animation started by the attack
+ */
 const launchAnimationCinematicFight = (indexAnimation = 0) => {
-    indexAnimationRunned = indexAnimation; 
     indexCurrentOrderOfAnimation = 0;
     cinematicUsed = JSON.parse(JSON.stringify(AnimationsList[indexAnimation]))
     fightCinematicViewState = FightCinematicViewStateEnum.Animation;
 }
 
+
+
+/**
+ * * Set a little time out when there is no anim to animate, in that case the cinematic is still running
+ */
 const endAnimationCinematicFight = () => {
     cinematicUsed.isStopped = true;
     setTimeout(() => {
         fightCinematicViewState = FightCinematicViewStateEnum.NoAnim;
-    }, 1000); 
+    }, 750); 
 }
 
+
+
+/**
+ * @returns boolean if the cinematic is running, it's better for the code lisibility
+ */
 const isCinematicFightIsRunning = () => fightCinematicViewState !== FightCinematicViewStateEnum.NoAnim
+
+
+
+//#endregion

@@ -7,6 +7,8 @@
  * ? The sprite of the AnimationsList :
  * * The list of sprites contains these animations with their max counter of frames and the speed per frames, in that case, we can have some frames 
  * * speeder than the other. 
+ * ? When does an animation end :
+ * * An animation end when a sprite finish his animation
  * 
  * * /!\ The animation run procedurally, in first case, the first element of the order array will play and then the second and then the third...
  * * With this method i don't have really smooth animations but i have animations that works ! /!\ 
@@ -64,7 +66,7 @@ const AnimationsList =
                 }
             ],
             position : [1, 1],
-            currentSpriteAssetsPosition : 0 
+            currentAnimation : null
         },
         {
             idSprite : 2,
@@ -86,7 +88,7 @@ const AnimationsList =
                 }
             ],
             position : [5, 1] ,
-            currentSpriteAssetsPosition : 0
+            currentAnimation : null
         }],
         isStopped : false
     }
@@ -95,5 +97,4 @@ const AnimationsList =
 let cinematicUsed;
 
 let fightCinematicViewState = FightCinematicViewStateEnum.NoAnim;
-let indexAnimationRunned = 0;
 let indexCurrentOrderOfAnimation = 0;
