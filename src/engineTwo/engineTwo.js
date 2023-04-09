@@ -60,19 +60,16 @@ const setCameraEngineTwo = () => {
 
 const displayTopDownMapEngineTwo = () => {
     displayAestheticTopDownMapEngineTwo(actualMapEngineTwo.map.groundLayer);
-    displayAestheticTopDownMapEngineTwo(actualMapEngineTwo.map.objectLayer);
-
     displayTacticalTopDownMapEngineTwo();
-    displaySpriteTacticalTopDownMapEngineTwo();
-    //createMapTopDown("front", actualMapEngineTwo.map.groundLayer, actualMapEngineTwo, vectorMapEngineTwo);
-    //createMapTopDown("front", actualMapEngineTwo.map.objectLayer, actualMapEngineTwo, vectorMapEngineTwo);
+    displayAestheticTopDownMapEngineTwo(actualMapEngineTwo.map.objectLayer, 'object');
 }
 
-const displayAestheticTopDownMapEngineTwo = (map) => {
+const displayAestheticTopDownMapEngineTwo = (map, layer = 'ground') => {
     for(let y = 0; y < map.length; y++)
     {
         for(let x = 0; x < map[y].length; x++)
         {
+            if(layer !== 'ground') showSpecificSpriteWithPositionOnTactical(x, y);
             createImageWithIdOn2dArrayEngineTwo(x, y, map[y][x],tileSize);
         }
     }
@@ -85,13 +82,6 @@ const displayTacticalTopDownMapEngineTwo = () => {
         {   
             showRectOnTactical(x, y, actualMapEngineTwo.tacticalMap[y][x])
         }
-    }
-}
-
-const displaySpriteTacticalTopDownMapEngineTwo = () => {
-    for(let i = 0; i < actualMapEngineTwo.entityOnTactical.length; i++)
-    {
-        showSpriteOnTactical(actualMapEngineTwo.entityOnTactical[i])
     }
 }
 
@@ -121,7 +111,7 @@ const showRectOnTactical = (x, y, id) => {
             }
             break;
     }
-}// Usefull for debug
+}// ! DEPRECATED BUT : Usefull for debug
 
 const showSpriteOnTactical = (entity) => {
     let positionOnMap = 
@@ -157,6 +147,7 @@ const showSpriteOnTactical = (entity) => {
                 entity.state = "idle";
                 checkIaTurn();
                 animationIdleSprite(positionOnMap[0], positionOnMap[1], playerSpriteSize, [0, 1], entity.id)
+                showHealthSpriteTactical(positionOnMap, entity)
                 return;
             }
             animationMooveSprite(positionOnMap[0], positionOnMap[1], playerSpriteSize, entity.dir, entity.id)
@@ -172,7 +163,13 @@ const showSpriteOnTactical = (entity) => {
     
 }
 
-
+const showSpecificSpriteWithPositionOnTactical = (xPosition, yPosition) => {
+    let npcOnMap = actualMapEngineTwo.entityOnTactical.filter(npc => Math.floor(npc.pos[0]) === xPosition && Math.floor(npc.pos[1]+1) === yPosition )
+    if(npcOnMap.length > 0)
+    {
+        showSpriteOnTactical(npcOnMap[0])
+    }
+}
 
 /**
  * @param {array[int]} position [x, y] the position of the entity who have his health showed in the world
@@ -185,7 +182,8 @@ const showHealthSpriteTactical = (position, entity) => {
     }
 
     let health = entity.health
-    image(uiData[3].image, position[0], position[1], playerSpriteSize, playerSpriteSize) // Background HP
+    let sizeHealth = playerSpriteSize;
+    image(uiData[3].image, position[0], position[1], sizeHealth, sizeHealth) // Background HP
     let actualHealthPercent = health.actualHealth / health.maxHealth * 100 + 0.0001; 
     /**
      *  Add +0.000001 cause when it will be to 0, the image function of p5
@@ -193,9 +191,9 @@ const showHealthSpriteTactical = (position, entity) => {
      *  used to set the width of the actual player health, i can +0.00001 it in the image function
      *  directly or here, it will be the same, image width cannot be 0 in p5
      */
-    image(uiData[0].image, position[0], position[1], actualHealthPercent, playerSpriteSize) // Bar HP
+    image(uiData[0].image, position[0], position[1], actualHealthPercent, sizeHealth) // Bar HP
 
-    image(uiData[2].image, position[0], position[1], playerSpriteSize, playerSpriteSize) // Border HP
+    image(uiData[2].image, position[0], position[1], sizeHealth, sizeHealth) // Border HP
 }
 
 
