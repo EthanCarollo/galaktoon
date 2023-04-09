@@ -11,6 +11,9 @@ const displayEngineTwoUI = () => {
     }
 }
 
+//#region // * Different States UI Display Region
+
+
 const displayEngineTwoPlayingUi = () => {
     switch(whichEntityTurn){
         case 0 :
@@ -28,12 +31,60 @@ const displayEngineTwoEndFightUi = () => {
     displayEndFight();
 }
 
+
+
+//#endregion
+
+
+
+//#region // * PlayingGame UI Region
+
+
+
 const displayGameUi = () => {
+    if(isCinematicFightIsRunning()) return; // If there is a cinematic, i just return the function and don't show the reste of the UI
     displayOpenAbility()
     displayAbility()
     displayPlayerInformationUiEngineTwo()
     displayEndTurnButton();
 }
+
+
+
+const displayPlayerInformationUiEngineTwo = () => {
+    /**
+     * * In this function, we just show the player informations 
+     */
+
+    checkAllAlliesDead();
+
+    let tempSize = window.innerWidth/12;
+    let padding = 25;
+    let tempPosX = 0 + tempSize / 4
+    let tempPosY = 0 + padding;
+    let percentLifeOfPlayer = playerTeam[0].health.actualHealth / playerTeam[0].health.maxHealth +0.00001;
+
+    image(uiData[7].image, tempPosX, tempPosY ,tempSize, tempSize)
+
+    let barSize = tempSize * 2;
+    let xBar = tempPosX + tempSize * 1.15;
+    let yBar = tempPosY + 10;
+    
+    showBarWithPercentUi(xBar, yBar, barSize, percentLifeOfPlayer);
+
+    let percentPmOfPlayer = actualMapEngineTwo.entityOnTactical[0].pm / 2 +0.00001;
+    tint(35,255,35)
+    showBarWithPercentUi(xBar, yBar+barSize/10, barSize, percentPmOfPlayer);
+
+    let percentPaOfPlayer = actualMapEngineTwo.entityOnTactical[0].pa / 2 +0.00001;
+    tint(35,35,255)
+    showBarWithPercentUi(xBar, yBar+(barSize/10)*2, barSize, percentPaOfPlayer);
+
+}
+
+
+
+//#endregion
 
 const displayEndFight = () => {
     let size = 200;
@@ -86,34 +137,6 @@ const showButtonFightEnd = () => {
 
 // * -----------------------------
 // * -----------------------------
-
-const displayPlayerInformationUiEngineTwo = () => {
-    
-    checkAllAlliesDead();
-
-    let tempSize = window.innerWidth/12;
-    let padding = 25;
-    let tempPosX = 0 + tempSize / 2
-    let tempPosY = window.innerHeight - tempSize - padding;
-    let percentLifeOfPlayer = playerTeam[0].health.actualHealth / playerTeam[0].health.maxHealth +0.00001;
-
-    image(uiData[7].image, tempPosX, tempPosY ,tempSize, tempSize)
-
-    let barSize = tempSize * 2;
-    let xBar = tempPosX + tempSize * 1.15;
-    let yBar = tempPosY + tempSize / 3;
-    
-    showBarWithPercentUi(xBar, yBar, barSize, percentLifeOfPlayer);
-
-    let percentPmOfPlayer = actualMapEngineTwo.entityOnTactical[0].pm / 2 +0.00001;
-    tint(35,255,35)
-    showBarWithPercentUi(xBar, yBar+barSize/10, barSize, percentPmOfPlayer);
-
-    let percentPaOfPlayer = actualMapEngineTwo.entityOnTactical[0].pa / 2 +0.00001;
-    tint(35,35,255)
-    showBarWithPercentUi(xBar, yBar+(barSize/10)*2, barSize, percentPaOfPlayer);
-
-}
 
 const displayEndTurnButton = () => {
     fill(255,0,255,100)

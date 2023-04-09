@@ -171,20 +171,37 @@ const showSpriteOnTactical = (entity) => {
     
 }
 
+
+
+/**
+ * @param {array[int]} position [x, y] the position of the entity who have his health showed in the world
+ * @param {object} entity the entity object who contains the health, the max health... etc
+ */
 const showHealthSpriteTactical = (position, entity) => {
 
     if(entity.health === undefined){
-        throw new Error("Entity doesn't have health which is impossible, check : " + entity.id)
+        throw new Error("Entity doesn't have health which is impossible, check the entity with the id : " + entity.id)
     }
 
     let health = entity.health
     image(uiData[3].image, position[0], position[1], playerSpriteSize, playerSpriteSize) // Background HP
-    let actualHealthPercent = health.actualHealth / health.maxHealth * 100 + 0.0001;
+    let actualHealthPercent = health.actualHealth / health.maxHealth * 100 + 0.0001; 
+    /**
+     *  Add +0.000001 cause when it will be to 0, the image function of p5
+     *  will just set the image width to his native size and the actualHealthPercent is
+     *  used to set the width of the actual player health, i can +0.00001 it in the image function
+     *  directly or here, it will be the same, image width cannot be 0 in p5
+     */
     image(uiData[0].image, position[0], position[1], actualHealthPercent, playerSpriteSize) // Bar HP
 
     image(uiData[2].image, position[0], position[1], playerSpriteSize, playerSpriteSize) // Border HP
 }
 
+
+
+/**
+ * * This function check every player health to set this to 0 if it is inferior to 0 
+ */
 const setAllHealth = () => {
     for(let i = 0; i < actualMapEngineTwo.entityOnTactical.length; i ++)
     {
@@ -194,6 +211,8 @@ const setAllHealth = () => {
         }
     }
 }
+
+
 
 const createImageWithIdOn2dArrayEngineTwo = (x, y, id, currentTileSize, mapInfo = actualMapEngineTwoRessource) => {
     if(id < 0)
@@ -207,7 +226,7 @@ const createImageWithIdOn2dArrayEngineTwo = (x, y, id, currentTileSize, mapInfo 
     let yPositionTiles = (currentTileSize*(y+1-yTileHeight))+vectorCameraEngineTwo.y;
     image(mapInfo.tileRessource[id].image, xPositionTiles , yPositionTiles, currentTileSize, currentTileSize * yTileHeight); 
   
-  }
+}
 
 
 

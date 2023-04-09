@@ -1,7 +1,11 @@
-
+/**
+ * * When an entity finish his turn, just call this function to swap of turn
+ */
 const endTurn = () => {
     turnManager();
 }
+
+
 
 const turnManager = () => {
     if(whichEntityTurn >= actualMapEngineTwo.entityOnTactical.length || whichEntityTurn === null)
@@ -18,6 +22,8 @@ const turnManager = () => {
     selectedEntity.pa = 2;
     checkIaTurn()
 }
+
+
 
 const checkIaTurn = () => {
     /**
@@ -48,6 +54,8 @@ const checkIaTurn = () => {
     }
 }
 
+
+
 const nextIndexEntityTurn = () => {
     whichEntityTurn ++;
     if(whichEntityTurn >= actualMapEngineTwo.entityOnTactical.length)
@@ -55,6 +63,7 @@ const nextIndexEntityTurn = () => {
         whichEntityTurn = 0;
     }
 }
+
 
 
 /**
@@ -126,6 +135,8 @@ const resetAttackableCase = () => {
     canAttackCase = []
 }
 
+
+
 /**
  * @param {int} x position x on the tilemap
  * @param {int} y position y on the tile map
@@ -146,9 +157,16 @@ const isAnAttackableCase = (x, y) => {
 
 //#region // * Usefull function when we launch an attack
 
+
+/**
+ * @param {object} entity the entity who attacks
+ * @param {object} target the target object (entity)
+ * @param {int} abilityIndex the selected ability of the attack
+ * @returns {boolean} return if the attack can be launch or not
+ */
 const launchAttack = (entity = actualMapEngineTwo.entityOnTactical[whichEntityTurn], target, abilityIndex = selectedAbility) => {
     if(entity.pa > 0){
-        if(selectedAbility >= 1)
+        if(selectedAbility >= 1) // TODO : Temp for the debug of the launch animation on cinematic fight
         {
             launchAnimationCinematicFight()
         }
