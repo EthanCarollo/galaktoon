@@ -46,9 +46,45 @@ const displayGameUi = () => {
     displayOpenAbility()
     displayAbility()
     displayPlayerInformationUiEngineTwo()
+    displayEnnemyInformationUiEngineTwo()
     displayEndTurnButton();
 }
 
+
+
+const displayEnnemyInformationUiEngineTwo = () => {
+    for (let i = 1; i < actualMapEngineTwo.entityOnTactical.length; i++) {
+        const entityToShow = actualMapEngineTwo.entityOnTactical[i];
+        
+
+        let tempSize = window.innerWidth/15;
+        let padding = 25;
+        let tempPosX = window.innerWidth - tempSize - padding
+        let tempPosY = 0 + padding + (tempSize+25) * (i-1);
+        let percentLifeOfEntity = entityToShow.health.actualHealth / entityToShow.health.maxHealth;
+
+        if(percentLifeOfEntity > 0) { 
+            showSpriteIconOnEngineTwo(tempPosX, tempPosY, tempSize, entityToShow.id) 
+        } else {
+            showDeadSpriteIconOnEngineTwo(tempPosX, tempPosY, tempSize, entityToShow.id)
+        }
+        image(uiData[36].image, tempPosX, tempPosY, tempSize, tempSize)
+
+        let barSize = tempSize * 2;
+        let xBar = tempPosX - barSize - tempSize * 0.15;
+        let yBar = tempPosY + 10;
+        console.log(xBar)
+        showBarWithPercentUi(xBar, yBar, barSize, percentLifeOfEntity+0.00001);
+
+        let percentPmOfPlayer = entityToShow.pm / 2 +0.00001;
+        tint(35,255,35)
+        showBarWithPercentUi(xBar, yBar+barSize/10, barSize, percentPmOfPlayer);
+
+        let percentPaOfPlayer = entityToShow.pa / 2 +0.00001;
+        tint(35,35,255)
+        showBarWithPercentUi(xBar, yBar+(barSize/10)*2, barSize, percentPaOfPlayer);
+    }
+}
 
 
 const displayPlayerInformationUiEngineTwo = () => {
@@ -58,13 +94,13 @@ const displayPlayerInformationUiEngineTwo = () => {
 
     checkAllAlliesDead();
 
-    let tempSize = window.innerWidth/12;
+    let tempSize = window.innerWidth/15;
     let padding = 25;
     let tempPosX = 0 + tempSize / 4
     let tempPosY = 0 + padding;
-    let percentLifeOfPlayer = playerTeam[0].health.actualHealth / playerTeam[0].health.maxHealth +0.00001;
+    let percentLifeOfPlayer = actualMapEngineTwo.entityOnTactical[0].health.actualHealth / actualMapEngineTwo.entityOnTactical[0].health.maxHealth +0.00001;
 
-    image(uiData[7].image, tempPosX, tempPosY ,tempSize, tempSize)
+    showSpriteIconOnEngineTwo(tempPosX, tempPosY, tempSize, 0)
 
     let barSize = tempSize * 2;
     let xBar = tempPosX + tempSize * 1.15;
@@ -83,12 +119,26 @@ const displayPlayerInformationUiEngineTwo = () => {
 }
 
 
+// Icon in ui show
+const showSpriteIconOnEngineTwo = (xStart, yStart, size, idSprite) => {
+    let paddingSprite = +size*0.018;
+    animationIdleSprite(xStart+paddingSprite, yStart+paddingSprite, size, [0, 1], idSprite)
+    image(uiData[35].image, xStart, yStart , size, size)
+}
+
+const showDeadSpriteIconOnEngineTwo = (xStart, yStart, size, idSprite) => {
+    let paddingSprite = +size*0.018;
+    animationDeadSprite(xStart+paddingSprite, yStart+paddingSprite, size, idSprite)
+    image(uiData[35].image, xStart, yStart , size, size)
+}
+// Icon in ui show
 
 //#endregion
 
+
 const displayEndFight = () => {
-    let size = 200;
-    showEnemiesEndFightList(size);
+    let size = window.innerHeight/1.5;
+    //showEnemiesEndFightList(size);
     showPlayer(size);
     showButtonFightEnd();
 }
@@ -107,12 +157,9 @@ const showEnemiesEndFightList = (size) => {
 }
 
 const showPlayer = (size) => {
-    let x = size
-    let y = (window.innerHeight) / 2 - size
+    let x = window.innerWidth / 2 - size / 2
+    let y = (window.innerHeight) / 2 - size / 2
     animationIdleSprite(x, y, size, [0, 1], 0)
-
-    let percentLifeOfPlayer = playerTeam[0].health.actualHealth / playerTeam[0].health.maxHealth +0.00001;
-    showHealthBehindRectUI(x-25/2, y-10, size, percentLifeOfPlayer)
 }
 
 const showButtonFightEnd = () => {
@@ -135,6 +182,7 @@ const showButtonFightEnd = () => {
     textAlign(LEFT, CENTER)
 }
 
+
 // * -----------------------------
 // * -----------------------------
 
@@ -142,7 +190,7 @@ const displayEndTurnButton = () => {
     fill(255,0,255,100)
     let tempSize = window.innerWidth/12;
     let padding = 25;
-    let tempPosX = window.innerWidth/2 + tempSize *3.6 - tempSize
+    let tempPosX = window.innerWidth - tempSize  * 1.5
     let tempPosY = window.innerHeight - tempSize - padding;
 
     image(uiData[12].image, tempPosX, tempPosY, tempSize, tempSize);

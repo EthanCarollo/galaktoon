@@ -154,9 +154,10 @@ const showSpriteOnTactical = (entity) => {
         case "moove" :
             if(mooveEntityToNextCase(entity) === false)
             {
-                console.log("Finished to moove")
                 entity.state = "idle";
                 checkIaTurn();
+                animationIdleSprite(positionOnMap[0], positionOnMap[1], playerSpriteSize, [0, 1], entity.id)
+                return;
             }
             animationMooveSprite(positionOnMap[0], positionOnMap[1], playerSpriteSize, entity.dir, entity.id)
             break;

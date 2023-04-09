@@ -148,6 +148,14 @@
             "id" : "34",
             "path" : "assets/ui/LogoGalaktoon.png",
             "image" : null
+        },{
+            "id" : "35",
+            "path" : "assets/ui/borderUi.png",
+            "image" : null
+        },{
+            "id" : "35",
+            "path" : "assets/ui/borderUiEnemy.png",
+            "image" : null
         }
     ]
 }
