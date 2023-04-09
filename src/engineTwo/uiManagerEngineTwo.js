@@ -138,22 +138,23 @@ const showDeadSpriteIconOnEngineTwo = (xStart, yStart, size, idSprite) => {
 
 const displayEndFight = () => {
     let size = window.innerHeight/1.5;
-    //showEnemiesEndFightList(size);
+    showEnemiesEndFightList(size);
     showPlayer(size);
     showButtonFightEnd();
 }
 
 const showEnemiesEndFightList = (size) => {
-    let x = (window.innerWidth) - (size*2)
-    let y = (window.innerHeight) / 2 - size
+    let xPosition = window.innerWidth / 2 - size / 2 - 1
+    let yPosition = (window.innerHeight) / 2
+    imageMode(CENTER)
     for(let i = 1; i < actualMapEngineTwo.entityOnTactical.length; i++)
     {
-        let yPosition = y +(size+25)*(i-1)
-        animationIdleSprite(x, yPosition, size, [0, 1], actualMapEngineTwo.entityOnTactical[i].id)
-        
-        let percentLifeOfEntity = actualMapEngineTwo.entityOnTactical[i].health.actualHealth / actualMapEngineTwo.entityOnTactical[i].health.maxHealth +0.00001;
-        showHealthBehindRectUI(x-25/2, yPosition-10, size, percentLifeOfEntity)
+        let sizeIterate = i-1;
+        let xPositionSprite = xPosition + size*sizeIterate
+        animationIdleSprite(xPositionSprite, yPosition, size/1.25, [0, 1], actualMapEngineTwo.entityOnTactical[i].id)
     }
+    imageMode(CORNER)
+    noTint();
 }
 
 const showPlayer = (size) => {
