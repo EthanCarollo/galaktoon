@@ -5,6 +5,7 @@ const launchFightOnEngineTwo = (idMapOfFight) => { // this take in parameters de
     {
         actualMapEngineTwo = tacticalMapData[idMapOfFight]
         actualMapEngineTwoRessource = mapData[actualMapEngineTwo.attachedMap];
+        engineTwoState = "startFight";
         setPlayerInActualMapEngineTwo();
         launchEngine(EngineStateEnum.EngineTwo);
     }

@@ -2,6 +2,9 @@ let engineTwoState = "Playing";
 
 const runEngineTwo = () => {
     switch(engineTwoState){
+        case "startFight" :
+            displayEngineTwoUI();
+            break;
         case "Playing" :
             engineTwoPlaying();
             break;

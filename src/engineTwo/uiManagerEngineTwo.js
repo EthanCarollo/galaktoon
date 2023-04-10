@@ -1,5 +1,8 @@
 const displayEngineTwoUI = () => {
     switch(engineTwoState){
+        case "startFight" :
+            displayEngineTwoStartingFightUi();
+            break;
         case "Playing" : 
             displayEngineTwoPlayingUi();
             break;
@@ -13,6 +16,13 @@ const displayEngineTwoUI = () => {
 
 //#region // * Different States UI Display Region
 
+
+const displayEngineTwoStartingFightUi = () => {
+    // TODO : Update the start of a fight engine
+    background(25);
+    showPlayer(500, 250, 250); 
+    displayStartFightButton();
+}
 
 const displayEngineTwoPlayingUi = () => {
     switch(whichEntityTurn){
@@ -31,6 +41,33 @@ const displayEngineTwoEndFightUi = () => {
     displayEndFight();
 }
 
+
+//#endregion
+
+
+
+// * -----------------------------
+
+
+
+//#region // * StartGame UI Region
+
+
+const displayStartFightButton = () => {
+    let height = 150;
+    let width = 500;
+    let xPosition = window.innerWidth / 2 - width / 2
+    let yPosition = window.innerHeight - 300
+    fill(255,255,255,255)
+    rect(xPosition, yPosition, width, height)
+    textAlign(CENTER,CENTER)
+    fill(25,25,25,255)
+    text("Start Fight",xPosition, yPosition, width, height)
+    textAlign(LEFT,LEFT)
+    createInputButtonWithCallback(xPosition, yPosition, width, height, () => {
+        engineTwoState = "Playing";
+    })
+}
 
 
 //#endregion
@@ -136,6 +173,9 @@ const showDeadSpriteIconOnEngineTwo = (xStart, yStart, size, idSprite) => {
 //#endregion
 
 
+
+//#region // * EndGame UI Region
+
 const displayEndFight = () => {
     let size = window.innerHeight/1.5;
     showEnemiesEndFightList(size);
@@ -143,10 +183,10 @@ const displayEndFight = () => {
     showButtonFightEnd();
 }
 
-const showEnemiesEndFightList = (size) => {
-    let xPosition = window.innerWidth / 2 - size / 2 - 1
-    let yPosition = (window.innerHeight) / 2
-    imageMode(CENTER)
+const showEnemiesEndFightList = (size, xStart = window.innerWidth / 2 - size / 2 - 1, yStart = (window.innerHeight) / 2) => {
+    let xPosition = xStart
+    let yPosition = yStart
+    imageMode(CENTER) // Set the image mode to center
     for(let i = 1; i < actualMapEngineTwo.entityOnTactical.length; i++)
     {
         let sizeIterate = i-1;
@@ -157,10 +197,8 @@ const showEnemiesEndFightList = (size) => {
     noTint();
 }
 
-const showPlayer = (size) => {
-    let x = window.innerWidth / 2 - size / 2
-    let y = (window.innerHeight) / 2 - size / 2
-    animationIdleSprite(x, y, size, [0, 1], 0)
+const showPlayer = (size, xStart = window.innerWidth / 2 - size / 2, yStart = window.innerHeight / 2 - size / 2) => {
+    animationIdleSprite(xStart, yStart, size, [0, 1], 0)
 }
 
 const showButtonFightEnd = () => {
@@ -183,9 +221,13 @@ const showButtonFightEnd = () => {
     textAlign(LEFT, CENTER)
 }
 
+//#endregion
+
+
 
 // * -----------------------------
-// * -----------------------------
+
+
 
 const displayEndTurnButton = () => {
     fill(255,0,255,100)
