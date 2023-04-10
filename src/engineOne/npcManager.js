@@ -9,6 +9,7 @@ const displayAllNPCOnMap = (orientation = "back") => {
    * * If the function is called with the parameter "back" the function just show the tile in back of the player
    * * but if it's "front" it will show the tiles in front of the player so if i put the playerShow function
    * * between these two functions, i will have illusion of depth
+   * ! DEPRECATED METHOD
    */
     switch(orientation){
         case "back":
@@ -67,6 +68,8 @@ const displayNpc = (npc) => {
     
 }
 
+
+
 /**
  * @param {int} x x pos of the npc on the map
  * @param {int} y y pos of the npc on the map
@@ -89,13 +92,15 @@ const animateNpc = (x, y, size, direction /* ! = Array ! */, npcId, npc) => {
       {
         animationMooveSprite(x, y, size, direction, npcId)
       }else{
-        animationIdleSprite(x, y, size, direction, npcId)
+        animationMooveSprite(x, y, size, direction, npcId)
       }
       break;
     default :
       break;
     }
 }
+
+
 
 /**
  * @param {object} npc 
@@ -122,6 +127,7 @@ const setNpcDirectionWithThePlayerDirection = (npc) => {
       return;
   }
 }
+
 
 
 const mooveEntityToNextCaseInEngineOne = (entity, cameraVector = vectorCameraEngineTwo) => {
@@ -174,6 +180,18 @@ const mooveEntityToNextCaseInEngineOne = (entity, cameraVector = vectorCameraEng
 } // Moove Entity to the next case insered in her "nextCase" array value
 
 
+
+const addNpcToMap = (idNpc, pos, interaction = 'dialog', direction = [0, 1], isInteractible = true, mapId = 0) => {
+  mapData[mapId].npcOnMap.push({
+    id : idNpc,
+    pos : pos,
+    nextCase : null,
+    isInteractible : isInteractible,
+    dir : direction,
+    state : "idle",
+    interaction : interaction
+  })
+}
 
 
 // ! Isn't used in the code

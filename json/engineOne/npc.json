@@ -46,6 +46,10 @@
                     "text" : "Merci d'avoir sauvé la ville ! " 
                 }]
             ]
+        },{
+            "id" : "4",
+            "spriteId" : "5",
+            "name" : "FightAi"
         }
     ]
 }

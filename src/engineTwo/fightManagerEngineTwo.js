@@ -166,10 +166,14 @@ const isAnAttackableCase = (x, y) => {
  */
 const launchAttack = (entity = actualMapEngineTwo.entityOnTactical[whichEntityTurn], target, abilityIndex = selectedAbility) => {
     if(entity.pa > 0){
-        if(selectedAbility >= 1) // TODO : Temp for the debug of the launch animation on cinematic fight
+
+        // TODO
+        if(selectedAbility >= 2) // TODO : Temp for the debug of the launch animation on cinematic fight
         {
             launchAnimationCinematicFight()
         }
+        // TODO
+
         attackWithTheCurrentAbility(entity, abilityIndex, target)
         resetMovableAndEntityVar();
         return true;

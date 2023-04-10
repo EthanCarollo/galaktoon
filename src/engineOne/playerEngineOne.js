@@ -163,8 +163,23 @@ const interactWithNPC = (tileInteract) => {
     if(npcInteracted.length > 0)
     {
         if(npcInteracted[0].isInteractible === true && npcInteracted[0].state === "idle"){
-            launchNpcDialog(npcInteracted[0]);
+            launchInteractionOfNpc(npcInteracted[0])
         }
+    }
+}
+
+
+const launchInteractionOfNpc = (npcInteraction) => {
+    switch(npcInteraction.interaction)
+    {
+        case 'dialog' :
+            launchNpcDialog(npcInteraction);
+            break; 
+        case 'fight' :
+            console.log("Launch a fight")
+            break;
+        default :
+            throw new Error("The interaction of the npc : " + npcInteraction + " isn't set. ")
     }
 }
 
