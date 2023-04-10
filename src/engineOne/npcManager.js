@@ -61,7 +61,9 @@ const displayNpc = (npc) => {
   if(npc.nextCase !== null && npc.nextCase.length > 0)
   {
     npc.state = "moove";
-  }else{
+  }
+  if(npc.nextCase === null && npc.state === "moove")
+  {
     npc.state = "idle";
   }
   animateNpc(positionTemp.x, positionTemp.y, playerSpriteSize, npc.dir, spriteNpcId, npc)
@@ -94,6 +96,10 @@ const animateNpc = (x, y, size, direction /* ! = Array ! */, npcId, npc) => {
       }else{
         animationMooveSprite(x, y, size, direction, npcId)
       }
+      break;
+    case "pop" :
+      console.log('pooped an animation')
+      if(runSpecificAnimationFromASprite(x, y, size, 4, 0.25, 0, npcId) === false) npc.state = 'idle';
       break;
     default :
       break;
@@ -175,20 +181,21 @@ const mooveEntityToNextCaseInEngineOne = (entity, cameraVector = vectorCameraEng
       }
   }
   entity.nextCase.splice(0, 1)
+  if(entity.nextCase.length === 0) entity.nextCase = null;
   return false;
 
 } // Moove Entity to the next case insered in her "nextCase" array value
 
 
 
-const addNpcToMap = (idNpc, pos, interaction = 'dialog', direction = [0, 1], isInteractible = true, mapId = 0) => {
+const addNpcToMap = (idNpc, pos, interaction = 'dialog', direction = [0, 1], state = 'idle', isInteractible = true, mapId = 0) => {
   mapData[mapId].npcOnMap.push({
     id : idNpc,
     pos : pos,
     nextCase : null,
     isInteractible : isInteractible,
     dir : direction,
-    state : "idle",
+    state : state,
     interaction : interaction
   })
 }

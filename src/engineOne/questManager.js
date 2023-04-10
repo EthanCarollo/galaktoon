@@ -96,7 +96,7 @@ const startSpecificQuestEvents = (questEventString) => {
             mapData[0].npcOnMap[0].nextCase = searchPath(mapData[0].npcOnMap[0].pos, [3, 5], mapData[0].map.objectLayer); // Here it's the AI who mmoves
             break;
         case "goFightTuto" :
-            addNpcToMap(4, [2, 6], 'fight', [1, 0]);
+            addNpcToMap(4, [2, 6], 'fight', [1, 0], 'pop');
             break;
         default :
             throw new Error("Specific event isn't set inside the startSpecificQuestEvents() : " + questEventString)

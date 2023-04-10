@@ -18,7 +18,7 @@
             "description" : "C'est la reguerre ma leugeu",
             "questType" : "talk",
             "eventOnStart" : "goFightTuto",
-            "questGoal" : null,
+            "questGoal" : {"map" : 0, "position" : [2, 6]},
             "idQuestProgression" : 4,
             "currentProgression": 0,
             "maxProgression" : 1,
