@@ -4,14 +4,31 @@ const displayUserInterfaceEngineOne = () => {
     /**
      * * Display the normal user interface for the engine One
      */
-    displayPlayerInformationUI()
-    displayExploringMenu();
-    showKeyboardPlayer();
-    if(playerIsExploringMap === true){
-        setVectorLerpEaseInExploringMenu();
-    }else{
-        setVectorLerpEaseOutExploringMenu();
-        showQuestList();
+    switch(uiEngineOneState)
+    {
+        case UiEngineOneStateEnum.Normal :
+            displayPlayerInformationUI();
+            displayExploringMenu();
+            showKeyboardPlayer();
+            setVectorLerpEaseOutExploringMenu();
+            showQuestList();
+            break;
+        case UiEngineOneStateEnum.IsExploring :
+            displayPlayerInformationUI();
+            displayExploringMenu();
+            showKeyboardPlayer();
+            setVectorLerpEaseInExploringMenu();
+            break;
+        case UiEngineOneStateEnum.Tutorial :
+            showQuestList();
+            showTutorialInterface();
+            setVectorLerpEaseInExploringMenu();
+            break;
+        case UiEngineOneStateEnum.Dialoging :
+            displayPlayerInformationUI();
+            setVectorLerpEaseOutExploringMenu();
+            showQuestList();
+            break;
     }
 }
 
@@ -112,7 +129,7 @@ const exitCross = () => {
 const exitExploringMenu = () => {
     vector2ExploringMenu.x = 0;
     playerCanMove = true;
-    playerIsExploringMap = false;
+    uiEngineOneState = UiEngineOneStateEnum.Normal
 }
 
 //#endregion
@@ -120,6 +137,8 @@ const exitExploringMenu = () => {
 
 
 //#region // * Key Show Region
+
+
 
 const showKeyboardPlayer = () => {
     let sizeKey = 100;
@@ -156,18 +175,73 @@ const showKeyOnScreen = (xShow, yShow, size, inputKeyCode, keyName) => {
 
     if(keyIsDown(inputKeyCode))
     {
-        image(uiData[38].image, xShow, yShow, size, size * 1.1)
+        image(uiData[38].image, xShow, yShow - size * 0.1, size, size * 1.1)
         fill(0, 0, 0)
-        text(keyName,xShow, yShow + size * 0.1, size, size)
+        text(keyName,xShow, yShow, size, size)
 
     }else{
-        image(uiData[37].image, xShow, yShow, size, size * 1.1)
+        image(uiData[37].image, xShow, yShow - size * 0.1, size, size * 1.1)
         fill(255, 255, 255)
-        text(keyName,xShow, yShow, size, size)
+        text(keyName, xShow, yShow - size * 0.1, size, size)
     }
 
     noFill()
     textAlign(CORNER, CORNER)
 }
+
+
+
+//#endregion
+
+
+
+//#region 
+
+
+
+const launchTutorial = () => {
+    uiEngineOneState = UiEngineOneStateEnum.Tutorial
+    playerCanMove = false;
+}
+
+const showTutorialInterface = () => {
+    let xSizeBg = window.innerHeight /1.75;
+    let ySizeBg = window.innerHeight;
+
+    let xPosition = window.innerWidth - (xSizeBg + vector2ExploringMenu.x);
+
+    
+    let padding = 100;
+    image(uiData[23].image, xPosition+padding/2, padding/2, xSizeBg-padding, ySizeBg-padding)
+    showExitButtonOnTutorialInterface(xPosition+padding/2, padding/2, xSizeBg-padding, ySizeBg-padding)
+}
+
+const showExitButtonOnTutorialInterface = (x, y, width, height) => {
+    let widthButton = 350;
+    let heightButton = widthButton/5;
+
+    let xPosition = x + width / 2 - widthButton / 2;
+    let yPosition = y + height - heightButton * 1.5;
+    image(uiData[18].image, xPosition, yPosition, widthButton, heightButton)
+    if(mouseIsHover(xPosition, yPosition, widthButton, heightButton))
+    {
+        image(uiData[27].image, xPosition, yPosition, widthButton, heightButton)
+    }
+    textAlign(CENTER, CENTER)
+    fill(255, 255, 255)
+    text("Quit Tutorial", xPosition, yPosition, widthButton, heightButton)
+    textAlign(LEFT, LEFT)
+    noFill()
+
+    createInputButtonWithCallback(xPosition, yPosition, widthButton, heightButton, endActualTutorial)
+}
+
+const endActualTutorial = () => {
+    uiEngineOneState = UiEngineOneStateEnum.Normal
+    playerCanMove = true;
+    vector2ExploringMenu.x = -500;
+}
+
+
 
 //#endregion

@@ -17,6 +17,8 @@ const launchNpcDialog = (npc) => {
 
     npcDialoged = npcInteractedData
 
+    uiEngineOneState = UiEngineOneStateEnum.Dialoging;
+
   }else{
     // TODO : some annexe events if we interact with a pnj without dialog
   }
@@ -38,6 +40,7 @@ const exitDialog = () => {
   /**
    * * Reset most of values to the normal and end the dialog
    */
+  uiEngineOneState = UiEngineOneStateEnum.Normal;
   backgroundTransition = 0;
   playerState = PlayerStateEnum.Normal
   actualDialog = 0;

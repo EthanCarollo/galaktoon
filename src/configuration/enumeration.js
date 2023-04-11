@@ -45,6 +45,13 @@ const FightCinematicViewStateEnum = {
     Animation : "animate"
 }
 
+const UiEngineOneStateEnum = {
+    Normal : 'normal',
+    IsExploring : 'isExploring',
+    Tutorial : 'tutorial',
+    Dialoging : 'dialog'
+}
+
 
 
 /**

@@ -118,7 +118,7 @@ const interactWithATile = (tileInteract) => {
     switch(interactedTile.type){
         case "explore":
             playerCanMove = false
-            playerIsExploringMap = true;
+            uiEngineOneState = UiEngineOneStateEnum.IsExploring;
             // explore function
             break;
         case "build":
@@ -139,7 +139,7 @@ const interactWithATile = (tileInteract) => {
             // TODO : This is temporary for the debug
             launchFightOnEngineTwo(0)
             break;
-        case "sleep":
+        case "useBed":
             playSleepAnimation();
             break;
         default :
@@ -222,5 +222,6 @@ const playSleepAnimation = () => {
      * ! Will soon be deprecated
      * TODO : Update this function soon
      */
+    launchTutorial();
     playerTeam[0].health.actualHealth = playerTeam[0].health.maxHealth
 }

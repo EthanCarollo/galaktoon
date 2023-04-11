@@ -640,7 +640,7 @@
             "isAnObject": false,
             "xWidth": 1,
             "yWidth": "2",
-            "type": "useless",
+            "type": "useBed",
             "destructible": "false",
             "sizeXonConstruct": 1
         },
