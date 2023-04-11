@@ -6,6 +6,7 @@ const displayUserInterfaceEngineOne = () => {
      */
     displayPlayerInformationUI()
     displayExploringMenu();
+    showKeyboardPlayer();
     if(playerIsExploringMap === true){
         setVectorLerpEaseInExploringMenu();
     }else{
@@ -112,6 +113,61 @@ const exitExploringMenu = () => {
     vector2ExploringMenu.x = 0;
     playerCanMove = true;
     playerIsExploringMap = false;
+}
+
+//#endregion
+
+
+
+//#region // * Key Show Region
+
+const showKeyboardPlayer = () => {
+    let sizeKey = 100;
+    let padding = 15
+    showKeyOnScreen(window.innerWidth - (sizeKey + padding) , 
+                    window.innerHeight- (sizeKey + padding) ,
+                    sizeKey,
+                    68,
+                    "D")
+    showKeyOnScreen(window.innerWidth - (sizeKey + padding) * 2, 
+                    window.innerHeight - (sizeKey + padding) ,
+                    sizeKey,
+                    83,
+                    "S")
+    showKeyOnScreen(window.innerWidth - (sizeKey + padding) * 3, 
+                    window.innerHeight - (sizeKey + padding) ,
+                    sizeKey,
+                    81,
+                    "Q")
+    showKeyOnScreen(window.innerWidth - (sizeKey + padding) * 2, 
+                    window.innerHeight - (sizeKey + padding) * 2,
+                    sizeKey,
+                    90,
+                    "Z")
+    showKeyOnScreen(window.innerWidth - (sizeKey + padding), 
+                    window.innerHeight - (sizeKey + padding) * 2,
+                    sizeKey,
+                    69,
+                    "E")
+}
+
+const showKeyOnScreen = (xShow, yShow, size, inputKeyCode, keyName) => {
+    textAlign(CENTER, CENTER)
+
+    if(keyIsDown(inputKeyCode))
+    {
+        image(uiData[38].image, xShow, yShow, size, size * 1.1)
+        fill(0, 0, 0)
+        text(keyName,xShow, yShow + size * 0.1, size, size)
+
+    }else{
+        image(uiData[37].image, xShow, yShow, size, size * 1.1)
+        fill(255, 255, 255)
+        text(keyName,xShow, yShow, size, size)
+    }
+
+    noFill()
+    textAlign(CORNER, CORNER)
 }
 
 //#endregion
