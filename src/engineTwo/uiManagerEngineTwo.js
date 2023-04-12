@@ -213,12 +213,21 @@ const showButtonFightEnd = () => {
         image(uiData[27].image, xStart, yPosition, width, height)
     }
     createInputButtonWithCallback(xStart ,yPosition ,width ,height, () => {
-        launchEngine(EngineStateEnum.EngineOne);
+        exitFight()
     })
     textAlign(CENTER, CENTER)
     textSize(40); fill(255);
     text("End Fight", xStart, yPosition, width, height)
     textAlign(LEFT, CENTER)
+}
+
+const exitFight = () => {
+    if(npcFighted !== null)
+    {
+        npcFighted.actualDialogIndex ++;
+    }
+    launchEngine(EngineStateEnum.EngineOne);
+
 }
 
 //#endregion

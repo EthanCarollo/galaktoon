@@ -8,6 +8,12 @@ const launchFightOnEngineTwo = (idMapOfFight) => { // this take in parameters de
         engineTwoState = "startFight";
         setPlayerInActualMapEngineTwo();
         launchEngine(EngineStateEnum.EngineTwo);
+        if(npcDialoged !== null)
+        {
+            npcFighted = npcDialoged;
+        }else{
+            npcFighted = null;
+        }
     }
 }
 
