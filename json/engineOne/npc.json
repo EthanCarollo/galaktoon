@@ -23,6 +23,7 @@
                     "text" : "Ho ! Tu t'es reveillé... " 
                 }, { 
                     "questIsGived" : false,
+                    "type" : "quest",
                     "text" : "C'est génial, suis moi, je vais tout t'expliquer.", 
                     "quest" : 0, 
                     "altText" : "Oh tu as déja pris ta quête !",
@@ -36,6 +37,7 @@
                     "text" : "Bref, il y a un truc louche qui se trame, mes systèmes ont capté un chien nain qui souhaite faire de ce monde... son chien. " 
                 }, { 
                     "questIsGived" : false,
+                    "type" : "quest",
                     "text" : "J'ai été prit de pitié par ce monde, et vu que je te deteste, je me suis dis que j'allais te réveiller, accepte tu de m'aider ?.", 
                     "quest" : 1, 
                     "interactionType" : "cannotRefuse",
@@ -49,7 +51,13 @@
         },{
             "id" : "4",
             "spriteId" : "5",
-            "name" : "FightAi"
+            "name" : "FightAi",
+            "actualDialogIndex" : 0,
+            "dialogs" : [[{ 
+                "text" : "Viens te battre. " ,
+                "type" : "fight",
+                "fight" : 1
+            }]]
         }
     ]
 }

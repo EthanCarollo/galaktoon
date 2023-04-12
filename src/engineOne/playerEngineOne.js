@@ -175,9 +175,6 @@ const launchInteractionOfNpc = (npcInteraction) => {
         case 'dialog' :
             launchNpcDialog(npcInteraction);
             break; 
-        case 'fight' :
-            console.log("Launch a fight")
-            break;
         default :
             throw new Error("The interaction of the npc : " + npcInteraction + " isn't set. ")
     }
