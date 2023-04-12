@@ -160,7 +160,7 @@ const showGoalQuest = () => {
     {
         if(questList[i].questGoal !== null)
         {
-            if(playerOnMap.id === questList[i].questGoal.map && questList[i].questGoal.position !== null && checkQuestIsFinish(questList[i]))
+            if(playerOnMap.id === questList[i].questGoal.map && questList[i].questGoal.position !== null && !checkQuestIsFinish(questList[i]))
             {
                 imageMode(CORNER);
                 let positionGoalOnMap = getCoordWithTileCoord(questList[i].questGoal.position[0], questList[i].questGoal.position[1]-1); // get vector position on map

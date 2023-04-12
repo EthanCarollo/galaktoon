@@ -52,6 +52,10 @@ const UiEngineOneStateEnum = {
     Dialoging : 'dialog'
 }
 
+const TutorialManagerStateEnum = {
+    Normal : 'normal',
+    KeyBoardTuto : 'kbtuto'
+}
 
 
 /**

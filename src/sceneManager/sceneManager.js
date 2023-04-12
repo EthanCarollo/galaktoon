@@ -7,6 +7,7 @@ const sceneManager = () => {
             case SceneManagerStateEnum.Engine :
                 runEngine();
                 runInputManager();
+                showTutorial();
                 break;
             case SceneManagerStateEnum.StartMenu :
                 runStartMenu();
