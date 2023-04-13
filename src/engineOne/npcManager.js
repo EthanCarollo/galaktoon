@@ -99,7 +99,7 @@ const animateNpc = (x, y, size, direction /* ! = Array ! */, npcId, npc) => {
       break;
     case "pop" :
       console.log('pooped an animation')
-      if(runSpecificAnimationFromASprite(x, y, size, 4, 0.25, 0, npcId) === false) npc.state = 'idle';
+      if(runSpecificAnimationFromASprite(x, y, size, 9, 0.33, -1, npcId) === false) npc.state = 'idle';
       break;
     default :
       break;
