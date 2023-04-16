@@ -8,6 +8,9 @@ const runEngineTwo = () => {
         case "Playing" :
             engineTwoPlaying();
             break;
+        case "Tutorial" :
+            engineTwoPlayingTutorial();
+            break;
         case "endFight" :
             engineTwoEndFight();
             break;
@@ -16,8 +19,24 @@ const runEngineTwo = () => {
     }
 }
 
+
+
+//#region // * Different State Engine Two
+
 const engineTwoPlaying = () => {
     background(20)
+    setAllHealth();
+    displayTopDownMapEngineTwo();
+    setSelectedEntity();
+    setCameraEngineTwo();
+    displayEngineTwoUI();
+    runCinematicFightView()
+    setGameState();
+}
+
+const engineTwoPlayingTutorial = () => {
+    console.log("play tuto")
+    background(220)
     setAllHealth();
     displayTopDownMapEngineTwo();
     setSelectedEntity();
@@ -31,6 +50,10 @@ const engineTwoEndFight = () => {
     background('rgba(20,20,20, 0.1)');
     displayEngineTwoUI();
 }
+
+//#endregion
+
+
 
 const setGameState = () => {
     if(checkAllEnemiesDead() === true){

@@ -6,6 +6,9 @@ const displayEngineTwoUI = () => {
         case "Playing" : 
             displayEngineTwoPlayingUi();
             break;
+        case "Tutorial" :
+            displayEngineTwoTutorialUi();
+            break;
         case "endFight" :
             displayEngineTwoEndFightUi();
             break;
@@ -37,6 +40,18 @@ const displayEngineTwoPlayingUi = () => {
     }
 }
 
+const displayEngineTwoTutorialUi = () => {
+    if(isCinematicFightIsRunning()) return; // If there is a cinematic, i just return the function and don't show the reste of the UI
+    switch(tutorialStep){
+        case 0 :
+            displayPlayerInformationUiEngineTwo()
+            displayEnnemyInformationUiEngineTwo()
+            break;
+        default :
+            throw new Error("Tutorial step isn't set for the different case : " + tutorialStep)
+    }
+}
+
 const displayEngineTwoEndFightUi = () => {
     displayEndFight();
 }
@@ -64,9 +79,21 @@ const displayStartFightButton = () => {
     fill(25,25,25,255)
     text("Start Fight",xPosition, yPosition, width, height)
     textAlign(LEFT,LEFT)
-    createInputButtonWithCallback(xPosition, yPosition, width, height, () => {
-        engineTwoState = "Playing";
-    })
+    switch(actualMapEngineTwo.fightType)
+    {
+        case "tutorial" :
+            console.log("play tutorial")
+            createInputButtonWithCallback(xPosition, yPosition, width, height, () => {
+                engineTwoState = "Tutorial";
+            })
+            break;
+        default :
+            createInputButtonWithCallback(xPosition, yPosition, width, height, () => {
+                engineTwoState = "Playing";
+            })
+            break;
+
+    }
 }
 
 
