@@ -24,7 +24,7 @@ const runEngineTwo = () => {
 //#region // * Different State Engine Two
 
 const engineTwoPlaying = () => {
-    background(20)
+    background(actualMapEngineTwo.backgroundColor)
     setAllHealth();
     displayTopDownMapEngineTwo();
     setSelectedEntity();
@@ -36,7 +36,7 @@ const engineTwoPlaying = () => {
 
 const engineTwoPlayingTutorial = () => {
     console.log("play tuto")
-    background(220)
+    background(actualMapEngineTwo.backgroundColor)
     setAllHealth();
     displayTopDownMapEngineTwo();
     setSelectedEntity();

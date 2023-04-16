@@ -49,13 +49,34 @@ const displayEngineTwoTutorialUi = () => {
             displayPlayerInformationUiEngineTwo()
             displayEnnemyInformationUiEngineTwo()
             break;
-        case 1 : 
-            canInputEngineTwo = false;
+        case 1 :
+            displayPlayerInformationUiEngineTwo()
+            displayEnnemyInformationUiEngineTwo()
+            break;
+        case 2 : 
             displayPlayerInformationUiEngineTwo()
             displayEnnemyInformationUiEngineTwo()
             displayOpenAbility()
             displayAbility()
             break;
+        case 3 : 
+            displayPlayerInformationUiEngineTwo()
+            displayEnnemyInformationUiEngineTwo()
+            break;
+        case 4 : 
+            displayPlayerInformationUiEngineTwo()
+            displayEnnemyInformationUiEngineTwo()
+            break;
+        case 5 :
+            displayPlayerInformationUiEngineTwo()
+            displayEnnemyInformationUiEngineTwo()
+            break;
+        case 6 :
+            displayPlayerInformationUiEngineTwo()
+            displayEnnemyInformationUiEngineTwo()
+            displayEndTurnButton();
+            break;
+        case 7 : canInputEngineTwo = true; break;
         default :
             throw new Error("Tutorial step isn't set for the different case : " + tutorialStep)
     }
@@ -284,7 +305,7 @@ const displayEndTurnButton = () => {
 
     image(uiData[12].image, tempPosX, tempPosY, tempSize, tempSize);
     createInputButtonWithCallback(tempPosX, tempPosY, tempSize, tempSize, () => {
-        endTurn();
+        endTurn(); eventOnTheTutorialEngine("nextTurn");
     })
 }
 
@@ -309,7 +330,7 @@ const displayAbility = () => {
             // rect(xInteract,yInteract,abilitySizeX,abilitySizeY) Debug Rect
 
             createInputButtonWithCallback(xInteract, yInteract,abilitySizeX,abilitySizeY, () => {
-
+                eventOnTheTutorialEngine("selected"+i)
                 abilityIsOpen = false;
                 selectAbility(i);
             })

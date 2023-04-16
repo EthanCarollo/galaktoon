@@ -81,7 +81,8 @@
                         }
                     ]
                 }
-            ]
+            ],
+            "backgroundColor" : 240
         },
         {
             "attachedMap": 0,
@@ -117,7 +118,7 @@
                     "id": 5,
                     "pos": [
                         6,
-                        3
+                        4
                     ],
                     "nextCase": null,
                     "pattern" : "aggressive",
@@ -140,6 +141,7 @@
                     ]
                 }
             ],
+            "backgroundColor" : 25,
             "fightType" : "tutorial"
         }
     ]
