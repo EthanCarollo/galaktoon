@@ -34,6 +34,7 @@ This game only use the p5.js library.
 
 ## 4. Features Informations
 
+* This game is optimized for a 1920*1080 screen
 * Start Menu is usable and show what we are actually loading (in terms of assets)
 * Player Movement and collision system.
 * Map creation (with y-axis). 

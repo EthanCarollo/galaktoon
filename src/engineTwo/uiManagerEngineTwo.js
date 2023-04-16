@@ -44,13 +44,23 @@ const displayEngineTwoTutorialUi = () => {
     if(isCinematicFightIsRunning()) return; // If there is a cinematic, i just return the function and don't show the reste of the UI
     switch(tutorialStep){
         case 0 :
+            tutorialManagerState = TutorialManagerStateEnum.EngineTwoTutorial;
+            canInputEngineTwo = false;
             displayPlayerInformationUiEngineTwo()
             displayEnnemyInformationUiEngineTwo()
+            break;
+        case 1 : 
+            canInputEngineTwo = false;
+            displayPlayerInformationUiEngineTwo()
+            displayEnnemyInformationUiEngineTwo()
+            displayOpenAbility()
+            displayAbility()
             break;
         default :
             throw new Error("Tutorial step isn't set for the different case : " + tutorialStep)
     }
 }
+
 
 const displayEngineTwoEndFightUi = () => {
     displayEndFight();

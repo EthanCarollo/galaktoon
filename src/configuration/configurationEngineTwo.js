@@ -20,5 +20,6 @@ let abilitySize = window.innerWidth/10.5;
 let abilityPosition = [];
 let abilityIsOpen = false;
 let tutorialStep = 0;
+let canInputEngineTwo = true;
 
 let npcFighted = null;

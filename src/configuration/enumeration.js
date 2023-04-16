@@ -54,7 +54,8 @@ const UiEngineOneStateEnum = {
 
 const TutorialManagerStateEnum = {
     Normal : 'normal',
-    KeyBoardTuto : 'kbtuto'
+    KeyBoardTuto : 'kbtuto',
+    EngineTwoTutorial :'engine2tuto'
 }
 
 
