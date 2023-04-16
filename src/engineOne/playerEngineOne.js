@@ -80,7 +80,7 @@ const checkForInteraction = (playerCaseInteract) => {
     
     // just for set pnj interactible
     let npcInteractible = playerOnMap.npcOnMap.filter(npc => npc.pos[0] === playerCaseInteract[0] && npc.pos[1] === playerCaseInteract[1])
-    if(npcInteractible.length > 0)
+    if(npcInteractible.length > 0 && npcInteractible[0].state === "idle")
     {
         createInteractionPopup(playerCaseInteract[0], playerCaseInteract[1], "npc")
     }

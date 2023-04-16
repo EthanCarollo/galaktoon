@@ -139,7 +139,8 @@
                         }
                     ]
                 }
-            ]
+            ],
+            "fightType" : "tutorial"
         }
     ]
 }

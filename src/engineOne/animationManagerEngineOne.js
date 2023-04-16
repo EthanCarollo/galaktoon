@@ -192,7 +192,6 @@ const runSpecificAnimationFromASprite = (positionX, positionY, size, countOfFram
     spritePlayerAnimationMoove = spritesData[id].image.get(xStartCut,spriteSizeCut* offsetAnimAmount,spriteSizeCut,spriteSizeCut);
     if(speedFrame === 0)
     {
-        console.log(0+30*(countOfFrame-1), " : what is showed" + indexAnimation + " : index " + id + " : id")
         spritePlayerAnimationMoove = spritesData[id].image.get(30*(countOfFrame-1),spriteSizeCut* offsetAnimAmount,spriteSizeCut,spriteSizeCut);
         image(spritePlayerAnimationMoove, positionX, positionY, size, size)
         return;
