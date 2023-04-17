@@ -17,6 +17,8 @@ const launchNpcDialog = (npc) => {
 
     npcDialoged = npcInteractedData
 
+    uiEngineOneState = UiEngineOneStateEnum.Dialoging;
+
   }else{
     // TODO : some annexe events if we interact with a pnj without dialog
   }
@@ -38,6 +40,7 @@ const exitDialog = () => {
   /**
    * * Reset most of values to the normal and end the dialog
    */
+  uiEngineOneState = UiEngineOneStateEnum.Normal;
   backgroundTransition = 0;
   playerState = PlayerStateEnum.Normal
   actualDialog = 0;
@@ -82,7 +85,11 @@ const showChoiceBoxForQuestDependingToTheType = (xStartDialog, yStartDialog, siz
   switch(dialog.interactionType)
   {
     case "cannotRefuse" :
-      showAcceptOnlyButton(xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, dialog);
+      showAcceptOnlyButton(xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, () => {
+        dialog.questIsGived = true;
+        addQuestToList(dialog.quest)
+        goNextDialog();
+      });
       break;
     default :
       showDialogChoiceBoxForQuest(xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, dialog);
@@ -94,7 +101,9 @@ const showChoiceBoxForQuestDependingToTheType = (xStartDialog, yStartDialog, siz
 
 //#region // * Dialog UI Component Region
 
-const showAcceptOnlyButton = (xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, quest) => {
+
+
+const showAcceptOnlyButton = (xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, callbackFunction) => {
   textAlign(CENTER, CENTER);
   
   let sizeYChoice = sizeYDialog / 2.4;
@@ -117,13 +126,10 @@ const showAcceptOnlyButton = (xStartDialog, yStartDialog, sizeXDialog, sizeYDial
 
   text("Accept", xBoxTrue, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice)
 
-  createInputButtonWithCallback(xBoxTrue, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice, 
-      () => {
-          quest.questIsGived = true;
-          addQuestToList(quest.quest)
-          goNextDialog();
-      });
+  createInputButtonWithCallback(xBoxTrue, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice, callbackFunction);
 }
+
+
 
 const showDialogChoiceBoxForQuest = (xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, quest) => {
   
@@ -175,39 +181,43 @@ const showDialogChoiceBoxForQuest = (xStartDialog, yStartDialog, sizeXDialog, si
   
 }
 
+
+
 const showRewardBox = (xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, npc, dialog) => {
 
-textAlign(CENTER, CENTER);
-  
-let sizeYChoice = sizeYDialog / 2.2;
-let sizeXChoice = sizeXDialog / 2.2;
-let paddingXChoice = sizeYDialog/2.75;
-let paddingYChoice = sizeYDialog/2.3;
+  textAlign(CENTER, CENTER);
+    
+  let sizeYChoice = sizeYDialog / 2.2;
+  let sizeXChoice = sizeXDialog / 2.2;
+  let paddingXChoice = sizeYDialog/2.75;
+  let paddingYChoice = sizeYDialog/2.3;
 
-textSize(sizeYChoice/4.5);
+  textSize(sizeYChoice/4.5);
 
-let dialogBox = uiData[11].image;
-let xBoxTrue = window.innerWidth / 2 - sizeXChoice / 2;
-let boxAcceptReward = image(dialogBox, xBoxTrue, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice)
+  let dialogBox = uiData[11].image;
+  let xBoxTrue = window.innerWidth / 2 - sizeXChoice / 2;
+  let boxAcceptReward = image(dialogBox, xBoxTrue, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice)
 
-fill(255)
-changeFillOnHover(xBoxTrue, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice, 0, 180, 0)
+  fill(255)
+  changeFillOnHover(xBoxTrue, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice, 0, 180, 0)
 
-text("Accept Reward", xBoxTrue, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice)
+  text("Accept Reward", xBoxTrue, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice)
 
-createInputButtonWithCallback(xBoxTrue, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice, 
-    () => {
-      finishQuest(dialog.quest);
-      actualDialog = 0;
-      dialogTextIndex = 0;
-      if(npc.actualDialogIndex < npc.dialogs.length-1)
-      {
-        npc.actualDialogIndex++;
-      }
-    });
-fill(255)
+  createInputButtonWithCallback(xBoxTrue, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice, 
+      () => {
+        finishQuest(dialog.quest);
+        actualDialog = 0;
+        dialogTextIndex = 0;
+        if(npc.actualDialogIndex < npc.dialogs.length-1)
+        {
+          npc.actualDialogIndex++;
+        }
+      });
+  fill(255)
 
 }
+
+
 
 const showNpcSpriteInDialog = (npcDialoged, whoDialog = 1) => {
   let sizeSpriteDialog = window.innerWidth/4.5;
@@ -241,6 +251,8 @@ const showNpcSpriteInDialog = (npcDialoged, whoDialog = 1) => {
   }
 }
 
+
+
 const showDialogText = (xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, dialog) => {
 let paddingXText = sizeYDialog/2.5;
 let paddingYText = sizeYDialog/3.75;
@@ -252,12 +264,6 @@ let actualDialogNpc;
 
 switch(dialog.state)
 {
-  case "Normal" :
-    actualDialogNpc = creatingStringWithDelay(dialog.text);
-    break;
-  case "HaveQuestToGive" :
-    actualDialogNpc = creatingStringWithDelay(dialog.text);
-    break;
   case "GivedQuest" :
     actualDialogNpc = creatingStringWithDelay(dialog.altText);
     break;
@@ -265,7 +271,7 @@ switch(dialog.state)
     actualDialogNpc = creatingStringWithDelay(dialog.rewardText);
     break;
   default :
-    throw new Error("State isn't defined or doesn't exist")
+    actualDialogNpc = creatingStringWithDelay(dialog.text);
 }
 
 textSize(sizeYDialog/11);
@@ -274,11 +280,18 @@ fill(255)
 text(actualDialogNpc, xStartDialog +paddingXText, yStartDialog+paddingYText, sizeXDialog-paddingSizeXBox, sizeYDialog-paddingSizeYBox);
 }
 
+
+
 const setDialogInput = (xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, dialog, npc) => {
 switch(dialog.state)
 {
   case "Normal" :
     createInputButtonWithCallback(xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, goNextDialog);
+    break;
+  case "Fight" :
+    showAcceptOnlyButton(xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, () => {
+      launchFightOnEngineTwo(dialog.fight)
+    });
     break;
   case "HaveQuestToGive" :
     showChoiceBoxForQuestDependingToTheType(xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, dialog);
@@ -294,18 +307,28 @@ switch(dialog.state)
 }
 }
 
+
+
 const setQuestState = (dialog) => {
 dialog.state = "Normal"
+  switch(dialog.type)
+  {
+    case "fight" :
+      if(dialog.fight !== undefined) dialog.state = "Fight";
+      break;
+    case "quest" :
+      if(dialog.questIsGived === true) {
 
-if(dialog.questIsGived === true) {
-  dialog.state = "GivedQuest"
-  if(checkQuestIsFinish(questData[dialog.quest]) === true){
-    dialog.state = "Reward"
+        dialog.state = "GivedQuest"
+        if(checkQuestIsFinish(questData[dialog.quest]) === true) dialog.state = "Reward";
+
+      }else if(dialog.questIsGived === false)
+      {
+        dialog.state = "HaveQuestToGive"
+      }
+      break;
   }
-}else if(dialog.questIsGived === false)
-{
-  dialog.state = "HaveQuestToGive"
-}
+
 }
 
 //#endregion

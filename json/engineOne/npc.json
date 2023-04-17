@@ -23,29 +23,40 @@
                     "text" : "Ho ! Tu t'es reveillé... " 
                 }, { 
                     "questIsGived" : false,
-                    "text" : "C'est génial, suis moi, je vais tout t'expliquer.", 
+                    "type" : "quest",
+                    "text" : "C'est génial, tu dois être engourdi, laisse moi t'initier !", 
                     "quest" : 0, 
-                    "altText" : "Oh tu as déja pris ta quête !",
-                    "rewardText" : "Allons-y, tu dois te poser une tonne de question." 
+                    "altText" : "Il faut aller te battre mon grand.",
+                    "rewardText" : "Bien nous pouvons commencer." 
                 }],
                 [{ 
-                    "text" : "Pour commencer, tu t'appelles Void, cela fait bientot 200 ans que tu dormais dans cette cuve alimenté par ce liquide étrange... " 
-                },{ 
-                    "text" : "Je suis l'intelligence artificielle de ce vaisseau, tu as choisi il y a longtemps de cela de ne pas me nommer pour m'humilier... " 
-                },{ 
-                    "text" : "Bref, il y a un truc louche qui se trame, mes systèmes ont capté un chien nain qui souhaite faire de ce monde... son chien. " 
+                    "text" : "Nous allons commencer par une initiation au combat. " 
                 }, { 
                     "questIsGived" : false,
-                    "text" : "J'ai été prit de pitié par ce monde, et vu que je te deteste, je me suis dis que j'allais te réveiller, accepte tu de m'aider ?.", 
+                    "type" : "quest",
+                    "text" : "Il va falloir te battre contre un petit droide de combat. Est tu pret ?", 
                     "quest" : 1, 
                     "interactionType" : "cannotRefuse",
-                    "altText" : "Bonne chance dans ce monde !",
-                    "rewardText" : "Allons-y, tu dois te poser une tonne de question." 
+                    "altText" : "Aller bats toi gros.",
+                    "rewardText" : "Tu as finit l'initiation au combat !" 
                 }],
                 [{ 
-                    "text" : "Merci d'avoir sauvé la ville ! " 
+                    "text" : "Ton initiation au comnbat est desormais terminée, je vais tout t'expliquer." 
                 }]
             ]
+        },{
+            "id" : "4",
+            "spriteId" : "5",
+            "name" : "FightAi",
+            "actualDialogIndex" : 0,
+            "dialogs" : [[{ 
+                "text" : "Viens te battre. " ,
+                "type" : "fight",
+                "fight" : 1
+            }],
+            [{ 
+                "text" : "Bien joué, tu m'as battu ! Retourne parler à l'IA pour continuer ton initiation. "
+            }]]
         }
     ]
 }

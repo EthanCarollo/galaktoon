@@ -40,6 +40,23 @@ const StartMenuStateEnum = {
     Normal : "normal"
 }
 
+const FightCinematicViewStateEnum = {
+    NoAnim : "noAnim",
+    Animation : "animate"
+}
+
+const UiEngineOneStateEnum = {
+    Normal : 'normal',
+    IsExploring : 'isExploring',
+    Tutorial : 'tutorial',
+    Dialoging : 'dialog'
+}
+
+const TutorialManagerStateEnum = {
+    Normal : 'normal',
+    KeyBoardTuto : 'kbtuto',
+    EngineTwoTutorial :'engine2tuto'
+}
 
 
 /**

@@ -34,6 +34,7 @@ This game only use the p5.js library.
 
 ## 4. Features Informations
 
+* This game is optimized for a 1920*1080 screen
 * Start Menu is usable and show what we are actually loading (in terms of assets)
 * Player Movement and collision system.
 * Map creation (with y-axis). 
@@ -42,7 +43,7 @@ This game only use the p5.js library.
 * Player can travel through planets from the control panel.
 * Player can fight enemy !
 * Player can now level Up ! 
-* Npc pathing is displonible & generics for both engine (a* is only working on engine one actually)
+* Npc pathing is displonible & generics for both engine
 * A tool for create map is disponible here ! : https://github.com/JackyTuneur/GalaktoonToolMapCreator
 
 ## 5. Studio Informations

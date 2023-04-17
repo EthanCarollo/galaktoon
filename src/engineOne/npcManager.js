@@ -9,6 +9,7 @@ const displayAllNPCOnMap = (orientation = "back") => {
    * * If the function is called with the parameter "back" the function just show the tile in back of the player
    * * but if it's "front" it will show the tiles in front of the player so if i put the playerShow function
    * * between these two functions, i will have illusion of depth
+   * ! DEPRECATED METHOD
    */
     switch(orientation){
         case "back":
@@ -60,12 +61,16 @@ const displayNpc = (npc) => {
   if(npc.nextCase !== null && npc.nextCase.length > 0)
   {
     npc.state = "moove";
-  }else{
+  }
+  if(npc.nextCase === null && npc.state === "moove")
+  {
     npc.state = "idle";
   }
   animateNpc(positionTemp.x, positionTemp.y, playerSpriteSize, npc.dir, spriteNpcId, npc)
     
 }
+
+
 
 /**
  * @param {int} x x pos of the npc on the map
@@ -85,13 +90,23 @@ const animateNpc = (x, y, size, direction /* ! = Array ! */, npcId, npc) => {
       animationIdleSprite(x, y, size, direction, npcId)
       break;
     case "moove" :
-      mooveEntityToNextCaseInEngineOne(npc, createVector(cameraVector.x + playerVector.x, cameraVector.y + playerVector.y)) === true // Using the "pathfinding" from the second Engine
-      animationMooveSprite(x, y, size, direction, npcId)
+      if(mooveEntityToNextCaseInEngineOne(npc, createVector(cameraVector.x + playerVector.x, cameraVector.y + playerVector.y)) === true) // Using the "pathfinding" from the second Engine
+      {
+        animationMooveSprite(x, y, size, direction, npcId)
+      }else{
+        animationMooveSprite(x, y, size, direction, npcId)
+      }
+      break;
+    case "pop" :
+      console.log('pooped an animation')
+      if(runSpecificAnimationFromASprite(x, y, size, 9, 0.33, -1, npcId) === false) npc.state = 'idle';
       break;
     default :
       break;
     }
 }
+
+
 
 /**
  * @param {object} npc 
@@ -118,6 +133,7 @@ const setNpcDirectionWithThePlayerDirection = (npc) => {
       return;
   }
 }
+
 
 
 const mooveEntityToNextCaseInEngineOne = (entity, cameraVector = vectorCameraEngineTwo) => {
@@ -165,11 +181,24 @@ const mooveEntityToNextCaseInEngineOne = (entity, cameraVector = vectorCameraEng
       }
   }
   entity.nextCase.splice(0, 1)
+  if(entity.nextCase.length === 0) entity.nextCase = null;
   return false;
 
 } // Moove Entity to the next case insered in her "nextCase" array value
 
 
+
+const addNpcToMap = (idNpc, pos, interaction = 'dialog', direction = [0, 1], state = 'idle', isInteractible = true, mapId = 0) => {
+  mapData[mapId].npcOnMap.push({
+    id : idNpc,
+    pos : pos,
+    nextCase : null,
+    isInteractible : isInteractible,
+    dir : direction,
+    state : state,
+    interaction : interaction
+  })
+}
 
 
 // ! Isn't used in the code

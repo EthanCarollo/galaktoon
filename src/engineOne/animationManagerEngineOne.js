@@ -1,5 +1,5 @@
 
-
+//#region // * Global Animation Logics Region
 
 /**
  * @param {float} positionX posX of the anim
@@ -171,7 +171,39 @@ const animationDeadSprite = (positionX, positionY, size, id = 0) => {
 
 
 
-//#region // ? Animation Index Logics
+//#endregion
+
+//#region // * Run specific animation for the engine two Region
+
+
+
+/**
+ * @param {int} positionX 
+ * @param {int} positionY 
+ * @param {int} size 
+ * @param {int} countOfFrame the count of frames animated
+ * @param {int} indexAnimation the index of the animation on the grid (9 + indexAnimation) this cannot be negative normally
+ * @param {int} id the id of the character animated
+ */
+const runSpecificAnimationFromASprite = (positionX, positionY, size, countOfFrame, speedFrame, indexAnimation = 0, id = 0) => {
+
+    let offsetAnimAmount = 8+indexAnimation;
+    xStartCut = 0+spriteSizeCut*Math.floor(specificAnimationIndex);
+    spritePlayerAnimationMoove = spritesData[id].image.get(xStartCut,spriteSizeCut* offsetAnimAmount,spriteSizeCut,spriteSizeCut);
+    if(speedFrame === 0)
+    {
+        spritePlayerAnimationMoove = spritesData[id].image.get(30*(countOfFrame-1),spriteSizeCut* offsetAnimAmount,spriteSizeCut,spriteSizeCut);
+        image(spritePlayerAnimationMoove, positionX, positionY, size, size)
+        return;
+    }
+    image(spritePlayerAnimationMoove, positionX, positionY, size, size)
+    return updateSpecialAnimationIndex(countOfFrame, speedFrame/1.5);
+}
+
+
+//#endregion
+
+//#region // * Animation Index Logics Region
 
 /**
  * @returns {boolean} false if the animation restart, true if it is still running
@@ -186,6 +218,19 @@ const updateFightAnimationIndex = () => {
     if(indexIsOutOfLength(playerFightAnimationIndex)) 
     {
         playerFightAnimationIndex = 0;
+        return false;
+    }
+    return true;
+}
+
+
+
+const updateSpecialAnimationIndex = (maxAnimationCount, speed = 0.1) => {
+    specificAnimationIndex += speed;
+
+    if(indexIsOutOfLength(specificAnimationIndex, maxAnimationCount)) 
+    {
+        specificAnimationIndex = 0;
         return false;
     }
     return true;
@@ -211,6 +256,7 @@ const updateAnimationIndex = () => {
  * @param {float} animationIndex the animation index we need to know if it's higher than the maximum frames authorized 
  * @returns {boolean} this boolean is if yes or not the 
  */
-const indexIsOutOfLength = (animationIndex) => animationIndex >= (playerAnimationLength -1) 
+const indexIsOutOfLength = (animationIndex, max = playerAnimationLength) => animationIndex >= (max -1) 
+
 
 //#endregion

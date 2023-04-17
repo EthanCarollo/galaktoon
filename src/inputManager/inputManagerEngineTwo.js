@@ -1,5 +1,5 @@
 const playerInputForEngineTwo=()=>{
-    if(mouseIsPressed === true)
+    if(mouseIsPressed === true && canInputEngineTwo === true)
     {
         if(mouseIsInArrayEngineTwo() === true && whichEntityTurn < 1 && abilityIsOpen === false){
             InputOnArray()
@@ -31,6 +31,7 @@ const attackInputInSecondEngine = () => {
                             getSpriteTactical(arrayMousePos[0], arrayMousePos[1]), /* target */
                             selectedAbility /* ability */
                             )
+                eventOnTheTutorialEngine("attacked")
                 return;
             }else{
                 resetAttackableCase();
@@ -50,6 +51,7 @@ const mooveInputInSecondEngine = () => {
             canvas.mouseReleased(()=>{
                 if(isAMovableCase(arrayMousePos[0], arrayMousePos[1]) && getSpriteTactical(arrayMousePos[0], arrayMousePos[1]) === null)
                 {
+                    eventOnTheTutorialEngine("mooved");
                     selectedEntity.nextCase = [arrayMousePos[0], arrayMousePos[1]];
                     applyDifferencePmWithNextCase(selectedEntity)
                     resetMovableAndEntityVar()
@@ -60,6 +62,7 @@ const mooveInputInSecondEngine = () => {
                 if(getSpriteTactical(arrayMousePos[0], arrayMousePos[1]).id === 0)
                 {
                     canvas.mouseReleased(()=>{
+                        eventOnTheTutorialEngine("selectedMoove");
                         getMovableCase(actualMapEngineTwo.entityOnTactical[whichEntityTurn].pos[0], actualMapEngineTwo.entityOnTactical[whichEntityTurn].pos[1], selectedEntity.pm);
                         selectedEntity = getSpriteWithCoord(arrayMousePos[0], arrayMousePos[1]);
                     })

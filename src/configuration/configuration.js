@@ -24,6 +24,7 @@ let actualEngine = EngineStateEnum.EngineOne;
 let playerFightAnimationIndex = 0;
 let playerAnimationIndex = 0;
 const playerAnimationLength = 4;
+let specificAnimationIndex = 0
 
 // * GLOBAL ANIMATION VAR
 

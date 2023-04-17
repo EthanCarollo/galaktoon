@@ -49,3 +49,14 @@ let positionBorderCinematic = [-ySizeBorderCinematic, window.innerHeight]
 
 // Cinematic var
 
+
+// Tutorial variable
+
+let uiEngineOneState = UiEngineOneStateEnum.Normal;
+
+let isInTutorial = false;
+
+let alreadyKnowBed = false;
+
+
+// Tutorial variable

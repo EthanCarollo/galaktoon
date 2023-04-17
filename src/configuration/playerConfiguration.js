@@ -44,7 +44,7 @@ let playerTeam = [
                 name : "Attack",
                 type : "attack",
                 abilityLevel : 2,
-                baseAmount : 80,
+                baseAmount : 10,
                 id : 1,
                 range : 2
             },
@@ -52,7 +52,7 @@ let playerTeam = [
                 name : "Heal",
                 type : "heal",
                 abilityLevel : 1,
-                baseAmount : 20,
+                baseAmount : 5,
                 id : 4,
                 range : 5
             },
@@ -60,7 +60,7 @@ let playerTeam = [
                 name : "HealAll",
                 type : "healAll",
                 abilityLevel : 2,
-                baseAmount : 20,
+                baseAmount : 4,
                 id : 5,
                 range : 1
             }

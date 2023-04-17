@@ -95,12 +95,17 @@ const startSpecificQuestEvents = (questEventString) => {
         case "goNextTutoStep" :
             mapData[0].npcOnMap[0].nextCase = searchPath(mapData[0].npcOnMap[0].pos, [3, 5], mapData[0].map.objectLayer); // Here it's the AI who mmoves
             break;
+        case "goFightTuto" :
+            addNpcToMap(4, [2, 6], 'dialog', [1, 0], 'pop');
+            break;
         default :
             throw new Error("Specific event isn't set inside the startSpecificQuestEvents() : " + questEventString)
     }
 }
 
 //#endregion
+
+
 
 //#region // * Show quest on UI or Map region
 
@@ -155,7 +160,7 @@ const showGoalQuest = () => {
     {
         if(questList[i].questGoal !== null)
         {
-            if(playerOnMap.id === questList[i].questGoal.map && questList[i].questGoal.position !== null)
+            if(playerOnMap.id === questList[i].questGoal.map && questList[i].questGoal.position !== null && !checkQuestIsFinish(questList[i]))
             {
                 imageMode(CORNER);
                 let positionGoalOnMap = getCoordWithTileCoord(questList[i].questGoal.position[0], questList[i].questGoal.position[1]-1); // get vector position on map

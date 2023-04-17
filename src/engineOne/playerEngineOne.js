@@ -80,7 +80,7 @@ const checkForInteraction = (playerCaseInteract) => {
     
     // just for set pnj interactible
     let npcInteractible = playerOnMap.npcOnMap.filter(npc => npc.pos[0] === playerCaseInteract[0] && npc.pos[1] === playerCaseInteract[1])
-    if(npcInteractible.length > 0)
+    if(npcInteractible.length > 0 && npcInteractible[0].state === "idle")
     {
         createInteractionPopup(playerCaseInteract[0], playerCaseInteract[1], "npc")
     }
@@ -118,7 +118,7 @@ const interactWithATile = (tileInteract) => {
     switch(interactedTile.type){
         case "explore":
             playerCanMove = false
-            playerIsExploringMap = true;
+            uiEngineOneState = UiEngineOneStateEnum.IsExploring;
             // explore function
             break;
         case "build":
@@ -139,7 +139,7 @@ const interactWithATile = (tileInteract) => {
             // TODO : This is temporary for the debug
             launchFightOnEngineTwo(0)
             break;
-        case "sleep":
+        case "useBed":
             playSleepAnimation();
             break;
         default :
@@ -163,8 +163,20 @@ const interactWithNPC = (tileInteract) => {
     if(npcInteracted.length > 0)
     {
         if(npcInteracted[0].isInteractible === true && npcInteracted[0].state === "idle"){
-            launchNpcDialog(npcInteracted[0]);
+            launchInteractionOfNpc(npcInteracted[0])
         }
+    }
+}
+
+
+const launchInteractionOfNpc = (npcInteraction) => {
+    switch(npcInteraction.interaction)
+    {
+        case 'dialog' :
+            launchNpcDialog(npcInteraction);
+            break; 
+        default :
+            throw new Error("The interaction of the npc : " + npcInteraction + " isn't set. ")
     }
 }
 
@@ -207,5 +219,6 @@ const playSleepAnimation = () => {
      * ! Will soon be deprecated
      * TODO : Update this function soon
      */
+    launchTutorial();
     playerTeam[0].health.actualHealth = playerTeam[0].health.maxHealth
 }

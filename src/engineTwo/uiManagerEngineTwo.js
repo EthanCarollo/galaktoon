@@ -1,7 +1,13 @@
 const displayEngineTwoUI = () => {
     switch(engineTwoState){
+        case "startFight" :
+            displayEngineTwoStartingFightUi();
+            break;
         case "Playing" : 
             displayEngineTwoPlayingUi();
+            break;
+        case "Tutorial" :
+            displayEngineTwoTutorialUi();
             break;
         case "endFight" :
             displayEngineTwoEndFightUi();
@@ -9,6 +15,16 @@ const displayEngineTwoUI = () => {
         default : 
             throw new Error("Engine Two State isn't set for UI : " + engineTwoState)
     }
+}
+
+//#region // * Different States UI Display Region
+
+
+const displayEngineTwoStartingFightUi = () => {
+    // TODO : Update the start of a fight engine
+    background(25);
+    showPlayer(500, 250, 250); 
+    displayStartFightButton();
 }
 
 const displayEngineTwoPlayingUi = () => {
@@ -24,44 +40,223 @@ const displayEngineTwoPlayingUi = () => {
     }
 }
 
+const displayEngineTwoTutorialUi = () => {
+    if(isCinematicFightIsRunning()) return; // If there is a cinematic, i just return the function and don't show the reste of the UI
+    switch(tutorialStep){
+        case 0 :
+            tutorialManagerState = TutorialManagerStateEnum.EngineTwoTutorial;
+            canInputEngineTwo = false;
+            displayPlayerInformationUiEngineTwo()
+            displayEnnemyInformationUiEngineTwo()
+            break;
+        case 1 :
+            displayPlayerInformationUiEngineTwo()
+            displayEnnemyInformationUiEngineTwo()
+            break;
+        case 2 : 
+            displayPlayerInformationUiEngineTwo()
+            displayEnnemyInformationUiEngineTwo()
+            displayOpenAbility()
+            displayAbility()
+            break;
+        case 3 : 
+            displayPlayerInformationUiEngineTwo()
+            displayEnnemyInformationUiEngineTwo()
+            break;
+        case 4 : 
+            displayPlayerInformationUiEngineTwo()
+            displayEnnemyInformationUiEngineTwo()
+            break;
+        case 5 :
+            displayPlayerInformationUiEngineTwo()
+            displayEnnemyInformationUiEngineTwo()
+            break;
+        case 6 :
+            displayPlayerInformationUiEngineTwo()
+            displayEnnemyInformationUiEngineTwo()
+            displayEndTurnButton();
+            break;
+        case 7 : canInputEngineTwo = true; break;
+        default :
+            throw new Error("Tutorial step isn't set for the different case : " + tutorialStep)
+    }
+}
+
+
 const displayEngineTwoEndFightUi = () => {
     displayEndFight();
 }
 
+
+//#endregion
+
+
+
+// * -----------------------------
+
+
+
+//#region // * StartGame UI Region
+
+
+const displayStartFightButton = () => {
+    let height = 150;
+    let width = 500;
+    let xPosition = window.innerWidth / 2 - width / 2
+    let yPosition = window.innerHeight - 300
+    fill(255,255,255,255)
+    rect(xPosition, yPosition, width, height)
+    textAlign(CENTER,CENTER)
+    fill(25,25,25,255)
+    text("Start Fight",xPosition, yPosition, width, height)
+    textAlign(LEFT,LEFT)
+    switch(actualMapEngineTwo.fightType)
+    {
+        case "tutorial" :
+            console.log("play tutorial")
+            createInputButtonWithCallback(xPosition, yPosition, width, height, () => {
+                engineTwoState = "Tutorial";
+            })
+            break;
+        default :
+            createInputButtonWithCallback(xPosition, yPosition, width, height, () => {
+                engineTwoState = "Playing";
+            })
+            break;
+
+    }
+}
+
+
+//#endregion
+
+
+
+//#region // * PlayingGame UI Region
+
+
+
 const displayGameUi = () => {
+    if(isCinematicFightIsRunning()) return; // If there is a cinematic, i just return the function and don't show the reste of the UI
     displayOpenAbility()
     displayAbility()
     displayPlayerInformationUiEngineTwo()
+    displayEnnemyInformationUiEngineTwo()
     displayEndTurnButton();
 }
 
+
+
+const displayEnnemyInformationUiEngineTwo = () => {
+    for (let i = 1; i < actualMapEngineTwo.entityOnTactical.length; i++) {
+        const entityToShow = actualMapEngineTwo.entityOnTactical[i];
+        
+
+        let tempSize = window.innerWidth/15;
+        let padding = 25;
+        let tempPosX = window.innerWidth - tempSize - padding
+        let tempPosY = 0 + padding + (tempSize+25) * (i-1);
+        let percentLifeOfEntity = entityToShow.health.actualHealth / entityToShow.health.maxHealth;
+
+        if(percentLifeOfEntity > 0) { 
+            showSpriteIconOnEngineTwo(tempPosX, tempPosY, tempSize, entityToShow.id) 
+        } else {
+            showDeadSpriteIconOnEngineTwo(tempPosX, tempPosY, tempSize, entityToShow.id)
+        }
+        image(uiData[36].image, tempPosX, tempPosY, tempSize, tempSize)
+
+        let barSize = tempSize * 2;
+        let xBar = tempPosX - barSize - tempSize * 0.15;
+        let yBar = tempPosY + 10;
+        console.log(xBar)
+        showBarWithPercentUi(xBar, yBar, barSize, percentLifeOfEntity+0.00001);
+
+        let percentPmOfPlayer = entityToShow.pm / 2 +0.00001;
+        tint(35,255,35)
+        showBarWithPercentUi(xBar, yBar+barSize/10, barSize, percentPmOfPlayer);
+
+        let percentPaOfPlayer = entityToShow.pa / 2 +0.00001;
+        tint(35,35,255)
+        showBarWithPercentUi(xBar, yBar+(barSize/10)*2, barSize, percentPaOfPlayer);
+    }
+}
+
+
+const displayPlayerInformationUiEngineTwo = () => {
+    /**
+     * * In this function, we just show the player informations 
+     */
+
+    checkAllAlliesDead();
+
+    let tempSize = window.innerWidth/15;
+    let padding = 25;
+    let tempPosX = 0 + tempSize / 4
+    let tempPosY = 0 + padding;
+    let percentLifeOfPlayer = actualMapEngineTwo.entityOnTactical[0].health.actualHealth / actualMapEngineTwo.entityOnTactical[0].health.maxHealth +0.00001;
+
+    showSpriteIconOnEngineTwo(tempPosX, tempPosY, tempSize, 0)
+
+    let barSize = tempSize * 2;
+    let xBar = tempPosX + tempSize * 1.15;
+    let yBar = tempPosY + 10;
+    
+    showBarWithPercentUi(xBar, yBar, barSize, percentLifeOfPlayer);
+
+    let percentPmOfPlayer = actualMapEngineTwo.entityOnTactical[0].pm / 2 +0.00001;
+    tint(35,255,35)
+    showBarWithPercentUi(xBar, yBar+barSize/10, barSize, percentPmOfPlayer);
+
+    let percentPaOfPlayer = actualMapEngineTwo.entityOnTactical[0].pa / 2 +0.00001;
+    tint(35,35,255)
+    showBarWithPercentUi(xBar, yBar+(barSize/10)*2, barSize, percentPaOfPlayer);
+
+}
+
+
+// Icon in ui show
+const showSpriteIconOnEngineTwo = (xStart, yStart, size, idSprite) => {
+    let paddingSprite = +size*0.018;
+    animationIdleSprite(xStart+paddingSprite, yStart+paddingSprite, size, [0, 1], idSprite)
+    image(uiData[35].image, xStart, yStart , size, size)
+}
+
+const showDeadSpriteIconOnEngineTwo = (xStart, yStart, size, idSprite) => {
+    let paddingSprite = +size*0.018;
+    animationDeadSprite(xStart+paddingSprite, yStart+paddingSprite, size, idSprite)
+    image(uiData[35].image, xStart, yStart , size, size)
+}
+// Icon in ui show
+
+//#endregion
+
+
+
+//#region // * EndGame UI Region
+
 const displayEndFight = () => {
-    let size = 200;
+    let size = window.innerHeight/1.5;
     showEnemiesEndFightList(size);
     showPlayer(size);
     showButtonFightEnd();
 }
 
-const showEnemiesEndFightList = (size) => {
-    let x = (window.innerWidth) - (size*2)
-    let y = (window.innerHeight) / 2 - size
+const showEnemiesEndFightList = (size, xStart = window.innerWidth / 2 - size / 2 - 1, yStart = (window.innerHeight) / 2) => {
+    let xPosition = xStart
+    let yPosition = yStart
+    imageMode(CENTER) // Set the image mode to center
     for(let i = 1; i < actualMapEngineTwo.entityOnTactical.length; i++)
     {
-        let yPosition = y +(size+25)*(i-1)
-        animationIdleSprite(x, yPosition, size, [0, 1], actualMapEngineTwo.entityOnTactical[i].id)
-        
-        let percentLifeOfEntity = actualMapEngineTwo.entityOnTactical[i].health.actualHealth / actualMapEngineTwo.entityOnTactical[i].health.maxHealth +0.00001;
-        showHealthBehindRectUI(x-25/2, yPosition-10, size, percentLifeOfEntity)
+        let sizeIterate = i-1;
+        let xPositionSprite = xPosition + size*sizeIterate
+        animationIdleSprite(xPositionSprite, yPosition, size/1.25, [0, 1], actualMapEngineTwo.entityOnTactical[i].id)
     }
+    imageMode(CORNER)
+    noTint();
 }
 
-const showPlayer = (size) => {
-    let x = size
-    let y = (window.innerHeight) / 2 - size
-    animationIdleSprite(x, y, size, [0, 1], 0)
-
-    let percentLifeOfPlayer = playerTeam[0].health.actualHealth / playerTeam[0].health.maxHealth +0.00001;
-    showHealthBehindRectUI(x-25/2, y-10, size, percentLifeOfPlayer)
+const showPlayer = (size, xStart = window.innerWidth / 2 - size / 2, yStart = window.innerHeight / 2 - size / 2) => {
+    animationIdleSprite(xStart, yStart, size, [0, 1], 0)
 }
 
 const showButtonFightEnd = () => {
@@ -76,7 +271,7 @@ const showButtonFightEnd = () => {
         image(uiData[27].image, xStart, yPosition, width, height)
     }
     createInputButtonWithCallback(xStart ,yPosition ,width ,height, () => {
-        launchEngine(EngineStateEnum.EngineOne);
+        exitFight()
     })
     textAlign(CENTER, CENTER)
     textSize(40); fill(255);
@@ -84,47 +279,33 @@ const showButtonFightEnd = () => {
     textAlign(LEFT, CENTER)
 }
 
-// * -----------------------------
-// * -----------------------------
-
-const displayPlayerInformationUiEngineTwo = () => {
-    
-    checkAllAlliesDead();
-
-    let tempSize = window.innerWidth/12;
-    let padding = 25;
-    let tempPosX = 0 + tempSize / 2
-    let tempPosY = window.innerHeight - tempSize - padding;
-    let percentLifeOfPlayer = playerTeam[0].health.actualHealth / playerTeam[0].health.maxHealth +0.00001;
-
-    image(uiData[7].image, tempPosX, tempPosY ,tempSize, tempSize)
-
-    let barSize = tempSize * 2;
-    let xBar = tempPosX + tempSize * 1.15;
-    let yBar = tempPosY + tempSize / 3;
-    
-    showBarWithPercentUi(xBar, yBar, barSize, percentLifeOfPlayer);
-
-    let percentPmOfPlayer = actualMapEngineTwo.entityOnTactical[0].pm / 2 +0.00001;
-    tint(35,255,35)
-    showBarWithPercentUi(xBar, yBar+barSize/10, barSize, percentPmOfPlayer);
-
-    let percentPaOfPlayer = actualMapEngineTwo.entityOnTactical[0].pa / 2 +0.00001;
-    tint(35,35,255)
-    showBarWithPercentUi(xBar, yBar+(barSize/10)*2, barSize, percentPaOfPlayer);
+const exitFight = () => {
+    if(npcFighted !== null)
+    {
+        npcFighted.actualDialogIndex ++;
+    }
+    launchEngine(EngineStateEnum.EngineOne);
 
 }
+
+//#endregion
+
+
+
+// * -----------------------------
+
+
 
 const displayEndTurnButton = () => {
     fill(255,0,255,100)
     let tempSize = window.innerWidth/12;
     let padding = 25;
-    let tempPosX = window.innerWidth/2 + tempSize *3.6 - tempSize
+    let tempPosX = window.innerWidth - tempSize  * 1.5
     let tempPosY = window.innerHeight - tempSize - padding;
 
     image(uiData[12].image, tempPosX, tempPosY, tempSize, tempSize);
     createInputButtonWithCallback(tempPosX, tempPosY, tempSize, tempSize, () => {
-        endTurn();
+        endTurn(); eventOnTheTutorialEngine("nextTurn");
     })
 }
 
@@ -149,7 +330,7 @@ const displayAbility = () => {
             // rect(xInteract,yInteract,abilitySizeX,abilitySizeY) Debug Rect
 
             createInputButtonWithCallback(xInteract, yInteract,abilitySizeX,abilitySizeY, () => {
-
+                eventOnTheTutorialEngine("selected"+i)
                 abilityIsOpen = false;
                 selectAbility(i);
             })
