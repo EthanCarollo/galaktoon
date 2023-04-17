@@ -169,6 +169,7 @@ const displayEnnemyInformationUiEngineTwo = () => {
         let xBar = tempPosX - barSize - tempSize * 0.15;
         let yBar = tempPosY + 10;
         console.log(xBar)
+        tint(255,35,35)
         showBarWithPercentUi(xBar, yBar, barSize, percentLifeOfEntity+0.00001);
 
         let percentPmOfPlayer = entityToShow.pm / 2 +0.00001;
@@ -201,6 +202,7 @@ const displayPlayerInformationUiEngineTwo = () => {
     let xBar = tempPosX + tempSize * 1.15;
     let yBar = tempPosY + 10;
     
+    tint(255,35,35)
     showBarWithPercentUi(xBar, yBar, barSize, percentLifeOfPlayer);
 
     let percentPmOfPlayer = actualMapEngineTwo.entityOnTactical[0].pm / 2 +0.00001;
@@ -298,13 +300,17 @@ const exitFight = () => {
 
 const displayEndTurnButton = () => {
     fill(255,0,255,100)
-    let tempSize = window.innerWidth/12;
+    let tempWidth = window.innerWidth/10;
+    let tempHeight = tempWidth/1.8;
     let padding = 25;
-    let tempPosX = window.innerWidth - tempSize  * 1.5
-    let tempPosY = window.innerHeight - tempSize - padding;
-
-    image(uiData[12].image, tempPosX, tempPosY, tempSize, tempSize);
-    createInputButtonWithCallback(tempPosX, tempPosY, tempSize, tempSize, () => {
+    let tempPosX = window.innerWidth - tempWidth  * 1.4
+    let tempPosY = window.innerHeight - tempHeight - padding;
+    if(mouseIsHover(tempPosX, tempPosY, tempWidth, tempHeight) && mouseIsPressed === true ){
+        image(uiData[39].image, tempPosX, tempPosY, tempWidth, tempHeight);
+    }else{
+        image(uiData[12].image, tempPosX, tempPosY, tempWidth, tempHeight);
+    }
+    createInputButtonWithCallback(tempPosX, tempPosY, tempWidth, tempHeight, () => {
         endTurn(); eventOnTheTutorialEngine("nextTurn");
     })
 }

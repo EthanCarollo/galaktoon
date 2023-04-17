@@ -217,8 +217,9 @@ const showHealthSpriteTactical = (position, entity) => {
      *  used to set the width of the actual player health, i can +0.00001 it in the image function
      *  directly or here, it will be the same, image width cannot be 0 in p5
      */
+    tint(255, 35, 35)
     image(uiData[0].image, position[0], position[1], actualHealthPercent, sizeHealth) // Bar HP
-
+    noTint();
     image(uiData[2].image, position[0], position[1], sizeHealth, sizeHealth) // Border HP
 }
 

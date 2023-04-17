@@ -47,9 +47,11 @@ const displayPlayerInformationUI = () => {
     showHealthBehindRectUI(tempPosXForHealth, tempPosY, tempSize, percentLifeOfPlayer)
 }
 
-const showHealthBehindRectUI = (posX, posY, size, percentOfLife) => {
+const showHealthBehindRectUI = (posX, posY, size, percentOfLife, color = [255, 0, 0]) => {
     image(uiData[3].image, posX, posY+5, size+25, size+25)
+    tint(color[0], color[1], color[2])
     image(uiData[0].image, posX, posY+5, (size+25)*percentOfLife, size+25)
+    noTint()
     image(uiData[2].image, posX, posY+5, size+25, size+25)
 }
 
