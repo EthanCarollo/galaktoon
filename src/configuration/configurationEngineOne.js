@@ -23,6 +23,7 @@ let spriteSizeCut = 30;
 
 let constructionMode = false;
 let destructionMode = false;
+var playerCanExplore = false;
 
 // Construction Mode
 

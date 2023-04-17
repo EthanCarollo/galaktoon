@@ -98,6 +98,9 @@ const startSpecificQuestEvents = (questEventString) => {
         case "goFightTuto" :
             addNpcToMap(4, [2, 6], 'dialog', [1, 0], 'pop');
             break;
+        case "goOnPlanetBob" :
+            playerCanExplore = true;
+            break;
         default :
             throw new Error("Specific event isn't set inside the startSpecificQuestEvents() : " + questEventString)
     }

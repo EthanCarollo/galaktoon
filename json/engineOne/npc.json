@@ -42,6 +42,18 @@
                 }],
                 [{ 
                     "text" : "Ton initiation au comnbat est desormais terminée, je vais tout t'expliquer." 
+                },{ 
+                    "text" : "Blablabla" 
+                }, { 
+                    "questIsGived" : false,
+                    "type" : "quest",
+                    "text" : "Y a un truc sur la planete des bob", 
+                    "quest" : 2, 
+                    "interactionType" : "cannotRefuse",
+                    "altText" : "aller va les aider là",
+                    "rewardText" : "ouais ouais ouais bien ouej" 
+                },{ 
+                    "text" : "Finito la mappo bobbo " 
                 }]
             ]
         },{

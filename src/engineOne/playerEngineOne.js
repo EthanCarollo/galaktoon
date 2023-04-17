@@ -117,8 +117,11 @@ const interactWithATile = (tileInteract) => {
 
     switch(interactedTile.type){
         case "explore":
-            playerCanMove = false
-            uiEngineOneState = UiEngineOneStateEnum.IsExploring;
+            if(playerCanExplore === true)
+            {
+                playerCanMove = false
+                uiEngineOneState = UiEngineOneStateEnum.IsExploring;
+            }
             // explore function
             break;
         case "build":

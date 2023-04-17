@@ -23,6 +23,18 @@
             "currentProgression": 0,
             "maxProgression" : 1,
             "reward" : null
+        },
+        {
+            "id" : 2,
+            "name" : "Go on the bob planet !",
+            "description" : "Il y a une alerte fin voila comme d'hab",
+            "questType" : "talk",
+            "eventOnStart" : "goOnPlanetBob",
+            "questGoal" : {"map" : 1, "position" : [2, 6]},
+            "idQuestProgression" : 5,
+            "currentProgression": 0,
+            "maxProgression" : 1,
+            "reward" : null
         }
     ]
 }
