@@ -30,7 +30,7 @@
             "description" : "Il y a une alerte fin voila comme d'hab",
             "questType" : "talk",
             "eventOnStart" : "goOnPlanetBob",
-            "questGoal" : {"map" : 1, "position" : [2, 6]},
+            "questGoal" : {"map" : 2, "position" : [2, 6]},
             "idQuestProgression" : 5,
             "currentProgression": 0,
             "maxProgression" : 1,
