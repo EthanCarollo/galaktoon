@@ -117,10 +117,17 @@ const interactWithATile = (tileInteract) => {
 
     switch(interactedTile.type){
         case "explore":
-            if(playerCanExplore === true)
+            if(playerCanExplore === false)
             {
-                playerCanMove = false
-                uiEngineOneState = UiEngineOneStateEnum.IsExploring;
+                if(playerAlreadyExplore === false)
+                {
+                    launchTutorial("This is the exploration tab, you can interact with by using the interact touch (E) and then, you can choose a planet where you can explore");
+                    playerAlreadyExplore = true;
+                }else{
+                    playerCanMove = false
+                    uiEngineOneState = UiEngineOneStateEnum.IsExploring;
+                }
+                
             }
             // explore function
             break;
@@ -143,7 +150,14 @@ const interactWithATile = (tileInteract) => {
             launchFightOnEngineTwo(0)
             break;
         case "useBed":
-            playSleepAnimation();
+            if(bedIsAlreadyUsed === false)
+            {
+                launchTutorial("This is the bed, you can interact with by using the interact touch (E) and then, it will refill your life at the maximum");
+                bedIsAlreadyUsed = true;
+            }else{
+                playSleepAnimation();
+            }
+            
             break;
         default :
             throw new Error
@@ -222,6 +236,5 @@ const playSleepAnimation = () => {
      * ! Will soon be deprecated
      * TODO : Update this function soon
      */
-    launchTutorial();
     playerTeam[0].health.actualHealth = playerTeam[0].health.maxHealth
 }

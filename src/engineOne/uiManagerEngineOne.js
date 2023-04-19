@@ -201,20 +201,35 @@ const showKeyOnScreen = (xShow, yShow, size, inputKeyCode, keyName) => {
 
 
 
-const launchTutorial = () => {
+const launchTutorial = (tutorialText = null) => {
+    if(tutorialText === null) throw new Error("Tutorial text isn't set, you need to set a text in parameter of the function.");
+    tutorialInteractText = tutorialText
     uiEngineOneState = UiEngineOneStateEnum.Tutorial
     playerCanMove = false;
+    playerCanInteract = false;
 }
 
 const showTutorialInterface = () => {
     let xSizeBg = window.innerHeight /1.75;
     let ySizeBg = window.innerHeight;
-
     let xPosition = window.innerWidth - (xSizeBg + vector2ExploringMenu.x);
-
-    
     let padding = 100;
+
+//
+    fill(0, 150);
+    let tutorialPosition = [(tileSize * playerLastDirection[0]) / 1.25, (tileSize * playerLastDirection[1])]
+    let sizeRect = 250;
+    rect(0, 0, window.innerWidth/2-sizeRect/2+tutorialPosition[0], window.innerHeight) // Border left
+    rect(window.innerWidth/2+sizeRect/2+tutorialPosition[0], 0, window.innerWidth/2, window.innerHeight) // Border right
+    
+    rect(window.innerWidth/2-sizeRect/2+tutorialPosition[0],0,sizeRect,window.innerHeight/2-sizeRect/2 + tutorialPosition[1]) // top
+    rect(window.innerWidth/2-sizeRect/2+tutorialPosition[0],window.innerHeight/2+sizeRect/2+tutorialPosition[1],sizeRect,window.innerHeight/2-sizeRect/2 - tutorialPosition[1]) // bot
+//
+
     image(uiData[23].image, xPosition+padding/2, padding/2, xSizeBg-padding, ySizeBg-padding)
+    fill(255); textSize(16); textAlign(CENTER)
+    text(tutorialInteractText, xPosition+padding/2+50/2, padding/2+50/1.5, xSizeBg-padding-50, ySizeBg-padding-50)
+    noFill(); textSize(15);
     showExitButtonOnTutorialInterface(xPosition+padding/2, padding/2, xSizeBg-padding, ySizeBg-padding)
 }
 
@@ -241,6 +256,7 @@ const showExitButtonOnTutorialInterface = (x, y, width, height) => {
 const endActualTutorial = () => {
     uiEngineOneState = UiEngineOneStateEnum.Normal
     playerCanMove = true;
+    playerCanInteract = true;
     vector2ExploringMenu.x = -500;
 }
 

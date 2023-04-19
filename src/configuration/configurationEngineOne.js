@@ -54,10 +54,11 @@ let positionBorderCinematic = [-ySizeBorderCinematic, window.innerHeight]
 // Tutorial variable
 
 let uiEngineOneState = UiEngineOneStateEnum.Normal;
-
+let tutorialInteractText = null;
 let isInTutorial = false;
 
-let alreadyKnowBed = false;
+let bedIsAlreadyUsed = false;
+let playerAlreadyExplore = false;
 
 
 // Tutorial variable
