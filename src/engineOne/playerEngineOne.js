@@ -117,7 +117,7 @@ const interactWithATile = (tileInteract) => {
 
     switch(interactedTile.type){
         case "explore":
-            if(playerCanExplore === false)
+            if(playerCanExplore === true)
             {
                 if(playerAlreadyExplore === false)
                 {

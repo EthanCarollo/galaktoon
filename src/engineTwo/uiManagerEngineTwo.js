@@ -334,27 +334,38 @@ const displayAbility = () => {
             let xInteract = x - abilitySizeX / 2
             let yInteract =  y - abilitySizeY / 2
             // rect(xInteract,yInteract,abilitySizeX,abilitySizeY) Debug Rect
+            if(playerTeam[0].abilities[i].isLocked === false){
+                createInputButtonWithCallback(xInteract, yInteract,abilitySizeX,abilitySizeY, () => {
+                    eventOnTheTutorialEngine("selected"+i);
+                    abilityIsOpen = false;
+                    selectAbility(i);
+                })
+                if(mouseIsHover(xInteract, yInteract,abilitySizeX,abilitySizeY)){ 
+                    updateInteractionIndex(i)
+                    if(actualMapEngineTwo.entityOnTactical[0].pa <= 0)
+                    {
+                        tint(255 - 10*transitionLight[i], 255-10*transitionLight[i], 255-10*transitionLight[i])
+                    }
+                } 
+                abilitySizeX = abilitySize + transitionLight[i];
+                abilitySizeY = abilitySizeX * 1.2
+                context.shadowBlur = transitionLight[i];
+                context.shadowColor = "white";
+                image(uiData[playerTeam[0].abilities[i].id].image, x, y, abilitySizeX, abilitySizeY)
+            }else{
+                abilitySizeX = abilitySize + transitionLight[i];
+                abilitySizeY = abilitySizeX * 1.2
+                context.shadowBlur = transitionLight[i];
+                context.shadowColor = "white";
+                tint(15);
+                image(uiData[playerTeam[0].abilities[i].id].image, x, y, abilitySizeX, abilitySizeY)
+                noTint();
+                image(uiData[16].image, x, y, abilitySizeX, abilitySizeY)
+            }
 
-            createInputButtonWithCallback(xInteract, yInteract,abilitySizeX,abilitySizeY, () => {
-                eventOnTheTutorialEngine("selected"+i)
-                abilityIsOpen = false;
-                selectAbility(i);
-            })
-
-            if(mouseIsHover(xInteract, yInteract,abilitySizeX,abilitySizeY)){ 
-                updateInteractionIndex(i)
-                if(actualMapEngineTwo.entityOnTactical[0].pa <= 0)
-                {
-                    tint(255 - 10*transitionLight[i], 255-10*transitionLight[i], 255-10*transitionLight[i])
-                }
-            } /* On Hover Effect */
+            /* On Hover Effect */
             // Set transition on Thing 
-            abilitySizeX = abilitySize + transitionLight[i];
-            abilitySizeY = abilitySizeX * 1.2
-            context.shadowBlur = transitionLight[i];
-            context.shadowColor = "white";
-
-            image(uiData[playerTeam[0].abilities[i].id].image, x, y, abilitySizeX, abilitySizeY)
+            
             noTint()
             context.shadowBlur = 0;
 
@@ -379,7 +390,14 @@ const displayAbility = () => {
         {   
             let x = abilityPosition[i].x;
             let y = abilityPosition[i].y;
-            image(uiData[playerTeam[0].abilities[i].id].image, x, y, abilitySizeX, abilitySizeY)
+            if(playerTeam[0].abilities[i].isLocked === false){
+                image(uiData[playerTeam[0].abilities[i].id].image, x, y, abilitySizeX, abilitySizeY)
+            }else{
+                tint(15);
+                image(uiData[playerTeam[0].abilities[i].id].image, x, y, abilitySizeX, abilitySizeY)
+                noTint();
+                image(uiData[16].image, x, y, abilitySizeX, abilitySizeY)
+            }
         }
         imageMode(CORNER);
         noFill()
