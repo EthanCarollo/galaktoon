@@ -69,6 +69,10 @@
             [{ 
                 "text" : "Bien joué, tu m'as battu ! Retourne parler à l'IA pour continuer ton initiation. "
             }]]
+        },{
+            "id" : "5",
+            "spriteId" : "6",
+            "name" : "Guard Woaf"
         }
     ]
 }

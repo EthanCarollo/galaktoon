@@ -26,7 +26,7 @@ const addQuestProgression = (questIdProgression, questType) => { // Update a pro
      */
     for(let i = 0; i< questList.length; i++)
     {
-        if(questList[i].idQuestProgression+"" === questIdProgression && 
+        if(questList[i].idQuestProgression+"" === questIdProgression+"" && 
             questList[i].currentProgression < questList[i].maxProgression &&
             questList[i].questType === questType)
         {

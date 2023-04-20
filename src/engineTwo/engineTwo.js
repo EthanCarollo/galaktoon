@@ -58,6 +58,7 @@ const engineTwoEndFight = () => {
 const setGameState = () => {
     if(checkAllEnemiesDead() === true){
         engineTwoState = "endFight";
+        addQuestProgressionOnEndFight(actualMapEngineTwo.entityOnTactical);
     }
     if(checkAllAlliesDead() === true){
         engineTwoState = "endFight";

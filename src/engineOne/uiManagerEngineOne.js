@@ -79,7 +79,7 @@ const displayExploringMenu = () => {
     let paddingInner = 40;
     image(uiData[23].image, xPosition+padding/2,padding/2,xSizeBg-padding,ySizeBg-padding)
     let planetToExplore = planetsData.filter(value => {
-        return playerOnMap.id !== value.map
+        return playerOnMap.id !== value.map && value.isExplorable === true
     })
     for(let i =0; i < planetToExplore.length; i++)
     {
