@@ -78,11 +78,14 @@ const displayExploringMenu = () => {
     let padding = 100;
     let paddingInner = 40;
     image(uiData[23].image, xPosition+padding/2,padding/2,xSizeBg-padding,ySizeBg-padding)
-    for(let i =0; i < planetsData.length; i++)
+    let planetToExplore = planetsData.filter(value => {
+        return playerOnMap.id !== value.map
+    })
+    for(let i =0; i < planetToExplore.length; i++)
     {
         let xSizePlanets = xSizeBg-padding-paddingInner;
         let ySizePlanets = (xSizeBg-padding-paddingInner)/3.85;
-        createPlanetMenuObject(xPosition+padding/2+paddingInner/2,(padding/2+paddingInner/2)+125*i,xSizePlanets, ySizePlanets, i)
+        createPlanetMenuObject(xPosition+padding/2+paddingInner/2,(padding/2+paddingInner/2)+125*i,xSizePlanets, ySizePlanets, planetToExplore[i])
     }
     exitCross();
 }
@@ -98,7 +101,7 @@ const setVectorLerpEaseOutExploringMenu = () => {
     vector2ExploringMenu = vectorMoove;
 }
 
-const createPlanetMenuObject = (x, y, sizeX, sizeY, planetID) => {
+const createPlanetMenuObject = (x, y, sizeX, sizeY, planet) => {
     image(uiData[22].image, x, y, sizeX, sizeY)
     if(mouseIsHover(x, y, sizeX, sizeY)){
         image(uiData[25].image, x, y, sizeX, sizeY)
@@ -107,10 +110,10 @@ const createPlanetMenuObject = (x, y, sizeX, sizeY, planetID) => {
     fill(255,255,255)
     textSize(25);
     textAlign(CENTER, CENTER)
-    text(planetsData[planetID].name, x, y, sizeX, sizeY)
+    text(planet.name, x, y, sizeX, sizeY)
     textAlign(LEFT, BASELINE)
     noFill()
-    let mapToExplore = mapData[planetsData[planetID].map]
+    let mapToExplore = mapData[planet.map]
     //createShowTextOnHover(x, y, sizeX, sizeY, "Voyager vers")
     createInputButtonWithCallback(x, y, sizeX, sizeY, () => {loadMapAndExitExploringMenu(mapToExplore)})
 
