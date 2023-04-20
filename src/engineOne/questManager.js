@@ -56,7 +56,11 @@ const addQuestProgressionOnEndFight = (teamProgressionToAdd) => { // Update the 
 const checkQuestIsFinish = (quest) => { // Check if a specific quest is finshed
     if(quest.currentProgression >= quest.maxProgression)
     {
-        quest.isFinished = true;
+        if(quest.isFinished !== true)
+        {
+            quest.isFinished = true;
+            endSpecificQuestEvents(quest.eventOnEnd);
+        }
         return true
     }
     return false;
@@ -100,6 +104,32 @@ const startSpecificQuestEvents = (questEventString) => {
             break;
         case "goOnPlanetBob" :
             playerCanExplore = true;
+            break;
+        case null :
+            break;
+        default :
+            throw new Error("Specific event isn't set inside the startSpecificQuestEvents() : " + questEventString)
+    }
+}
+
+
+
+/**
+ * 
+ * @param {string} questEventString the start event quest string
+ */
+const endSpecificQuestEvents = (questEventString) => {
+    /** 
+     * * This is usefull in case we need to have some events on start quest
+     */
+    if(questEventString === undefined) return;
+    switch(questEventString)
+    {
+        case "finishFightQuestBob" :
+            mapData[2].npcOnMap[0].nextCase = searchPath(mapData[2].npcOnMap[0].pos, [15, 17], mapData[2].map.objectLayer); // Here it's the AI who mooves
+            mapData[2].npcOnMap[0].interaction = "dialog";
+            finishQuest(2)
+            addQuestToList(3)
             break;
         default :
             throw new Error("Specific event isn't set inside the startSpecificQuestEvents() : " + questEventString)

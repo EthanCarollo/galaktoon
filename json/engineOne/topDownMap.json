@@ -46,7 +46,7 @@
                         "isInteractible" : true,
                         "dir" : [0, 1],
                         "state" : "idle",
-                        "interaction" : "dialog"
+                        "interaction" : "none"
                     },{
                         "id" : 5,
                         "pos" : [6, 13],

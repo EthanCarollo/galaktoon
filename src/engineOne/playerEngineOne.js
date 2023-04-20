@@ -82,7 +82,7 @@ const checkForInteraction = (playerCaseInteract) => {
     let npcInteractible = playerOnMap.npcOnMap.filter(npc => npc.pos[0] === playerCaseInteract[0] && npc.pos[1] === playerCaseInteract[1])
     if(npcInteractible.length > 0 && npcInteractible[0].state === "idle")
     {
-        createInteractionPopup(playerCaseInteract[0], playerCaseInteract[1], "npc")
+        createInteractionPopup(playerCaseInteract[0], playerCaseInteract[1], npcInteractible[0].interaction)
     }
 }
 
@@ -117,7 +117,7 @@ const interactWithATile = (tileInteract) => {
 
     switch(interactedTile.type){
         case "explore":
-            if(playerCanExplore === false)
+            if(playerCanExplore === true)
             {
                 if(playerAlreadyExplore === false)
                 {
@@ -186,12 +186,17 @@ const interactWithNPC = (tileInteract) => {
 }
 
 
+/**
+ * @param {string} npcInteraction npc specific interaction
+ */
 const launchInteractionOfNpc = (npcInteraction) => {
     switch(npcInteraction.interaction)
     {
         case 'dialog' :
             launchNpcDialog(npcInteraction);
             break; 
+        case 'none' :
+            break;
         default :
             throw new Error("The interaction of the npc : " + npcInteraction + " isn't set. ")
     }
@@ -210,8 +215,10 @@ const createInteractionPopup = (x ,y ,typeOfInteract) => {
      * * which said that is UiImage and then load id 9 or 10 image in top of the tile interacted
      */
     switch(typeOfInteract){
-        case "npc" :
+        case "dialog" :
             createImageWithIdOn2dArray(x, y-1, 9, 65, true)
+            break;
+        case "none" :
             break;
         default:
             createImageWithIdOn2dArray(x, y-1, 10, 65, true)

@@ -4,7 +4,21 @@
         {
             "id" : "0",
             "spriteId" : "1",
-            "name" : "Bob"
+            "name" : "Bob",
+            "actualDialogIndex" : 0,
+            "dialogs" : [[{ 
+                "text" : "Vous m'avez sauvé, je vous remercie beaucoup et tout !"
+            }, { 
+                "questIsGived" : true,
+                "type" : "quest",
+                "text" : "Merci de m'avoir sauvé.", 
+                "quest" : 3, 
+                "altText" : "Il faut aller te battre mon grand.",
+                "rewardText" : "Bien nous pouvons commencer." 
+            }],
+            [{ 
+                "text" : "Bien joué, tu m'as battu ! Retourne parler à l'IA pour continuer ton initiation. "
+            }]]
         },{
             "id" : "1",
             "spriteId" : "2",
@@ -72,7 +86,16 @@
         },{
             "id" : "5",
             "spriteId" : "6",
-            "name" : "Guard Woaf"
+            "name" : "Guard Woaf",
+            "actualDialogIndex" : 0,
+            "dialogs" : [[{ 
+                "text" : "Viens te battre ou je hagar bob. " ,
+                "type" : "fight",
+                "fight" : 2
+            }],
+            [{ 
+                "text" : "Arghhhh je meurs "
+            }]]
         }
     ]
 }
