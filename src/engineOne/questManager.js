@@ -105,6 +105,10 @@ const startSpecificQuestEvents = (questEventString) => {
         case "goOnPlanetBob" :
             playerCanExplore = true;
             break;
+        case "addNewAbility1" :
+            planetsData[2].isExplorable = true;
+            playerTeam[0].abilities[1].isLocked = false; // unlock the first ability
+            break;
         case null :
             break;
         default :
