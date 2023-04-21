@@ -166,7 +166,7 @@ const showSpriteOnTactical = (entity) => {
                 entity.state = "idle";
                 checkIaTurn()
             }
-            
+            showHealthSpriteTactical(positionOnMap, entity)
             break;
         case "moove" :
             if(mooveEntityToNextCase(entity) === false)
@@ -178,6 +178,7 @@ const showSpriteOnTactical = (entity) => {
                 return;
             }
             animationMooveSprite(positionOnMap[0], positionOnMap[1], playerSpriteSize, entity.dir, entity.id)
+            showHealthSpriteTactical(positionOnMap, entity)
             break;
         case "dead" :
             animationDeadSprite(positionOnMap[0], positionOnMap[1], playerSpriteSize, entity.id)
@@ -210,7 +211,7 @@ const showHealthSpriteTactical = (position, entity) => {
 
     let health = entity.health
     let sizeHealth = playerSpriteSize;
-    image(uiData[3].image, position[0], position[1], sizeHealth, sizeHealth) // Background HP
+    image(uiData[3].image, position[0], position[1]-playerSpriteSize, sizeHealth, sizeHealth) // Background HP
     let actualHealthPercent = health.actualHealth / health.maxHealth * 100 + 0.0001; 
     /**
      *  Add +0.000001 cause when it will be to 0, the image function of p5
@@ -219,9 +220,9 @@ const showHealthSpriteTactical = (position, entity) => {
      *  directly or here, it will be the same, image width cannot be 0 in p5
      */
     tint(255, 35, 35)
-    image(uiData[0].image, position[0], position[1], actualHealthPercent, sizeHealth) // Bar HP
+    image(uiData[0].image, position[0], position[1]-playerSpriteSize, actualHealthPercent, sizeHealth) // Bar HP
     noTint();
-    image(uiData[2].image, position[0], position[1], sizeHealth, sizeHealth) // Border HP
+    image(uiData[2].image, position[0], position[1]-playerSpriteSize, sizeHealth, sizeHealth) // Border HP
 }
 
 
