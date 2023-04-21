@@ -4,7 +4,30 @@
         {
             "id" : "0",
             "spriteId" : "1",
-            "name" : "Bob"
+            "name" : "Bob",
+            "actualDialogIndex" : 0,
+            "dialogs" : [[{ 
+                "text" : "Vous m'avez sauvé, je vous remercie beaucoup et tout !"
+            }, { 
+                "questIsGived" : true,
+                "type" : "quest",
+                "text" : "Merci de m'avoir sauvé.", 
+                "quest" : 3, 
+                "altText" : "Il faut aller te battre mon grand.",
+                "rewardText" : "Bien nous pouvons commencer." 
+            }],
+            [{ 
+                "text" : "Sur la planête terre y a mon petit fils qui est pris au piège par les salatonions ! Ils ont été corrompus par DarkWoaf "
+            }, { 
+                "questIsGived" : false,
+                "type" : "quest",
+                "text" : "Va le sauver par pitié !", 
+                "quest" : 4, 
+                "altText" : "Il faut aller te battre mon grand.",
+                "rewardText" : "Bien nous pouvons commencer." 
+            }],[{ 
+                "text" : "Merci beaucoup de m'avoir réuni avec mon fils !"
+            }]]
         },{
             "id" : "1",
             "spriteId" : "2",
@@ -12,7 +35,16 @@
         },{
             "id" : "2",
             "spriteId" : "3",
-            "name" : "Salatonion"
+            "name" : "Salatonion",
+            "actualDialogIndex" : 0,
+            "dialogs" : [[{ 
+                "text" : "Viens te battre ou je tue baby bob. " ,
+                "type" : "fight",
+                "fight" : 3
+            }],
+            [{ 
+                "text" : "Arghhhh je meurs "
+            }]]
         },{
             "id" : "3",
             "spriteId" : "4",
@@ -42,6 +74,18 @@
                 }],
                 [{ 
                     "text" : "Ton initiation au comnbat est desormais terminée, je vais tout t'expliquer." 
+                },{ 
+                    "text" : "Blablabla" 
+                }, { 
+                    "questIsGived" : false,
+                    "type" : "quest",
+                    "text" : "Y a un truc sur la planete des bob", 
+                    "quest" : 2, 
+                    "interactionType" : "cannotRefuse",
+                    "altText" : "aller va les aider là",
+                    "rewardText" : "ouais ouais ouais bien ouej" 
+                },{ 
+                    "text" : "Finito la mappo bobbo " 
                 }]
             ]
         },{
@@ -57,6 +101,30 @@
             [{ 
                 "text" : "Bien joué, tu m'as battu ! Retourne parler à l'IA pour continuer ton initiation. "
             }]]
+        },{
+            "id" : "5",
+            "spriteId" : "6",
+            "name" : "Guard Woaf",
+            "actualDialogIndex" : 0,
+            "dialogs" : [[{ 
+                "text" : "Viens te battre ou je hagar bob. " ,
+                "type" : "fight",
+                "fight" : 2
+            }],
+            [{ 
+                "text" : "Arghhhh je meurs "
+            }]]
+        },{
+            "id" : "6",
+            "spriteId" : "4",
+            "name" : "Ai",
+            "actualDialogIndex" : 0,
+            "dialogs" : [ 
+                [{ 
+                    "type" : "returnOnTheSpaceShip",
+                    "text" : "Do you want to return in the space ship ?"
+                }]
+            ]
         }
     ]
 }

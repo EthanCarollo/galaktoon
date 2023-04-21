@@ -46,7 +46,8 @@ let playerTeam = [
                 abilityLevel : 2,
                 baseAmount : 10,
                 id : 1,
-                range : 2
+                range : 2,
+                isLocked : false
             },
             {
                 name : "Heal",
@@ -54,7 +55,8 @@ let playerTeam = [
                 abilityLevel : 1,
                 baseAmount : 5,
                 id : 4,
-                range : 5
+                range : 5,
+                isLocked : true
             },
             {
                 name : "HealAll",
@@ -62,7 +64,8 @@ let playerTeam = [
                 abilityLevel : 2,
                 baseAmount : 4,
                 id : 5,
-                range : 1
+                range : 1,
+                isLocked : true
             }
         ],
         isAlive : true,

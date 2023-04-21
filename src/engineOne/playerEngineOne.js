@@ -82,7 +82,7 @@ const checkForInteraction = (playerCaseInteract) => {
     let npcInteractible = playerOnMap.npcOnMap.filter(npc => npc.pos[0] === playerCaseInteract[0] && npc.pos[1] === playerCaseInteract[1])
     if(npcInteractible.length > 0 && npcInteractible[0].state === "idle")
     {
-        createInteractionPopup(playerCaseInteract[0], playerCaseInteract[1], "npc")
+        createInteractionPopup(playerCaseInteract[0], playerCaseInteract[1], npcInteractible[0].interaction)
     }
 }
 
@@ -117,8 +117,18 @@ const interactWithATile = (tileInteract) => {
 
     switch(interactedTile.type){
         case "explore":
-            playerCanMove = false
-            uiEngineOneState = UiEngineOneStateEnum.IsExploring;
+            if(playerCanExplore === true)
+            {
+                if(playerAlreadyExplore === false)
+                {
+                    launchTutorial("This is the exploration tab, you can interact with by using the interact touch (E) and then, you can choose a planet where you can explore");
+                    playerAlreadyExplore = true;
+                }else{
+                    playerCanMove = false
+                    uiEngineOneState = UiEngineOneStateEnum.IsExploring;
+                }
+                
+            }
             // explore function
             break;
         case "build":
@@ -140,7 +150,14 @@ const interactWithATile = (tileInteract) => {
             launchFightOnEngineTwo(0)
             break;
         case "useBed":
-            playSleepAnimation();
+            if(bedIsAlreadyUsed === false)
+            {
+                launchTutorial("This is the bed, you can interact with by using the interact touch (E) and then, it will refill your life at the maximum");
+                bedIsAlreadyUsed = true;
+            }else{
+                playSleepAnimation();
+            }
+            
             break;
         default :
             throw new Error
@@ -169,12 +186,17 @@ const interactWithNPC = (tileInteract) => {
 }
 
 
+/**
+ * @param {string} npcInteraction npc specific interaction
+ */
 const launchInteractionOfNpc = (npcInteraction) => {
     switch(npcInteraction.interaction)
     {
         case 'dialog' :
             launchNpcDialog(npcInteraction);
             break; 
+        case 'none' :
+            break;
         default :
             throw new Error("The interaction of the npc : " + npcInteraction + " isn't set. ")
     }
@@ -193,8 +215,10 @@ const createInteractionPopup = (x ,y ,typeOfInteract) => {
      * * which said that is UiImage and then load id 9 or 10 image in top of the tile interacted
      */
     switch(typeOfInteract){
-        case "npc" :
+        case "dialog" :
             createImageWithIdOn2dArray(x, y-1, 9, 65, true)
+            break;
+        case "none" :
             break;
         default:
             createImageWithIdOn2dArray(x, y-1, 10, 65, true)
@@ -219,6 +243,5 @@ const playSleepAnimation = () => {
      * ! Will soon be deprecated
      * TODO : Update this function soon
      */
-    launchTutorial();
     playerTeam[0].health.actualHealth = playerTeam[0].health.maxHealth
 }

@@ -2,28 +2,38 @@
     "data" : 
     [
         {
-            "id" : "0",
-            "map" : "2",
+            "id" : 0,
+            "map" : 0,
+            "name" : "The spaceship",
+            "description" : "The space ship brooo",
+            "isExplorable" : true
+        },{
+            "id" : 1,
+            "map" : 2,
             "name" : "Bob's Planet",
-            "description" : "A basic explorable planets !"
+            "description" : "A basic explorable planets !",
+            "isExplorable" : true
         },
         {
-            "id" : "1",
-            "map" : "1",
+            "id" : 2,
+            "map" : 1,
             "name" : "Earth Planet",
-            "description" : "A basic explorable planets !"
+            "description" : "A basic explorable planets !",
+            "isExplorable" : false
         },
         {
-            "id" : "1",
-            "map" : "3",
+            "id" : 3,
+            "map" : 3,
             "name" : "Dark Woaf's Planet",
-            "description" : "A basic explorable planets !"
+            "description" : "A basic explorable planets !",
+            "isExplorable" : false
         },
         {
-            "id" : "1",
-            "map" : "4",
+            "id" : 4,
+            "map" : 4,
             "name" : "MJ - Island",
-            "description" : "The everything at once map"
+            "description" : "The everything at once map",
+            "isExplorable" : true
         }
     ]
 }

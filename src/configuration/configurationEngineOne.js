@@ -23,6 +23,7 @@ let spriteSizeCut = 30;
 
 let constructionMode = false;
 let destructionMode = false;
+var playerCanExplore = false;
 
 // Construction Mode
 
@@ -53,10 +54,11 @@ let positionBorderCinematic = [-ySizeBorderCinematic, window.innerHeight]
 // Tutorial variable
 
 let uiEngineOneState = UiEngineOneStateEnum.Normal;
-
+let tutorialInteractText = null;
 let isInTutorial = false;
 
-let alreadyKnowBed = false;
+let bedIsAlreadyUsed = false;
+let playerAlreadyExplore = false;
 
 
 // Tutorial variable

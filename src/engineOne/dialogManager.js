@@ -78,7 +78,17 @@ const displayDialogNpc = (npcDialoged) => {
   
 }
 
-const showChoiceBoxForQuestDependingToTheType = (xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, dialog) => {
+const showChoiceBoxDependingToTheType = (
+  xStartDialog, 
+  yStartDialog, 
+  sizeXDialog, 
+  sizeYDialog, 
+  dialog, 
+  callback = () => {
+      dialog.questIsGived = true;
+      addQuestToList(dialog.quest)
+      goNextDialog();
+  }) => {
   /** 
    * * Set the different dialog choice depending on the interaction type
    */
@@ -92,7 +102,7 @@ const showChoiceBoxForQuestDependingToTheType = (xStartDialog, yStartDialog, siz
       });
       break;
     default :
-      showDialogChoiceBoxForQuest(xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, dialog);
+      showDialogChoiceBox(xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, callback);
       break;
   }
 }
@@ -130,8 +140,8 @@ const showAcceptOnlyButton = (xStartDialog, yStartDialog, sizeXDialog, sizeYDial
 }
 
 
-
-const showDialogChoiceBoxForQuest = (xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, quest) => {
+// loadNewMap(mapData[0], [-15, -15]);
+const showDialogChoiceBox = (xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, callback) => {
   
   textAlign(CENTER, CENTER);
   
@@ -155,12 +165,8 @@ const showDialogChoiceBoxForQuest = (xStartDialog, yStartDialog, sizeXDialog, si
 
   text("Accept", xBoxTrue, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice)
 
-  createInputButtonWithCallback(xBoxTrue, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice, 
-      () => {
-          quest.questIsGived = true;
-          addQuestToList(quest.quest)
-          goNextDialog();
-      });
+  createInputButtonWithCallback(xBoxTrue, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice, callback);
+
   let xBoxFalse = xStartDialog + sizeXDialog - sizeXChoice - paddingXChoice;
   let boxChoiceFalse = image(dialogBox, xBoxFalse, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice)
         
@@ -180,6 +186,7 @@ const showDialogChoiceBoxForQuest = (xStartDialog, yStartDialog, sizeXDialog, si
   fill(0)
   
 }
+
 
 
 
@@ -294,13 +301,17 @@ switch(dialog.state)
     });
     break;
   case "HaveQuestToGive" :
-    showChoiceBoxForQuestDependingToTheType(xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, dialog);
+    showChoiceBoxDependingToTheType(xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, dialog);
     break;
   case "GivedQuest" :
     createInputButtonWithCallback(xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, goNextDialog);
     break;
   case "Reward" :
     showRewardBox(xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, npc, dialog);
+    break;
+  case "returnOnTheSpaceShip" :
+    showChoiceBoxDependingToTheType(xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, dialog, ()=>{loadNewMap(mapData[0], [-8.5, -8]); goNextDialog()})
+    // This type just teleport the player to the space ship
     break;
   default :
     throw new Error("State isn't defined or doesn't exist")
@@ -326,6 +337,9 @@ dialog.state = "Normal"
       {
         dialog.state = "HaveQuestToGive"
       }
+      break;
+    case "returnOnTheSpaceShip" :
+      dialog.state = "returnOnTheSpaceShip"
       break;
   }
 

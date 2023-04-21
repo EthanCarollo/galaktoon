@@ -169,6 +169,7 @@ const displayEnnemyInformationUiEngineTwo = () => {
         let xBar = tempPosX - barSize - tempSize * 0.15;
         let yBar = tempPosY + 10;
         console.log(xBar)
+        tint(255,35,35)
         showBarWithPercentUi(xBar, yBar, barSize, percentLifeOfEntity+0.00001);
 
         let percentPmOfPlayer = entityToShow.pm / 2 +0.00001;
@@ -201,6 +202,7 @@ const displayPlayerInformationUiEngineTwo = () => {
     let xBar = tempPosX + tempSize * 1.15;
     let yBar = tempPosY + 10;
     
+    tint(255,35,35)
     showBarWithPercentUi(xBar, yBar, barSize, percentLifeOfPlayer);
 
     let percentPmOfPlayer = actualMapEngineTwo.entityOnTactical[0].pm / 2 +0.00001;
@@ -298,13 +300,17 @@ const exitFight = () => {
 
 const displayEndTurnButton = () => {
     fill(255,0,255,100)
-    let tempSize = window.innerWidth/12;
+    let tempWidth = window.innerWidth/10;
+    let tempHeight = tempWidth/1.8;
     let padding = 25;
-    let tempPosX = window.innerWidth - tempSize  * 1.5
-    let tempPosY = window.innerHeight - tempSize - padding;
-
-    image(uiData[12].image, tempPosX, tempPosY, tempSize, tempSize);
-    createInputButtonWithCallback(tempPosX, tempPosY, tempSize, tempSize, () => {
+    let tempPosX = window.innerWidth - tempWidth  * 1.4
+    let tempPosY = window.innerHeight - tempHeight - padding;
+    if(mouseIsHover(tempPosX, tempPosY, tempWidth, tempHeight) && mouseIsPressed === true ){
+        image(uiData[39].image, tempPosX, tempPosY, tempWidth, tempHeight);
+    }else{
+        image(uiData[12].image, tempPosX, tempPosY, tempWidth, tempHeight);
+    }
+    createInputButtonWithCallback(tempPosX, tempPosY, tempWidth, tempHeight, () => {
         endTurn(); eventOnTheTutorialEngine("nextTurn");
     })
 }
@@ -328,27 +334,38 @@ const displayAbility = () => {
             let xInteract = x - abilitySizeX / 2
             let yInteract =  y - abilitySizeY / 2
             // rect(xInteract,yInteract,abilitySizeX,abilitySizeY) Debug Rect
+            if(playerTeam[0].abilities[i].isLocked === false){
+                createInputButtonWithCallback(xInteract, yInteract,abilitySizeX,abilitySizeY, () => {
+                    eventOnTheTutorialEngine("selected"+i);
+                    abilityIsOpen = false;
+                    selectAbility(i);
+                })
+                if(mouseIsHover(xInteract, yInteract,abilitySizeX,abilitySizeY)){ 
+                    updateInteractionIndex(i)
+                    if(actualMapEngineTwo.entityOnTactical[0].pa <= 0)
+                    {
+                        tint(255 - 10*transitionLight[i], 255-10*transitionLight[i], 255-10*transitionLight[i])
+                    }
+                } 
+                abilitySizeX = abilitySize + transitionLight[i];
+                abilitySizeY = abilitySizeX * 1.2
+                context.shadowBlur = transitionLight[i];
+                context.shadowColor = "white";
+                image(uiData[playerTeam[0].abilities[i].id].image, x, y, abilitySizeX, abilitySizeY)
+            }else{
+                abilitySizeX = abilitySize + transitionLight[i];
+                abilitySizeY = abilitySizeX * 1.2
+                context.shadowBlur = transitionLight[i];
+                context.shadowColor = "white";
+                tint(15);
+                image(uiData[playerTeam[0].abilities[i].id].image, x, y, abilitySizeX, abilitySizeY)
+                noTint();
+                image(uiData[16].image, x, y, abilitySizeX, abilitySizeY)
+            }
 
-            createInputButtonWithCallback(xInteract, yInteract,abilitySizeX,abilitySizeY, () => {
-                eventOnTheTutorialEngine("selected"+i)
-                abilityIsOpen = false;
-                selectAbility(i);
-            })
-
-            if(mouseIsHover(xInteract, yInteract,abilitySizeX,abilitySizeY)){ 
-                updateInteractionIndex(i)
-                if(actualMapEngineTwo.entityOnTactical[0].pa <= 0)
-                {
-                    tint(255 - 10*transitionLight[i], 255-10*transitionLight[i], 255-10*transitionLight[i])
-                }
-            } /* On Hover Effect */
+            /* On Hover Effect */
             // Set transition on Thing 
-            abilitySizeX = abilitySize + transitionLight[i];
-            abilitySizeY = abilitySizeX * 1.2
-            context.shadowBlur = transitionLight[i];
-            context.shadowColor = "white";
-
-            image(uiData[playerTeam[0].abilities[i].id].image, x, y, abilitySizeX, abilitySizeY)
+            
             noTint()
             context.shadowBlur = 0;
 
@@ -373,7 +390,14 @@ const displayAbility = () => {
         {   
             let x = abilityPosition[i].x;
             let y = abilityPosition[i].y;
-            image(uiData[playerTeam[0].abilities[i].id].image, x, y, abilitySizeX, abilitySizeY)
+            if(playerTeam[0].abilities[i].isLocked === false){
+                image(uiData[playerTeam[0].abilities[i].id].image, x, y, abilitySizeX, abilitySizeY)
+            }else{
+                tint(15);
+                image(uiData[playerTeam[0].abilities[i].id].image, x, y, abilitySizeX, abilitySizeY)
+                noTint();
+                image(uiData[16].image, x, y, abilitySizeX, abilitySizeY)
+            }
         }
         imageMode(CORNER);
         noFill()
