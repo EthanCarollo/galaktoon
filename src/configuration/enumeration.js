@@ -22,7 +22,8 @@ const PlayerStateEnum = {
 
 const EngineOneStateEnum = {
     Playing : 'playing',
-    Cinematic : 'cinematic'
+    Cinematic : 'cinematic',
+    StoryBoard : 'storyBoard'
 }
 
 const TransitionStateEnum = {

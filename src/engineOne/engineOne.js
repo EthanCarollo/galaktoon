@@ -11,6 +11,9 @@ const runEngineOne = () => {
     case EngineOneStateEnum.Cinematic :
       runCinematicStateEngineOne()
       break;
+    case EngineOneStateEnum.StoryBoard :
+      runStoryBoardStateEngineOne()
+      break;
     default :
       throw new Error("engine one state isn't set : " + engineOneState)
   }
@@ -36,6 +39,12 @@ const runPlayingStateEngineOne = () => {
   {
     displayDialogNpc(npcDialoged)
   }
+  showTutorial();
+}
+
+const runStoryBoardStateEngineOne = () => {
+  playerCanMove = false;
+  runStoryBoard();
 }
 
 //#endregion

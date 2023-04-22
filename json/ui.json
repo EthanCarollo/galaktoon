@@ -168,6 +168,10 @@
             "id" : "39",
             "path" : "assets/ui/nextTurnButtonHold.png",
             "image" : null
+        },{
+            "id" : "40",
+            "path" : "assets/storyboard/storyboard1.png",
+            "image" : null
         }
     ]
 }
