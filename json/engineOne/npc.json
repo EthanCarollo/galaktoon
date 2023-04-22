@@ -58,6 +58,7 @@
                     "type" : "quest",
                     "text" : "C'est génial, tu dois être engourdi, laisse moi t'initier !", 
                     "quest" : 0, 
+                    "interactionType" : "cannotRefuse",
                     "altText" : "Il faut aller te battre mon grand.",
                     "rewardText" : "Bien nous pouvons commencer." 
                 }],

@@ -7,7 +7,7 @@ let logoOffSet = [0, 0];
 let startMenuChoices = [
     {
         text : 'Start Game',
-        callback : () => { engineOneState = EngineOneStateEnum.StoryBoard; launchEngine(EngineStateEnum.EngineOne); }
+        callback : () => { engineOneState = EngineOneStateEnum.StoryBoard; launchEngine(EngineStateEnum.EngineOne); launchNpcDialog(playerOnMap.npcOnMap[0]) }
     },
     {
         text : 'Exit Game',

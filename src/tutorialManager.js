@@ -122,7 +122,7 @@ const showTutorialKeyBoard = () => {
     if (keyIsDown(83)) keyBoardTested[3] = true;
 
     noFill();
-
+    textSize(22)
     showTutorialText("Here are the key for the movement and the interaction for the player, test every key !")
     let countTest = 0
     for(let i = 0; i < keyBoardTested.length; i++)

@@ -97,6 +97,7 @@ const startSpecificQuestEvents = (questEventString) => {
     switch(questEventString)
     {
         case "goNextTutoStep" :
+            tutorialManagerState = TutorialManagerStateEnum.KeyBoardTuto;
             mapData[0].npcOnMap[0].nextCase = searchPath(mapData[0].npcOnMap[0].pos, [3, 5], mapData[0].map.objectLayer); // Here it's the AI who mmoves
             break;
         case "goFightTuto" :

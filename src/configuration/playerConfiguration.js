@@ -22,7 +22,7 @@ let playerIsExploringMap = false;
 // Player anim
 let playerIsMooving = false;
 let playerDirection = [0, 0]; // stock the direction of the player in a array
-let playerLastDirection = [0, 1]; // orientation naturally down
+let playerLastDirection = [0, -1]; // orientation naturally down
 // Player anim
 
 //#endregion
