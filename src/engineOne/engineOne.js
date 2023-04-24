@@ -65,11 +65,11 @@ const displayTopDown2D = () => {
     // the double createmap function is used to simulate a 2D perspective
 }
 
-const setPlayerCamera = () => {
+const setPlayerCamera = (xSizeCam = windowWidth/2, yHeightCam = windowHeight/2) => {
     if(cameraVector !== playerVector){
         background(20)
         let vectorMoove;
-        vectorMoove = p5.Vector.lerp(createVector(windowWidth/2, windowHeight/2), cameraVector, cameraSmoothStep); // interpolate the camera with the player by using vector.lerp by p5
+        vectorMoove = p5.Vector.lerp(createVector(xSizeCam, yHeightCam), cameraVector, cameraSmoothStep); // interpolate the camera with the player by using vector.lerp by p5
         cameraVector = vectorMoove;
     }
 }

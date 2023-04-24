@@ -152,7 +152,7 @@ const showEndTutorialWithCallback = (callbackOnEnd = exitTutorial, yOff = 0) => 
     let position = [window.innerWidth / 2 - sizeBox[0] / 2, window.innerHeight / 2 + sizeBox[1] - yOff]
     image(uiData[18].image, position[0], position[1], sizeBox[0], sizeBox[1])
     if(mouseIsHover(position[0], position[1], sizeBox[0], sizeBox[1])) image(uiData[27].image, position[0], position[1], sizeBox[0], sizeBox[1]);
-    text("Finish tutorial", position[0], position[1], sizeBox[0], sizeBox[1])
+    text("Continue...", position[0], position[1], sizeBox[0], sizeBox[1])
     createInputButtonWithCallback(position[0], position[1], sizeBox[0], sizeBox[1], callbackOnEnd)
     textAlign(LEFT, LEFT)
 }

@@ -164,9 +164,9 @@ const getNodePathArray = (mapLayer) => {
  * @param {array} mapLayer the current map layer on which we are building the node
  * @returns {object} the node of the position of the map layer
  */
-const getNode = (x, y, mapLayer) => {
+const getNode = (x, y, mapLayer = null) => {
     let canWalk = true;
-    if(mapLayer[y][x] !== -1)
+    if(mapLayer !== null && mapLayer[y][x] !== -1)
     {
         canWalk = false; 
         /**

@@ -58,10 +58,11 @@
                     },{
                         "id" : 5,
                         "pos" : [6, 13],
+                        "endMoovementEvent" : "launchDialog",
                         "nextCase" : null,
                         "isInteractible" : true,
                         "dir" : [0, 1],
-                        "state" : "idle",
+                        "state" : "waitForVoid",
                         "interaction" : "dialog"
                     },{
                         "id" : 6,
