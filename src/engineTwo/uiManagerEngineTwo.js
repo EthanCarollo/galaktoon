@@ -116,7 +116,6 @@ const displayStartFightButton = () => {
     switch(actualMapEngineTwo.fightType)
     {
         case "tutorial" :
-            console.log("play tutorial")
             createInputButtonWithCallback(xPosition, yPosition, width, height, () => {
                 engineTwoState = "Tutorial";
             })
@@ -171,7 +170,6 @@ const displayEnemyInformationUiEngineTwo = () => {
         let barSize = tempSize * 2;
         let xBar = tempPosX - barSize - tempSize * 0.15;
         let yBar = tempPosY + 10;
-        console.log(xBar)
         tint(255,35,35)
         showBarWithPercentUi(xBar, yBar, barSize, percentLifeOfEntity+0.00001, { current : entityToShow.health.actualHealth, max : entityToShow.health.maxHealth});
 
@@ -206,15 +204,15 @@ const displayPlayerInformationUiEngineTwo = () => {
     let yBar = tempPosY + 10;
     
     tint(255,35,35)
-    showBarWithPercentUi(xBar, yBar, barSize, percentLifeOfPlayer);
+    showBarWithPercentUi(xBar, yBar, barSize, percentLifeOfPlayer, { current : actualMapEngineTwo.entityOnTactical[0].health.actualHealth, max : actualMapEngineTwo.entityOnTactical[0].health.maxHealth});
 
     let percentPmOfPlayer = actualMapEngineTwo.entityOnTactical[0].pm / 2 +0.00001;
     tint(35,210,35)
-    showBarWithPercentUi(xBar, yBar+barSize/10, barSize, percentPmOfPlayer);
+    showBarWithPercentUi(xBar, yBar+barSize/10, barSize, percentPmOfPlayer, { current : actualMapEngineTwo.entityOnTactical[0].pm , max : 2});
 
     let percentPaOfPlayer = actualMapEngineTwo.entityOnTactical[0].pa / 2 +0.00001;
     tint(35,35,255)
-    showBarWithPercentUi(xBar, yBar+(barSize/10)*2, barSize, percentPaOfPlayer);
+    showBarWithPercentUi(xBar, yBar+(barSize/10)*2, barSize, percentPaOfPlayer, { current : actualMapEngineTwo.entityOnTactical[0].pa, max : 2});
 
 }
 
