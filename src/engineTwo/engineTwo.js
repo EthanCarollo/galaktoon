@@ -58,12 +58,29 @@ const engineTwoEndFight = () => {
 
 const setGameState = () => {
     if(checkAllEnemiesDead() === true){
+        fightWinner = "allies";
         engineTwoState = "endFight";
         addQuestProgressionOnEndFight(actualMapEngineTwo.entityOnTactical);
     }
     if(checkAllAlliesDead() === true){
+        looseFight();
+        fightWinner = "enemies";
         engineTwoState = "endFight";
     }
+}
+
+const looseFight = () => {
+    loadNewMap(mapData[0], [-10, -7]);
+    launchStoryBoard(2);
+    if(npcFighted != null)
+    {
+        npcFighted.actualDialogIndex = 0;
+        npcFighted = null;
+        npcDialoged = null;
+        playerState = PlayerStateEnum.Normal;
+        playerTeam[0].health.actualHealth = playerTeam[0].health.maxHealth + 0;
+    }
+    // ! Here its loose fight event
 }
 
 const setSelectedEntity = () =>{
@@ -305,6 +322,18 @@ const mouseIsInArrayEngineTwo = () => {
     && Math.floor((mouseX - vectorCameraEngineTwo.x) / tileSize) < actualMapEngineTwo.tacticalMap[0].length
 } // Return true or false
 
+
+/**
+ * just reset every informations of entities on a tactical map
+ * @param {object} tacticalMap a tactical tile map object
+ */
+const resetEveryEntityValue = (tacticalMap) => {
+    for(let i = 0; i <tacticalMap.entityOnTactical.length; i++)
+    {
+        tacticalMap.entityOnTactical[i].pm = 2;
+        tacticalMap.entityOnTactical[i].pa = 2;
+    }
+}
 
 
 //#endregion

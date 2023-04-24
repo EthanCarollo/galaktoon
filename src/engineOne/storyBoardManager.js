@@ -1,4 +1,7 @@
-
+const launchStoryBoard = (idStoryBoard = 0) => {
+    currentStoryBoard = idStoryBoard;
+    engineOneState = EngineOneStateEnum.StoryBoard;
+}
 
 const runStoryBoard = () => {
     imageMode(CENTER)

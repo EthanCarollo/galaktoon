@@ -16,6 +16,12 @@ const loadNewMap = (mapToLoad, start) => {
         cameraVector = createVector(windowWidth/2, windowHeight/2);
         mapVector = createVector(0,0);
         checkMapForCinematic(mapToLoad)
+
+        if(mapToLoad.storyBoard !== undefined && mapToLoad.storyBoard !== undefined && mapToLoad.storyBoard.played === false)
+        {
+            launchStoryBoard(mapToLoad.storyBoard.id);
+            mapToLoad.storyBoard.played = true;
+        }
     }else{
         throw new Error("mapToLoad doesn't exist because the id of the map is inferior to 0")
     }

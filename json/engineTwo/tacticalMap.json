@@ -134,7 +134,7 @@
                             "name": "Attack",
                             "type": "attack",
                             "abilityLevel": 2,
-                            "baseAmount": 5,
+                            "baseAmount": 55,
                             "id": 1,
                             "range": 2
                         }

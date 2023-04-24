@@ -24,6 +24,7 @@ const displayEngineTwoStartingFightUi = () => {
     // TODO : Update the start of a fight engine
     background(25);
     showPlayer(500, 250, 250); 
+    showEnemiesStartFight(500, window.innerWidth -250-500)
     displayStartFightButton();
 }
 
@@ -100,14 +101,16 @@ const displayEngineTwoEndFightUi = () => {
 
 
 const displayStartFightButton = () => {
-    let height = 150;
-    let width = 500;
+    let width = 750;
+    let height = width/5;
     let xPosition = window.innerWidth / 2 - width / 2
     let yPosition = window.innerHeight - 300
     fill(255,255,255,255)
-    rect(xPosition, yPosition, width, height)
+    
+    image(uiData[18].image, xPosition, yPosition, width, height)
+    if(mouseIsHover(xPosition, yPosition, width, height)) image(uiData[27].image, xPosition, yPosition, width, height);
+
     textAlign(CENTER,CENTER)
-    fill(25,25,25,255)
     text("Start Fight",xPosition, yPosition, width, height)
     textAlign(LEFT,LEFT)
     switch(actualMapEngineTwo.fightType)
@@ -259,6 +262,13 @@ const showEnemiesEndFightList = (size, xStart = window.innerWidth / 2 - size / 2
 
 const showPlayer = (size, xStart = window.innerWidth / 2 - size / 2, yStart = window.innerHeight / 2 - size / 2) => {
     animationIdleSprite(xStart, yStart, size, [0, 1], 0)
+}
+
+const showEnemiesStartFight = (size, xStart = window.innerWidth / 2 + size / 2,  yStart = window.innerHeight / 2 - size / 2) => {
+    for(let i = 1; i < actualMapEngineTwo.entityOnTactical.length; i++)
+    {
+        animationIdleSprite(xStart, yStart, size, [0, 1], actualMapEngineTwo.entityOnTactical[i].id)
+    }
 }
 
 const showButtonFightEnd = () => {

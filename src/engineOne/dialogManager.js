@@ -297,7 +297,7 @@ switch(dialog.state)
     break;
   case "Fight" :
     showAcceptOnlyButton(xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, () => {
-      launchFightOnEngineTwo(dialog.fight)
+      if(launchFightOnEngineTwo(dialog.fight) === false) exitDialog();
     });
     break;
   case "HaveQuestToGive" :

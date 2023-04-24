@@ -21,5 +21,6 @@ let abilityPosition = [];
 let abilityIsOpen = false;
 let tutorialStep = 0;
 let canInputEngineTwo = true;
+let fightWinner = "allies";
 
 let npcFighted = null;

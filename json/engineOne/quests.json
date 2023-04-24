@@ -31,7 +31,7 @@
             "questType" : "fight",
             "eventOnStart" : "goOnPlanetBob",
             "eventOnEnd" : "finishFightQuestBob",
-            "questGoal" : {"map" : 2, "position" : [6, 13]},
+            "questGoal" : {"map" : 2, "position" : [7, 13]},
             "idQuestProgression" : 6,
             "currentProgression": 0,
             "maxProgression" : 1,
