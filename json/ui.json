@@ -176,6 +176,10 @@
             "id" : "41",
             "path" : "assets/storyboard/storyboard2.png",
             "image" : null
+        },{
+            "id" : "42",
+            "path" : "assets/storyboard/storyboard3.png",
+            "image" : null
         }
     ]
 }
