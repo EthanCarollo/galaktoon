@@ -21,11 +21,19 @@ const DifferentListStory = [
         ]
     },
     {
-        id : 41,
+        id : 42,
         text : [
             "After a long and hard fight...",
             "Void was defeated... But he wasn't alone...",
             "Then, he woke up in his bed..."
+        ]
+    },
+    {
+        id : 43,
+        text : [
+            "Salatonion was a brave kebab...",
+            "But Dark Woaf corrupted him...",
+            "Now, it's time for Void to change him..."
         ]
     }
 ]

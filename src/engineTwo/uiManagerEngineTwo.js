@@ -48,33 +48,33 @@ const displayEngineTwoTutorialUi = () => {
             tutorialManagerState = TutorialManagerStateEnum.EngineTwoTutorial;
             canInputEngineTwo = false;
             displayPlayerInformationUiEngineTwo()
-            displayEnnemyInformationUiEngineTwo()
+            displayEnemyInformationUiEngineTwo()
             break;
         case 1 :
             displayPlayerInformationUiEngineTwo()
-            displayEnnemyInformationUiEngineTwo()
+            displayEnemyInformationUiEngineTwo()
             break;
         case 2 : 
             displayPlayerInformationUiEngineTwo()
-            displayEnnemyInformationUiEngineTwo()
+            displayEnemyInformationUiEngineTwo()
             displayOpenAbility()
             displayAbility()
             break;
         case 3 : 
             displayPlayerInformationUiEngineTwo()
-            displayEnnemyInformationUiEngineTwo()
+            displayEnemyInformationUiEngineTwo()
             break;
         case 4 : 
             displayPlayerInformationUiEngineTwo()
-            displayEnnemyInformationUiEngineTwo()
+            displayEnemyInformationUiEngineTwo()
             break;
         case 5 :
             displayPlayerInformationUiEngineTwo()
-            displayEnnemyInformationUiEngineTwo()
+            displayEnemyInformationUiEngineTwo()
             break;
         case 6 :
             displayPlayerInformationUiEngineTwo()
-            displayEnnemyInformationUiEngineTwo()
+            displayEnemyInformationUiEngineTwo()
             displayEndTurnButton();
             break;
         case 7 : canInputEngineTwo = true; break;
@@ -144,13 +144,13 @@ const displayGameUi = () => {
     displayOpenAbility()
     displayAbility()
     displayPlayerInformationUiEngineTwo()
-    displayEnnemyInformationUiEngineTwo()
+    displayEnemyInformationUiEngineTwo()
     displayEndTurnButton();
 }
 
 
 
-const displayEnnemyInformationUiEngineTwo = () => {
+const displayEnemyInformationUiEngineTwo = () => {
     for (let i = 1; i < actualMapEngineTwo.entityOnTactical.length; i++) {
         const entityToShow = actualMapEngineTwo.entityOnTactical[i];
         
@@ -173,15 +173,15 @@ const displayEnnemyInformationUiEngineTwo = () => {
         let yBar = tempPosY + 10;
         console.log(xBar)
         tint(255,35,35)
-        showBarWithPercentUi(xBar, yBar, barSize, percentLifeOfEntity+0.00001);
+        showBarWithPercentUi(xBar, yBar, barSize, percentLifeOfEntity+0.00001, { current : entityToShow.health.actualHealth, max : entityToShow.health.maxHealth});
 
         let percentPmOfPlayer = entityToShow.pm / 2 +0.00001;
-        tint(35,255,35)
-        showBarWithPercentUi(xBar, yBar+barSize/10, barSize, percentPmOfPlayer);
+        tint(35,210,35)
+        showBarWithPercentUi(xBar, yBar+barSize/10, barSize, percentPmOfPlayer, { current : entityToShow.pm, max : 2});
 
         let percentPaOfPlayer = entityToShow.pa / 2 +0.00001;
         tint(35,35,255)
-        showBarWithPercentUi(xBar, yBar+(barSize/10)*2, barSize, percentPaOfPlayer);
+        showBarWithPercentUi(xBar, yBar+(barSize/10)*2, barSize, percentPaOfPlayer, { current : entityToShow.pa, max : 2});
     }
 }
 
@@ -209,7 +209,7 @@ const displayPlayerInformationUiEngineTwo = () => {
     showBarWithPercentUi(xBar, yBar, barSize, percentLifeOfPlayer);
 
     let percentPmOfPlayer = actualMapEngineTwo.entityOnTactical[0].pm / 2 +0.00001;
-    tint(35,255,35)
+    tint(35,210,35)
     showBarWithPercentUi(xBar, yBar+barSize/10, barSize, percentPmOfPlayer);
 
     let percentPaOfPlayer = actualMapEngineTwo.entityOnTactical[0].pa / 2 +0.00001;

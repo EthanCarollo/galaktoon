@@ -79,10 +79,10 @@ const checkForInteraction = (playerCaseInteract) => {
     }
     
     // just for set pnj interactible
-    let npcInteractible = playerOnMap.npcOnMap.filter(npc => npc.pos[0] === playerCaseInteract[0] && npc.pos[1] === playerCaseInteract[1])
+    let npcInteractible = getNpcOnTileInteraction(playerCaseInteract)
     if(npcInteractible.length > 0 && npcInteractible[0].state === "idle")
     {
-        createInteractionPopup(playerCaseInteract[0], playerCaseInteract[1], npcInteractible[0].interaction)
+        createInteractionPopup(npcInteractible[0].pos[0], npcInteractible[0].pos[1], npcInteractible[0].interaction)
     }
 }
 
@@ -176,7 +176,7 @@ const interactWithNPC = (tileInteract) => {
      * * then we check if we have npc who we can interact with and if we have, we just take the
      * * first element of the array and we interact with
      */
-    let npcInteracted = playerOnMap.npcOnMap.filter(npc => npc.pos[0] === tileInteract[0] && npc.pos[1] === tileInteract[1])
+    let npcInteracted = getNpcOnTileInteraction(tileInteract)
     if(npcInteracted.length > 0)
     {
         if(npcInteracted[0].isInteractible === true && npcInteracted[0].state === "idle"){
@@ -185,6 +185,17 @@ const interactWithNPC = (tileInteract) => {
     }
 }
 
+const getNpcOnTileInteraction = (tileInteract) => {
+    let npcInteracted = playerOnMap.npcOnMap.filter(npc => npc.pos[0] === tileInteract[0] && npc.pos[1] === tileInteract[1])
+
+    if(npcInteracted.length === 0)
+    {
+        npcInteracted = playerOnMap.npcOnMap.filter(npc => actualPlayerTile()[0] === npc.pos[0] && actualPlayerTile()[1] === npc.pos[1])
+    }
+
+    return npcInteracted;
+    
+}
 
 /**
  * @param {string} npcInteraction npc specific interaction
