@@ -74,6 +74,7 @@ const looseFight = () => {
     if(npcFighted != null)
     {
         npcFighted.actualDialogIndex = 0;
+        actualDialog = 0;
         npcFighted = null;
         npcDialoged = null;
         playerState = PlayerStateEnum.Normal;
@@ -289,6 +290,17 @@ const createImageWithIdOn2dArrayEngineTwo = (x, y, id, currentTileSize, mapInfo 
 
 
 
+const endEventFight = (event) => {
+    switch(event)
+    {
+        case "darkWoafEnd" :
+            // ! Dark woaf specific event when you kill dark woaf !
+            break;
+        case undefined :
+            break;
+        default: throw new Error("end event isn't defined for the end of the fight if the allies wins");
+    }
+}
 
 
 //#region // * Usefull tools functions regions

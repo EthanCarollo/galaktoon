@@ -60,6 +60,18 @@
             "currentProgression": 0,
             "maxProgression" : 1,
             "reward" : null
+        },
+        {
+            "id" : 5,
+            "name" : "Kill Dark Woaf",
+            "description" : "We don't have any solutions, we need to kill Dark Woaf if we wan't to save the world.",
+            "questType" : "fight",
+            "eventOnStart" : "addNewAbility2",
+            "questGoal" : {"map" : 3, "position" : [20, 9]},
+            "idQuestProgression" : 2,
+            "currentProgression": 0,
+            "maxProgression" : 1,
+            "reward" : null
         }
     ]
 }

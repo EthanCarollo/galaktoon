@@ -188,6 +188,10 @@
             "id" : "44",
             "path" : "assets/ui/caseNewInteraction.png",
             "image" : null
+        },{
+            "id" : "45",
+            "path" : "assets/storyboard/storyboard5.png",
+            "image" : null
         }
     ]
 }

@@ -21,17 +21,42 @@
             }, { 
                 "questIsGived" : false,
                 "type" : "quest",
-                "text" : "Va le sauver par pitié !", 
+                "text" : "Please save my son...", 
                 "quest" : 4, 
-                "altText" : "Il faut aller te battre mon grand.",
-                "rewardText" : "Bien nous pouvons commencer." 
+                "altText" : "We need to go on the Dark Woaf's Lair.",
+                "rewardText" : "So let's start." 
             }],[{ 
                 "text" : "Thank you for reuniting me with my son!"
-            }]]
+            },{ 
+                "text" : "We must put an end to the dictatorship of the Dark Woaf"
+            }, { 
+                "questIsGived" : false,
+                "type" : "quest",
+                "text" : "Will you help me destroy it?", 
+                "quest" : 5, 
+                "altText" : "Let's go on the Dark Woaf's Lair.",
+                "rewardText" : "We saved our world !." 
+            }],[
+                {
+                    "text" : "This was a beautiful adventure Void, thank you for that..."
+                }
+            ]]
         },{
             "id" : "1",
             "spriteId" : "2",
-            "name" : "DarkWoaf"
+            "name" : "DarkWoaf",
+            "actualDialogIndex" : 0,
+            "dialogs" : [
+            [{ 
+                "text" : "I never wanted to make all of that but you know, if we want a balanced world, we must act..."
+            },{ 
+                "text" : "So, now you are here, come fight to end all of that. " ,
+                "type" : "fight",
+                "fight" : 0
+            }],
+            [{ 
+                "text" : "Argh...."
+            }]]
         },{
             "id" : "2",
             "spriteId" : "3",
@@ -59,7 +84,7 @@
                     "text" : "You must be numb, you should try to move!", 
                     "quest" : 0, 
                     "interactionType" : "cannotRefuse",
-                    "altText" : "Il faut aller te battre mon grand.",
+                    "altText" : "You are not sense to learn that, there is a problem...",
                     "rewardText" : "Bien nous pouvons commencer." 
                 }],
                 [{ 

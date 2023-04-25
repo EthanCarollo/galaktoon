@@ -168,9 +168,13 @@ const launchAttack = (entity = actualMapEngineTwo.entityOnTactical[whichEntityTu
     if(entity.pa > 0){
 
         // TODO
-        if(selectedAbility >= 2) // TODO : Temp for the debug of the launch animation on cinematic fight
+        if(selectedAbility >= 2 && target.id === 2 /* This is the id of the dark woaf*/) // TODO : Temp for the debug of the launch animation on cinematic fight
         {
-            launchAnimationCinematicFight()
+            launchAnimationCinematicFight(() => {
+                attackWithTheCurrentAbility(entity, abilityIndex, target)
+                resetMovableAndEntityVar();
+            });
+            return true;
         }
         // TODO
 

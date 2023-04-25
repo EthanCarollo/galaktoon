@@ -293,9 +293,10 @@ const exitFight = () => {
     if(npcFighted !== null)
     {
         npcFighted.actualDialogIndex ++;
+        actualDialog = 0;
     }
     launchEngine(EngineStateEnum.EngineOne);
-
+    if(fightWinner === "allies") endEventFight(actualMapEngineTwo.endEvent);
 }
 
 //#endregion

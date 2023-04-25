@@ -1,5 +1,6 @@
 const launchStoryBoard = (idStoryBoard = 0) => {
     currentStoryBoard = idStoryBoard;
+    previousEngineOneState = engineOneState + "";
     engineOneState = EngineOneStateEnum.StoryBoard;
 }
 
@@ -48,7 +49,7 @@ const showButtonEndStoryBoard = () => {
 
 
 const endStoryBoard = () => {
-    engineOneState = EngineOneStateEnum.Playing; 
+    engineOneState = previousEngineOneState; 
     playerCanMove = true;
     resetOpacityStoryBoard();
 }

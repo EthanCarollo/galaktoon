@@ -2,6 +2,7 @@
 
 let storyBoardOpacity = [0, 0, 0]
 let currentStoryBoard = 0
+let previousEngineOneState = EngineOneStateEnum.Playing;
 
 const DifferentListStory = [
     {
@@ -34,6 +35,14 @@ const DifferentListStory = [
             "Salatonion was a brave kebab...",
             "But Dark Woaf corrupted him...",
             "Now, it's time for Void to change him..."
+        ]
+    },
+    {
+        id : 45,
+        text : [
+            "Our heroes have finally arrived...",
+            "In the lair of the Lord Dark Woaf...",
+            "A pretty confident villain..."
         ]
     }
 ]

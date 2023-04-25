@@ -36,53 +36,28 @@
                         3
                     ],
                     "nextCase": null,
-                    "pattern" : "aggressive",
-                    "pm": 2,
-                    "pa": 1,
-                    "state": "idle",
-                    "health": {
-                        "actualHealth": 10,
-                        "maxHealth": 100
-                    },
-                    "abilities": [
-                        {
-                            "name": "Attack",
-                            "type": "attack",
-                            "abilityLevel": 2,
-                            "baseAmount": 5,
-                            "id": 1,
-                            "range": 2
-                        }
-                    ]
-                },
-                {
-                    "id": 2,
-                    "pos": [
-                        8,
-                        4
-                    ],
-                    "nextCase": null,
                     "pattern" : "normal",
                     "pm": 2,
                     "pa": 1,
                     "state": "idle",
                     "health": {
-                        "actualHealth": 75,
-                        "maxHealth": 100
+                        "actualHealth": 50,
+                        "maxHealth": 50
                     },
                     "abilities": [
                         {
                             "name": "Attack",
                             "type": "attack",
                             "abilityLevel": 2,
-                            "baseAmount": 5,
+                            "baseAmount": 15,
                             "id": 1,
                             "range": 2
                         }
                     ]
                 }
             ],
-            "backgroundColor" : 25
+            "backgroundColor" : 25,
+            "endEvent" : "darkWoafEnd"
         },
         {
             "attachedMap": 0,
@@ -141,7 +116,7 @@
                     ]
                 }
             ],
-            "backgroundColor" : 240,
+            "backgroundColor" : 25,
             "fightType" : "tutorial"
         },
         {

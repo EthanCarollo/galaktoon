@@ -48,7 +48,7 @@ const updateTipsEase = () => {
         indexOfTips = lerp(indexOfTips,410.5,0.05)
         if(indexOfTips >= 410) setTimeout(() => {
             indexOfTipsEase = "out"; 
-        }, 3000);
+        }, 1500);
     }else{
         indexOfTips = lerp(indexOfTips,-0.5,0.02)
         if(indexOfTipsEase <= 0) endTips();
@@ -85,7 +85,6 @@ const showAdvancedTips = () => {
     let heightTips = widthTips/3;
     let ratio = advancedImageToShow.height / advancedImageToShow.width;
     if(ratio < 0) throw new Error("Ratio Image for advanced tips is not good, image must be higher in height than width, ratio : " + ratio);
-    console.log(ratio)
     let widthImage = 140;
     let heightImage = widthImage * ratio;
 
@@ -111,7 +110,7 @@ const updateAdvancedTipsEase = () => {
         }, 1500);
     }else{
         indexOfAdvancedTips = lerp(indexOfAdvancedTips,-50.5,0.02)
-        if(indexOfAdvancedTips <= -50) endTips();
+        if(indexOfAdvancedTips <= -50) endAdvancedTips();
     }
 }
 

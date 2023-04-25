@@ -75,6 +75,7 @@ const checkForInteraction = (playerCaseInteract) => {
             {
             let interactType = getTileData(playerCaseInteract[0], playerCaseInteract[1], actualPlayerMap.objectLayer).type;
             createInteractionPopup(playerCaseInteract[0], playerCaseInteract[1], interactType)
+            return;
             }
     }
     
@@ -92,7 +93,7 @@ const checkForInteraction = (playerCaseInteract) => {
  * @param {array[int]} caseInteraction [x, y] the case interaction
  */
 const playerInteraction = (caseInteraction) => {
-    interactWithATile(caseInteraction);
+    if(interactWithATile(caseInteraction) === true) return;
     interactWithNPC(caseInteraction);
 }
 
@@ -112,9 +113,8 @@ const interactWithATile = (tileInteract) => {
     let interactedTile = getTileData(tileInteract[0], tileInteract[1], actualPlayerMap.objectLayer) // get the information of the tile that the player is looking for
 
     if(interactedTile === undefined){
-        return;
+        return false;
     }
-
     switch(interactedTile.type){
         case "explore":
             if(playerCanExplore === true)
@@ -163,6 +163,7 @@ const interactWithATile = (tileInteract) => {
             throw new Error
                 ("The player is interacting with nothing which is impossible if all are doing well, so it's probably an exception with the parameter type of the tile : ' " + interactedTile.type + " ' ")
     }
+    return true;
 }
 
 

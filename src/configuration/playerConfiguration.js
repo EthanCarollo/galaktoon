@@ -59,10 +59,10 @@ let playerTeam = [
                 isLocked : true
             },
             {
-                name : "HealAll",
-                type : "healAll",
+                name : "SuperAttack",
+                type : "superAttack",
                 abilityLevel : 2,
-                baseAmount : 4,
+                baseAmount : 50,
                 id : 5,
                 range : 1,
                 isLocked : true

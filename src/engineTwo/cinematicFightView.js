@@ -184,10 +184,11 @@ const addIndexToCurrentOrderAnimation = () => {
 /**
  * @param {int} indexAnimation, this is the index of the animation started by the attack
  */
-const launchAnimationCinematicFight = (indexAnimation = 0) => {
+const launchAnimationCinematicFight = (eventOnEnd = () => {},indexAnimation = 0) => {
     indexCurrentOrderOfAnimation = 0;
     cinematicUsed = JSON.parse(JSON.stringify(AnimationsList[indexAnimation]))
     fightCinematicViewState = FightCinematicViewStateEnum.Animation;
+    callbackCinematic = eventOnEnd;
 }
 
 
@@ -199,6 +200,8 @@ const endAnimationCinematicFight = () => {
     cinematicUsed.isStopped = true;
     setTimeout(() => {
         fightCinematicViewState = FightCinematicViewStateEnum.NoAnim;
+        callbackCinematic();
+        callbackCinematic = () => { console.log("Callback cinematic isn't set")};
     }, 750); 
 }
 

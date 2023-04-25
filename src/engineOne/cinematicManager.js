@@ -52,7 +52,8 @@ const playCameraCinematic = (vectorDestination = vectorDestinationCinemation) =>
 
     cameraVector = vectorMoove;
 
-    if(Math.round(cameraVector.x) === vectorDestination[0] && Math.round(cameraVector.y) === vectorDestination[1])
+    if(Math.round(cameraVector.x) === vectorDestination[0] && Math.round(cameraVector.y) === vectorDestination[1] 
+    || Math.round(cameraVector.x) === vectorDestination[0] && Math.round(cameraVector.y) === vectorDestination[1])
     {
         endCinematic();
     }
@@ -94,7 +95,7 @@ const checkMapForCinematic = (map) => {
     switch(map.cinematic)
     {
         case "darkWoaf" : 
-            setCinematic([0, 2000]);
+            setCinematic([0, 1850]);
             break;
     }
 }
