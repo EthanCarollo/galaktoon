@@ -36,7 +36,6 @@ const engineTwoPlaying = () => {
 }
 
 const engineTwoPlayingTutorial = () => {
-    console.log("play tuto")
     background(actualMapEngineTwo.backgroundColor)
     setAllHealth();
     displayTopDownMapEngineTwo();

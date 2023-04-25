@@ -68,6 +68,7 @@ const showBarWithPercentUi = (posX, posY, size, percentOfLife, innerValue = null
     image(uiData[13].image, posX, posY+5, size, size/12)
     if(innerValue !== null)
     {
+        fill(255)
         textAlign(CENTER, CENTER)
         textSize(12)
         text(innerValue.current + " / " + innerValue.max, posX, posY+5, size, size/12)

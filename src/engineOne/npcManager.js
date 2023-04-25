@@ -102,7 +102,6 @@ const animateNpc = (x, y, size, direction /* ! = Array ! */, npcId, npc) => {
       }
       break;
     case "pop" :
-      console.log('pooped an animation')
       if(runSpecificAnimationFromASprite(x, y, size, 9, 0.33, -1, npcId) === false) npc.state = 'idle';
       break;
     case "waitForVoid" :
@@ -161,7 +160,6 @@ const mooveEntityToNextCaseInEngineOne = (entity, cameraVector = vectorCameraEng
 
   if(entity.nextCase[0].posOnGrid === null || entity.nextCase[0].posOnGrid === undefined)
   {
-      console.log(entity.nextCase[0].posOnGrid +" ----------- This is the entity next case")
       throw new Error("Entity next case isn't set but the script want to moove");
   }    
   if(entity.nextCase[0].posOnGrid[0] > entity.pos[0] || entity.nextCase[0].posOnGrid[0] < entity.pos[0])

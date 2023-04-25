@@ -104,7 +104,6 @@ const getAttackableCase = (x, y, attackPoint) => {
         addCanAttackCase([x - i, y])
         addCanAttackCase([x, y +i])
         addCanAttackCase([x, y -i])
-        //console.log((attackPoint+i - attackPoint-i) <= attackPoint)
         for(let j = 0; j < attackPoint;j++)
         {
                 //addCanAttackCase([x + j -i,y+j])

@@ -20,23 +20,20 @@ const attackInputInSecondEngine = () => {
      */
     let arrayMousePos = getCoordTileWithMouseClickEngineTwo();
 
-    if(isAnAttackableCase(arrayMousePos[0], arrayMousePos[1]) && selectedEntity !== null)
+    if(mouseIsInArrayEngineTwo() === true && isAnAttackableCase(arrayMousePos[0], arrayMousePos[1]) && selectedEntity !== null && getSpriteTactical(arrayMousePos[0], arrayMousePos[1]) !== null)
     {
-        if(getSpriteTactical(arrayMousePos[0], arrayMousePos[1]) !== null)
+        if(getSpriteTactical(arrayMousePos[0], arrayMousePos[1]).id !== 0)
         {
-            if(getSpriteTactical(arrayMousePos[0], arrayMousePos[1]).id !== 0)
-            {
-                launchAttack(
-                            actualMapEngineTwo.entityOnTactical[whichEntityTurn] /* attacker */, 
-                            getSpriteTactical(arrayMousePos[0], arrayMousePos[1]), /* target */
-                            selectedAbility /* ability */
-                            )
-                eventOnTheTutorialEngine("attacked")
-                return;
-            }else{
-                resetAttackableCase();
-                getMovableCase(actualMapEngineTwo.entityOnTactical[whichEntityTurn].pos[0], actualMapEngineTwo.entityOnTactical[whichEntityTurn].pos[1], selectedEntity.pm);
-            }
+            launchAttack(
+                        actualMapEngineTwo.entityOnTactical[whichEntityTurn] /* attacker */,    
+                        getSpriteTactical(arrayMousePos[0], arrayMousePos[1]), /* target */
+                        selectedAbility /* ability */
+                        )
+            eventOnTheTutorialEngine("attacked")
+            return;
+        }else{
+            resetAttackableCase();
+            getMovableCase(actualMapEngineTwo.entityOnTactical[whichEntityTurn].pos[0], actualMapEngineTwo.entityOnTactical[whichEntityTurn].pos[1], selectedEntity.pm);
         }
     }
 }
@@ -44,7 +41,7 @@ const attackInputInSecondEngine = () => {
 const mooveInputInSecondEngine = () => {
     let arrayMousePos = getCoordTileWithMouseClickEngineTwo();
 
-    if(selectedEntity !== null && selectedEntity.id === 0)
+    if(mouseIsInArrayEngineTwo() === true && selectedEntity !== null && selectedEntity.id === 0)
     {
         if(canMoveCase.length > 0)
         {
@@ -72,7 +69,7 @@ const mooveInputInSecondEngine = () => {
         
     } // Set or moove the player with an ID who is Equal to 0
 
-    if(getTacticalTileOnMouseClick() === 0 && selectedEntity !== null){
+    if(mouseIsInArrayEngineTwo() === true && getTacticalTileOnMouseClick() === 0 && selectedEntity !== null){
         if(selectedEntity.id !== 0){
             canvas.mouseReleased(()=>{
                 resetMovableAndEntityVar()
