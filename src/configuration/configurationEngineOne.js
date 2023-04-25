@@ -39,6 +39,7 @@ let toggleAnimationQuestIndex = false;
 
 let npcDialoged = null;
 let actualDialog = 0;
+let firstDialog = true;
 
 // Player dialog
 

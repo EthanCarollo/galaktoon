@@ -172,6 +172,20 @@ const showSpriteOnTactical = (entity) => {
 
     switch(entity.state)
     {
+        case "heal" :
+            if(isCinematicFightIsRunning() === true)
+            {
+                animationIdleSprite(positionOnMap[0], positionOnMap[1], playerSpriteSize, [0, 1], entity.id)
+                showHealthSpriteTactical(positionOnMap, entity)
+                return;
+            }
+            if(animationFightSprite(positionOnMap[0], positionOnMap[1], playerSpriteSize, 1, entity.id) === false)
+            {
+                entity.state = "idle";
+                checkIaTurn()
+            }
+            showHealthSpriteTactical(positionOnMap, entity)
+            break;
         case "fight":
             if(isCinematicFightIsRunning() === true)
             {

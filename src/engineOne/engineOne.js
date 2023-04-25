@@ -40,6 +40,7 @@ const runPlayingStateEngineOne = () => {
     displayDialogNpc(npcDialoged)
   }
   showTutorial();
+  runTips();
 }
 
 const runStoryBoardStateEngineOne = () => {

@@ -7,7 +7,7 @@
             "name" : "Bob",
             "actualDialogIndex" : 0,
             "dialogs" : [[{ 
-                "text" : "Vous m'avez sauvé, je vous remercie beaucoup et tout !"
+                "text" : "You saved me from that nasty dark woaf minion."
             }, { 
                 "questIsGived" : true,
                 "type" : "quest",
@@ -17,7 +17,7 @@
                 "rewardText" : "Bien nous pouvons commencer." 
             }],
             [{ 
-                "text" : "Sur la planête terre y a mon petit fils qui est pris au piège par les salatonions ! Ils ont été corrompus par DarkWoaf "
+                "text" : "My son recently got kidnapped by a new servant of dark woaf.... The Salatonion's. "
             }, { 
                 "questIsGived" : false,
                 "type" : "quest",
@@ -26,7 +26,7 @@
                 "altText" : "Il faut aller te battre mon grand.",
                 "rewardText" : "Bien nous pouvons commencer." 
             }],[{ 
-                "text" : "Merci beaucoup de m'avoir réuni avec mon fils !"
+                "text" : "Thank you for reuniting me with my son!"
             }]]
         },{
             "id" : "1",
@@ -38,12 +38,12 @@
             "name" : "Salatonion",
             "actualDialogIndex" : 0,
             "dialogs" : [[{ 
-                "text" : "Viens te battre ou je tue baby bob. " ,
+                "text" : "Come fight you coward. " ,
                 "type" : "fight",
                 "fight" : 3
             }],
             [{ 
-                "text" : "Arghhhh je meurs "
+                "text" : "You opened my heart and destroyed the corruption of the dark woaf in me ... Thank you."
             }]]
         },{
             "id" : "3",
@@ -52,11 +52,11 @@
             "actualDialogIndex" : 0,
             "dialogs" : [ 
                 [{ 
-                    "text" : "Ho ! Tu t'es reveillé... " 
+                    "text" : "You woke up, it's really cool!" 
                 }, { 
                     "questIsGived" : false,
                     "type" : "quest",
-                    "text" : "C'est génial, tu dois être engourdi, laisse moi t'initier !", 
+                    "text" : "You must be numb, you should try to move!", 
                     "quest" : 0, 
                     "interactionType" : "cannotRefuse",
                     "altText" : "Il faut aller te battre mon grand.",
@@ -67,20 +67,20 @@
                 }, { 
                     "questIsGived" : false,
                     "type" : "quest",
-                    "text" : "Il va falloir te battre contre un petit droide de combat. Est tu pret ?", 
+                    "text" : "You will have to fight against a small battle droid. Are you ready ?", 
                     "quest" : 1, 
                     "interactionType" : "cannotRefuse",
-                    "altText" : "Aller bats toi gros.",
-                    "rewardText" : "Tu as finit l'initiation au combat !" 
+                    "altText" : "Go fight this droid !",
+                    "rewardText" : "Well done, you have the basics!" 
                 }],
                 [{ 
-                    "text" : "Ton initiation au comnbat est desormais terminée, je vais tout t'expliquer." 
+                    "text" : "Your initiation to fight is now complete, all you have to do is embark on an adventure..." 
                 },{ 
-                    "text" : "Blablabla" 
+                    "text" : "A great villain by the name of Dark Woaf tries to reign in this world, it is in the name of all the inhabitants of the universe that you must defeat him." 
                 }, { 
                     "questIsGived" : false,
                     "type" : "quest",
-                    "text" : "Y a un truc sur la planete des bob", 
+                    "text" : "I heard he started wreaking havoc on the planet of bobs, start there.", 
                     "quest" : 2, 
                     "interactionType" : "cannotRefuse",
                     "altText" : "aller va les aider là",

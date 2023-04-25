@@ -33,7 +33,7 @@
                         "interaction" : "dialog"
                     },{
                         "id" : 6,
-                        "pos" : [5, 6],
+                        "pos" : [8, 3],
                         "nextCase" : null,
                         "isInteractible" : true,
                         "dir" : [0, 1],
@@ -67,7 +67,7 @@
                         "interaction" : "dialog"
                     },{
                         "id" : 6,
-                        "pos" : [5, 6],
+                        "pos" : [5, 3],
                         "nextCase" : null,
                         "isInteractible" : true,
                         "dir" : [0, 1],

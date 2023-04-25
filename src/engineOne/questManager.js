@@ -109,6 +109,7 @@ const startSpecificQuestEvents = (questEventString) => {
         case "addNewAbility1" :
             planetsData[2].isExplorable = true;
             playerTeam[0].abilities[1].isLocked = false; // unlock the first ability
+            launchAdvancedTips("New Card Unlocked !", uiData[playerTeam[0].abilities[1].id].image)
             break;
         case null :
             break;
@@ -117,7 +118,10 @@ const startSpecificQuestEvents = (questEventString) => {
     }
 }
 
+const testTips=() =>{
+    launchAdvancedTips("New Card Unlocked !", uiData[playerTeam[0].abilities[1].id].image)
 
+}
 
 /**
  * 

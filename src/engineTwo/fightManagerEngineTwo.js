@@ -70,6 +70,7 @@ const nextIndexEntityTurn = () => {
  * @param {object} entity entity object 
  * @param {int} target target of the current map 
  * @param {int} selectedAbility selected ability index of the 'entity' obj 
+ * ! Deprecated Method, this method use a time out and is no longer used
  */
 const useAbility = (entity, target = 1, selectedAbility = 0) => {
     if(entity.pa > 0)
@@ -190,6 +191,14 @@ const launchAttack = (entity = actualMapEngineTwo.entityOnTactical[whichEntityTu
 const attackWithTheCurrentAbility = (entity, abilityIndex, target) => {
     switch(entity.abilities[abilityIndex].type)
     {
+        case 'heal' :
+            entity.state = "heal";
+            entity.pa --;
+            setTimeout(() => {
+                target.health.actualHealth += entity.abilities[abilityIndex].baseAmount;
+                if(target.health.actualHealth >= target.health.maxHealth) target.health.actualHealth = target.health.maxHealth;
+            }, 450);
+            break;
         default :
             entity.state = "fight";
             entity.pa --;

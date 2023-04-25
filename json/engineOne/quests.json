@@ -2,8 +2,8 @@
     "data" : [
         {
             "id" : 0,
-            "name" : "Suivre l'entité bleue",
-            "description" : "Retourner parler à l'IA",
+            "name" : "Follow the blue entity",
+            "description" : "Follow the blue entity and talk to him to know more about you.",
             "questType" : "talk",
             "eventOnStart" : "goNextTutoStep",
             "questGoal" : {"map" : 0, "position" : [3, 5]},
@@ -14,8 +14,8 @@
         },
         {
             "id" : 1,
-            "name" : "Essaie de ta battre !",
-            "description" : "C'est la reguerre ma leugeu",
+            "name" : "Try to fight the grey entity",
+            "description" : "Interact with the grey AI to fight him.",
             "questType" : "fight",
             "eventOnStart" : "goFightTuto",
             "questGoal" : {"map" : 0, "position" : [2, 6]},
@@ -27,7 +27,7 @@
         {
             "id" : 2,
             "name" : "Go on the bob planet !",
-            "description" : "Il y a une alerte fin voila comme d'hab",
+            "description" : "Use the exploration computer in front of the window",
             "questType" : "fight",
             "eventOnStart" : "goOnPlanetBob",
             "eventOnEnd" : "finishFightQuestBob",
@@ -39,8 +39,8 @@
         },
         {
             "id" : 3,
-            "name" : "La fin de la planète bob",
-            "description" : "Tu as sauvé bob, parle lui stp",
+            "name" : "The end of the Bob arc",
+            "description" : "You helped bob, now go talk to him to know more.",
             "questType" : "talk",
             "eventOnStart" : null,
             "questGoal" : {"map" : 2, "position" : [15, 17]},
@@ -52,7 +52,7 @@
         {
             "id" : 4,
             "name" : "Sauver bébé bob",
-            "description" : "Il faut sauver bébé bob des griffes du malandradin chef des Salatonions corrompu.",
+            "description" : "We need to help baby bob, he is a prisoner of the terrible 'Salatonion'",
             "questType" : "fight",
             "eventOnStart" : "addNewAbility1",
             "questGoal" : {"map" : 1, "position" : [15, 17]},

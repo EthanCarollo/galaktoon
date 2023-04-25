@@ -294,6 +294,9 @@ switch(dialog.state)
 {
   case "Normal" :
     createInputButtonWithCallback(xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, goNextDialog);
+    setTimeout(() => {
+      if(firstDialog === true) {launchTips("Click on the dialog container to go to the next dialog !"); firstDialog = false}
+    }, 250);
     break;
   case "Fight" :
     showAcceptOnlyButton(xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, () => {

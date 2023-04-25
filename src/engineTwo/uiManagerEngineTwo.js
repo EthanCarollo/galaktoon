@@ -486,9 +486,17 @@ const displayOpenAbility = () => {
 const selectAbility = (ability) => {
     if(actualMapEngineTwo.entityOnTactical[0].pa > 0)
     {
-        resetMovableAndEntityVar();
-        getAttackableCase(actualMapEngineTwo.entityOnTactical[0].pos[0], actualMapEngineTwo.entityOnTactical[0].pos[1], playerTeam[0].abilities[ability].range)
-        selectedAbility = ability;
+        switch(playerTeam[0].abilities[ability].type)
+        {
+            case "heal":
+                attackWithTheCurrentAbility(actualMapEngineTwo.entityOnTactical[0], ability, actualMapEngineTwo.entityOnTactical[0])
+                break;
+            default :
+                resetMovableAndEntityVar();
+                getAttackableCase(actualMapEngineTwo.entityOnTactical[0].pos[0], actualMapEngineTwo.entityOnTactical[0].pos[1], playerTeam[0].abilities[ability].range)
+                selectedAbility = ability;
+                break;
+        }
     }
 }
 
