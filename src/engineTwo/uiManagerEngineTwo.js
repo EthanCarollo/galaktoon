@@ -25,6 +25,7 @@ const displayEngineTwoStartingFightUi = () => {
     background(25);
     showPlayer(500, 250, 250); 
     showEnemiesStartFight(500, window.innerWidth -250-500)
+    displayVersusIcon();
     displayStartFightButton();
 }
 
@@ -100,15 +101,30 @@ const displayEngineTwoEndFightUi = () => {
 //#region // * StartGame UI Region
 
 
+const displayVersusIcon = () => {
+    let width = 500;
+    let height = width;
+    let xPosition = window.innerWidth / 2 - width / 2
+    let yPosition = window.innerHeight / 2 - height / 2
+    if(startUiIsShaking === true) {
+        xPosition += getRandomInt(5) - getRandomInt(5);
+        yPosition += getRandomInt(5) - getRandomInt(5);
+    }
+    image(uiData[46].image, xPosition, yPosition, width, height)
+}
+
 const displayStartFightButton = () => {
     let width = 750;
     let height = width/5;
     let xPosition = window.innerWidth / 2 - width / 2
     let yPosition = window.innerHeight - 300
     fill(255,255,255,255)
-    
+    startUiIsShaking = true
     image(uiData[18].image, xPosition, yPosition, width, height)
-    if(mouseIsHover(xPosition, yPosition, width, height)) image(uiData[27].image, xPosition, yPosition, width, height);
+    if(mouseIsHover(xPosition, yPosition, width, height)){ 
+        image(uiData[27].image, xPosition, yPosition, width, height);
+        startUiIsShaking = false;
+    }
 
     textAlign(CENTER,CENTER)
     text("Start Fight",xPosition, yPosition, width, height)
