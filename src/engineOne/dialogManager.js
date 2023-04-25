@@ -313,7 +313,7 @@ switch(dialog.state)
     showRewardBox(xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, npc, dialog);
     break;
   case "returnOnTheSpaceShip" :
-    showChoiceBoxDependingToTheType(xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, dialog, ()=>{loadNewMap(mapData[0], [-8.5, -8]); goNextDialog()})
+    showChoiceBoxDependingToTheType(xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, dialog, ()=>{loadNewMap(mapData[0], [-8.3, -3]); goNextDialog()})
     // This type just teleport the player to the space ship
     break;
   default :

@@ -51,7 +51,7 @@
         },
         {
             "id" : 4,
-            "name" : "Sauver bébé bob",
+            "name" : "Save Baby Bob",
             "description" : "We need to help baby bob, he is a prisoner of the terrible 'Salatonion'",
             "questType" : "fight",
             "eventOnStart" : "addNewAbility1",

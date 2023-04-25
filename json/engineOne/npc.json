@@ -83,13 +83,11 @@
                     "text" : "I heard he started wreaking havoc on the planet of bobs, start there.", 
                     "quest" : 2, 
                     "interactionType" : "cannotRefuse",
-                    "altText" : "aller va les aider là",
-                    "rewardText" : "ouais ouais ouais bien ouej" 
-                },{ 
-                    "text" : "Finito la mappo bobbo " 
+                    "altText" : "I wait for you here, go help Bob.",
+                    "rewardText" : "Thank you, you saved the planet bob from the grip of Dark Woaf" 
                 }],
                 [{ 
-                    "text" : "Finito la mappo bobbo " 
+                    "text" : "You finished to save Bob from Dark Woaf " 
                 }]
             ]
         },{
@@ -98,7 +96,7 @@
             "name" : "FightAi",
             "actualDialogIndex" : 0,
             "dialogs" : [[{ 
-                "text" : "Viens te battre. " ,
+                "text" : "Let's train" ,
                 "type" : "fight",
                 "fight" : 1
             }],

@@ -105,6 +105,7 @@ const startSpecificQuestEvents = (questEventString) => {
             break;
         case "goOnPlanetBob" :
             playerCanExplore = true;
+            mapData[0].npcOnMap[0].nextCase = searchPath(mapData[0].npcOnMap[0].pos, [7, 3], mapData[0].map.objectLayer); // Here it's the AI who mooves
             break;
         case "addNewAbility1" :
             planetsData[2].isExplorable = true;
@@ -118,10 +119,6 @@ const startSpecificQuestEvents = (questEventString) => {
     }
 }
 
-const testTips=() =>{
-    launchAdvancedTips("New Card Unlocked !", uiData[playerTeam[0].abilities[1].id].image)
-
-}
 
 /**
  * 
