@@ -118,42 +118,13 @@ const showChoiceBoxDependingToTheType = (
 
 
 
-const showAcceptOnlyButton = (xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, callbackFunction) => {
+const showAcceptOnlyButton = (xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, callback) => {
   textAlign(CENTER, CENTER);
   
-  let sizeYChoice = sizeYDialog / 2.4;
-  let sizeXChoice = sizeXDialog / 2.4;
-  let paddingXChoice = sizeXDialog/2 - sizeXChoice/2;
-  let paddingYChoice = sizeYDialog/2.5;
-
-  textSize(sizeYChoice/4.5);
-
-  let dialogBox = uiData[11].image;
-  let xBoxTrue = xStartDialog + paddingXChoice;
-  let boxChoiceTrue = image(dialogBox, xBoxTrue, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice)
-  
-  fill(255)
-  changeFillOnHover(xBoxTrue, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice, 125, 255, 125)
-  if(mouseIsHover(xBoxTrue, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice))
-  {
-    let boxChoiceHover = image(uiData[20].image, xBoxTrue, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice)
-  }
-
-  text("Accept", xBoxTrue, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice)
-
-  createInputButtonWithCallback(xBoxTrue, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice, callbackFunction);
-}
-
-
-// loadNewMap(mapData[0], [-15, -15]);
-const showDialogChoiceBox = (xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, callback) => {
-  
-  textAlign(CENTER, CENTER);
-  
-  let sizeYChoice = sizeYDialog / 2.4;
-  let sizeXChoice = sizeXDialog / 2.4;
-  let paddingXChoice = sizeYDialog/2.75;
-  let paddingYChoice = sizeYDialog/2.5;
+  let sizeYChoice = sizeYDialog / 3;
+  let sizeXChoice = sizeXDialog / 3;
+  let paddingXChoice = sizeYDialog/1.5;
+  let paddingYChoice = sizeYDialog/4;
 
   textSize(sizeYChoice/4.5);
 
@@ -162,7 +133,61 @@ const showDialogChoiceBox = (xStartDialog, yStartDialog, sizeXDialog, sizeYDialo
   let boxChoiceTrue = image(dialogBox, xBoxTrue, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice)
   
   fill(255)
-  changeFillOnHover(xBoxTrue, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice, 125, 255, 125)
+  changeFillOnHover(xBoxTrue, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice, 20, 254, 2)
+  if(mouseIsHover(xBoxTrue, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice))
+  {
+    let boxChoiceHover = image(uiData[20].image, xBoxTrue, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice)
+  }
+
+  text("Accept", xBoxTrue, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice)
+
+  createInputButtonWithCallback(xBoxTrue, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice, callback);
+
+  let xBoxFalse = xStartDialog + paddingXChoice;
+  tint(125,125,125)
+
+  if(refuseIsShaking === true)
+  {
+    xBoxFalse += getRandomInt(5) - getRandomInt(5)
+    yStartDialog += getRandomInt(5) - getRandomInt(5)
+  }
+  let boxChoiceFalse = image(dialogBox, xBoxFalse, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice)
+  noTint()
+  fill(125)
+  text("Refuse", xBoxFalse, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice)
+  imageMode(CENTER)
+  image(uiData[16].image, xBoxFalse+sizeXChoice/2, yStartDialog-sizeYChoice/4, sizeYChoice, sizeYChoice)
+  imageMode(CORNER)
+
+  createInputButtonWithCallback(xBoxFalse, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice, 
+    () => {
+        refuseIsShaking = true;
+        setTimeout(() => {
+          refuseIsShaking = false;
+        }, 500);
+    });
+
+}
+
+
+// loadNewMap(mapData[0], [-15, -15]);
+const showDialogChoiceBox = (xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, callback) => {
+  
+  textAlign(CENTER, CENTER);
+  
+  let sizeYChoice = sizeYDialog / 3;
+  let sizeXChoice = sizeXDialog / 3;
+  let paddingXChoice = sizeYDialog/1.5;
+  let paddingYChoice = sizeYDialog/4;
+
+  textSize(sizeYChoice/4.5);
+
+  let dialogBox = uiData[11].image;
+  let xBoxTrue = xStartDialog + sizeXDialog - sizeXChoice - paddingXChoice;
+  let boxChoiceTrue = image(dialogBox, xBoxTrue, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice)
+  
+  fill(255)
+  changeFillOnHover(xBoxTrue, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice, 20, 254, 2)
   if(mouseIsHover(xBoxTrue, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice))
   {
     let boxChoiceHover = image(uiData[20].image, xBoxTrue, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice)
@@ -176,7 +201,7 @@ const showDialogChoiceBox = (xStartDialog, yStartDialog, sizeXDialog, sizeYDialo
   let boxChoiceFalse = image(dialogBox, xBoxFalse, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice)
         
   fill(255)
-  changeFillOnHover(xBoxFalse, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice, 255, 125, 125)
+  changeFillOnHover(xBoxFalse, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice, 253, 3, 3)
   if(mouseIsHover(xBoxFalse, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice))
   {
     let boxChoiceHover = image(uiData[20].image, xBoxFalse, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice)
@@ -199,10 +224,11 @@ const showRewardBox = (xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, npc
 
   textAlign(CENTER, CENTER);
     
-  let sizeYChoice = sizeYDialog / 2.2;
-  let sizeXChoice = sizeXDialog / 2.2;
-  let paddingXChoice = sizeYDialog/2.75;
-  let paddingYChoice = sizeYDialog/2.3;
+  
+  let sizeYChoice = sizeYDialog / 3;
+  let sizeXChoice = sizeXDialog / 3;
+  let paddingXChoice = sizeYDialog/1.5;
+  let paddingYChoice = sizeYDialog/4;
 
   textSize(sizeYChoice/4.5);
 
@@ -211,7 +237,7 @@ const showRewardBox = (xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, npc
   let boxAcceptReward = image(dialogBox, xBoxTrue, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice)
 
   fill(255)
-  changeFillOnHover(xBoxTrue, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice, 0, 180, 0)
+  changeFillOnHover(xBoxTrue, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice, 20, 254, 2)
 
   text("Accept Reward", xBoxTrue, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice)
 
@@ -299,9 +325,9 @@ const setDialogInput = (xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, di
   if(Math.floor(dialogTextIndex) !== npcDialoged.dialogs[npcDialoged.actualDialogIndex][actualDialog].text.length)
   {
     createInputButtonWithCallback(xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, goNextDialog);
-    textSize(sizeYDialog/11);
+    textSize(sizeYDialog/15);
     textAlign(RIGHT, BOTTOM)
-    text("Click.", xStartDialog, yStartDialog, sizeXDialog-65, sizeYDialog-40)
+    text("Click", xStartDialog, yStartDialog, sizeXDialog-72.5, sizeYDialog-47.5)
     textAlign(LEFT, TOP)
     return;
   }
@@ -309,9 +335,9 @@ const setDialogInput = (xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, di
   {
     case "Normal" :
       createInputButtonWithCallback(xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, goNextDialog);
-      textSize(sizeYDialog/11);
+      textSize(sizeYDialog/15);
       textAlign(RIGHT, BOTTOM)
-      text("Click.", xStartDialog, yStartDialog, sizeXDialog-65, sizeYDialog-40)
+      text("Click", xStartDialog, yStartDialog, sizeXDialog-72.5, sizeYDialog-47.5)
       textAlign(LEFT, TOP)
       break;
     case "Fight" :

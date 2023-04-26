@@ -196,6 +196,14 @@
             "id" : "46",
             "path" : "assets/ui/versusIcon.png",
             "image" : null
+        },{
+            "id" : "47",
+            "path" : "assets/backgroundFight/backGroundFightSpaceShip.png",
+            "image" : null
+        },{
+            "id" : "48",
+            "path" : "assets/backgroundFight/backGroundFightDarkWoaf.png",
+            "image" : null
         }
     ]
 }

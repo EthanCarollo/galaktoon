@@ -23,6 +23,11 @@ const displayEngineTwoUI = () => {
 const displayEngineTwoStartingFightUi = () => {
     // TODO : Update the start of a fight engine
     background(25);
+    if(actualMapEngineTwo.backgroundStartMap !== undefined)
+    {
+        image(uiData[actualMapEngineTwo.backgroundStartMap ].image,0,0,window.innerWidth,window.innerHeight)
+    }
+    
     showPlayer(500, 250, 250); 
     showEnemiesStartFight(500, window.innerWidth -250-500)
     displayVersusIcon();
@@ -86,6 +91,12 @@ const displayEngineTwoTutorialUi = () => {
 
 
 const displayEngineTwoEndFightUi = () => {
+    background(25);
+    if(actualMapEngineTwo.backgroundStartMap !== undefined)
+    {
+        imageMode(CORNER)
+        image(uiData[actualMapEngineTwo.backgroundStartMap ].image,0,0,window.innerWidth,window.innerHeight)
+    }
     displayEndFight();
 }
 
@@ -256,7 +267,7 @@ const showDeadSpriteIconOnEngineTwo = (xStart, yStart, size, idSprite) => {
 const displayEndFight = () => {
     let size = window.innerHeight/1.5;
     showEnemiesEndFightList(size);
-    showPlayer(size);
+    showEndPlayer(size);
     showButtonFightEnd();
 }
 
@@ -268,24 +279,54 @@ const showEnemiesEndFightList = (size, xStart = window.innerWidth / 2 - size / 2
     {
         let sizeIterate = i-1;
         let xPositionSprite = xPosition + size*sizeIterate
-        animationIdleSprite(xPositionSprite, yPosition, size/1.25, [0, 1], actualMapEngineTwo.entityOnTactical[i].id)
+        textSize(32);
+        textAlign(CENTER, TOP)
+        let nameSprite = spritesData[actualMapEngineTwo.entityOnTactical[i].id].name
+        fill(10,10,10)
+        text(nameSprite, xPositionSprite - (size/1.25) / 2, yPosition-15 - (size/1.25) / 2 , size/1.25, (size/1.25))
+        if(fightWinner !== "allies")
+        {
+            animationIdleSprite(xPositionSprite, yPosition, size/1.25, [0, 1], actualMapEngineTwo.entityOnTactical[i].id)
+        }else{
+            animationDeadSprite(xPositionSprite, yPosition, size/1.25, actualMapEngineTwo.entityOnTactical[i].id)
+        }
     }
     imageMode(CORNER)
     noTint();
 }
 
 const showPlayer = (size, xStart = window.innerWidth / 2 - size / 2, yStart = window.innerHeight / 2 - size / 2) => {
-    textSize(32);
+    textSize(size/14);
     textAlign(CENTER, TOP)
-    text(spritesData[0].name, xStart, yStart-15, size, size)
+    let nameSprite = spritesData[0].name
+    fill(10,10,10)
+    text(nameSprite, xStart+10, yStart-15, size, size)
     animationIdleSprite(xStart, yStart, size, [0, 1], 0)
+    
+}
+
+const showEndPlayer = (size, xStart = window.innerWidth / 2 - size / 2, yStart = window.innerHeight / 2 - size / 2) => {
+    textSize(size/14);
+    textAlign(CENTER, TOP)
+    let nameSprite = spritesData[0].name
+    fill(10,10,10)
+    text(nameSprite, xStart+10, yStart-15, size, size)
+    animationIdleSprite(xStart, yStart, size, [0, 1], 0)
+
+    if(fightWinner === "allies")
+    {
+        animationIdleSprite(xStart, yStart, size, [0, 1], 0)
+    }else{
+        animationDeadSprite(xStart, yStart, size, 0)
+    }
 }
 
 const showEnemiesStartFight = (size, xStart = window.innerWidth / 2 + size / 2,  yStart = window.innerHeight / 2 - size / 2) => {
     for(let i = 1; i < actualMapEngineTwo.entityOnTactical.length; i++)
     {
-        textSize(32);
+        textSize(size/14);
         textAlign(CENTER, TOP)
+        fill(10,10,10)
         text(spritesData[actualMapEngineTwo.entityOnTactical[i].id].name, xStart, yStart-15, size, size)
         animationIdleSprite(xStart, yStart, size, [0, 1], actualMapEngineTwo.entityOnTactical[i].id)
     }

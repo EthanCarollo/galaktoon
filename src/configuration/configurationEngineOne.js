@@ -40,6 +40,7 @@ let toggleAnimationQuestIndex = false;
 let npcDialoged = null;
 let actualDialog = 0;
 let firstDialog = true;
+let refuseIsShaking = false;
 
 // Player dialog
 

@@ -39,8 +39,8 @@ const showButtonEndStoryBoard = () => {
     }
     fill(255, 255, 255)
     textAlign(CENTER, CENTER);
-    textSize(28);
-    text("Continue...", xStart, yStart, width, height)
+    textSize(20);
+    text("Continue", xStart, yStart, width, height)
     textAlign(TOP, LEFT);
     createInputButtonWithCallback(xStart, yStart, width, height, endStoryBoard)
     
