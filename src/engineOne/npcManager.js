@@ -203,7 +203,7 @@ const mooveEntityToNextCaseInEngineOne = (entity, cameraVector = vectorCameraEng
 
 
 const addNpcToMap = (idNpc, pos, interaction = 'dialog', direction = [0, 1], state = 'idle', isInteractible = true, mapId = 0) => {
-  mapData[mapId].npcOnMap.push({
+  return mapData[mapId].npcOnMap.push({
     id : idNpc,
     pos : pos,
     nextCase : null,

@@ -61,8 +61,7 @@ const displayTopDown2D = () => {
     showPlayerSprite(cameraVector.x, cameraVector.y, playerSpriteSize);
 
     createMapTopDown("front", actualPlayerMap.objectLayer); // create the layer object in front of the player
-  
-    showGoalQuest();
+    
     // the double createmap function is used to simulate a 2D perspective
 }
 

@@ -33,7 +33,7 @@
             "map" : 4,
             "name" : "MJ - Island",
             "description" : "The everything at once map",
-            "isExplorable" : true
+            "isExplorable" : false
         }
     ]
 }

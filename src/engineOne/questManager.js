@@ -101,7 +101,7 @@ const startSpecificQuestEvents = (questEventString) => {
             mapData[0].npcOnMap[0].nextCase = searchPath(mapData[0].npcOnMap[0].pos, [3, 5], mapData[0].map.objectLayer); // Here it's the AI who mmoves
             break;
         case "goFightTuto" :
-            addNpcToMap(4, [2, 6], 'dialog', [1, 0], 'pop');
+            console.log(addNpcToMap(4, [2, 6], 'dialog', [1, 0], 'pop'));
             break;
         case "goOnPlanetBob" :
             playerCanExplore = true;
@@ -195,6 +195,10 @@ const showQuestList = () => {
     }
 }
 
+
+/**
+ * ! Deprecated Method, we no longer use that cause it was juged not usefull in the game.
+ */
 const showGoalQuest = () => {
     /** 
      * * This function set the current goal of every quest on the map if the current map is the same

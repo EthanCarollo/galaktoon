@@ -275,12 +275,18 @@ const showEnemiesEndFightList = (size, xStart = window.innerWidth / 2 - size / 2
 }
 
 const showPlayer = (size, xStart = window.innerWidth / 2 - size / 2, yStart = window.innerHeight / 2 - size / 2) => {
+    textSize(32);
+    textAlign(CENTER, TOP)
+    text(spritesData[0].name, xStart, yStart-15, size, size)
     animationIdleSprite(xStart, yStart, size, [0, 1], 0)
 }
 
 const showEnemiesStartFight = (size, xStart = window.innerWidth / 2 + size / 2,  yStart = window.innerHeight / 2 - size / 2) => {
     for(let i = 1; i < actualMapEngineTwo.entityOnTactical.length; i++)
     {
+        textSize(32);
+        textAlign(CENTER, TOP)
+        text(spritesData[actualMapEngineTwo.entityOnTactical[i].id].name, xStart, yStart-15, size, size)
         animationIdleSprite(xStart, yStart, size, [0, 1], actualMapEngineTwo.entityOnTactical[i].id)
     }
 }

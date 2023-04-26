@@ -85,10 +85,10 @@
                     "quest" : 0, 
                     "interactionType" : "cannotRefuse",
                     "altText" : "You are not sense to learn that, there is a problem...",
-                    "rewardText" : "Bien nous pouvons commencer." 
+                    "rewardText" : "Well, you look in better shape." 
                 }],
                 [{ 
-                    "text" : "Nous allons commencer par une initiation au combat. " 
+                    "text" : "We are going to start a fight initiation. " 
                 }, { 
                     "questIsGived" : false,
                     "type" : "quest",
@@ -126,7 +126,7 @@
                 "fight" : 1
             }],
             [{ 
-                "text" : "Bien joué, tu m'as battu ! Retourne parler à l'IA pour continuer ton initiation. "
+                "text" : "Well done, you beat me! Go back to talk to the AI to continue the initiation "
             }]]
         },{
             "id" : "5",

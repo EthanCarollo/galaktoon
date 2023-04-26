@@ -28,6 +28,11 @@ const goNextDialog = () => {
   /**
    * * Advance in the dialog and exit the dialog if it's the last dialog of the dialog array
    */
+  if(dialogTextIndex !== npcDialoged.dialogs[npcDialoged.actualDialogIndex][actualDialog].text.length)
+  {
+    dialogTextIndex = npcDialoged.dialogs[npcDialoged.actualDialogIndex][actualDialog].text.length;
+    return;
+  }
   dialogTextIndex = 0;
   actualDialog++;
   if(actualDialog >= npcDialoged.dialogs[npcDialoged.actualDialogIndex].length){
@@ -153,7 +158,7 @@ const showDialogChoiceBox = (xStartDialog, yStartDialog, sizeXDialog, sizeYDialo
   textSize(sizeYChoice/4.5);
 
   let dialogBox = uiData[11].image;
-  let xBoxTrue = xStartDialog + paddingXChoice;
+  let xBoxTrue = xStartDialog + sizeXDialog - sizeXChoice - paddingXChoice;
   let boxChoiceTrue = image(dialogBox, xBoxTrue, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice)
   
   fill(255)
@@ -167,7 +172,7 @@ const showDialogChoiceBox = (xStartDialog, yStartDialog, sizeXDialog, sizeYDialo
 
   createInputButtonWithCallback(xBoxTrue, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice, callback);
 
-  let xBoxFalse = xStartDialog + sizeXDialog - sizeXChoice - paddingXChoice;
+  let xBoxFalse = xStartDialog + paddingXChoice;
   let boxChoiceFalse = image(dialogBox, xBoxFalse, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice)
         
   fill(255)
@@ -290,35 +295,40 @@ text(actualDialogNpc, xStartDialog +paddingXText, yStartDialog+paddingYText, siz
 
 
 const setDialogInput = (xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, dialog, npc) => {
-switch(dialog.state)
-{
-  case "Normal" :
+  if(dialogTextIndex !== npcDialoged.dialogs[npcDialoged.actualDialogIndex][actualDialog].text.length)
+  {
     createInputButtonWithCallback(xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, goNextDialog);
-    setTimeout(() => {
-      if(firstDialog === true) {launchTips("Click on the dialog container to go to the next dialog !"); firstDialog = false}
-    }, 250);
-    break;
-  case "Fight" :
-    showAcceptOnlyButton(xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, () => {
-      if(launchFightOnEngineTwo(dialog.fight) === false) exitDialog();
-    });
-    break;
-  case "HaveQuestToGive" :
-    showChoiceBoxDependingToTheType(xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, dialog);
-    break;
-  case "GivedQuest" :
-    createInputButtonWithCallback(xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, goNextDialog);
-    break;
-  case "Reward" :
-    showRewardBox(xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, npc, dialog);
-    break;
-  case "returnOnTheSpaceShip" :
-    showChoiceBoxDependingToTheType(xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, dialog, ()=>{loadNewMap(mapData[0], [-8.3, -3]); goNextDialog()})
-    // This type just teleport the player to the space ship
-    break;
-  default :
-    throw new Error("State isn't defined or doesn't exist")
-}
+    return;
+  }
+  switch(dialog.state)
+  {
+    case "Normal" :
+      createInputButtonWithCallback(xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, goNextDialog);
+      /*setTimeout(() => {
+        if(firstDialog === true) {launchTips("Click on the dialog container to go to the next dialog !"); firstDialog = false}
+      }, 250);*/
+      break;
+    case "Fight" :
+      showAcceptOnlyButton(xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, () => {
+        if(launchFightOnEngineTwo(dialog.fight) === false) exitDialog();
+      });
+      break;
+    case "HaveQuestToGive" :
+      showChoiceBoxDependingToTheType(xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, dialog);
+      break;
+    case "GivedQuest" :
+      createInputButtonWithCallback(xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, goNextDialog);
+      break;
+    case "Reward" :
+      showRewardBox(xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, npc, dialog);
+      break;
+    case "returnOnTheSpaceShip" :
+      showChoiceBoxDependingToTheType(xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, dialog, ()=>{loadNewMap(mapData[0], [-8.3, -3]); goNextDialog()})
+      // This type just teleport the player to the space ship
+      break;
+    default :
+      throw new Error("State isn't defined or doesn't exist")
+  }
 }
 
 
