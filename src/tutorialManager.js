@@ -29,8 +29,8 @@ const showTutorialEngineTwo = () => {
         case 1 :
             rect(0, 200, window.innerWidth, window.innerHeight)
             rect(500, 0, window.innerWidth-1000, 200.0001)
-            showTutorialText("The first bar on the top (in red) is the health bar ! The second one is the moovement point bar and the third is the ability point bar !", 350);
-            showEndTutorialWithCallback(() => tutorialStep++, 350);
+            showTutorialText("The first bar on the top (in red) is the health bar ! The second one is the moovement point bar and the third is the ability point bar !");
+            showEndTutorialWithCallback(() => tutorialStep++);
             break;
         case 2 :
             let offSetPositionCard = (window.innerHeight - abilityPosition[1].y)
@@ -131,7 +131,7 @@ const showTutorialKeyBoard = () => {
     }
     if(countTest === 0)
     {
-        showEndTutorialWithCallback();
+        showEndTutorialWithCallback(() => { exitTutorial(); keyboardIsShowing = false });
     }
 }
 

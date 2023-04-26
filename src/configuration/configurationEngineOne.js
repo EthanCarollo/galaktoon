@@ -57,6 +57,7 @@ let positionBorderCinematic = [-ySizeBorderCinematic, window.innerHeight]
 let uiEngineOneState = UiEngineOneStateEnum.Normal;
 let tutorialInteractText = null;
 let isInTutorial = false;
+let keyboardIsShowing = true;
 
 let bedIsAlreadyUsed = false;
 let playerAlreadyExplore = false;

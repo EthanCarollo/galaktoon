@@ -28,7 +28,7 @@ const goNextDialog = () => {
   /**
    * * Advance in the dialog and exit the dialog if it's the last dialog of the dialog array
    */
-  if(dialogTextIndex !== npcDialoged.dialogs[npcDialoged.actualDialogIndex][actualDialog].text.length)
+  if(Math.floor(dialogTextIndex) !== npcDialoged.dialogs[npcDialoged.actualDialogIndex][actualDialog].text.length)
   {
     dialogTextIndex = npcDialoged.dialogs[npcDialoged.actualDialogIndex][actualDialog].text.length;
     return;
@@ -266,47 +266,53 @@ const showNpcSpriteInDialog = (npcDialoged, whoDialog = 1) => {
 
 
 const showDialogText = (xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, dialog) => {
-let paddingXText = sizeYDialog/2.5;
-let paddingYText = sizeYDialog/3.75;
+  let paddingXText = sizeYDialog/2.5;
+  let paddingYText = sizeYDialog/3.75;
 
-let paddingSizeXBox = paddingXText*2;
-let paddingSizeYBox = paddingYText*2;
+  let paddingSizeXBox = paddingXText*2;
+  let paddingSizeYBox = paddingYText*2;
 
-let actualDialogNpc;
+  let actualDialogNpc;
 
-switch(dialog.state)
-{
-  case "GivedQuest" :
-    actualDialogNpc = creatingStringWithDelay(dialog.altText);
-    break;
-  case "Reward" :
-    actualDialogNpc = creatingStringWithDelay(dialog.rewardText);
-    break;
-  default :
-    actualDialogNpc = creatingStringWithDelay(dialog.text);
-}
+  switch(dialog.state)
+  {
+    case "GivedQuest" :
+      actualDialogNpc = creatingStringWithDelay(dialog.altText);
+      break;
+    case "Reward" :
+      actualDialogNpc = creatingStringWithDelay(dialog.rewardText);
+      break;
+    default :
+      actualDialogNpc = creatingStringWithDelay(dialog.text);
+  }
 
-textSize(sizeYDialog/11);
-textAlign(LEFT, TOP)
-fill(255)
-text(actualDialogNpc, xStartDialog +paddingXText, yStartDialog+paddingYText, sizeXDialog-paddingSizeXBox, sizeYDialog-paddingSizeYBox);
+  textSize(sizeYDialog/11);
+  textAlign(LEFT, TOP)
+  fill(255)
+  text(actualDialogNpc, xStartDialog +paddingXText, yStartDialog+paddingYText, sizeXDialog-paddingSizeXBox, sizeYDialog-paddingSizeYBox);
+
 }
 
 
 
 const setDialogInput = (xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, dialog, npc) => {
-  if(dialogTextIndex !== npcDialoged.dialogs[npcDialoged.actualDialogIndex][actualDialog].text.length)
+  if(Math.floor(dialogTextIndex) !== npcDialoged.dialogs[npcDialoged.actualDialogIndex][actualDialog].text.length)
   {
     createInputButtonWithCallback(xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, goNextDialog);
+    textSize(sizeYDialog/11);
+    textAlign(RIGHT, BOTTOM)
+    text("Click.", xStartDialog, yStartDialog, sizeXDialog-65, sizeYDialog-40)
+    textAlign(LEFT, TOP)
     return;
   }
   switch(dialog.state)
   {
     case "Normal" :
       createInputButtonWithCallback(xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, goNextDialog);
-      /*setTimeout(() => {
-        if(firstDialog === true) {launchTips("Click on the dialog container to go to the next dialog !"); firstDialog = false}
-      }, 250);*/
+      textSize(sizeYDialog/11);
+      textAlign(RIGHT, BOTTOM)
+      text("Click.", xStartDialog, yStartDialog, sizeXDialog-65, sizeYDialog-40)
+      textAlign(LEFT, TOP)
       break;
     case "Fight" :
       showAcceptOnlyButton(xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, () => {

@@ -161,6 +161,7 @@ const exitExploringMenu = () => {
 
 
 const showKeyboardPlayer = () => {
+    if(keyboardIsShowing === false) return;
     let sizeKey = 100;
     let padding = 15
     showKeyOnScreen(window.innerWidth - (sizeKey + padding) , 
