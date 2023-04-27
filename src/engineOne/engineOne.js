@@ -14,6 +14,9 @@ const runEngineOne = () => {
     case EngineOneStateEnum.StoryBoard :
       runStoryBoardStateEngineOne()
       break;
+    case EngineOneStateEnum.EndGame :
+      runEndStateEngineOne()
+      break;
     default :
       throw new Error("engine one state isn't set : " + engineOneState)
   }
@@ -49,7 +52,11 @@ const runStoryBoardStateEngineOne = () => {
 }
 
 const runEndStateEngineOne = () => {
-
+  playerCanMove = false;
+  displayTopDown2D();
+  setVectorLerpEaseOutExploringMenu();
+  showBorderCinematic();
+  showCredits();
 }
 
 //#endregion
@@ -182,5 +189,5 @@ const getTileData = (x, y, map) => {
  * * Launching the end game with credits
  */
 const launchEndGame = () => {
-
+  engineOneState = EngineOneStateEnum.EndGame;
 }

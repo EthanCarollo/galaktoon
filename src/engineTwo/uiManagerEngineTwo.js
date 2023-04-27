@@ -311,7 +311,6 @@ const showEndPlayer = (size, xStart = window.innerWidth / 2 - size / 2, yStart =
     let nameSprite = spritesData[0].name
     fill(10,10,10)
     text(nameSprite, xStart+10, yStart-15, size, size)
-    animationIdleSprite(xStart, yStart, size, [0, 1], 0)
 
     if(fightWinner === "allies")
     {

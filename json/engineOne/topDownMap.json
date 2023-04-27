@@ -90,6 +90,14 @@
                         "dir" : [0, 1],
                         "state" : "idle",
                         "interaction" : "dialog"
+                    },{
+                        "id" : 6,
+                        "pos" : [22, 32],
+                        "nextCase" : null,
+                        "isInteractible" : true,
+                        "dir" : [0, 1],
+                        "state" : "idle",
+                        "interaction" : "dialog"
                     }],
                     "cinematic" : "darkWoaf",
                     "tileRessource":"./json/engineOne/mapTileData/tileMapDarkWoaf.json"

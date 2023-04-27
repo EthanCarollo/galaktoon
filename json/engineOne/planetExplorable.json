@@ -11,7 +11,7 @@
             "id" : 1,
             "map" : 2,
             "name" : "Bob's Planet",
-            "description" : "A simple planet where all the slimes live together !",
+            "description" : "A simple planet where all the slimes live together!",
             "isExplorable" : true
         },
         {
@@ -26,7 +26,7 @@
             "map" : 3,
             "name" : "Dark Woaf's Lair",
             "description" : "The lair of the evil tyrant...",
-            "isExplorable" : true
+            "isExplorable" : false
         },
         {
             "id" : 4,

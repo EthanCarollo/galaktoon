@@ -369,7 +369,7 @@ const setDialogInput = (xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, di
     case "finishTheGame" :
       createInputButtonWithCallback(xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, () => {
         goNextDialog()
-        launchNpcDialog(mapData[3].npcOnMap[1])
+        launchNpcDialog(mapData[3].npcOnMap[2])
       });
       textSize(sizeYDialog/15);
       textAlign(RIGHT, BOTTOM)
@@ -379,7 +379,7 @@ const setDialogInput = (xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, di
     case "launchSalatonion" :
       createInputButtonWithCallback(xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, () => {
         goNextDialog()
-        launchNpcDialog(mapData[3].npcOnMap[2])
+        launchNpcDialog(mapData[3].npcOnMap[3])
       });
       textSize(sizeYDialog/15);
       textAlign(RIGHT, BOTTOM)
