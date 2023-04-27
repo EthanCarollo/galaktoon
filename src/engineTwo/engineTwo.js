@@ -294,6 +294,11 @@ const endEventFight = (event) => {
     switch(event)
     {
         case "darkWoafEnd" :
+            let npcIndexBob = addNpcToMap(7, [19, 18], 'dialog', [1, 0], 'idle', true, 3)
+            let npcIndexSalato = addNpcToMap(2, [21, 18], 'dialog', [1, 0], 'idle', true, 3)
+            playerCanMove = false;
+            mapData[3].npcOnMap[npcIndexBob-1].nextCase = searchPath(mapData[3].npcOnMap[npcIndexBob-1].pos, [19, 12], mapData[3].map.objectLayer);
+            mapData[3].npcOnMap[npcIndexSalato-1].nextCase = searchPath(mapData[3].npcOnMap[npcIndexBob-1].pos, [21, 12], mapData[3].map.objectLayer);
             // ! Dark woaf specific event when you kill dark woaf !
             break;
         case undefined :

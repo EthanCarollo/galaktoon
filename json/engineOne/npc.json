@@ -55,7 +55,8 @@
                 "fight" : 0
             }],
             [{ 
-                "text" : "Argh...."
+                "text" : "Argh....",
+                "type" : "finishTheGame"
             }]]
         },{
             "id" : "2",
@@ -152,6 +153,28 @@
                     "text" : "Do you want to return in the space ship ?"
                 }]
             ]
+        },{
+            "id" : "7",
+            "spriteId" : "1",
+            "name" : "Bob",
+            "actualDialogIndex" : 0,
+            "dialogs" : [[{ 
+                "text" : "We killed Dark Woaf.."
+            },{ 
+                "type" : "launchSalatonion",
+                "text" : "Is this the end?"
+            }]]
+        },{
+            "id" : "8",
+            "spriteId" : "3",
+            "name" : "Salatonion",
+            "actualDialogIndex" : 0,
+            "dialogs" : [[{ 
+                "text" : "Yes. It's now over for him."
+            },{ 
+                "type" : "launchEnd",
+                "text" : "We will never hear from him again."
+            }]]
         }
     ]
 }

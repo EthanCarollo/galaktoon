@@ -100,11 +100,7 @@ const showChoiceBoxDependingToTheType = (
   switch(dialog.interactionType)
   {
     case "cannotRefuse" :
-      showAcceptOnlyButton(xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, () => {
-        dialog.questIsGived = true;
-        addQuestToList(dialog.quest)
-        goNextDialog();
-      });
+      showAcceptOnlyButton(xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, callback);
       break;
     default :
       showDialogChoiceBox(xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, callback);
@@ -322,6 +318,7 @@ const showDialogText = (xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, di
 
 
 const setDialogInput = (xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, dialog, npc) => {
+  if(Math.floor(dialogTextIndex) > npcDialoged.dialogs[npcDialoged.actualDialogIndex][actualDialog].text.length) dialogTextIndex = npcDialoged.dialogs[npcDialoged.actualDialogIndex][actualDialog].text.length; 
   if(Math.floor(dialogTextIndex) !== npcDialoged.dialogs[npcDialoged.actualDialogIndex][actualDialog].text.length)
   {
     createInputButtonWithCallback(xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, goNextDialog);
@@ -358,6 +355,36 @@ const setDialogInput = (xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, di
       showChoiceBoxDependingToTheType(xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, dialog, ()=>{loadNewMap(mapData[0], [-8.3, -3]); goNextDialog()})
       // This type just teleport the player to the space ship
       break;
+    case "finishTheGame" :
+      createInputButtonWithCallback(xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, () => {
+        goNextDialog()
+        launchNpcDialog(mapData[3].npcOnMap[1])
+      });
+      textSize(sizeYDialog/15);
+      textAlign(RIGHT, BOTTOM)
+      text("Click", xStartDialog, yStartDialog, sizeXDialog-72.5, sizeYDialog-47.5)
+      textAlign(LEFT, TOP)
+      break;
+    case "launchSalatonion" :
+      createInputButtonWithCallback(xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, () => {
+        goNextDialog()
+        launchNpcDialog(mapData[3].npcOnMap[2])
+      });
+      textSize(sizeYDialog/15);
+      textAlign(RIGHT, BOTTOM)
+      text("Click", xStartDialog, yStartDialog, sizeXDialog-72.5, sizeYDialog-47.5)
+      textAlign(LEFT, TOP)
+      break;
+    case "launchEnd" :
+      createInputButtonWithCallback(xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, () => {
+        goNextDialog()
+        launchEndGame();
+      });
+      textSize(sizeYDialog/15);
+      textAlign(RIGHT, BOTTOM)
+      text("Click", xStartDialog, yStartDialog, sizeXDialog-72.5, sizeYDialog-47.5)
+      textAlign(LEFT, TOP)
+      break;
     default :
       throw new Error("State isn't defined or doesn't exist")
   }
@@ -366,7 +393,7 @@ const setDialogInput = (xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, di
 
 
 const setQuestState = (dialog) => {
-dialog.state = "Normal"
+  dialog.state = "Normal";
   switch(dialog.type)
   {
     case "fight" :
@@ -385,6 +412,15 @@ dialog.state = "Normal"
       break;
     case "returnOnTheSpaceShip" :
       dialog.state = "returnOnTheSpaceShip"
+      break;
+    case "finishTheGame" :
+      dialog.state = "finishTheGame";
+      break;
+    case "launchSalatonion" :
+      dialog.state = "launchSalatonion";
+      break;
+    case "launchEnd" :
+      dialog.state = "launchEnd";
       break;
   }
 

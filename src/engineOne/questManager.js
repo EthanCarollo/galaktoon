@@ -101,7 +101,7 @@ const startSpecificQuestEvents = (questEventString) => {
             mapData[0].npcOnMap[0].nextCase = searchPath(mapData[0].npcOnMap[0].pos, [3, 5], mapData[0].map.objectLayer); // Here it's the AI who mmoves
             break;
         case "goFightTuto" :
-            console.log(addNpcToMap(4, [2, 6], 'dialog', [1, 0], 'pop'));
+            addNpcToMap(4, [2, 6], 'dialog', [1, 0], 'pop')
             break;
         case "goOnPlanetBob" :
             playerCanExplore = true;

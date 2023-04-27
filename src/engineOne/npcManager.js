@@ -106,8 +106,9 @@ const animateNpc = (x, y, size, direction /* ! = Array ! */, npcId, npc) => {
       break;
     case "waitForVoid" :
       animationIdleSprite(x, y, size, direction, npcId)
-      if(actualPlayerTile()[0]-4 < npc.pos[0] && actualPlayerTile()[0]+4 > npc.pos[0] 
-      && actualPlayerTile()[1]-4 < npc.pos[1] && actualPlayerTile()[1]+4 > npc.pos[1])
+      let range = 7;
+      if(actualPlayerTile()[0]-range < npc.pos[0] && actualPlayerTile()[0]+range > npc.pos[0] 
+      && actualPlayerTile()[1]-range < npc.pos[1] && actualPlayerTile()[1]+range > npc.pos[1])
       {
         launchGreedPathingOnVoid(npc);
       }
