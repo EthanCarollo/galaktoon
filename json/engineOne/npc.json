@@ -69,7 +69,12 @@
                 "fight" : 3
             }],
             [{ 
-                "text" : "You opened my heart and destroyed the corruption of the dark woaf in me ... Thank you."
+                "text" : "You opened my heart and destroyed the corruption of the dark woaf in me ... Thank you.",
+                "type" : "appearBobAfterFight"
+            },
+            {
+                "text" : "Oh bob... I'm so sorry, I regret so much..",
+                "type" : "freeBobKid"
             }]]
         },{
             "id" : "3",
@@ -140,7 +145,7 @@
                 "fight" : 2
             }],
             [{ 
-                "text" : "Arghhhh you beated me... "
+                "text" : "Arghhhh you beat me... I'm just a minion after all..."
             }]]
         },{
             "id" : "6",
@@ -175,6 +180,36 @@
                 "type" : "launchEnd",
                 "text" : "We will never hear from him again."
             }]]
+        },{
+            "id" : "9",
+            "spriteId" : "1",
+            "name" : "Bob",
+            "actualDialogIndex" : 0,
+            "dialogs" : [[{ 
+                "questIsGived" : true,
+                "type" : "quest",
+                "text" : "Please save my son...", 
+                "quest" : 4, 
+                "altText" : "We need to go on the Dark Woaf's Lair.",
+                "rewardText" : "Don't worry for that, the most important thing is that you have become yourself again and my son. Thank you for that Void ! " 
+            }],[{ 
+                "text" : "Now, we must put an end to the dictatorship of the Dark Woaf"
+            }, { 
+                "questIsGived" : false,
+                "type" : "quest",
+                "text" : "Will you help me destroy it?", 
+                "quest" : 5, 
+                "altText" : "Let's go on the Dark Woaf's Lair.",
+                "rewardText" : "We saved our world !." 
+            }],[
+                {
+                    "text" : "This was a beautiful adventure Void, thank you for that..."
+                }
+            ]]
+        },{
+            "id" : "10",
+            "spriteId" : "7",
+            "name" : "Baby Bob"
         }
     ]
 }

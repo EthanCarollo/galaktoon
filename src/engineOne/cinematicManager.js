@@ -95,7 +95,7 @@ const checkMapForCinematic = (map) => {
     switch(map.cinematic)
     {
         case "darkWoaf" : 
-            setCinematic([0, 1850]);
+            setCinematic([0, 1650]);
             break;
     }
 }

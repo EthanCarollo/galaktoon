@@ -1343,6 +1343,34 @@
             "type": "useless",
             "destructible": "false",
             "sizeXonConstruct": 1
+        },
+        {
+            "id": "96",
+            "path": "assets/tiles/earthTiles/cage-bob-droitevide.png",
+            "isAnimated": false,
+            "image": "null",
+            "collider": true,
+            "canConstruct": "true",
+            "isAnObject": false,
+            "xWidth": 1,
+            "yWidth": "2",
+            "type": "useless",
+            "destructible": "false",
+            "sizeXonConstruct": 1
+        },
+        {
+            "id": "97",
+            "path": "assets/tiles/earthTiles/cage-bob-gauchevide.png",
+            "isAnimated": false,
+            "image": "null",
+            "collider": true,
+            "canConstruct": "true",
+            "isAnObject": false,
+            "xWidth": 1,
+            "yWidth": "2",
+            "type": "useless",
+            "destructible": "false",
+            "sizeXonConstruct": 1
         }
     ]
 }

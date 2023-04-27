@@ -343,10 +343,6 @@ const setDialogInput = (xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, di
   {
     case "Normal" :
       createInputButtonWithCallback(xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, goNextDialog);
-      textSize(sizeYDialog/15);
-      textAlign(RIGHT, BOTTOM)
-      text("Click", xStartDialog, yStartDialog, sizeXDialog-72.5, sizeYDialog-47.5)
-      textAlign(LEFT, TOP)
       break;
     case "Fight" :
       showAcceptOnlyButton(xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, () => {
@@ -371,31 +367,37 @@ const setDialogInput = (xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, di
         goNextDialog()
         launchNpcDialog(mapData[3].npcOnMap[2])
       });
-      textSize(sizeYDialog/15);
-      textAlign(RIGHT, BOTTOM)
-      text("Click", xStartDialog, yStartDialog, sizeXDialog-72.5, sizeYDialog-47.5)
-      textAlign(LEFT, TOP)
       break;
     case "launchSalatonion" :
       createInputButtonWithCallback(xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, () => {
         goNextDialog()
         launchNpcDialog(mapData[3].npcOnMap[3])
       });
-      textSize(sizeYDialog/15);
-      textAlign(RIGHT, BOTTOM)
-      text("Click", xStartDialog, yStartDialog, sizeXDialog-72.5, sizeYDialog-47.5)
-      textAlign(LEFT, TOP)
       break;
     case "launchEnd" :
       createInputButtonWithCallback(xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, () => {
         goNextDialog()
         launchEndGame();
       });
-      textSize(sizeYDialog/15);
-      textAlign(RIGHT, BOTTOM)
-      text("Click", xStartDialog, yStartDialog, sizeXDialog-72.5, sizeYDialog-47.5)
-      textAlign(LEFT, TOP)
       break;
+    case "appearBobAfterFight" :
+      createInputButtonWithCallback(xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, ()=>{
+        goNextDialog()
+        let numberNpc = addNpcToMap(9, [20, 21], 'dialog', [1, 0], 'idle', true, 1)
+        mapData[1].npcOnMap[numberNpc-1].nextCase = searchPath(mapData[1].npcOnMap[numberNpc-1].pos, [12, 21], mapData[1].map.objectLayer);
+      });
+      break;
+    case "freeBobKid" :
+      createInputButtonWithCallback(xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, ()=>{
+        mapData[2].npcOnMap.splice(0, 1)
+        goNextDialog()
+        launchNpcDialog(mapData[1].npcOnMap[2])
+        mapData[1].map.objectLayer[23][6] = 97;
+        mapData[1].map.objectLayer[23][7] = 96;
+        let numberNpc = addNpcToMap(10, [6, 20], 'dialog', [1, 0], 'idle', true, 1)
+        mapData[1].npcOnMap[numberNpc-1].nextCase = searchPath(mapData[1].npcOnMap[numberNpc-1].pos, [10, 21], mapData[1].map.objectLayer);
+      });
+      break ;
     default :
       throw new Error("State isn't defined or doesn't exist")
   }
@@ -432,6 +434,12 @@ const setQuestState = (dialog) => {
       break;
     case "launchEnd" :
       dialog.state = "launchEnd";
+      break;
+    case "appearBobAfterFight" :
+      dialog.state = "appearBobAfterFight";
+      break;
+    case "freeBobKid" :
+      dialog.state = "freeBobKid";
       break;
   }
 
