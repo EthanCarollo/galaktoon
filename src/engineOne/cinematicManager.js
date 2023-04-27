@@ -48,7 +48,7 @@ const playCameraCinematic = (vectorDestination = vectorDestinationCinemation) =>
      */
     background(20)
     let vectorMoove;
-    vectorMoove = p5.Vector.lerp(createVector(vectorDestination[0], vectorDestination[1]), cameraVector, cameraSmoothStep); // interpolate the camera with the player by using vector.lerp by p5
+    vectorMoove = p5.Vector.lerp(createVector(vectorDestination[0], vectorDestination[1]), cameraVector, 0.985); // interpolate the camera with the player by using vector.lerp by p5
 
     cameraVector = vectorMoove;
 

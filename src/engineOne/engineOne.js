@@ -105,7 +105,7 @@ const createMapTopDown = (orientation, mapLayer, mapInfo = playerOnMap, offsetPo
    * * between these two functions, i will have illusion of depth (in this case, if orientation isn't set, it won't send an
    * * error and will just draw every image)
    */
-    noTint()
+    noTint(); noStroke();
     for(let y = 0;y < mapLayer.length; y++)
     {
       for(let x = 0;x < mapLayer[0].length; x++)

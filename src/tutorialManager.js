@@ -10,8 +10,6 @@ const showTutorial = () => {
         case TutorialManagerStateEnum.EngineTwoTutorial :
             showTutorialEngineTwo();
             break;
-        default :
-            break;
     }
 }
 
