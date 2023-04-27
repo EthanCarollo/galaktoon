@@ -3,39 +3,52 @@
     [
         {
             "id" : "0",
+            "name" : "Void",
             "path" : "assets/sprites/topDownSprite/testsprite/MainCharacter.png",
             "nb" : "1",
             "image" : "null"
         },
         {
             "id" : "1",
+            "name" : "Bob",
             "path" : "assets/sprites/topDownSprite/bob/BobSpriteSheet.png",
             "nb" : "1",
             "image" : "null"
         },
         {
             "id" : "2",
+            "name" : "DarkWoaf",
             "path" : "assets/sprites/topDownSprite/darkWoaf/darkWoafSpriteSheet.png",
             "nb" : "1",
             "image" : "null"
         },{
             "id" : "3",
+            "name" : "Salatonion",
             "path" : "assets/sprites/topDownSprite/salatonion/salatonionSprite.png",
             "nb" : "1",
             "image" : "null"
         },{
             "id" : "4",
+            "name" : "MainAi",
             "path" : "assets/sprites/topDownSprite/ai/MainAi.png",
             "nb" : "1",
             "image" : "null"
         },{
             "id" : "5",
+            "name" : "FightAi",
             "path" : "assets/sprites/topDownSprite/ai/MainAiFight.png",
             "nb" : "1",
             "image" : "null"
         },{
             "id" : "6",
+            "name" : "RedWoaf",
             "path" : "assets/sprites/topDownSprite/redwoafsprite/redWoaf.png",
+            "nb" : "1",
+            "image" : "null"
+        },{
+            "id" : "7",
+            "name" : "BabyBob",
+            "path" : "assets/sprites/topDownSprite/babyBob/babyBob.png",
             "nb" : "1",
             "image" : "null"
         }

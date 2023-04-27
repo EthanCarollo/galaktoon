@@ -17,6 +17,7 @@ const runEngineTwo = () => {
         default :
             throw new Error("Engine Two State isn't defined : " + engineTwoState)
     }
+    showTutorial();
 }
 
 
@@ -35,7 +36,6 @@ const engineTwoPlaying = () => {
 }
 
 const engineTwoPlayingTutorial = () => {
-    console.log("play tuto")
     background(actualMapEngineTwo.backgroundColor)
     setAllHealth();
     displayTopDownMapEngineTwo();
@@ -57,12 +57,30 @@ const engineTwoEndFight = () => {
 
 const setGameState = () => {
     if(checkAllEnemiesDead() === true){
+        fightWinner = "allies";
         engineTwoState = "endFight";
         addQuestProgressionOnEndFight(actualMapEngineTwo.entityOnTactical);
     }
     if(checkAllAlliesDead() === true){
+        looseFight();
+        fightWinner = "enemies";
         engineTwoState = "endFight";
     }
+}
+
+const looseFight = () => {
+    loadNewMap(mapData[0], [-10, -7]);
+    launchStoryBoard(2);
+    if(npcFighted != null)
+    {
+        npcFighted.actualDialogIndex = 0;
+        actualDialog = 0;
+        npcFighted = null;
+        npcDialoged = null;
+        playerState = PlayerStateEnum.Normal;
+        playerTeam[0].health.actualHealth = playerTeam[0].health.maxHealth + 0;
+    }
+    // ! Here its loose fight event
 }
 
 const setSelectedEntity = () =>{
@@ -133,7 +151,7 @@ const showRectOnTactical = (x, y, id) => {
             }
             if(isAnAttackableCase(x, y) === true)
             {
-                fill(255,100,100,100)
+                fill(255,150,150,175)
                 rect(x*tileSize+vectorCameraEngineTwo.x, y*tileSize+vectorCameraEngineTwo.y, tileSize, tileSize);
             }
             break;
@@ -154,6 +172,20 @@ const showSpriteOnTactical = (entity) => {
 
     switch(entity.state)
     {
+        case "heal" :
+            if(isCinematicFightIsRunning() === true)
+            {
+                animationIdleSprite(positionOnMap[0], positionOnMap[1], playerSpriteSize, [0, 1], entity.id)
+                showHealthSpriteTactical(positionOnMap, entity)
+                return;
+            }
+            if(animationFightSprite(positionOnMap[0], positionOnMap[1], playerSpriteSize, 1, entity.id) === false)
+            {
+                entity.state = "idle";
+                checkIaTurn()
+            }
+            showHealthSpriteTactical(positionOnMap, entity)
+            break;
         case "fight":
             if(isCinematicFightIsRunning() === true)
             {
@@ -258,6 +290,22 @@ const createImageWithIdOn2dArrayEngineTwo = (x, y, id, currentTileSize, mapInfo 
 
 
 
+const endEventFight = (event) => {
+    switch(event)
+    {
+        case "darkWoafEnd" :
+            let npcIndexBob = addNpcToMap(7, [19, 18], 'dialog', [1, 0], 'idle', true, 3)
+            let npcIndexSalato = addNpcToMap(8, [21, 18], 'dialog', [1, 0], 'idle', true, 3)
+            playerCanMove = false;
+            mapData[3].npcOnMap[npcIndexBob-1].nextCase = searchPath(mapData[3].npcOnMap[npcIndexBob-1].pos, [19, 12], mapData[3].map.objectLayer);
+            mapData[3].npcOnMap[npcIndexSalato-1].nextCase = searchPath(mapData[3].npcOnMap[npcIndexBob-1].pos, [21, 12], mapData[3].map.objectLayer);
+            // ! Dark woaf specific event when you kill dark woaf !
+            break;
+        case undefined :
+            break;
+        default: throw new Error("end event isn't defined for the end of the fight if the allies wins");
+    }
+}
 
 
 //#region // * Usefull tools functions regions
@@ -304,6 +352,18 @@ const mouseIsInArrayEngineTwo = () => {
     && Math.floor((mouseX - vectorCameraEngineTwo.x) / tileSize) < actualMapEngineTwo.tacticalMap[0].length
 } // Return true or false
 
+
+/**
+ * just reset every informations of entities on a tactical map
+ * @param {object} tacticalMap a tactical tile map object
+ */
+const resetEveryEntityValue = (tacticalMap) => {
+    for(let i = 0; i <tacticalMap.entityOnTactical.length; i++)
+    {
+        tacticalMap.entityOnTactical[i].pm = 2;
+        tacticalMap.entityOnTactical[i].pa = 2;
+    }
+}
 
 
 //#endregion

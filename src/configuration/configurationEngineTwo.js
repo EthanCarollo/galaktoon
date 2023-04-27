@@ -21,5 +21,8 @@ let abilityPosition = [];
 let abilityIsOpen = false;
 let tutorialStep = 0;
 let canInputEngineTwo = true;
+let fightWinner = "allies";
+let startUiIsShaking = true;
+let cinematicIsShaking = false;
 
 let npcFighted = null;

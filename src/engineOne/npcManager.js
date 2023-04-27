@@ -41,13 +41,16 @@ const displayAllNPCOnMap = (orientation = "back") => {
 const showSpecificNpcOnMap = (xPosition, yPosition) => {
   /**
    * * Get the npc on the current tile position, this function is good because i can show my npc like
-   * * there is a top down with depth 
+   * * there is a top down with depth and then display all the npc on the tile
    */
-  let npcInteractible = playerOnMap.npcOnMap.filter(npc => 
+  let npcToDisplay = playerOnMap.npcOnMap.filter(npc => 
     Math.floor(npc.pos[0]) === xPosition && Math.floor(npc.pos[1]+1) === yPosition )
-    if(npcInteractible.length > 0)
+    if(npcToDisplay.length > 0)
     {
-      displayNpc(npcInteractible[0])
+      for(let i = 0; i < npcToDisplay.length;i++)
+      {
+        displayNpc(npcToDisplay[i])
+      }
     }
 }
 
@@ -64,6 +67,7 @@ const displayNpc = (npc) => {
   }
   if(npc.nextCase === null && npc.state === "moove")
   {
+    launchEndMoovementEventNpc(npc);
     npc.state = "idle";
   }
   animateNpc(positionTemp.x, positionTemp.y, playerSpriteSize, npc.dir, spriteNpcId, npc)
@@ -98,9 +102,25 @@ const animateNpc = (x, y, size, direction /* ! = Array ! */, npcId, npc) => {
       }
       break;
     case "pop" :
-      console.log('pooped an animation')
       if(runSpecificAnimationFromASprite(x, y, size, 9, 0.33, -1, npcId) === false) npc.state = 'idle';
       break;
+    case "waitForVoid" :
+      animationIdleSprite(x, y, size, direction, npcId)
+      let range = 7;
+      if(actualPlayerTile()[0]-range < npc.pos[0] && actualPlayerTile()[0]+range > npc.pos[0] 
+      && actualPlayerTile()[1]-range < npc.pos[1] && actualPlayerTile()[1]+range > npc.pos[1])
+      {
+        launchGreedPathingOnVoid(npc);
+      }
+      break;
+    case "seeVoid" :
+      animationIdleSprite(x, y, size, direction, npcId)
+      createImageWithIdOn2dArray(npc.pos[0], npc.pos[1]-1, 10, 65, true)
+      break;
+    case "dead" : 
+      animationDeadSprite(x, y, size, npcId)
+      break;
+
     default :
       break;
     }
@@ -145,7 +165,6 @@ const mooveEntityToNextCaseInEngineOne = (entity, cameraVector = vectorCameraEng
 
   if(entity.nextCase[0].posOnGrid === null || entity.nextCase[0].posOnGrid === undefined)
   {
-      console.log(entity.nextCase[0].posOnGrid +" ----------- This is the entity next case")
       throw new Error("Entity next case isn't set but the script want to moove");
   }    
   if(entity.nextCase[0].posOnGrid[0] > entity.pos[0] || entity.nextCase[0].posOnGrid[0] < entity.pos[0])
@@ -189,7 +208,7 @@ const mooveEntityToNextCaseInEngineOne = (entity, cameraVector = vectorCameraEng
 
 
 const addNpcToMap = (idNpc, pos, interaction = 'dialog', direction = [0, 1], state = 'idle', isInteractible = true, mapId = 0) => {
-  mapData[mapId].npcOnMap.push({
+  return mapData[mapId].npcOnMap.push({
     id : idNpc,
     pos : pos,
     nextCase : null,
@@ -198,6 +217,28 @@ const addNpcToMap = (idNpc, pos, interaction = 'dialog', direction = [0, 1], sta
     state : state,
     interaction : interaction
   })
+}
+
+
+
+const launchEndMoovementEventNpc = (npc) => {
+  switch(npc.endMoovementEvent)
+  {
+    case "launchDialog" :
+      launchNpcDialog(npc);
+      break;
+  }
+}
+
+const launchGreedPathingOnVoid = (npc) => {
+  npc.state = "seeVoid";
+  playerState = PlayerStateEnum.Dialog;
+  setTimeout(() => {
+    npc.nextCase = searchPath(npc.pos, actualPlayerTile(), actualPlayerMap.objectLayer)
+    if(npc.nextCase === null){ 
+      npc.nextCase = [getNode(actualPlayerTile()[0], actualPlayerTile()[1])]; 
+    } // Just force the path finding
+  }, 1000);
 }
 
 

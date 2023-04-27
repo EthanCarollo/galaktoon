@@ -7,43 +7,74 @@
             "name" : "Bob",
             "actualDialogIndex" : 0,
             "dialogs" : [[{ 
-                "text" : "Vous m'avez sauvé, je vous remercie beaucoup et tout !"
+                "text" : "You saved me from that nasty dark woaf minion."
             }, { 
                 "questIsGived" : true,
                 "type" : "quest",
-                "text" : "Merci de m'avoir sauvé.", 
+                "text" : "Thank you for savingme.", 
                 "quest" : 3, 
-                "altText" : "Il faut aller te battre mon grand.",
-                "rewardText" : "Bien nous pouvons commencer." 
+                "altText" : "You need to fight.",
+                "rewardText" : "I will now need you help adventurer!" 
             }],
             [{ 
-                "text" : "Sur la planête terre y a mon petit fils qui est pris au piège par les salatonions ! Ils ont été corrompus par DarkWoaf "
+                "text" : "My son recently got kidnapped by a new servant of dark woaf.... The Salatonion's. "
             }, { 
                 "questIsGived" : false,
                 "type" : "quest",
-                "text" : "Va le sauver par pitié !", 
+                "text" : "Please save my son...", 
                 "quest" : 4, 
-                "altText" : "Il faut aller te battre mon grand.",
-                "rewardText" : "Bien nous pouvons commencer." 
+                "altText" : "We need to go on the Dark Woaf's Lair.",
+                "rewardText" : "So let's start." 
             }],[{ 
-                "text" : "Merci beaucoup de m'avoir réuni avec mon fils !"
-            }]]
+                "text" : "Thank you for reuniting me with my son!"
+            },{ 
+                "text" : "We must put an end to the dictatorship of the Dark Woaf."
+            }, { 
+                "questIsGived" : false,
+                "type" : "quest",
+                "text" : "Will you help me destroy it?", 
+                "quest" : 5, 
+                "altText" : "Let's go on the Dark Woaf's Lair.",
+                "rewardText" : "We saved our world!." 
+            }],[
+                {
+                    "text" : "This was a beautiful adventure Void, thank you for that..."
+                }
+            ]]
         },{
             "id" : "1",
             "spriteId" : "2",
-            "name" : "DarkWoaf"
+            "name" : "DarkWoaf",
+            "actualDialogIndex" : 0,
+            "dialogs" : [
+            [{ 
+                "text" : "I never wanted to make all of that but you know, if we want a balanced world, we must act..."
+            },{ 
+                "text" : "So, now you are here, come fight to end all of that. " ,
+                "type" : "fight",
+                "fight" : 0
+            }],
+            [{ 
+                "text" : "Argh....",
+                "type" : "finishTheGame"
+            }]]
         },{
             "id" : "2",
             "spriteId" : "3",
             "name" : "Salatonion",
             "actualDialogIndex" : 0,
             "dialogs" : [[{ 
-                "text" : "Viens te battre ou je tue baby bob. " ,
+                "text" : "Come fight you coward. " ,
                 "type" : "fight",
                 "fight" : 3
             }],
             [{ 
-                "text" : "Arghhhh je meurs "
+                "text" : "You opened my heart and destroyed the corruption of the dark woaf in me ... Thank you.",
+                "type" : "appearBobAfterFight"
+            },
+            {
+                "text" : "Oh bob... I'm so sorry, I regret so much..",
+                "type" : "freeBobKid"
             }]]
         },{
             "id" : "3",
@@ -52,40 +83,42 @@
             "actualDialogIndex" : 0,
             "dialogs" : [ 
                 [{ 
-                    "text" : "Ho ! Tu t'es reveillé... " 
+                    "text" : "You woke up, it's really cool!" 
                 }, { 
                     "questIsGived" : false,
                     "type" : "quest",
-                    "text" : "C'est génial, tu dois être engourdi, laisse moi t'initier !", 
+                    "text" : "You must be numb, you should try to move!", 
                     "quest" : 0, 
-                    "altText" : "Il faut aller te battre mon grand.",
-                    "rewardText" : "Bien nous pouvons commencer." 
+                    "interactionType" : "cannotRefuse",
+                    "altText" : "You are not sense to learn that, there is a problem...",
+                    "rewardText" : "Well, you look in better shape." 
                 }],
                 [{ 
-                    "text" : "Nous allons commencer par une initiation au combat. " 
+                    "text" : "We are going to start a fight initiation. " 
                 }, { 
                     "questIsGived" : false,
                     "type" : "quest",
-                    "text" : "Il va falloir te battre contre un petit droide de combat. Est tu pret ?", 
+                    "text" : "You will have to fight against a small battle droid. Are you ready?", 
                     "quest" : 1, 
                     "interactionType" : "cannotRefuse",
-                    "altText" : "Aller bats toi gros.",
-                    "rewardText" : "Tu as finit l'initiation au combat !" 
+                    "altText" : "Go fight this droid!",
+                    "rewardText" : "Well done, you have the basics!" 
                 }],
                 [{ 
-                    "text" : "Ton initiation au comnbat est desormais terminée, je vais tout t'expliquer." 
+                    "text" : "Your initiation to fight is now complete, all you have to do is embark on an adventure..." 
                 },{ 
-                    "text" : "Blablabla" 
+                    "text" : "A great villain by the name of Dark Woaf tries to reign in this world, it is in the name of all the inhabitants of the universe that you must defeat him." 
                 }, { 
                     "questIsGived" : false,
                     "type" : "quest",
-                    "text" : "Y a un truc sur la planete des bob", 
+                    "text" : "I heard he started wreaking havoc on the planet of bobs, start there.", 
                     "quest" : 2, 
                     "interactionType" : "cannotRefuse",
-                    "altText" : "aller va les aider là",
-                    "rewardText" : "ouais ouais ouais bien ouej" 
-                },{ 
-                    "text" : "Finito la mappo bobbo " 
+                    "altText" : "I wait for you here, go help Bob.",
+                    "rewardText" : "Thank you, you saved the planet bob from the grip of Dark Woaf" 
+                }],
+                [{ 
+                    "text" : "You finished to save Bob from Dark Woaf " 
                 }]
             ]
         },{
@@ -94,12 +127,12 @@
             "name" : "FightAi",
             "actualDialogIndex" : 0,
             "dialogs" : [[{ 
-                "text" : "Viens te battre. " ,
+                "text" : "Let's train" ,
                 "type" : "fight",
                 "fight" : 1
             }],
             [{ 
-                "text" : "Bien joué, tu m'as battu ! Retourne parler à l'IA pour continuer ton initiation. "
+                "text" : "Well played, you beat me ! Go talk to the AI for more information. "
             }]]
         },{
             "id" : "5",
@@ -107,12 +140,12 @@
             "name" : "Guard Woaf",
             "actualDialogIndex" : 0,
             "dialogs" : [[{ 
-                "text" : "Viens te battre ou je hagar bob. " ,
+                "text" : "You've seen it all, so I'm going to have to delete you... " ,
                 "type" : "fight",
                 "fight" : 2
             }],
             [{ 
-                "text" : "Arghhhh je meurs "
+                "text" : "Arghhhh you beat me... I'm just a minion after all..."
             }]]
         },{
             "id" : "6",
@@ -125,6 +158,58 @@
                     "text" : "Do you want to return in the space ship ?"
                 }]
             ]
+        },{
+            "id" : "7",
+            "spriteId" : "1",
+            "name" : "Bob",
+            "actualDialogIndex" : 0,
+            "dialogs" : [[{ 
+                "text" : "We killed Dark Woaf.."
+            },{ 
+                "type" : "launchSalatonion",
+                "text" : "Is this the end?"
+            }]]
+        },{
+            "id" : "8",
+            "spriteId" : "3",
+            "name" : "Salatonion",
+            "actualDialogIndex" : 0,
+            "dialogs" : [[{ 
+                "text" : "Yes. It's now over for him."
+            },{ 
+                "type" : "launchEnd",
+                "text" : "We will never hear from him again."
+            }]]
+        },{
+            "id" : "9",
+            "spriteId" : "1",
+            "name" : "Bob",
+            "actualDialogIndex" : 0,
+            "dialogs" : [[{ 
+                "questIsGived" : true,
+                "type" : "quest",
+                "text" : "Please save my son...", 
+                "quest" : 4, 
+                "altText" : "We need to go on the Dark Woaf's Lair.",
+                "rewardText" : "Don't worry for that, the most important thing is that you have become yourself again and my son. Thank you for that Void ! " 
+            }],[{ 
+                "text" : "Now, we must put an end to the dictatorship of the Dark Woaf"
+            }, { 
+                "questIsGived" : false,
+                "type" : "quest",
+                "text" : "Will you help me destroy it?", 
+                "quest" : 5, 
+                "altText" : "Let's go on the Dark Woaf's Lair.",
+                "rewardText" : "We saved our world !." 
+            }],[
+                {
+                    "text" : "This was a beautiful adventure Void, thank you for that..."
+                }
+            ]]
+        },{
+            "id" : "10",
+            "spriteId" : "7",
+            "name" : "Baby Bob"
         }
     ]
 }

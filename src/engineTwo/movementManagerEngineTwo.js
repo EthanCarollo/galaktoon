@@ -23,7 +23,6 @@ const getMovableCase = (x, y, movementPoint) => {
         addCanMoveCase([x - i, y])
         addCanMoveCase([x, y +i])
         addCanMoveCase([x, y -i])
-        //console.log((movementPoint+i - movementPoint-i) <= movementPoint)
         for(let j = 0; j < movementPoint;j++)
         {
                 //addCanMoveCase([x + j -i,y+j])
@@ -91,7 +90,6 @@ const mooveEntityToNextCase = (entity, cameraVector = vectorCameraEngineTwo) => 
         ]
     if(entity.nextCase === null || entity.nextCase === undefined)
     {
-        console.log(entity.nextCase)
         throw new Error("Entity next case isn't set but the script want to moove");
     }    
     if(entity.nextCase[0] > entity.pos[0] || entity.nextCase[0] < entity.pos[0])

@@ -3,9 +3,12 @@
 const launchFightOnEngineTwo = (idMapOfFight) => { // this take in parameters debug enemies for the prototype
     if(checkAllAlliesDead() === false && actualTransitionState === null)
     {
-        actualMapEngineTwo = tacticalMapData[idMapOfFight]
+        actualMapEngineTwo = JSON.parse(JSON.stringify(tacticalMapData[idMapOfFight]))
         actualMapEngineTwoRessource = mapData[actualMapEngineTwo.attachedMap];
         engineTwoState = "startFight";
+        playerFightAnimationIndex = 0;
+        whichEntityTurn = 0; // Reset turn to 0
+        resetEveryEntityValue(actualMapEngineTwo)
         setPlayerInActualMapEngineTwo();
         launchEngine(EngineStateEnum.EngineTwo);
         if(npcDialoged !== null)
@@ -14,7 +17,9 @@ const launchFightOnEngineTwo = (idMapOfFight) => { // this take in parameters de
         }else{
             npcFighted = null;
         }
+        return true;
     }
+    return false;
 }
 
 const setPlayerInActualMapEngineTwo = () => {
@@ -61,7 +66,6 @@ const launchTransitionAndSetCallbackAfter = (callbackFunction) => {
 
     callbackWhenTransitionFinish = callbackFunction
     transitionImageId = getRandomBackGroundId();
-    console.log(transitionImageId)
 
     actualTransitionState = TransitionStateEnum.EnterIn
 }
@@ -76,10 +80,12 @@ const transitionManager = () => {
     switch(actualTransitionState)
     {
         case TransitionStateEnum.EnterIn : 
+            resetCanvasVar()
             enterInTransition()
             break;
         case TransitionStateEnum.GoOut :
             goOutTransition()
+            resetCanvasVar()
             break;
     }
 }
@@ -88,7 +94,6 @@ const transitionManager = () => {
 
 const getRandomBackGroundId = () => {
     const arrayId = [31, 15, 33]
-    console.log(getRandomInt(arrayId.length))
     return arrayId[getRandomInt(arrayId.length)];
 } 
 

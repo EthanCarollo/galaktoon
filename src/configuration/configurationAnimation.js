@@ -98,3 +98,4 @@ let cinematicUsed;
 
 let fightCinematicViewState = FightCinematicViewStateEnum.NoAnim;
 let indexCurrentOrderOfAnimation = 0;
+let callbackCinematic = () => { console.log("Callback isn't set")}

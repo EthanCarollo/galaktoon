@@ -1,19 +1,3 @@
-
-
-
-const playerInputInteractForEngineOne = () => {
-    if(playerCanInteract === true){
-  
-        let playerCaseInteract = tileNextToThePlayer()
-    
-        if(keyIsDown(69)) {
-            playerInteraction(playerCaseInteract)
-        }
-    }
-}
-
-
-
 const playerInputForEngineOne=()=>{
     switch(playerState){
         case PlayerStateEnum.Normal :
@@ -25,6 +9,19 @@ const playerInputForEngineOne=()=>{
             break;
         default :
             throw new Error("PlayerState isn't set or doesn't exist in input")
+    }
+}
+
+
+
+const playerInputInteractForEngineOne = () => {
+    if(playerCanInteract === true){
+  
+        let playerCaseInteract = tileNextToThePlayer()
+    
+        if(keyIsDown(69)) {
+            playerInteraction(playerCaseInteract)
+        }
     }
 }
 

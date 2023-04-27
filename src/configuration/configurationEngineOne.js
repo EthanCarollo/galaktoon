@@ -39,6 +39,8 @@ let toggleAnimationQuestIndex = false;
 
 let npcDialoged = null;
 let actualDialog = 0;
+let firstDialog = true;
+let refuseIsShaking = false;
 
 // Player dialog
 
@@ -56,6 +58,7 @@ let positionBorderCinematic = [-ySizeBorderCinematic, window.innerHeight]
 let uiEngineOneState = UiEngineOneStateEnum.Normal;
 let tutorialInteractText = null;
 let isInTutorial = false;
+let keyboardIsShowing = true;
 
 let bedIsAlreadyUsed = false;
 let playerAlreadyExplore = false;

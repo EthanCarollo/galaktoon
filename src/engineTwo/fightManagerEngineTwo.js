@@ -70,6 +70,7 @@ const nextIndexEntityTurn = () => {
  * @param {object} entity entity object 
  * @param {int} target target of the current map 
  * @param {int} selectedAbility selected ability index of the 'entity' obj 
+ * ! Deprecated Method, this method use a time out and is no longer used
  */
 const useAbility = (entity, target = 1, selectedAbility = 0) => {
     if(entity.pa > 0)
@@ -103,7 +104,6 @@ const getAttackableCase = (x, y, attackPoint) => {
         addCanAttackCase([x - i, y])
         addCanAttackCase([x, y +i])
         addCanAttackCase([x, y -i])
-        //console.log((attackPoint+i - attackPoint-i) <= attackPoint)
         for(let j = 0; j < attackPoint;j++)
         {
                 //addCanAttackCase([x + j -i,y+j])
@@ -168,9 +168,13 @@ const launchAttack = (entity = actualMapEngineTwo.entityOnTactical[whichEntityTu
     if(entity.pa > 0){
 
         // TODO
-        if(selectedAbility >= 2) // TODO : Temp for the debug of the launch animation on cinematic fight
+        if(selectedAbility >= 2 && target.id === 2 /* This is the id of the dark woaf*/) // TODO : Temp for the debug of the launch animation on cinematic fight
         {
-            launchAnimationCinematicFight()
+            launchAnimationCinematicFight(() => {
+                attackWithTheCurrentAbility(entity, abilityIndex, target)
+                resetMovableAndEntityVar();
+            });
+            return true;
         }
         // TODO
 
@@ -190,6 +194,14 @@ const launchAttack = (entity = actualMapEngineTwo.entityOnTactical[whichEntityTu
 const attackWithTheCurrentAbility = (entity, abilityIndex, target) => {
     switch(entity.abilities[abilityIndex].type)
     {
+        case 'heal' :
+            entity.state = "heal";
+            entity.pa --;
+            setTimeout(() => {
+                target.health.actualHealth += entity.abilities[abilityIndex].baseAmount;
+                if(target.health.actualHealth >= target.health.maxHealth) target.health.actualHealth = target.health.maxHealth;
+            }, 450);
+            break;
         default :
             entity.state = "fight";
             entity.pa --;

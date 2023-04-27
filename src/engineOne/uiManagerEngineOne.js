@@ -55,10 +55,25 @@ const showHealthBehindRectUI = (posX, posY, size, percentOfLife, color = [255, 0
     image(uiData[2].image, posX, posY+5, size+25, size+25)
 }
 
-const showBarWithPercentUi = (posX, posY, size, percentOfLife) => {
+/**
+ * @param {int} posX 
+ * @param {int} posY 
+ * @param {int} size 
+ * @param {int} percentOfLife 
+ * @param {Object} innerValue is an object that contain : { current : 50, max : 100 }
+ */
+const showBarWithPercentUi = (posX, posY, size, percentOfLife, innerValue = null) => {
     image(uiData[14].image, posX, posY+5, (size)*percentOfLife, size/12)
     noTint()
     image(uiData[13].image, posX, posY+5, size, size/12)
+    if(innerValue !== null)
+    {
+        fill(255)
+        textAlign(CENTER, CENTER)
+        textSize(12)
+        text(innerValue.current + " / " + innerValue.max, posX, posY+5, size, size/12)
+        textAlign(LEFT, TOP)
+    }
 }
 
 //#endregion
@@ -146,6 +161,7 @@ const exitExploringMenu = () => {
 
 
 const showKeyboardPlayer = () => {
+    if(keyboardIsShowing === false) return;
     let sizeKey = 100;
     let padding = 15
     showKeyOnScreen(window.innerWidth - (sizeKey + padding) , 

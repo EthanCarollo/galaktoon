@@ -23,7 +23,14 @@ const displayEngineTwoUI = () => {
 const displayEngineTwoStartingFightUi = () => {
     // TODO : Update the start of a fight engine
     background(25);
+    if(actualMapEngineTwo.backgroundStartMap !== undefined)
+    {
+        image(uiData[actualMapEngineTwo.backgroundStartMap ].image,0,0,window.innerWidth,window.innerHeight)
+    }
+    
     showPlayer(500, 250, 250); 
+    showEnemiesStartFight(500, window.innerWidth -250-500)
+    displayVersusIcon();
     displayStartFightButton();
 }
 
@@ -47,33 +54,33 @@ const displayEngineTwoTutorialUi = () => {
             tutorialManagerState = TutorialManagerStateEnum.EngineTwoTutorial;
             canInputEngineTwo = false;
             displayPlayerInformationUiEngineTwo()
-            displayEnnemyInformationUiEngineTwo()
+            displayEnemyInformationUiEngineTwo()
             break;
         case 1 :
             displayPlayerInformationUiEngineTwo()
-            displayEnnemyInformationUiEngineTwo()
+            displayEnemyInformationUiEngineTwo()
             break;
         case 2 : 
             displayPlayerInformationUiEngineTwo()
-            displayEnnemyInformationUiEngineTwo()
+            displayEnemyInformationUiEngineTwo()
             displayOpenAbility()
             displayAbility()
             break;
         case 3 : 
             displayPlayerInformationUiEngineTwo()
-            displayEnnemyInformationUiEngineTwo()
+            displayEnemyInformationUiEngineTwo()
             break;
         case 4 : 
             displayPlayerInformationUiEngineTwo()
-            displayEnnemyInformationUiEngineTwo()
+            displayEnemyInformationUiEngineTwo()
             break;
         case 5 :
             displayPlayerInformationUiEngineTwo()
-            displayEnnemyInformationUiEngineTwo()
+            displayEnemyInformationUiEngineTwo()
             break;
         case 6 :
             displayPlayerInformationUiEngineTwo()
-            displayEnnemyInformationUiEngineTwo()
+            displayEnemyInformationUiEngineTwo()
             displayEndTurnButton();
             break;
         case 7 : canInputEngineTwo = true; break;
@@ -84,6 +91,12 @@ const displayEngineTwoTutorialUi = () => {
 
 
 const displayEngineTwoEndFightUi = () => {
+    background(25);
+    if(actualMapEngineTwo.backgroundStartMap !== undefined)
+    {
+        imageMode(CORNER)
+        image(uiData[actualMapEngineTwo.backgroundStartMap ].image,0,0,window.innerWidth,window.innerHeight)
+    }
     displayEndFight();
 }
 
@@ -99,21 +112,37 @@ const displayEngineTwoEndFightUi = () => {
 //#region // * StartGame UI Region
 
 
-const displayStartFightButton = () => {
-    let height = 150;
+const displayVersusIcon = () => {
     let width = 500;
+    let height = width;
+    let xPosition = window.innerWidth / 2 - width / 2
+    let yPosition = window.innerHeight / 2 - height / 2
+    if(startUiIsShaking === true) {
+        xPosition += getRandomInt(5) - getRandomInt(5);
+        yPosition += getRandomInt(5) - getRandomInt(5);
+    }
+    image(uiData[46].image, xPosition, yPosition, width, height)
+}
+
+const displayStartFightButton = () => {
+    let width = 750;
+    let height = width/5;
     let xPosition = window.innerWidth / 2 - width / 2
     let yPosition = window.innerHeight - 300
     fill(255,255,255,255)
-    rect(xPosition, yPosition, width, height)
+    startUiIsShaking = true
+    image(uiData[18].image, xPosition, yPosition, width, height)
+    if(mouseIsHover(xPosition, yPosition, width, height)){ 
+        image(uiData[27].image, xPosition, yPosition, width, height);
+        startUiIsShaking = false;
+    }
+
     textAlign(CENTER,CENTER)
-    fill(25,25,25,255)
     text("Start Fight",xPosition, yPosition, width, height)
     textAlign(LEFT,LEFT)
     switch(actualMapEngineTwo.fightType)
     {
         case "tutorial" :
-            console.log("play tutorial")
             createInputButtonWithCallback(xPosition, yPosition, width, height, () => {
                 engineTwoState = "Tutorial";
             })
@@ -141,13 +170,13 @@ const displayGameUi = () => {
     displayOpenAbility()
     displayAbility()
     displayPlayerInformationUiEngineTwo()
-    displayEnnemyInformationUiEngineTwo()
+    displayEnemyInformationUiEngineTwo()
     displayEndTurnButton();
 }
 
 
 
-const displayEnnemyInformationUiEngineTwo = () => {
+const displayEnemyInformationUiEngineTwo = () => {
     for (let i = 1; i < actualMapEngineTwo.entityOnTactical.length; i++) {
         const entityToShow = actualMapEngineTwo.entityOnTactical[i];
         
@@ -168,17 +197,16 @@ const displayEnnemyInformationUiEngineTwo = () => {
         let barSize = tempSize * 2;
         let xBar = tempPosX - barSize - tempSize * 0.15;
         let yBar = tempPosY + 10;
-        console.log(xBar)
         tint(255,35,35)
-        showBarWithPercentUi(xBar, yBar, barSize, percentLifeOfEntity+0.00001);
+        showBarWithPercentUi(xBar, yBar, barSize, percentLifeOfEntity+0.00001, { current : entityToShow.health.actualHealth, max : entityToShow.health.maxHealth});
 
         let percentPmOfPlayer = entityToShow.pm / 2 +0.00001;
-        tint(35,255,35)
-        showBarWithPercentUi(xBar, yBar+barSize/10, barSize, percentPmOfPlayer);
+        tint(35,210,35)
+        showBarWithPercentUi(xBar, yBar+barSize/10, barSize, percentPmOfPlayer, { current : entityToShow.pm, max : 2});
 
         let percentPaOfPlayer = entityToShow.pa / 2 +0.00001;
         tint(35,35,255)
-        showBarWithPercentUi(xBar, yBar+(barSize/10)*2, barSize, percentPaOfPlayer);
+        showBarWithPercentUi(xBar, yBar+(barSize/10)*2, barSize, percentPaOfPlayer, { current : entityToShow.pa, max : 2});
     }
 }
 
@@ -203,15 +231,15 @@ const displayPlayerInformationUiEngineTwo = () => {
     let yBar = tempPosY + 10;
     
     tint(255,35,35)
-    showBarWithPercentUi(xBar, yBar, barSize, percentLifeOfPlayer);
+    showBarWithPercentUi(xBar, yBar, barSize, percentLifeOfPlayer, { current : actualMapEngineTwo.entityOnTactical[0].health.actualHealth, max : actualMapEngineTwo.entityOnTactical[0].health.maxHealth});
 
     let percentPmOfPlayer = actualMapEngineTwo.entityOnTactical[0].pm / 2 +0.00001;
-    tint(35,255,35)
-    showBarWithPercentUi(xBar, yBar+barSize/10, barSize, percentPmOfPlayer);
+    tint(35,210,35)
+    showBarWithPercentUi(xBar, yBar+barSize/10, barSize, percentPmOfPlayer, { current : actualMapEngineTwo.entityOnTactical[0].pm , max : 2});
 
     let percentPaOfPlayer = actualMapEngineTwo.entityOnTactical[0].pa / 2 +0.00001;
     tint(35,35,255)
-    showBarWithPercentUi(xBar, yBar+(barSize/10)*2, barSize, percentPaOfPlayer);
+    showBarWithPercentUi(xBar, yBar+(barSize/10)*2, barSize, percentPaOfPlayer, { current : actualMapEngineTwo.entityOnTactical[0].pa, max : 2});
 
 }
 
@@ -239,7 +267,7 @@ const showDeadSpriteIconOnEngineTwo = (xStart, yStart, size, idSprite) => {
 const displayEndFight = () => {
     let size = window.innerHeight/1.5;
     showEnemiesEndFightList(size);
-    showPlayer(size);
+    showEndPlayer(size);
     showButtonFightEnd();
 }
 
@@ -251,14 +279,56 @@ const showEnemiesEndFightList = (size, xStart = window.innerWidth / 2 - size / 2
     {
         let sizeIterate = i-1;
         let xPositionSprite = xPosition + size*sizeIterate
-        animationIdleSprite(xPositionSprite, yPosition, size/1.25, [0, 1], actualMapEngineTwo.entityOnTactical[i].id)
+        textSize(32);
+        textAlign(CENTER, TOP)
+        let nameSprite = spritesData[actualMapEngineTwo.entityOnTactical[i].id].name
+        fill(10,10,10)
+        text(nameSprite, xPositionSprite - (size/1.25) / 2, yPosition-15 - (size/1.25) / 2 , size/1.25, (size/1.25))
+        if(fightWinner !== "allies")
+        {
+            animationIdleSprite(xPositionSprite, yPosition, size/1.25, [0, 1], actualMapEngineTwo.entityOnTactical[i].id)
+        }else{
+            animationDeadSprite(xPositionSprite, yPosition, size/1.25, actualMapEngineTwo.entityOnTactical[i].id)
+        }
     }
     imageMode(CORNER)
     noTint();
 }
 
 const showPlayer = (size, xStart = window.innerWidth / 2 - size / 2, yStart = window.innerHeight / 2 - size / 2) => {
+    textSize(size/14);
+    textAlign(CENTER, TOP)
+    let nameSprite = spritesData[0].name
+    fill(10,10,10)
+    text(nameSprite, xStart+10, yStart-15, size, size)
     animationIdleSprite(xStart, yStart, size, [0, 1], 0)
+    
+}
+
+const showEndPlayer = (size, xStart = window.innerWidth / 2 - size / 2, yStart = window.innerHeight / 2 - size / 2) => {
+    textSize(size/14);
+    textAlign(CENTER, TOP)
+    let nameSprite = spritesData[0].name
+    fill(10,10,10)
+    text(nameSprite, xStart+10, yStart-15, size, size)
+
+    if(fightWinner === "allies")
+    {
+        animationIdleSprite(xStart, yStart, size, [0, 1], 0)
+    }else{
+        animationDeadSprite(xStart, yStart, size, 0)
+    }
+}
+
+const showEnemiesStartFight = (size, xStart = window.innerWidth / 2 + size / 2,  yStart = window.innerHeight / 2 - size / 2) => {
+    for(let i = 1; i < actualMapEngineTwo.entityOnTactical.length; i++)
+    {
+        textSize(size/14);
+        textAlign(CENTER, TOP)
+        fill(10,10,10)
+        text(spritesData[actualMapEngineTwo.entityOnTactical[i].id].name, xStart, yStart-15, size, size)
+        animationIdleSprite(xStart, yStart, size, [0, 1], actualMapEngineTwo.entityOnTactical[i].id)
+    }
 }
 
 const showButtonFightEnd = () => {
@@ -285,9 +355,10 @@ const exitFight = () => {
     if(npcFighted !== null)
     {
         npcFighted.actualDialogIndex ++;
+        actualDialog = 0;
     }
     launchEngine(EngineStateEnum.EngineOne);
-
+    if(fightWinner === "allies") endEventFight(actualMapEngineTwo.endEvent);
 }
 
 //#endregion
@@ -476,9 +547,17 @@ const displayOpenAbility = () => {
 const selectAbility = (ability) => {
     if(actualMapEngineTwo.entityOnTactical[0].pa > 0)
     {
-        resetMovableAndEntityVar();
-        getAttackableCase(actualMapEngineTwo.entityOnTactical[0].pos[0], actualMapEngineTwo.entityOnTactical[0].pos[1], playerTeam[0].abilities[ability].range)
-        selectedAbility = ability;
+        switch(playerTeam[0].abilities[ability].type)
+        {
+            case "heal":
+                attackWithTheCurrentAbility(actualMapEngineTwo.entityOnTactical[0], ability, actualMapEngineTwo.entityOnTactical[0])
+                break;
+            default :
+                resetMovableAndEntityVar();
+                getAttackableCase(actualMapEngineTwo.entityOnTactical[0].pos[0], actualMapEngineTwo.entityOnTactical[0].pos[1], playerTeam[0].abilities[ability].range)
+                selectedAbility = ability;
+                break;
+        }
     }
 }
 

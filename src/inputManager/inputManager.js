@@ -15,6 +15,5 @@ const runInputManager = () => {
             break;
         default :
             throw new Error("Actual engine isn't set, the game can't run")
-            break;
     }
 }

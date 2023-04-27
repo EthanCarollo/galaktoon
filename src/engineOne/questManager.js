@@ -97,17 +97,25 @@ const startSpecificQuestEvents = (questEventString) => {
     switch(questEventString)
     {
         case "goNextTutoStep" :
+            tutorialManagerState = TutorialManagerStateEnum.KeyBoardTuto;
             mapData[0].npcOnMap[0].nextCase = searchPath(mapData[0].npcOnMap[0].pos, [3, 5], mapData[0].map.objectLayer); // Here it's the AI who mmoves
             break;
         case "goFightTuto" :
-            addNpcToMap(4, [2, 6], 'dialog', [1, 0], 'pop');
+            addNpcToMap(4, [2, 6], 'dialog', [1, 0], 'pop')
             break;
         case "goOnPlanetBob" :
             playerCanExplore = true;
+            mapData[0].npcOnMap[0].nextCase = searchPath(mapData[0].npcOnMap[0].pos, [7, 3], mapData[0].map.objectLayer); // Here it's the AI who mooves
             break;
         case "addNewAbility1" :
             planetsData[2].isExplorable = true;
             playerTeam[0].abilities[1].isLocked = false; // unlock the first ability
+            launchAdvancedTips("New Card Unlocked !", uiData[playerTeam[0].abilities[1].id].image)
+            break;
+        case "addNewAbility2" :
+            planetsData[3].isExplorable = true;
+            playerTeam[0].abilities[2].isLocked = false; // unlock the first ability
+            launchAdvancedTips("New Card Unlocked !", uiData[playerTeam[0].abilities[2].id].image)
             break;
         case null :
             break;
@@ -115,7 +123,6 @@ const startSpecificQuestEvents = (questEventString) => {
             throw new Error("Specific event isn't set inside the startSpecificQuestEvents() : " + questEventString)
     }
 }
-
 
 
 /**
@@ -132,8 +139,10 @@ const endSpecificQuestEvents = (questEventString) => {
         case "finishFightQuestBob" :
             mapData[2].npcOnMap[0].nextCase = searchPath(mapData[2].npcOnMap[0].pos, [15, 17], mapData[2].map.objectLayer); // Here it's the AI who mooves
             mapData[2].npcOnMap[0].interaction = "dialog";
-            finishQuest(2)
-            addQuestToList(3)
+            mapData[2].npcOnMap[1].state = "dead"
+            npcData[3].actualDialogIndex = 3; // Update the dialog of the npc of the ai
+            finishQuest(2);
+            addQuestToList(3);
             break;
         default :
             throw new Error("Specific event isn't set inside the startSpecificQuestEvents() : " + questEventString)
@@ -187,6 +196,10 @@ const showQuestList = () => {
     }
 }
 
+
+/**
+ * ! Deprecated Method, we no longer use that cause it was juged not usefull in the game.
+ */
 const showGoalQuest = () => {
     /** 
      * * This function set the current goal of every quest on the map if the current map is the same

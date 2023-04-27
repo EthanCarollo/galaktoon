@@ -1,5 +1,5 @@
 /**
- * * This script contains all variables that contains prefix 'player'
+ * * This script contains all variables that are used for the player in multiple cases
  * ! EXCEPT : 'playerOnMap', 'actualPlayerMap', 'actualMapEngineTwo'
  */
 
@@ -22,7 +22,7 @@ let playerIsExploringMap = false;
 // Player anim
 let playerIsMooving = false;
 let playerDirection = [0, 0]; // stock the direction of the player in a array
-let playerLastDirection = [0, 1]; // orientation naturally down
+let playerLastDirection = [0, -1]; // orientation naturally down
 // Player anim
 
 //#endregion
@@ -53,16 +53,16 @@ let playerTeam = [
                 name : "Heal",
                 type : "heal",
                 abilityLevel : 1,
-                baseAmount : 5,
+                baseAmount : 8,
                 id : 4,
                 range : 5,
                 isLocked : true
             },
             {
-                name : "HealAll",
-                type : "healAll",
+                name : "SuperAttack",
+                type : "superAttack",
                 abilityLevel : 2,
-                baseAmount : 4,
+                baseAmount : 50,
                 id : 5,
                 range : 1,
                 isLocked : true

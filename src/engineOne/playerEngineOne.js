@@ -75,14 +75,15 @@ const checkForInteraction = (playerCaseInteract) => {
             {
             let interactType = getTileData(playerCaseInteract[0], playerCaseInteract[1], actualPlayerMap.objectLayer).type;
             createInteractionPopup(playerCaseInteract[0], playerCaseInteract[1], interactType)
+            return;
             }
     }
     
     // just for set pnj interactible
-    let npcInteractible = playerOnMap.npcOnMap.filter(npc => npc.pos[0] === playerCaseInteract[0] && npc.pos[1] === playerCaseInteract[1])
+    let npcInteractible = getNpcOnTileInteraction(playerCaseInteract)
     if(npcInteractible.length > 0 && npcInteractible[0].state === "idle")
     {
-        createInteractionPopup(playerCaseInteract[0], playerCaseInteract[1], npcInteractible[0].interaction)
+        createInteractionPopup(npcInteractible[0].pos[0], npcInteractible[0].pos[1], npcInteractible[0].interaction)
     }
 }
 
@@ -92,7 +93,7 @@ const checkForInteraction = (playerCaseInteract) => {
  * @param {array[int]} caseInteraction [x, y] the case interaction
  */
 const playerInteraction = (caseInteraction) => {
-    interactWithATile(caseInteraction);
+    if(interactWithATile(caseInteraction) === true) return;
     interactWithNPC(caseInteraction);
 }
 
@@ -112,9 +113,8 @@ const interactWithATile = (tileInteract) => {
     let interactedTile = getTileData(tileInteract[0], tileInteract[1], actualPlayerMap.objectLayer) // get the information of the tile that the player is looking for
 
     if(interactedTile === undefined){
-        return;
+        return false;
     }
-
     switch(interactedTile.type){
         case "explore":
             if(playerCanExplore === true)
@@ -163,6 +163,7 @@ const interactWithATile = (tileInteract) => {
             throw new Error
                 ("The player is interacting with nothing which is impossible if all are doing well, so it's probably an exception with the parameter type of the tile : ' " + interactedTile.type + " ' ")
     }
+    return true;
 }
 
 
@@ -176,7 +177,7 @@ const interactWithNPC = (tileInteract) => {
      * * then we check if we have npc who we can interact with and if we have, we just take the
      * * first element of the array and we interact with
      */
-    let npcInteracted = playerOnMap.npcOnMap.filter(npc => npc.pos[0] === tileInteract[0] && npc.pos[1] === tileInteract[1])
+    let npcInteracted = getNpcOnTileInteraction(tileInteract)
     if(npcInteracted.length > 0)
     {
         if(npcInteracted[0].isInteractible === true && npcInteracted[0].state === "idle"){
@@ -185,6 +186,17 @@ const interactWithNPC = (tileInteract) => {
     }
 }
 
+const getNpcOnTileInteraction = (tileInteract) => {
+    let npcInteracted = playerOnMap.npcOnMap.filter(npc => npc.pos[0] === tileInteract[0] && npc.pos[1] === tileInteract[1])
+
+    if(npcInteracted.length === 0)
+    {
+        npcInteracted = playerOnMap.npcOnMap.filter(npc => actualPlayerTile()[0] === npc.pos[0] && actualPlayerTile()[1] === npc.pos[1])
+    }
+
+    return npcInteracted;
+    
+}
 
 /**
  * @param {string} npcInteraction npc specific interaction

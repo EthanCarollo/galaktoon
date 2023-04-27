@@ -48,11 +48,12 @@ const playCameraCinematic = (vectorDestination = vectorDestinationCinemation) =>
      */
     background(20)
     let vectorMoove;
-    vectorMoove = p5.Vector.lerp(createVector(vectorDestination[0], vectorDestination[1]), cameraVector, cameraSmoothStep); // interpolate the camera with the player by using vector.lerp by p5
+    vectorMoove = p5.Vector.lerp(createVector(vectorDestination[0], vectorDestination[1]), cameraVector, 0.985); // interpolate the camera with the player by using vector.lerp by p5
 
     cameraVector = vectorMoove;
 
-    if(Math.round(cameraVector.x) === vectorDestination[0] && Math.round(cameraVector.y) === vectorDestination[1])
+    if(Math.round(cameraVector.x) === vectorDestination[0] && Math.round(cameraVector.y) === vectorDestination[1] 
+    || Math.round(cameraVector.x) === vectorDestination[0] && Math.round(cameraVector.y) === vectorDestination[1])
     {
         endCinematic();
     }
@@ -94,7 +95,7 @@ const checkMapForCinematic = (map) => {
     switch(map.cinematic)
     {
         case "darkWoaf" : 
-            setCinematic([0, 2000]);
+            setCinematic([0, 1650]);
             break;
     }
 }

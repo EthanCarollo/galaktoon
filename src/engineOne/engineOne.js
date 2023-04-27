@@ -11,6 +11,12 @@ const runEngineOne = () => {
     case EngineOneStateEnum.Cinematic :
       runCinematicStateEngineOne()
       break;
+    case EngineOneStateEnum.StoryBoard :
+      runStoryBoardStateEngineOne()
+      break;
+    case EngineOneStateEnum.EndGame :
+      runEndStateEngineOne()
+      break;
     default :
       throw new Error("engine one state isn't set : " + engineOneState)
   }
@@ -36,6 +42,21 @@ const runPlayingStateEngineOne = () => {
   {
     displayDialogNpc(npcDialoged)
   }
+  showTutorial();
+  runTips();
+}
+
+const runStoryBoardStateEngineOne = () => {
+  playerCanMove = false;
+  runStoryBoard();
+}
+
+const runEndStateEngineOne = () => {
+  playerCanMove = false;
+  displayTopDown2D();
+  setVectorLerpEaseOutExploringMenu();
+  showBorderCinematic();
+  showCredits();
 }
 
 //#endregion
@@ -51,16 +72,15 @@ const displayTopDown2D = () => {
     showPlayerSprite(cameraVector.x, cameraVector.y, playerSpriteSize);
 
     createMapTopDown("front", actualPlayerMap.objectLayer); // create the layer object in front of the player
-  
-    showGoalQuest();
+    
     // the double createmap function is used to simulate a 2D perspective
 }
 
-const setPlayerCamera = () => {
+const setPlayerCamera = (xSizeCam = windowWidth/2, yHeightCam = windowHeight/2) => {
     if(cameraVector !== playerVector){
         background(20)
         let vectorMoove;
-        vectorMoove = p5.Vector.lerp(createVector(windowWidth/2, windowHeight/2), cameraVector, cameraSmoothStep); // interpolate the camera with the player by using vector.lerp by p5
+        vectorMoove = p5.Vector.lerp(createVector(xSizeCam, yHeightCam), cameraVector, cameraSmoothStep); // interpolate the camera with the player by using vector.lerp by p5
         cameraVector = vectorMoove;
     }
 }
@@ -85,6 +105,7 @@ const createMapTopDown = (orientation, mapLayer, mapInfo = playerOnMap, offsetPo
    * * between these two functions, i will have illusion of depth (in this case, if orientation isn't set, it won't send an
    * * error and will just draw every image)
    */
+    noTint(); noStroke();
     for(let y = 0;y < mapLayer.length; y++)
     {
       for(let x = 0;x < mapLayer[0].length; x++)
@@ -163,3 +184,10 @@ const getTileData = (x, y, map) => {
 }
 
 //#endregion
+
+/**
+ * * Launching the end game with credits
+ */
+const launchEndGame = () => {
+  engineOneState = EngineOneStateEnum.EndGame;
+}

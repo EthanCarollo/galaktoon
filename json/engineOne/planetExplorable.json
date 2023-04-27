@@ -4,28 +4,28 @@
         {
             "id" : 0,
             "map" : 0,
-            "name" : "The spaceship",
-            "description" : "The space ship brooo",
+            "name" : "The Spaceship",
+            "description" : "The space ship where everything started...",
             "isExplorable" : true
         },{
             "id" : 1,
             "map" : 2,
             "name" : "Bob's Planet",
-            "description" : "A basic explorable planets !",
+            "description" : "A simple planet where all the slimes live together!",
             "isExplorable" : true
         },
         {
             "id" : 2,
             "map" : 1,
             "name" : "Earth Planet",
-            "description" : "A basic explorable planets !",
+            "description" : "The planet ruled by Salatonion...",
             "isExplorable" : false
         },
         {
             "id" : 3,
             "map" : 3,
-            "name" : "Dark Woaf's Planet",
-            "description" : "A basic explorable planets !",
+            "name" : "Dark Woaf's Lair",
+            "description" : "The lair of the evil tyrant...",
             "isExplorable" : false
         },
         {
@@ -33,7 +33,7 @@
             "map" : 4,
             "name" : "MJ - Island",
             "description" : "The everything at once map",
-            "isExplorable" : true
+            "isExplorable" : false
         }
     ]
 }

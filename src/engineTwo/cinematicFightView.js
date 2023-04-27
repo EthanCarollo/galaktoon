@@ -23,10 +23,20 @@ const runCinematicFightView = () => {
  */
 
 const runClassicCinematic = () => {
-    let widthRectAnimation = window.innerWidth / 1.5, heightRectAnimation = window.innerHeight / 1.25;
-    let xStartRectAnimation = window.innerWidth / 2 - widthRectAnimation / 2;
+    let widthRectAnimation = window.innerWidth / 1.5, heightRectAnimation = window.innerHeight / 1.25
+    let xStartRectAnimation = window.innerWidth / 2 - widthRectAnimation / 2
     let yStartRectAnimation = window.innerHeight / 2 - heightRectAnimation / 2;
+    if(cinematicIsShaking === true)
+    {
+        widthRectAnimation += getRandomInt(5) - getRandomInt(5);
+        xStartRectAnimation += getRandomInt(5) - getRandomInt(5);
+    }
+    noStroke();
+    //Stroke
     fill(255,255,255,255)
+    rect(xStartRectAnimation-10, yStartRectAnimation-10, widthRectAnimation+20, heightRectAnimation+20);
+    //Background
+    fill(25,25,25,255)
     rect(xStartRectAnimation, yStartRectAnimation, widthRectAnimation, heightRectAnimation);
     fill(255,0,0,80)
     showMapOnAnimationSpecific(xStartRectAnimation, yStartRectAnimation, widthRectAnimation, heightRectAnimation);
@@ -164,6 +174,12 @@ const showSpriteOnSpecificAnimation = (xStartOfMap, yStartOfMap, widthMap, heigh
 
 const addIndexToCurrentOrderAnimation = () => {
     indexCurrentOrderOfAnimation++;
+    // Setting the shaking to true to make the animation more reactive
+    cinematicIsShaking = true;
+    setTimeout(() => {
+        cinematicIsShaking = false
+    }, 200);
+
     if(indexCurrentOrderOfAnimation >= cinematicUsed.order.length)
     {
         indexCurrentOrderOfAnimation = 0;
@@ -184,10 +200,11 @@ const addIndexToCurrentOrderAnimation = () => {
 /**
  * @param {int} indexAnimation, this is the index of the animation started by the attack
  */
-const launchAnimationCinematicFight = (indexAnimation = 0) => {
+const launchAnimationCinematicFight = (eventOnEnd = () => {},indexAnimation = 0) => {
     indexCurrentOrderOfAnimation = 0;
     cinematicUsed = JSON.parse(JSON.stringify(AnimationsList[indexAnimation]))
     fightCinematicViewState = FightCinematicViewStateEnum.Animation;
+    callbackCinematic = eventOnEnd;
 }
 
 
@@ -199,6 +216,8 @@ const endAnimationCinematicFight = () => {
     cinematicUsed.isStopped = true;
     setTimeout(() => {
         fightCinematicViewState = FightCinematicViewStateEnum.NoAnim;
+        callbackCinematic();
+        callbackCinematic = () => { console.log("Callback cinematic isn't set")};
     }, 750); 
 }
 

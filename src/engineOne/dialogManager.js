@@ -24,10 +24,15 @@ const launchNpcDialog = (npc) => {
   }
 }
 
-const goNextDialog = () => {
+const goNextDialog = (lengthDialog = null) => {
   /**
    * * Advance in the dialog and exit the dialog if it's the last dialog of the dialog array
    */
+  if(lengthDialog !== null && typeof(lengthDialog) === typeof(dialogTextIndex) && dialogTextIndex !== lengthDialog)
+  {
+    dialogTextIndex = lengthDialog;
+    return;
+  }
   dialogTextIndex = 0;
   actualDialog++;
   if(actualDialog >= npcDialoged.dialogs[npcDialoged.actualDialogIndex].length){
@@ -95,11 +100,7 @@ const showChoiceBoxDependingToTheType = (
   switch(dialog.interactionType)
   {
     case "cannotRefuse" :
-      showAcceptOnlyButton(xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, () => {
-        dialog.questIsGived = true;
-        addQuestToList(dialog.quest)
-        goNextDialog();
-      });
+      showAcceptOnlyButton(xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, callback);
       break;
     default :
       showDialogChoiceBox(xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, callback);
@@ -113,51 +114,22 @@ const showChoiceBoxDependingToTheType = (
 
 
 
-const showAcceptOnlyButton = (xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, callbackFunction) => {
+const showAcceptOnlyButton = (xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, callback) => {
   textAlign(CENTER, CENTER);
   
-  let sizeYChoice = sizeYDialog / 2.4;
-  let sizeXChoice = sizeXDialog / 2.4;
-  let paddingXChoice = sizeXDialog/2 - sizeXChoice/2;
-  let paddingYChoice = sizeYDialog/2.5;
+  let sizeYChoice = sizeYDialog / 3;
+  let sizeXChoice = sizeXDialog / 3;
+  let paddingXChoice = sizeYDialog/1.5;
+  let paddingYChoice = sizeYDialog/4;
 
   textSize(sizeYChoice/4.5);
 
   let dialogBox = uiData[11].image;
-  let xBoxTrue = xStartDialog + paddingXChoice;
+  let xBoxTrue = xStartDialog + sizeXDialog - sizeXChoice - paddingXChoice;
   let boxChoiceTrue = image(dialogBox, xBoxTrue, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice)
   
   fill(255)
-  changeFillOnHover(xBoxTrue, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice, 125, 255, 125)
-  if(mouseIsHover(xBoxTrue, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice))
-  {
-    let boxChoiceHover = image(uiData[20].image, xBoxTrue, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice)
-  }
-
-  text("Accept", xBoxTrue, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice)
-
-  createInputButtonWithCallback(xBoxTrue, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice, callbackFunction);
-}
-
-
-// loadNewMap(mapData[0], [-15, -15]);
-const showDialogChoiceBox = (xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, callback) => {
-  
-  textAlign(CENTER, CENTER);
-  
-  let sizeYChoice = sizeYDialog / 2.4;
-  let sizeXChoice = sizeXDialog / 2.4;
-  let paddingXChoice = sizeYDialog/2.75;
-  let paddingYChoice = sizeYDialog/2.5;
-
-  textSize(sizeYChoice/4.5);
-
-  let dialogBox = uiData[11].image;
-  let xBoxTrue = xStartDialog + paddingXChoice;
-  let boxChoiceTrue = image(dialogBox, xBoxTrue, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice)
-  
-  fill(255)
-  changeFillOnHover(xBoxTrue, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice, 125, 255, 125)
+  changeFillOnHover(xBoxTrue, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice, 20, 254, 2)
   if(mouseIsHover(xBoxTrue, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice))
   {
     let boxChoiceHover = image(uiData[20].image, xBoxTrue, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice)
@@ -167,11 +139,65 @@ const showDialogChoiceBox = (xStartDialog, yStartDialog, sizeXDialog, sizeYDialo
 
   createInputButtonWithCallback(xBoxTrue, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice, callback);
 
-  let xBoxFalse = xStartDialog + sizeXDialog - sizeXChoice - paddingXChoice;
+  let xBoxFalse = xStartDialog + paddingXChoice;
+  tint(125,125,125)
+
+  if(refuseIsShaking === true)
+  {
+    xBoxFalse += getRandomInt(5) - getRandomInt(5)
+    yStartDialog += getRandomInt(5) - getRandomInt(5)
+  }
+  let boxChoiceFalse = image(dialogBox, xBoxFalse, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice)
+  noTint()
+  fill(125)
+  text("Refuse", xBoxFalse, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice)
+  imageMode(CENTER)
+  image(uiData[16].image, xBoxFalse+sizeXChoice/2, yStartDialog-sizeYChoice/4, sizeYChoice, sizeYChoice)
+  imageMode(CORNER)
+
+  createInputButtonWithCallback(xBoxFalse, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice, 
+    () => {
+        refuseIsShaking = true;
+        setTimeout(() => {
+          refuseIsShaking = false;
+        }, 500);
+    });
+
+}
+
+
+// loadNewMap(mapData[0], [-15, -15]);
+const showDialogChoiceBox = (xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, callback) => {
+  
+  textAlign(CENTER, CENTER);
+  
+  let sizeYChoice = sizeYDialog / 3;
+  let sizeXChoice = sizeXDialog / 3;
+  let paddingXChoice = sizeYDialog/1.5;
+  let paddingYChoice = sizeYDialog/4;
+
+  textSize(sizeYChoice/4.5);
+
+  let dialogBox = uiData[11].image;
+  let xBoxTrue = xStartDialog + sizeXDialog - sizeXChoice - paddingXChoice;
+  let boxChoiceTrue = image(dialogBox, xBoxTrue, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice)
+  
+  fill(255)
+  changeFillOnHover(xBoxTrue, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice, 20, 254, 2)
+  if(mouseIsHover(xBoxTrue, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice))
+  {
+    let boxChoiceHover = image(uiData[20].image, xBoxTrue, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice)
+  }
+
+  text("Accept", xBoxTrue, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice)
+
+  createInputButtonWithCallback(xBoxTrue, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice, callback);
+
+  let xBoxFalse = xStartDialog + paddingXChoice;
   let boxChoiceFalse = image(dialogBox, xBoxFalse, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice)
         
   fill(255)
-  changeFillOnHover(xBoxFalse, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice, 255, 125, 125)
+  changeFillOnHover(xBoxFalse, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice, 253, 3, 3)
   if(mouseIsHover(xBoxFalse, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice))
   {
     let boxChoiceHover = image(uiData[20].image, xBoxFalse, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice)
@@ -194,10 +220,11 @@ const showRewardBox = (xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, npc
 
   textAlign(CENTER, CENTER);
     
-  let sizeYChoice = sizeYDialog / 2.2;
-  let sizeXChoice = sizeXDialog / 2.2;
-  let paddingXChoice = sizeYDialog/2.75;
-  let paddingYChoice = sizeYDialog/2.3;
+  
+  let sizeYChoice = sizeYDialog / 3;
+  let sizeXChoice = sizeXDialog / 3;
+  let paddingXChoice = sizeYDialog/1.5;
+  let paddingYChoice = sizeYDialog/4;
 
   textSize(sizeYChoice/4.5);
 
@@ -206,9 +233,9 @@ const showRewardBox = (xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, npc
   let boxAcceptReward = image(dialogBox, xBoxTrue, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice)
 
   fill(255)
-  changeFillOnHover(xBoxTrue, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice, 0, 180, 0)
+  changeFillOnHover(xBoxTrue, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice, 20, 254, 2)
 
-  text("Accept Reward", xBoxTrue, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice)
+  text("Finish Quest", xBoxTrue, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice)
 
   createInputButtonWithCallback(xBoxTrue, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice, 
       () => {
@@ -261,67 +288,125 @@ const showNpcSpriteInDialog = (npcDialoged, whoDialog = 1) => {
 
 
 const showDialogText = (xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, dialog) => {
-let paddingXText = sizeYDialog/2.5;
-let paddingYText = sizeYDialog/3.75;
+  let paddingXText = sizeYDialog/2.5;
+  let paddingYText = sizeYDialog/3.75;
 
-let paddingSizeXBox = paddingXText*2;
-let paddingSizeYBox = paddingYText*2;
+  let paddingSizeXBox = paddingXText*2;
+  let paddingSizeYBox = paddingYText*2;
 
-let actualDialogNpc;
+  let actualDialogNpc;
 
-switch(dialog.state)
-{
-  case "GivedQuest" :
-    actualDialogNpc = creatingStringWithDelay(dialog.altText);
-    break;
-  case "Reward" :
-    actualDialogNpc = creatingStringWithDelay(dialog.rewardText);
-    break;
-  default :
-    actualDialogNpc = creatingStringWithDelay(dialog.text);
-}
+  switch(dialog.state)
+  {
+    case "GivedQuest" :
+      actualDialogNpc = creatingStringWithDelay(dialog.altText);
+      break;
+    case "Reward" :
+      actualDialogNpc = creatingStringWithDelay(dialog.rewardText);
+      break;
+    default :
+      actualDialogNpc = creatingStringWithDelay(dialog.text);
+  }
 
-textSize(sizeYDialog/11);
-textAlign(LEFT, TOP)
-fill(255)
-text(actualDialogNpc, xStartDialog +paddingXText, yStartDialog+paddingYText, sizeXDialog-paddingSizeXBox, sizeYDialog-paddingSizeYBox);
+  textSize(sizeYDialog/11);
+  textAlign(LEFT, TOP)
+  fill(255)
+  text(actualDialogNpc, xStartDialog +paddingXText, yStartDialog+paddingYText, sizeXDialog-paddingSizeXBox, sizeYDialog-paddingSizeYBox);
+
 }
 
 
 
 const setDialogInput = (xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, dialog, npc) => {
-switch(dialog.state)
-{
-  case "Normal" :
-    createInputButtonWithCallback(xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, goNextDialog);
-    break;
-  case "Fight" :
-    showAcceptOnlyButton(xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, () => {
-      launchFightOnEngineTwo(dialog.fight)
-    });
-    break;
-  case "HaveQuestToGive" :
-    showChoiceBoxDependingToTheType(xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, dialog);
-    break;
-  case "GivedQuest" :
-    createInputButtonWithCallback(xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, goNextDialog);
-    break;
-  case "Reward" :
-    showRewardBox(xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, npc, dialog);
-    break;
-  case "returnOnTheSpaceShip" :
-    showChoiceBoxDependingToTheType(xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, dialog, ()=>{loadNewMap(mapData[0], [-8.5, -8]); goNextDialog()})
-    // This type just teleport the player to the space ship
-    break;
-  default :
-    throw new Error("State isn't defined or doesn't exist")
-}
+/**
+ * * Setting the current text for the length for the verification in the next dialog
+ * * Then, switch case on the state of the dialog to show different in put on different
+ * * dialog
+ */
+
+  let textDialog = dialog.text
+  if(dialog.state === "GivedQuest") textDialog = dialog.altText
+  if(dialog.state === "Reward") textDialog = dialog.rewardText
+
+
+  if(dialogTextIndex !== textDialog.length)
+  {
+    createInputButtonWithCallback(xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, () => { goNextDialog(textDialog.length) });
+    textSize(sizeYDialog/15);
+    textAlign(RIGHT, BOTTOM)
+    text("Click", xStartDialog, yStartDialog, sizeXDialog-72.5, sizeYDialog-47.5)
+    textAlign(LEFT, TOP)
+    return;
+  }
+
+  switch(dialog.state)
+  {
+    case "Normal" :
+      createInputButtonWithCallback(xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, goNextDialog);
+      break;
+    case "Fight" :
+      showAcceptOnlyButton(xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, () => {
+        if(launchFightOnEngineTwo(dialog.fight) === false) exitDialog();
+      });
+      break;
+    case "HaveQuestToGive" :
+      showChoiceBoxDependingToTheType(xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, dialog);
+      break;
+    case "GivedQuest" :
+      createInputButtonWithCallback(xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, goNextDialog);
+      break;
+    case "Reward" :
+      showRewardBox(xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, npc, dialog);
+      break;
+    case "returnOnTheSpaceShip" :
+      showChoiceBoxDependingToTheType(xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, dialog, ()=>{loadNewMap(mapData[0], [-8.3, -3]); goNextDialog()})
+      // This type just teleport the player to the space ship
+      break;
+    case "finishTheGame" :
+      createInputButtonWithCallback(xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, () => {
+        goNextDialog()
+        launchNpcDialog(mapData[3].npcOnMap[2])
+      });
+      break;
+    case "launchSalatonion" :
+      createInputButtonWithCallback(xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, () => {
+        goNextDialog()
+        launchNpcDialog(mapData[3].npcOnMap[3])
+      });
+      break;
+    case "launchEnd" :
+      createInputButtonWithCallback(xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, () => {
+        goNextDialog()
+        launchEndGame();
+      });
+      break;
+    case "appearBobAfterFight" :
+      createInputButtonWithCallback(xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, ()=>{
+        goNextDialog()
+        let numberNpc = addNpcToMap(9, [20, 21], 'dialog', [1, 0], 'idle', true, 1)
+        mapData[1].npcOnMap[numberNpc-1].nextCase = searchPath(mapData[1].npcOnMap[numberNpc-1].pos, [12, 21], mapData[1].map.objectLayer);
+      });
+      break;
+    case "freeBobKid" :
+      createInputButtonWithCallback(xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, ()=>{
+        mapData[2].npcOnMap.splice(0, 1)
+        goNextDialog()
+        launchNpcDialog(mapData[1].npcOnMap[2])
+        mapData[1].map.objectLayer[23][6] = 97;
+        mapData[1].map.objectLayer[23][7] = 96;
+        let numberNpc = addNpcToMap(10, [6, 20], 'dialog', [1, 0], 'idle', true, 1)
+        mapData[1].npcOnMap[numberNpc-1].nextCase = searchPath(mapData[1].npcOnMap[numberNpc-1].pos, [10, 21], mapData[1].map.objectLayer);
+      });
+      break ;
+    default :
+      throw new Error("State isn't defined or doesn't exist")
+  }
 }
 
 
 
 const setQuestState = (dialog) => {
-dialog.state = "Normal"
+  dialog.state = "Normal";
   switch(dialog.type)
   {
     case "fight" :
@@ -340,6 +425,21 @@ dialog.state = "Normal"
       break;
     case "returnOnTheSpaceShip" :
       dialog.state = "returnOnTheSpaceShip"
+      break;
+    case "finishTheGame" :
+      dialog.state = "finishTheGame";
+      break;
+    case "launchSalatonion" :
+      dialog.state = "launchSalatonion";
+      break;
+    case "launchEnd" :
+      dialog.state = "launchEnd";
+      break;
+    case "appearBobAfterFight" :
+      dialog.state = "appearBobAfterFight";
+      break;
+    case "freeBobKid" :
+      dialog.state = "freeBobKid";
       break;
   }
 
@@ -365,6 +465,8 @@ const creatingStringWithDelay = (textToDelay) => {
   {
     dialogTextIndex += 0.3;
   }
+  if(dialogTextIndex >= textToDelay.length) dialogTextIndex = textToDelay.length; 
+  
   return textToDelay.substr(0, Math.floor(dialogTextIndex));
 }
 

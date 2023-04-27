@@ -9,7 +9,7 @@
 const createInputButtonWithCallback = (xStartButton, yStartButton, sizeXButton, sizeYButton, callbackFunction = errorCallbackFunctionButton) => { // callback function is naturally an error !
     /**
      * * To make it works, i use mouseReleased lied to the canvas, with that i can easily do 
-     * * a onMouseUp isntead of a onMouseDown and it takes much less codes !
+     * * a onMouseUp isntead of a onMouseDown and it takes much less codes!
      */
     
     if( mouseIsHover(xStartButton, yStartButton, sizeXButton, sizeYButton) )
@@ -82,5 +82,5 @@ const errorCallbackFunctionButton = () => {
     /**
      * * Default callback when we createInputButtonWithCallback
      */
-    throw new Error("This Button doesn't have a Function ! (uiManagerEngineOne.js --> const createInputButtonWithWallback) Don't forget createInputButtonWithWallback takes 5 parameters")
+    throw new Error("This Button doesn't have a Function! (uiManagerEngineOne.js --> const createInputButtonWithCallback) Don't forget createInputButtonWithWallback takes 5 parameters")
 }

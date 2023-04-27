@@ -168,6 +168,42 @@
             "id" : "39",
             "path" : "assets/ui/nextTurnButtonHold.png",
             "image" : null
+        },{
+            "id" : "40",
+            "path" : "assets/storyboard/storyboard1.png",
+            "image" : null
+        },{
+            "id" : "41",
+            "path" : "assets/storyboard/storyboard2.png",
+            "image" : null
+        },{
+            "id" : "42",
+            "path" : "assets/storyboard/storyboard3.png",
+            "image" : null
+        },{
+            "id" : "43",
+            "path" : "assets/storyboard/storyboard4.png",
+            "image" : null
+        },{
+            "id" : "44",
+            "path" : "assets/ui/caseNewInteraction.png",
+            "image" : null
+        },{
+            "id" : "45",
+            "path" : "assets/storyboard/storyboard5.png",
+            "image" : null
+        },{
+            "id" : "46",
+            "path" : "assets/ui/versusIcon.png",
+            "image" : null
+        },{
+            "id" : "47",
+            "path" : "assets/backgroundFight/backGroundFightSpaceShip.png",
+            "image" : null
+        },{
+            "id" : "48",
+            "path" : "assets/backgroundFight/backGroundFightDarkWoaf.png",
+            "image" : null
         }
     ]
 }
