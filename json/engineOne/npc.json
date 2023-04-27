@@ -135,12 +135,12 @@
             "name" : "Guard Woaf",
             "actualDialogIndex" : 0,
             "dialogs" : [[{ 
-                "text" : "Viens te battre ou je hagar bob. " ,
+                "text" : "You've seen it all, so I'm going to have to delete you... " ,
                 "type" : "fight",
                 "fight" : 2
             }],
             [{ 
-                "text" : "Arghhhh je meurs "
+                "text" : "Arghhhh you beated me... "
             }]]
         },{
             "id" : "6",

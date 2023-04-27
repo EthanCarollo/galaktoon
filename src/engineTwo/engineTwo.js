@@ -151,7 +151,7 @@ const showRectOnTactical = (x, y, id) => {
             }
             if(isAnAttackableCase(x, y) === true)
             {
-                fill(255,100,100,100)
+                fill(255,150,150,175)
                 rect(x*tileSize+vectorCameraEngineTwo.x, y*tileSize+vectorCameraEngineTwo.y, tileSize, tileSize);
             }
             break;
@@ -295,7 +295,7 @@ const endEventFight = (event) => {
     {
         case "darkWoafEnd" :
             let npcIndexBob = addNpcToMap(7, [19, 18], 'dialog', [1, 0], 'idle', true, 3)
-            let npcIndexSalato = addNpcToMap(2, [21, 18], 'dialog', [1, 0], 'idle', true, 3)
+            let npcIndexSalato = addNpcToMap(8, [21, 18], 'dialog', [1, 0], 'idle', true, 3)
             playerCanMove = false;
             mapData[3].npcOnMap[npcIndexBob-1].nextCase = searchPath(mapData[3].npcOnMap[npcIndexBob-1].pos, [19, 12], mapData[3].map.objectLayer);
             mapData[3].npcOnMap[npcIndexSalato-1].nextCase = searchPath(mapData[3].npcOnMap[npcIndexBob-1].pos, [21, 12], mapData[3].map.objectLayer);

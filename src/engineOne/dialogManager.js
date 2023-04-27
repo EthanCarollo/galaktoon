@@ -24,13 +24,13 @@ const launchNpcDialog = (npc) => {
   }
 }
 
-const goNextDialog = () => {
+const goNextDialog = (lengthDialog = null) => {
   /**
    * * Advance in the dialog and exit the dialog if it's the last dialog of the dialog array
    */
-  if(Math.floor(dialogTextIndex) !== npcDialoged.dialogs[npcDialoged.actualDialogIndex][actualDialog].text.length)
+  if(lengthDialog !== null && typeof(lengthDialog) === typeof(dialogTextIndex) && dialogTextIndex !== lengthDialog)
   {
-    dialogTextIndex = npcDialoged.dialogs[npcDialoged.actualDialogIndex][actualDialog].text.length;
+    dialogTextIndex = lengthDialog;
     return;
   }
   dialogTextIndex = 0;
@@ -235,7 +235,7 @@ const showRewardBox = (xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, npc
   fill(255)
   changeFillOnHover(xBoxTrue, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice, 20, 254, 2)
 
-  text("Accept Reward", xBoxTrue, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice)
+  text("Finish Quest", xBoxTrue, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice)
 
   createInputButtonWithCallback(xBoxTrue, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice, 
       () => {
@@ -318,16 +318,27 @@ const showDialogText = (xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, di
 
 
 const setDialogInput = (xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, dialog, npc) => {
-  if(Math.floor(dialogTextIndex) > npcDialoged.dialogs[npcDialoged.actualDialogIndex][actualDialog].text.length) dialogTextIndex = npcDialoged.dialogs[npcDialoged.actualDialogIndex][actualDialog].text.length; 
-  if(Math.floor(dialogTextIndex) !== npcDialoged.dialogs[npcDialoged.actualDialogIndex][actualDialog].text.length)
+/**
+ * * Setting the current text for the length for the verification in the next dialog
+ * * Then, switch case on the state of the dialog to show different in put on different
+ * * dialog
+ */
+
+  let textDialog = dialog.text
+  if(dialog.state === "GivedQuest") textDialog = dialog.altText
+  if(dialog.state === "Reward") textDialog = dialog.rewardText
+
+
+  if(dialogTextIndex !== textDialog.length)
   {
-    createInputButtonWithCallback(xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, goNextDialog);
+    createInputButtonWithCallback(xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, () => { goNextDialog(textDialog.length) });
     textSize(sizeYDialog/15);
     textAlign(RIGHT, BOTTOM)
     text("Click", xStartDialog, yStartDialog, sizeXDialog-72.5, sizeYDialog-47.5)
     textAlign(LEFT, TOP)
     return;
   }
+
   switch(dialog.state)
   {
     case "Normal" :
@@ -446,6 +457,8 @@ const creatingStringWithDelay = (textToDelay) => {
   {
     dialogTextIndex += 0.3;
   }
+  if(dialogTextIndex >= textToDelay.length) dialogTextIndex = textToDelay.length; 
+  
   return textToDelay.substr(0, Math.floor(dialogTextIndex));
 }
 

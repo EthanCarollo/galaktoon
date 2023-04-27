@@ -117,6 +117,10 @@ const animateNpc = (x, y, size, direction /* ! = Array ! */, npcId, npc) => {
       animationIdleSprite(x, y, size, direction, npcId)
       createImageWithIdOn2dArray(npc.pos[0], npc.pos[1]-1, 10, 65, true)
       break;
+    case "dead" : 
+      animationDeadSprite(x, y, size, npcId)
+      break;
+
     default :
       break;
     }

@@ -139,6 +139,7 @@ const endSpecificQuestEvents = (questEventString) => {
         case "finishFightQuestBob" :
             mapData[2].npcOnMap[0].nextCase = searchPath(mapData[2].npcOnMap[0].pos, [15, 17], mapData[2].map.objectLayer); // Here it's the AI who mooves
             mapData[2].npcOnMap[0].interaction = "dialog";
+            mapData[2].npcOnMap[1].state = "dead"
             npcData[3].actualDialogIndex = 3; // Update the dialog of the npc of the ai
             finishQuest(2);
             addQuestToList(3);
