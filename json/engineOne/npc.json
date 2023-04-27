@@ -11,10 +11,10 @@
             }, { 
                 "questIsGived" : true,
                 "type" : "quest",
-                "text" : "Merci de m'avoir sauvé.", 
+                "text" : "Thank you for savingme.", 
                 "quest" : 3, 
-                "altText" : "Il faut aller te battre mon grand.",
-                "rewardText" : "Bien nous pouvons commencer." 
+                "altText" : "You need to fight.",
+                "rewardText" : "I will now need you help adventurer!" 
             }],
             [{ 
                 "text" : "My son recently got kidnapped by a new servant of dark woaf.... The Salatonion's. "
@@ -28,14 +28,14 @@
             }],[{ 
                 "text" : "Thank you for reuniting me with my son!"
             },{ 
-                "text" : "We must put an end to the dictatorship of the Dark Woaf"
+                "text" : "We must put an end to the dictatorship of the Dark Woaf."
             }, { 
                 "questIsGived" : false,
                 "type" : "quest",
                 "text" : "Will you help me destroy it?", 
                 "quest" : 5, 
                 "altText" : "Let's go on the Dark Woaf's Lair.",
-                "rewardText" : "We saved our world !." 
+                "rewardText" : "We saved our world!." 
             }],[
                 {
                     "text" : "This was a beautiful adventure Void, thank you for that..."
@@ -98,10 +98,10 @@
                 }, { 
                     "questIsGived" : false,
                     "type" : "quest",
-                    "text" : "You will have to fight against a small battle droid. Are you ready ?", 
+                    "text" : "You will have to fight against a small battle droid. Are you ready?", 
                     "quest" : 1, 
                     "interactionType" : "cannotRefuse",
-                    "altText" : "Go fight this droid !",
+                    "altText" : "Go fight this droid!",
                     "rewardText" : "Well done, you have the basics!" 
                 }],
                 [{ 
@@ -132,7 +132,7 @@
                 "fight" : 1
             }],
             [{ 
-                "text" : "Well played, you beat me ! Retourne parler à l'IA pour continuer ton initiation. "
+                "text" : "Well played, you beat me ! Go talk to the AI for more information. "
             }]]
         },{
             "id" : "5",
