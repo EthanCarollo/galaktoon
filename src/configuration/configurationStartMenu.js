@@ -22,7 +22,7 @@ const LangMenuChoices = [
     {
         text : 'EN',
         callback : () => { 
-            localStorage.setItem("lang", null)
+            localStorage.removeItem("lang")
             restartGame(); 
         }
     },

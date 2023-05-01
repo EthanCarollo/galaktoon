@@ -4,7 +4,7 @@ const LangPackage = {
 
 const setLanguageOnStart = () => {
     if(localStorage.getItem("lang") === null) return;
-    console.log("Changed the language")
+
     loadSpecificLanguage("fr");
 }
 
@@ -26,7 +26,7 @@ const loadSpecificLanguage = (language) => {
 
 const setLanguageOfEveryPrompts = (languageData) => {
     let languageKey = Object.keys(languageData)
-    console.log(languageKey)
+
     for(let i = 0; i < languageKey.length; i++)
     {
         switch(languageKey[i])
@@ -40,16 +40,43 @@ const setLanguageOfEveryPrompts = (languageData) => {
             case "story" :
                 setLanguageOfStories(languageData["story"])
                 break;
+            case "tutorial" :
+                setLanguageTutorial(languageData["tutorial"])
+                break;
         }
     }
 }
 
 
 
+
+const setLanguageTutorial = (tutorialPrompt) => {
+    let tutoLanguageKey = Object.keys(tutorialPrompt)
+
+    for(let i = 0; i < tutoLanguageKey.length; i++)
+    {
+        switch(tutoLanguageKey[i])
+        {
+            case "engineTwoTutorial" :
+                tutorialText = tutorialPrompt[tutoLanguageKey[i]]
+                break;
+        }
+    }
+}
+
+
+
+
 /**
+ * * setLanguage function for the story
  * @param {Object} storyPrompt this is an object 
  */
 const setLanguageOfStories = (storyPrompt) => {
+    
+    for(let i = 0; i < storyPrompt.length; i++)
+    {
+        DifferentListStory[i].text = storyPrompt[i].text;
+    }
     
 }
 
@@ -62,7 +89,7 @@ const setLanguageOfStories = (storyPrompt) => {
  */
 const setLanguageOfNpc = (npcPrompt) => {
     /**
-     *  * Quadra for to set every language of every npc
+     *  * Triple for to set every language of every npc
      */
 
     for(let k = 0; k < npcPrompt.length; k++)

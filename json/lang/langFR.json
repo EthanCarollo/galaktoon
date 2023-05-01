@@ -149,6 +149,54 @@
                     }
                 ]]
             }
-        ]
+        ],
+        "story" : [
+            {
+                "text" : [
+                    "Dans une galaxie lointaine...",
+                    "Une entité dormait tranquillement...",
+                    "Jusqu'a ce que sa cuve de survie se brise..."
+                ]
+            },
+            {
+                "text" : [
+                    "Sur la planête des Bob...",
+                    "Un soldat se battait contre un slime...",
+                    "Jusq'à ce que Void voit ca..."
+                ]
+            },
+            {
+                "text" : [
+                    "Après un long et dur combat...",
+                    "Void avait perdu... Mais il n'était seul...",
+                    "Il se réveilla ensuite dans son lit..."
+                ]
+            },
+            {
+                "text" : [
+                    "Salatonion était un brave kebab...",
+                    "mais Dark Woaf l'ensorcela...",
+                    "Maintenant, c'est à Void de changer cela..."
+                ]
+            },
+            {
+                "text" : [
+                    "Nos héros sont enfin arrivés...",
+                    "Dans l'antre du vilain Dark Woaf...",
+                    "Un méchant très sûr de lui..."
+                ]
+            }
+        ],
+        "tutorial" : {
+            "engineTwoTutorial" : [
+                "En haut à droite et en haut à gauche, il y a les informations de Void et de l'ennemi !",
+                "La première barre en haut (en rouge) c'est la barre de vie, la suivante celle de mouvement et la dernière, c'est les points d'attaques !",
+                "Ici il y a tes abilités representé par des cartes ! Passe ta souris dessus pour les révélés ! Clique sur la première carte pour la selectionné.",
+                "Une fois l'abilité choisi, clique sur l'ennemi pour l'attaquer !",
+                "Si tu cliques sur Void, tu es en phase de mouvement !",
+                "Tu peux donc ensutie cliquer sur une case en bleue pour pouvoir bouger !",
+                "Le tutoriel de combat est maintenant finit ! Finit ton tour en appuyant sur le bouton !"
+            ]
+        }
     }
 }
