@@ -91,6 +91,63 @@
                         "text" : "Tu as sauvé Bob de Dark Woaf. " 
                     }]
                 ]
+            },{
+                "name" : "FightAi",
+                "dialogs" : [[{ 
+                    "text" : "Entrainons-nous !"
+                }],
+                [{ 
+                    "text" : "Bien joué, retourne parler à l'IA pour continuer l'initiation. "
+                }]]
+            },{
+                "name" : "Garde de Dark Woaf",
+                "dialogs" : [[{ 
+                    "text" : "Tu as tout vu, je vais t'exterminer ! "
+                }],
+                [{ 
+                    "text" : "Tu m'as vaincu, je ne reste qu'un soldat parmis d'autres malgré tout. Ne t'emballes pas..."
+                }]]
+            },{
+                "name" : "l'IA",
+                "dialogs" : [ 
+                    [{ 
+                        "text" : "Tu veux retourné sur le vaisseau ?"
+                    }]
+                ]
+            },{
+                "name" : "Bob",
+                "dialogs" : [[{ 
+                    "text" : "On en a finit de lui.."
+                },{ 
+                    "text" : "Tu penses que c'est la fin ?"
+                }]]
+            },{
+                "name" : "Salatonion",
+                "dialogs" : [[{ 
+                    "text" : "Oui tout ca est terminé Bob..."
+                },{ 
+                    "text" : "On n'en entendra plus jamais parlé."
+                }]]
+            },{
+                "id" : "9",
+                "spriteId" : "1",
+                "name" : "Bob",
+                "actualDialogIndex" : 0,
+                "dialogs" : [[{ 
+                    "text" : "S'il te plait sauve mon fils", 
+                    "altText" : "On doit aller dans l'antre de Dark Woaf.",
+                    "rewardText" : "Ne t'inquiète pas, le plus important est que tu es redevenue toi meme après tout. " 
+                }],[{ 
+                    "text" : "Maintenant, on doit en finir avec le dictateur Em.. Dark Woaf."
+                }, { 
+                    "text" : "Est ce que tu vas m'aider à le vaincre ?", 
+                    "altText" : "Allons dans l'antre de ce stupide chien nain.",
+                    "rewardText" : "On a sauvé le monde !." 
+                }],[
+                    {
+                        "text" : "C'était cool Void, Merci pour tout..."
+                    }
+                ]]
             }
         ]
     }
