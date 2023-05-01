@@ -3,6 +3,95 @@
         "startMenu" : {
             "start" : "Lancer le jeu",
             "exit" : "Quitter le jeu"
-        }
+        },
+        "npc" : [
+            {
+                "name" : "Bob",
+                "dialogs" : [[{ 
+                    "text" : "Tu m'as sauvé de cet acolyte du sombre Dark Woaf."
+                }, { 
+                    "type" : "quest",
+                    "text" : "Merci de m'avoir sauvé.",
+                    "altText" : "Vas te battre !",
+                    "rewardText" : "Je vais avoir besoin de ton aide pour autre chose !" 
+                }],
+                [{ 
+                    "text" : "Mon fils s'est récemment fait kidnappé par nos anciens alliés, les Salatonions. "
+                }, { 
+                    "type" : "quest",
+                    "text" : "S'il te plait sauve mon fils", 
+                    "altText" : "Je viendrais te rejoindre quand mon fils sera sauvé !",
+                    "rewardText" : "Commencons." 
+                }],[{ 
+                    "text" : "Merci de m'avoir réuni avec mon fils !"
+                },{ 
+                    "text" : "On doit mettre fin au reigne du dictateur Dark Woaf."
+                }, { 
+                    "type" : "quest",
+                    "text" : "M'aideras tu à en finir ?", 
+                    "quest" : 5, 
+                    "altText" : "Allons sur la planète du Dark Woaf.",
+                    "rewardText" : "On a sauvé le monde!." 
+                }],[{
+                    "text" : "C'était une aventure magnifique, merci..."
+                }
+                ]]
+            },{
+                "name" : "DarkWoaf",
+                "dialogs" : [
+                [{ 
+                    "text" : "Je n'ai jamais voulu faire tout cela de cette manière, mais je me devais d'agir pour rétablir un équilibre..."
+                },{ 
+                    "text" : "Maintenant que tu es là combattant, viens te battre. "
+                }],
+                [{ 
+                    "text" : "Argh...."
+                }]]
+            },{
+                "name" : "Salatonion",
+                "dialogs" : [[{ 
+                    "text" : "Viens te battre poule mouillée. "
+                }],
+                [{ 
+                    "text" : "Tu as ouvert mon coeur et la corruption du Dark Woaf est parti."
+                },
+                {
+                    "text" : "Bob, je suis si désolé, je m'en veux tellement..."
+                }]]
+            },{
+                "name" : "l'IA",
+                "dialogs" : [ 
+                    [{ 
+                        "text" : "Tu t'es réveillé, c'est trop cool !" 
+                    }, { 
+                        "text" : "Tu dois être patraque, essaie de bouger !",
+                        "rewardText" : "Bien, tu as l'air en meilleure forme." 
+                    }],
+                    [{ 
+                        "text" : "We are going to start a fight initiation. " 
+                    }, { 
+                        "text" : "Tu vas devoir te battre, te sens tu prêt ?",
+                        "altText" : "Va te battre contre le droide.",
+                        "rewardText" : "Bien joué, t'es un champion toi !" 
+                    }],
+                    [{ 
+                        "text" : "Ton initiation est fini,  commencons l'aventure ! " 
+                    },{ 
+                        "text" : "Un grand caid du nom de Dark Woaf s'amuse à faire regner le chaos, tu dois le vaincre pour réstaurer la paix !" 
+                    }, { 
+                        "questIsGived" : false,
+                        "type" : "quest",
+                        "text" : "Il a commencé à foutre le zouk sur la planète des Bobs, allons y !", 
+                        "quest" : 2, 
+                        "interactionType" : "cannotRefuse",
+                        "altText" : "Je t'attends ici, va sur la planète.",
+                        "rewardText" : "Bien vu zin, tu as sauvé la planète !" 
+                    }],
+                    [{ 
+                        "text" : "Tu as sauvé Bob de Dark Woaf. " 
+                    }]
+                ]
+            }
+        ]
     }
 }
