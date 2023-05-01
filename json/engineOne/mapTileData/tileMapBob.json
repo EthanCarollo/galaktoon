@@ -1206,7 +1206,7 @@
         },
         {
             "id": "86",
-            "path": "assets/tiles/bobTiles/rzfv\".png",
+            "path": "assets/tiles/bobTiles/rzfv.png",
             "isAnimated": false,
             "image": "null",
             "collider": false,
