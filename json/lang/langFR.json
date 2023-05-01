@@ -196,7 +196,35 @@
                 "Si tu cliques sur Void, tu es en phase de mouvement !",
                 "Tu peux donc ensutie cliquer sur une case en bleue pour pouvoir bouger !",
                 "Le tutoriel de combat est maintenant finit ! Finit ton tour en appuyant sur le bouton !"
-            ]
-        }
+            ],
+            "keyboardTutorial" : "Ce sont les touches pour bouger et interagir, essaie les toutes pour continuer !",
+            "explorationTutorial" : "Ca, c'est le tableau d'exploration, tu peux intéragir avec en utilisant la touche E et ensuite explorer la planête de ton choix !"
+        },
+        "quests" : [
+            {
+                "name" : "Suis l'entité bleue !",
+                "description" : "Suis l'entité bleue, je crois que c'est L'IA du vaisseau."
+            },
+            {
+                "name" : "Bats toi contre l'IA grise.",
+                "description" : "Y a un truc chelou qui a pop, je pense qu'il faut le combattre, allons y."
+            },
+            {
+                "name" : "Allons sur la planête des bobs !",
+                "description" : "L'IA est allée en direction de l'ordinateur, je pense que je devrais l'utiliser pour voyager jusqu'à la planête."
+            },
+            {
+                "name" : "La fin du chapitre bob.",
+                "description" : "C'était rapide, ils ont pas l'air éfficace chez Dark Woaf."
+            },
+            {
+                "name" : "Sauve Bébé Bob.",
+                "description" : "Ok là c'est un peu grave... (Il y a vraiment un mec qui s'appelle Salatonion ?)"
+            },
+            {
+                "name" : "Tuer Dark Woaf.",
+                "description" : "On le tue comme ca c'est fait, allons sur sa planête."
+            }
+        ]
     }
 }

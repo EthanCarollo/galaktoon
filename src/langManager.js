@@ -43,23 +43,44 @@ const setLanguageOfEveryPrompts = (languageData) => {
             case "tutorial" :
                 setLanguageTutorial(languageData["tutorial"])
                 break;
+            case "quests" :
+                setLanguageQuests(languageData["quests"])
+                break
+            default :
+                throw new Error("text language isn't properly set // doesn't exist : " + languageKey[i])
         }
     }
 }
 
 
+const setLanguageQuests = (questsText) => {
+    for(let i = 0; i < questsText.length;i ++)
+    {
+        questData[i].description = questsText[i].description
+        questData[i].name = questsText[i].name
+    }
+}
 
 
-const setLanguageTutorial = (tutorialPrompt) => {
-    let tutoLanguageKey = Object.keys(tutorialPrompt)
+
+const setLanguageTutorial = (tutorialText) => {
+    let tutoLanguageKey = Object.keys(tutorialText)
 
     for(let i = 0; i < tutoLanguageKey.length; i++)
     {
         switch(tutoLanguageKey[i])
         {
             case "engineTwoTutorial" :
-                tutorialText = tutorialPrompt[tutoLanguageKey[i]]
+                tutorialEngineTwoText = tutorialText[tutoLanguageKey[i]]
                 break;
+            case "keyboardTutorial" :
+                tutorialKeyBoardText = tutorialText[tutoLanguageKey[i]]
+                break;
+            case "keyboardTutorial" :
+                tutorialExplore = tutorialText[tutoLanguageKey[i]]
+                break;
+            default :
+                throw new Error("tutorial text language isn't properly set : " + tutoLanguageKey[i])
         }
     }
 }
@@ -69,13 +90,13 @@ const setLanguageTutorial = (tutorialPrompt) => {
 
 /**
  * * setLanguage function for the story
- * @param {Object} storyPrompt this is an object 
+ * @param {Object} storyText this is an object 
  */
-const setLanguageOfStories = (storyPrompt) => {
+const setLanguageOfStories = (storyText) => {
     
-    for(let i = 0; i < storyPrompt.length; i++)
+    for(let i = 0; i < storyText.length; i++)
     {
-        DifferentListStory[i].text = storyPrompt[i].text;
+        DifferentListStory[i].text = storyText[i].text;
     }
     
 }
@@ -85,23 +106,23 @@ const setLanguageOfStories = (storyPrompt) => {
 
 /**
  * * setLanguage Function for the dialog menu
- * @param {Object} npcPrompt this is an object 
+ * @param {Object} npcText this is an object 
  */
-const setLanguageOfNpc = (npcPrompt) => {
+const setLanguageOfNpc = (npcText) => {
     /**
      *  * Triple for to set every language of every npc
      */
 
-    for(let k = 0; k < npcPrompt.length; k++)
+    for(let k = 0; k < npcText.length; k++)
     {
-        npcData[k].name = npcPrompt[k].name 
+        npcData[k].name = npcText[k].name 
         for(let j = 0; j < npcData[k].dialogs.length; j++)
         {
             for(let l = 0; l <npcData[k].dialogs[j].length;l++)
             {
-                    npcData[k].dialogs[j][l].text = npcPrompt[k].dialogs[j][l].text
-                    npcData[k].dialogs[j][l].rewardText = npcPrompt[k].dialogs[j][l].rewardText
-                    npcData[k].dialogs[j][l].altText = npcPrompt[k].dialogs[j][l].altText
+                    npcData[k].dialogs[j][l].text = npcText[k].dialogs[j][l].text
+                    npcData[k].dialogs[j][l].rewardText = npcText[k].dialogs[j][l].rewardText
+                    npcData[k].dialogs[j][l].altText = npcText[k].dialogs[j][l].altText
             }
         }
     }
@@ -112,20 +133,22 @@ const setLanguageOfNpc = (npcPrompt) => {
 
 /**
  * * setLanguage Function for the starting menu
- * @param {Object} startMenuPrompt this is an object that contains "start" or "exit"
+ * @param {Object} startMenuText this is an object that contains "start" or "exit"
  */
-const setLanguageOfStartingMenu = (startMenuPrompt) => {
-    let languageKey = Object.keys(startMenuPrompt)
+const setLanguageOfStartingMenu = (startMenuText) => {
+    let languageKey = Object.keys(startMenuText)
     for(let i = 0; i < languageKey.length; i++)
     {
         switch(languageKey[i])
         {
             case "start" : 
-                StartMenuChoices[0].text = startMenuPrompt[languageKey[i]]
+                StartMenuChoices[0].text = startMenuText[languageKey[i]]
                 break;
             case "exit" :
-                StartMenuChoices[1].text = startMenuPrompt[languageKey[i]]
+                StartMenuChoices[1].text = startMenuText[languageKey[i]]
                 break;
+            default :
+                throw new Error("start text language isn't properly set : " + languageKey[i])
         }
     }
 }

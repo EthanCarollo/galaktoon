@@ -13,6 +13,8 @@ const showTutorial = () => {
     }
 }
 
+
+
 const showTutorialEngineTwo = () => {
     noStroke()
     fill(0, 180)
@@ -21,13 +23,13 @@ const showTutorialEngineTwo = () => {
         case 0 :
             rect(0, 200, window.innerWidth, window.innerHeight)
             rect(500, 0, window.innerWidth-1000, 200.0001)
-            showTutorialText(tutorialText[0]);
+            showTutorialText(tutorialEngineTwoText[0]);
             showEndTutorialWithCallback(() => tutorialStep++);
             break;
         case 1 :
             rect(0, 200, window.innerWidth, window.innerHeight)
             rect(500, 0, window.innerWidth-1000, 200.0001)
-            showTutorialText(tutorialText[1]);
+            showTutorialText(tutorialEngineTwoText[1]);
             showEndTutorialWithCallback(() => tutorialStep++);
             break;
         case 2 :
@@ -40,7 +42,7 @@ const showTutorialEngineTwo = () => {
 
             textSize(16);
 
-            showTutorialText(tutorialText[2], 150);
+            showTutorialText(tutorialEngineTwoText[2], 150);
             break;
         case 3 :
             let sizeRect3 = 250;
@@ -51,7 +53,7 @@ const showTutorialEngineTwo = () => {
             rect(window.innerWidth/2-sizeRect3/2,0-offSetY,sizeRect3,window.innerHeight/2-sizeRect3/2) // top
             rect(window.innerWidth/2-sizeRect3/2,window.innerHeight/2+sizeRect3/2-offSetY,sizeRect3,window.innerHeight) // bot
             if (mouseIsPressed === true) attackInputInSecondEngine();
-            showTutorialText(tutorialText[3], -160);
+            showTutorialText(tutorialEngineTwoText[3], -160);
             break;
         case 4 :
             let sizeRect = 250;
@@ -63,16 +65,16 @@ const showTutorialEngineTwo = () => {
     
     
             if (mouseIsPressed === true) mooveInputInSecondEngine();
-            showTutorialText(tutorialText[4], 260);
+            showTutorialText(tutorialEngineTwoText[4], 260);
             break;
         case 5 :
             if (mouseIsPressed === true) mooveInputInSecondEngine();
-            showTutorialText(tutorialText[5], 300);
+            showTutorialText(tutorialEngineTwoText[5], 300);
             break;
         case 6 : 
             rect(0, 0, window.innerWidth, window.innerHeight *0.72+0.2)
             rect(0, window.innerHeight *0.72, window.innerWidth * 0.8, window.innerHeight *0.33)
-            showTutorialText(tutorialText[6], -200);
+            showTutorialText(tutorialEngineTwoText[6], -200);
             break;
         case 7 : 
             // the end case of the tutorial
@@ -85,6 +87,8 @@ const showTutorialEngineTwo = () => {
     }
 
 }
+
+
 
 const eventOnTheTutorialEngine = (event) => {
     tutorialStep++;
@@ -107,7 +111,7 @@ const showTutorialKeyBoard = () => {
 
     noFill();
     textSize(22)
-    showTutorialText("Here are the key for the movement and the interaction for the player, test every key!")
+    showTutorialText(tutorialKeyBoardText)
     let countTest = 0
     for(let i = 0; i < keyBoardTested.length; i++)
     {
@@ -118,6 +122,8 @@ const showTutorialKeyBoard = () => {
         showEndTutorialWithCallback(() => { exitTutorial(); keyboardIsShowing = false });
     }
 }
+
+
 
 const showTutorialText = (textTutorial, yOff = 0) => {
     textAlign(CENTER, CENTER)
@@ -130,6 +136,8 @@ const showTutorialText = (textTutorial, yOff = 0) => {
     textAlign(LEFT, LEFT)
 }
 
+
+
 const showEndTutorialWithCallback = (callbackOnEnd = exitTutorial, yOff = 0) => {
     textAlign(CENTER, CENTER)
     let sizeBox = [400, 400/5]
@@ -141,6 +149,8 @@ const showEndTutorialWithCallback = (callbackOnEnd = exitTutorial, yOff = 0) => 
     createInputButtonWithCallback(position[0], position[1], sizeBox[0], sizeBox[1], callbackOnEnd)
     textAlign(LEFT, LEFT)
 }
+
+
 
 const exitTutorial = () => {
     playerCanMove = true;
