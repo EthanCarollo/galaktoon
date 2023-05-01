@@ -3,6 +3,8 @@ const LangPackage = {
 }
 
 const setLanguageOnStart = () => {
+    if(localStorage.getItem("lang") === null) return;
+    console.log("Changed the language")
     loadSpecificLanguage("fr");
 }
 
@@ -35,8 +37,20 @@ const setLanguageOfEveryPrompts = (languageData) => {
             case "npc" :
                 setLanguageOfNpc(languageData["npc"])
                 break;
+            case "story" :
+                setLanguageOfStories(languageData["story"])
+                break;
         }
     }
+}
+
+
+
+/**
+ * @param {Object} storyPrompt this is an object 
+ */
+const setLanguageOfStories = (storyPrompt) => {
+    
 }
 
 
@@ -44,7 +58,7 @@ const setLanguageOfEveryPrompts = (languageData) => {
 
 /**
  * * setLanguage Function for the dialog menu
- * @param {Object} npcPrompt this is an object that contains "start" or "exit"
+ * @param {Object} npcPrompt this is an object 
  */
 const setLanguageOfNpc = (npcPrompt) => {
     /**
@@ -59,10 +73,10 @@ const setLanguageOfNpc = (npcPrompt) => {
             for(let l = 0; l <npcData[k].dialogs[j].length;l++)
             {
                     npcData[k].dialogs[j][l].text = npcPrompt[k].dialogs[j][l].text
+                    npcData[k].dialogs[j][l].rewardText = npcPrompt[k].dialogs[j][l].rewardText
+                    npcData[k].dialogs[j][l].altText = npcPrompt[k].dialogs[j][l].altText
             }
-                
         }
-        console.log(npcData[k].dialogs)
     }
     
 }
@@ -80,10 +94,10 @@ const setLanguageOfStartingMenu = (startMenuPrompt) => {
         switch(languageKey[i])
         {
             case "start" : 
-                startMenuChoices[0].text = startMenuPrompt[languageKey[i]]
+                StartMenuChoices[0].text = startMenuPrompt[languageKey[i]]
                 break;
             case "exit" :
-                startMenuChoices[1].text = startMenuPrompt[languageKey[i]]
+                StartMenuChoices[1].text = startMenuPrompt[languageKey[i]]
                 break;
         }
     }
