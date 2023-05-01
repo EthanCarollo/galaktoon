@@ -1,0 +1,8 @@
+{
+    "data" : {
+        "startMenu" : {
+            "start" : "Lancer le jeu",
+            "exit" : "Quitter le jeu"
+        }
+    }
+}
