@@ -1,7 +1,7 @@
 
 
 let storyBoardOpacity = [0, 0, 0]
-let currentStoryBoard = 0
+let currentStoryBoardIndex = 0
 let previousEngineOneState = EngineOneStateEnum.Playing;
 
 const DifferentListStory = [

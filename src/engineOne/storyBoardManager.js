@@ -1,5 +1,5 @@
 const launchStoryBoard = (idStoryBoard = 0) => {
-    currentStoryBoard = idStoryBoard;
+    currentStoryBoardIndex = idStoryBoard;
     previousEngineOneState = engineOneState + "";
     engineOneState = EngineOneStateEnum.StoryBoard;
 }
@@ -8,7 +8,7 @@ const runStoryBoard = () => {
     imageMode(CENTER)
     textAlign(CENTER, CENTER)
     background(20 ,255);
-    let imageStoryBoardToClip = uiData[DifferentListStory[currentStoryBoard].id].image;
+    let imageStoryBoardToClip = uiData[DifferentListStory[currentStoryBoardIndex].id].image;
     for(let i = 0; i < 3; i++)
     {
         let storyBoard = imageStoryBoardToClip.get(400*i, 0, 400, 800);
@@ -63,7 +63,7 @@ const showStoryBoardText = (index, position) => {
     textSize(16)
     let yOverflow = position[1]+300;
     if(index === 1) yOverflow = position[1]-300;
-    let textToShow = DifferentListStory[currentStoryBoard].text[index]
+    let textToShow = DifferentListStory[currentStoryBoardIndex].text[index]
     image(uiData[22].image, position[0], yOverflow, 350, 80)
     text(textToShow, position[0]-170, yOverflow-50, 340, 100)
 }
