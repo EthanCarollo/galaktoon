@@ -78,10 +78,10 @@ const showLanguageStartMenu = () => {
     for(let i = 0; i < LangMenuChoices.length; i++)
     {
         let xPosition =  xStart + (height+35) * i
-        image(uiData[18].image, xPosition, yStart, width, height)
+        image(uiData[49].image, xPosition, yStart, width, height)
         if(mouseIsHover(xPosition, yStart, width, height) === true)
         {
-            image(uiData[27].image, xPosition, yStart, width, height)
+            image(uiData[50].image, xPosition, yStart, width, height)
         }
         fill(255, 255, 255)
         textAlign(CENTER, CENTER);

@@ -45,10 +45,32 @@ const setLanguageOfEveryPrompts = (languageData) => {
                 break;
             case "quests" :
                 setLanguageQuests(languageData["quests"])
-                break
+                break;
+            case "planets" :
+                setLanguagePlanets(languageData["planets"])
+                break;
+            case "engineTwo" :
+                setLanguageEngineTwo(languageData["engineTwo"])
+                break;
             default :
                 throw new Error("text language isn't properly set // doesn't exist : " + languageKey[i])
         }
+    }
+}
+
+
+const setLanguageEngineTwo = (engineTwoText) => {
+    console.log(engineTwoText)
+    endFightText = engineTwoText.endFight
+    startFightText = engineTwoText.startFight
+}
+
+
+const setLanguagePlanets = (planetsText) => {
+    for(let i = 0; i < planetsText.length;i ++)
+    {
+        planetsData[i].description = planetsText[i].description
+        planetsData[i].name = planetsText[i].name
     }
 }
 
@@ -76,7 +98,7 @@ const setLanguageTutorial = (tutorialText) => {
             case "keyboardTutorial" :
                 tutorialKeyBoardText = tutorialText[tutoLanguageKey[i]]
                 break;
-            case "keyboardTutorial" :
+            case "explorationTutorial" :
                 tutorialExplore = tutorialText[tutoLanguageKey[i]]
                 break;
             default :

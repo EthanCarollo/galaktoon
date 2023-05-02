@@ -204,6 +204,14 @@
             "id" : "48",
             "path" : "assets/backgroundFight/backGroundFightDarkWoaf.png",
             "image" : null
+        },{
+            "id" : "49",
+            "path" : "assets/ui/borderRect.png",
+            "image" : null
+        },{
+            "id" : "50",
+            "path" : "assets/ui/borderRectColored.png",
+            "image" : null
         }
     ]
 }
