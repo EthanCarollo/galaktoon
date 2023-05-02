@@ -383,8 +383,10 @@ const setDialogInput = (xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, di
     case "appearBobAfterFight" :
       createInputButtonWithCallback(xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, ()=>{
         goNextDialog()
-        let numberNpc = addNpcToMap(9, [20, 21], 'dialog', [1, 0], 'idle', true, 1)
-        mapData[1].npcOnMap[numberNpc-1].nextCase = searchPath(mapData[1].npcOnMap[numberNpc-1].pos, [12, 21], mapData[1].map.objectLayer);
+        if(freeBobKidHappens === false){
+          let numberNpc = addNpcToMap(9, [20, 21], 'dialog', [1, 0], 'idle', true, 1)
+          mapData[1].npcOnMap[numberNpc-1].nextCase = searchPath(mapData[1].npcOnMap[numberNpc-1].pos, [12, 21], mapData[1].map.objectLayer);
+        }
       });
       break;
     case "freeBobKid" :

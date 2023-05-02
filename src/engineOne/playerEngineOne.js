@@ -122,7 +122,7 @@ const interactWithATile = (tileInteract) => {
             {
                 if(playerAlreadyExplore === false)
                 {
-                    launchTutorial("This is the exploration tab, you can interact with by using the interact touch (E) and then, you can choose a planet where you can explore");
+                    launchTutorial(tutorialExplore);
                     playerAlreadyExplore = true;
                 }else{
                     playerCanMove = false
@@ -153,7 +153,7 @@ const interactWithATile = (tileInteract) => {
         case "useBed":
             if(bedIsAlreadyUsed === false)
             {
-                launchTutorial("This is the bed, you can interact with by using the interact touch (E) and then, it will refill your life at the maximum");
+                launchTutorial(tutorialBed);
                 bedIsAlreadyUsed = true;
             }else{
                 playSleepAnimation();
