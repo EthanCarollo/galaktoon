@@ -109,6 +109,12 @@ const setLanguageTutorial = (tutorialText) => {
             case "explorationTutorial" :
                 tutorialExplore = tutorialText[tutoLanguageKey[i]]
                 break;
+            case "bedTutorial" :
+                tutorialBed  = tutorialText[tutoLanguageKey[i]]
+                break;
+            case "quitTutorial" :
+                quitTutorial  = tutorialText[tutoLanguageKey[i]]
+                break;
             default :
                 throw new Error("tutorial text language isn't properly set : " + tutoLanguageKey[i])
         }

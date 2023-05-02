@@ -14,4 +14,6 @@ let tutorialEngineTwoText = [
 
 let tutorialKeyBoardText = "Here are the key for the movement and the interaction for the player, test every key!";
 
+let tutorialBed = "This is the bed, you can interact with by using the interact touch (E) and then, it will refill your life at the maximum"
 let tutorialExplore = "This is the exploration tab, you can interact with by using the interact touch (E) and then, you can choose a planet where you can explore";
+let quitTutorial = "Quit Tutorial"

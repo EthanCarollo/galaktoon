@@ -68,7 +68,7 @@
                         "rewardText" : "Bien, tu as l'air en meilleure forme." 
                     }],
                     [{ 
-                        "text" : "We are going to start a fight initiation. " 
+                        "text" : "On va commencer une initation au combat ! " 
                     }, { 
                         "text" : "Tu vas devoir te battre, te sens tu prêt ?",
                         "altText" : "Va te battre contre le droide.",
@@ -168,7 +168,7 @@
             {
                 "text" : [
                     "Après un long et dur combat...",
-                    "Void avait perdu... Mais il n'était seul...",
+                    "Void avait perdu... Mais il n'était pas seul...",
                     "Il se réveilla ensuite dans son lit..."
                 ]
             },
@@ -198,7 +198,9 @@
                 "Le tutoriel de combat est maintenant finit ! Finit ton tour en appuyant sur le bouton !"
             ],
             "keyboardTutorial" : "Ce sont les touches pour bouger et interagir, essaie les toutes pour continuer !",
-            "explorationTutorial" : "Ca, c'est le tableau d'exploration, tu peux intéragir avec en utilisant la touche E et ensuite explorer la planête de ton choix !"
+            "explorationTutorial" : "Ca, c'est le tableau d'exploration, tu peux intéragir avec en utilisant la touche E et ensuite explorer la planête de ton choix !",
+            "bedTutorial" : "C'est le lit, tu peux intéragir avec en utilisant la touche E, il remplira ta vie si tu l'utilises !",
+            "quitTutorial" : "Quitter le Tutoriel"
         },
         "quests" : [
             {

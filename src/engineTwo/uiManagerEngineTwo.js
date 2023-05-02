@@ -22,7 +22,7 @@ const displayEngineTwoUI = () => {
 
 const displayEngineTwoStartingFightUi = () => {
     // TODO : Update the start of a fight engine
-    background(25);
+    background(240);
     if(actualMapEngineTwo.backgroundStartMap !== undefined)
     {
         image(uiData[actualMapEngineTwo.backgroundStartMap ].image,0,0,window.innerWidth,window.innerHeight)
@@ -91,7 +91,7 @@ const displayEngineTwoTutorialUi = () => {
 
 
 const displayEngineTwoEndFightUi = () => {
-    background(25);
+    background(240);
     if(actualMapEngineTwo.backgroundStartMap !== undefined)
     {
         imageMode(CORNER)

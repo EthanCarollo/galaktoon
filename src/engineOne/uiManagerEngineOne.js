@@ -265,7 +265,7 @@ const showExitButtonOnTutorialInterface = (x, y, width, height) => {
     }
     textAlign(CENTER, CENTER)
     fill(255, 255, 255)
-    text("Quit Tutorial", xPosition, yPosition, widthButton, heightButton)
+    text(quitTutorial, xPosition, yPosition, widthButton, heightButton)
     textAlign(LEFT, LEFT)
     noFill()
 
