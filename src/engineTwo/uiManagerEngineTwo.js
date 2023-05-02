@@ -279,7 +279,7 @@ const showEnemiesEndFightList = (size, xStart = window.innerWidth / 2 - size / 2
     {
         let sizeIterate = i-1;
         let xPositionSprite = xPosition + size*sizeIterate
-        textSize(32);
+        textSize(26);
         textAlign(CENTER, TOP)
         let nameSprite = spritesData[actualMapEngineTwo.entityOnTactical[i].id].name
         fill(10,10,10)

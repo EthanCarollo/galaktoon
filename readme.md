@@ -6,7 +6,7 @@
 ### Table of Contents
 
 1. [Techologies]
-2. [How To Install]
+2. [How To Play]
 2. [Engine Informations]
 3. [Features Informations]
 4. [Studio Informations]
@@ -18,13 +18,19 @@
 This game only use the p5.js library.
 * [p5.js] (https://p5js.org/) : v1.5.0 || October 18, 2022
 
-## 2. How To Install
+## 2. How To Play
+
+### Choice One
 
 * 1 - Download the source
 * 2 - Install the "live server" extension in Visual Studio Code
 * 3 - Open index.html in Visual Studio Code 
 * 4 - Click on "Go Live" in the right bottom corner of the window
 * 5 - Enjoy !
+
+### Choice Two
+
+* Play on https://yey-team.com/Galaktoon/
 
 ## 3. Engine Informations
 

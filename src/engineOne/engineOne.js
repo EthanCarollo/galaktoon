@@ -125,6 +125,8 @@ const createMapTopDown = (orientation, mapLayer, mapInfo = playerOnMap, offsetPo
               {
                 showSpecificNpcOnMap(x, y)
                 if(!tileIsEmpty(x, y, mapLayer)){
+                    
+                  
                   createImageWithIdOn2dArray(x, y, mapLayer[y][x], tileSize, false, mapInfo, offsetPositionOnScreen);
                 }
               }

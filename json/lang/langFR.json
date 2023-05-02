@@ -227,33 +227,38 @@
             }
         ],
         "planets" : [
-            [
-                {
-                    "name" : "Le Vaisseau",
-                    "description" : "Le vaisseau, là où tout à commencé."
-                },{
-                    "id" : 1,
-                    "map" : 2,
-                    "name" : "La planète des Bobs",
-                    "description" : "Une petite planète sucrée !"
-                },
-                {
-                    "name" : "La Terre",
-                    "description" : "La planète dirigé par les Salatonions.."
-                },
-                {
-                    "name" : "L'antre de Dark Woaf",
-                    "description" : "L'antre d'un tyran maléfique..."
-                },
-                {
-                    "name" : "MJ - Island",
-                    "description" : "The everything at once map"
-                }
-            ]
+            {
+                "name" : "Le Vaisseau",
+                "description" : "Le vaisseau, là où tout à commencé."
+            },
+            {
+                "id" : 1,
+                "map" : 2,
+                "name" : "La planète des Bobs",
+                "description" : "Une petite planète sucrée !"
+            },
+            {
+                "name" : "La Terre",
+                "description" : "La planète dirigé par les Salatonions.."
+            },
+            {
+                "name" : "L'antre de Dark Woaf",
+                "description" : "L'antre d'un tyran maléfique..."
+            },
+            {
+                "name" : "MJ - Island",
+                "description" : "The everything at once map"
+            }
+            
         ],
         "engineTwo" : {
             "startFight" : "Commencer le combat",
             "endFight" : "Finir le combat"
+        },
+        "engineOne" : {
+            "accept" : "Accepter",
+            "refuse" : "Refuser",
+            "finishQuest" : "Finir la Quête"
         }
     }
 }

@@ -75,6 +75,7 @@ const checkForInteraction = (playerCaseInteract) => {
             {
             let interactType = getTileData(playerCaseInteract[0], playerCaseInteract[1], actualPlayerMap.objectLayer).type;
             createInteractionPopup(playerCaseInteract[0], playerCaseInteract[1], interactType)
+
             return;
             }
     }
