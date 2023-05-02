@@ -10,22 +10,22 @@ const loadAssets = (indexOfAssetsToLoad = totalLoadCounter) => {
      * * when we finished to load a json en we need to go to the second, in that case, i can know 
      * * where i am in the loading of all of my assets
      */
-    fetch(ressourceToLoad[indexOfAssetsToLoad].path)
-    .then(rep => rep.json())
-    .then(rep => { 
-            loadRessource(
-                rep.data,
-                ressourceToLoad[indexOfAssetsToLoad].typeOfRessource
-            )
-                    
-     })
-    .catch(error => { 
-        // error handling
-        throw new Error("there is an issue with a ressource : " + error + " // On the id of asset : " + indexOfAssetsToLoad);
 
-    })
-    
-    
+
+    fetch(ressourceToLoad[indexOfAssetsToLoad].path)
+        .then(rep => rep.json())
+        .then(rep => { 
+                loadRessource(
+                    rep.data,
+                    ressourceToLoad[indexOfAssetsToLoad].typeOfRessource
+                )
+                        
+        })
+        .catch(error => { 
+            // error handling
+            throw new Error("there is an issue with a ressource : " + error + " // On the id of asset : " + indexOfAssetsToLoad);
+
+        })
   }
 
 
@@ -228,12 +228,13 @@ const checkAllRessource = () => {
 }
 
 const loadAllRessource = () => {
+    setLanguageOnStart();
+    setEngineVariableAfterLoadingAllAssets();
+    ressourceIsLoaded = true;
+
     setTimeout(() => {
         startMenuState =  StartMenuStateEnum.Normal;
     }, 200); // set the menu normally if we have load all assets
-
-    setEngineVariableAfterLoadingAllAssets();
-    ressourceIsLoaded = true;
 }
 
 const setEngineVariableAfterLoadingAllAssets = () => {

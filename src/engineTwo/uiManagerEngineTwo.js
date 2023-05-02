@@ -138,7 +138,7 @@ const displayStartFightButton = () => {
     }
 
     textAlign(CENTER,CENTER)
-    text("Start Fight",xPosition, yPosition, width, height)
+    text(startFightText,xPosition, yPosition, width, height)
     textAlign(LEFT,LEFT)
     switch(actualMapEngineTwo.fightType)
     {
@@ -347,7 +347,7 @@ const showButtonFightEnd = () => {
     })
     textAlign(CENTER, CENTER)
     textSize(40); fill(255);
-    text("End Fight", xStart, yPosition, width, height)
+    text(endFightText, xStart, yPosition, width, height)
     textAlign(LEFT, CENTER)
 }
 

@@ -4,7 +4,7 @@ let indexLogoStartMenu = -150;
 let maxSizeOfTheLogo = 300;
 let logoOffSet = [0, 0];
 
-let startMenuChoices = [
+const StartMenuChoices = [
     {
         text : 'Start Game',
         callback : () => { engineOneState = EngineOneStateEnum.StoryBoard; launchEngine(EngineStateEnum.EngineOne); launchNpcDialog(playerOnMap.npcOnMap[0]) }
@@ -16,6 +16,23 @@ let startMenuChoices = [
             window.close(); 
         }
     } // TODO : Are you sure to exit the game ?
+]
+
+const LangMenuChoices = [
+    {
+        text : 'EN',
+        callback : () => { 
+            localStorage.removeItem("lang")
+            restartGame(); 
+        }
+    },
+    {
+        text : 'FR',
+        callback : () => { 
+            localStorage.setItem("lang", "fr"); 
+            restartGame();
+        }
+    }
 ]
 
 let loadingBarOpacity = 255;

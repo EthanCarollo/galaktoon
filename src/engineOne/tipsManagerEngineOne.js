@@ -2,6 +2,7 @@
  * * This is a small program usefull when we need to just show some tips.
  * * This can be used everywhere in every engine, actually it's just an optionnal
  * * features.
+ * ! Features Classic Tips isn't really used in the game
  */
 
 

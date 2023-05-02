@@ -26,3 +26,6 @@ let startUiIsShaking = true;
 let cinematicIsShaking = false;
 
 let npcFighted = null;
+
+let endFightText = "End Fight"
+let startFightText = "Start Fight"

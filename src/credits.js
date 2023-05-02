@@ -5,7 +5,6 @@ let opacityTextCredits = 0;
 let easeInOpacity = true;
 let creditsText = "Designers \nJeremy Berthet\nLouane Chatel\nBillie-Lou Azzano\n\nDevelopper \nEthan CAROLLO"
 
-
 const showCredits = () => {
 
     startCredits += 1;

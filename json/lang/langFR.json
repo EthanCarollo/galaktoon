@@ -1,0 +1,259 @@
+{
+    "data" : {
+        "startMenu" : {
+            "start" : "Lancer le jeu",
+            "exit" : "Quitter le jeu"
+        },
+        "npc" : [
+            {
+                "name" : "Bob",
+                "dialogs" : [[{ 
+                    "text" : "Tu m'as sauvé de cet acolyte du sombre Dark Woaf."
+                }, { 
+                    "type" : "quest",
+                    "text" : "Merci de m'avoir sauvé.",
+                    "altText" : "Vas te battre !",
+                    "rewardText" : "Je vais avoir besoin de ton aide pour autre chose !" 
+                }],
+                [{ 
+                    "text" : "Mon fils s'est récemment fait kidnappé par nos anciens alliés, les Salatonions. "
+                }, { 
+                    "type" : "quest",
+                    "text" : "S'il te plait sauve mon fils", 
+                    "altText" : "Je viendrais te rejoindre quand mon fils sera sauvé !",
+                    "rewardText" : "Commencons." 
+                }],[{ 
+                    "text" : "Merci de m'avoir réuni avec mon fils !"
+                },{ 
+                    "text" : "On doit mettre fin au reigne du dictateur Dark Woaf."
+                }, { 
+                    "type" : "quest",
+                    "text" : "M'aideras tu à en finir ?", 
+                    "quest" : 5, 
+                    "altText" : "Allons sur la planète du Dark Woaf.",
+                    "rewardText" : "On a sauvé le monde!." 
+                }],[{
+                    "text" : "C'était une aventure magnifique, merci..."
+                }
+                ]]
+            },{
+                "name" : "DarkWoaf",
+                "dialogs" : [
+                [{ 
+                    "text" : "Je n'ai jamais voulu faire tout cela de cette manière, mais je me devais d'agir pour rétablir un équilibre..."
+                },{ 
+                    "text" : "Maintenant que tu es là combattant, viens te battre. "
+                }],
+                [{ 
+                    "text" : "Argh...."
+                }]]
+            },{
+                "name" : "Salatonion",
+                "dialogs" : [[{ 
+                    "text" : "Viens te battre poule mouillée. "
+                }],
+                [{ 
+                    "text" : "Tu as ouvert mon coeur et la corruption du Dark Woaf est parti."
+                },
+                {
+                    "text" : "Bob, je suis si désolé, je m'en veux tellement..."
+                }]]
+            },{
+                "name" : "l'IA",
+                "dialogs" : [ 
+                    [{ 
+                        "text" : "Tu t'es réveillé, c'est trop cool !" 
+                    }, { 
+                        "text" : "Tu dois être patraque, essaie de bouger !",
+                        "rewardText" : "Bien, tu as l'air en meilleure forme." 
+                    }],
+                    [{ 
+                        "text" : "We are going to start a fight initiation. " 
+                    }, { 
+                        "text" : "Tu vas devoir te battre, te sens tu prêt ?",
+                        "altText" : "Va te battre contre le droide.",
+                        "rewardText" : "Bien joué, t'es un champion toi !" 
+                    }],
+                    [{ 
+                        "text" : "Ton initiation est fini,  commencons l'aventure ! " 
+                    },{ 
+                        "text" : "Un grand caid du nom de Dark Woaf s'amuse à faire regner le chaos, tu dois le vaincre pour réstaurer la paix !" 
+                    }, { 
+                        "questIsGived" : false,
+                        "type" : "quest",
+                        "text" : "Il a commencé à foutre le zouk sur la planète des Bobs, allons y !", 
+                        "quest" : 2, 
+                        "interactionType" : "cannotRefuse",
+                        "altText" : "Je t'attends ici, va sur la planète.",
+                        "rewardText" : "Bien vu zin, tu as sauvé la planète !" 
+                    }],
+                    [{ 
+                        "text" : "Tu as sauvé Bob de Dark Woaf. " 
+                    }]
+                ]
+            },{
+                "name" : "FightAi",
+                "dialogs" : [[{ 
+                    "text" : "Entrainons-nous !"
+                }],
+                [{ 
+                    "text" : "Bien joué, retourne parler à l'IA pour continuer l'initiation. "
+                }]]
+            },{
+                "name" : "Garde de Dark Woaf",
+                "dialogs" : [[{ 
+                    "text" : "Tu as tout vu, je vais t'exterminer ! "
+                }],
+                [{ 
+                    "text" : "Tu m'as vaincu, je ne reste qu'un soldat parmis d'autres malgré tout. Ne t'emballes pas..."
+                }]]
+            },{
+                "name" : "l'IA",
+                "dialogs" : [ 
+                    [{ 
+                        "text" : "Tu veux retourné sur le vaisseau ?"
+                    }]
+                ]
+            },{
+                "name" : "Bob",
+                "dialogs" : [[{ 
+                    "text" : "On en a finit de lui.."
+                },{ 
+                    "text" : "Tu penses que c'est la fin ?"
+                }]]
+            },{
+                "name" : "Salatonion",
+                "dialogs" : [[{ 
+                    "text" : "Oui tout ca est terminé Bob..."
+                },{ 
+                    "text" : "On n'en entendra plus jamais parlé."
+                }]]
+            },{
+                "id" : "9",
+                "spriteId" : "1",
+                "name" : "Bob",
+                "actualDialogIndex" : 0,
+                "dialogs" : [[{ 
+                    "text" : "S'il te plait sauve mon fils", 
+                    "altText" : "On doit aller dans l'antre de Dark Woaf.",
+                    "rewardText" : "Ne t'inquiète pas, le plus important est que tu es redevenue toi meme après tout. " 
+                }],[{ 
+                    "text" : "Maintenant, on doit en finir avec le dictateur Em.. Dark Woaf."
+                }, { 
+                    "text" : "Est ce que tu vas m'aider à le vaincre ?", 
+                    "altText" : "Allons dans l'antre de ce stupide chien nain.",
+                    "rewardText" : "On a sauvé le monde !." 
+                }],[
+                    {
+                        "text" : "C'était cool Void, Merci pour tout..."
+                    }
+                ]]
+            }
+        ],
+        "story" : [
+            {
+                "text" : [
+                    "Dans une galaxie lointaine...",
+                    "Une entité dormait tranquillement...",
+                    "Jusqu'a ce que sa cuve de survie se brise..."
+                ]
+            },
+            {
+                "text" : [
+                    "Sur la planête des Bob...",
+                    "Un soldat se battait contre un slime...",
+                    "Jusq'à ce que Void voit ca..."
+                ]
+            },
+            {
+                "text" : [
+                    "Après un long et dur combat...",
+                    "Void avait perdu... Mais il n'était seul...",
+                    "Il se réveilla ensuite dans son lit..."
+                ]
+            },
+            {
+                "text" : [
+                    "Salatonion était un brave kebab...",
+                    "mais Dark Woaf l'ensorcela...",
+                    "Maintenant, c'est à Void de changer cela..."
+                ]
+            },
+            {
+                "text" : [
+                    "Nos héros sont enfin arrivés...",
+                    "Dans l'antre du vilain Dark Woaf...",
+                    "Un méchant très sûr de lui..."
+                ]
+            }
+        ],
+        "tutorial" : {
+            "engineTwoTutorial" : [
+                "En haut à droite et en haut à gauche, il y a les informations de Void et de l'ennemi !",
+                "La première barre en haut (en rouge) c'est la barre de vie, la suivante celle de mouvement et la dernière, c'est les points d'attaques !",
+                "Ici il y a tes abilités representé par des cartes ! Passe ta souris dessus pour les révélés ! Clique sur la première carte pour la selectionné.",
+                "Une fois l'abilité choisi, clique sur l'ennemi pour l'attaquer !",
+                "Si tu cliques sur Void, tu es en phase de mouvement !",
+                "Tu peux donc ensutie cliquer sur une case en bleue pour pouvoir bouger !",
+                "Le tutoriel de combat est maintenant finit ! Finit ton tour en appuyant sur le bouton !"
+            ],
+            "keyboardTutorial" : "Ce sont les touches pour bouger et interagir, essaie les toutes pour continuer !",
+            "explorationTutorial" : "Ca, c'est le tableau d'exploration, tu peux intéragir avec en utilisant la touche E et ensuite explorer la planête de ton choix !"
+        },
+        "quests" : [
+            {
+                "name" : "Suis l'entité bleue !",
+                "description" : "Suis l'entité bleue, je crois que c'est L'IA du vaisseau."
+            },
+            {
+                "name" : "Bats toi contre l'IA grise.",
+                "description" : "Y a un truc chelou qui a pop, je pense qu'il faut le combattre, allons y."
+            },
+            {
+                "name" : "Allons sur la planête des bobs !",
+                "description" : "L'IA est allée en direction de l'ordinateur, je pense que je devrais l'utiliser pour voyager jusqu'à la planête."
+            },
+            {
+                "name" : "La fin du chapitre bob.",
+                "description" : "C'était rapide, ils ont pas l'air éfficace chez Dark Woaf."
+            },
+            {
+                "name" : "Sauve Bébé Bob.",
+                "description" : "Ok là c'est un peu grave... (Il y a vraiment un mec qui s'appelle Salatonion ?)"
+            },
+            {
+                "name" : "Tuer Dark Woaf.",
+                "description" : "On le tue comme ca c'est fait, allons sur sa planête."
+            }
+        ],
+        "planets" : [
+            [
+                {
+                    "name" : "Le Vaisseau",
+                    "description" : "Le vaisseau, là où tout à commencé."
+                },{
+                    "id" : 1,
+                    "map" : 2,
+                    "name" : "La planète des Bobs",
+                    "description" : "Une petite planète sucrée !"
+                },
+                {
+                    "name" : "La Terre",
+                    "description" : "La planète dirigé par les Salatonions.."
+                },
+                {
+                    "name" : "L'antre de Dark Woaf",
+                    "description" : "L'antre d'un tyran maléfique..."
+                },
+                {
+                    "name" : "MJ - Island",
+                    "description" : "The everything at once map"
+                }
+            ]
+        ],
+        "engineTwo" : {
+            "startFight" : "Commencer le combat",
+            "endFight" : "Finir le combat"
+        }
+    }
+}
