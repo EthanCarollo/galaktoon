@@ -52,6 +52,9 @@ const setLanguageOfEveryPrompts = (languageData) => {
             case "engineTwo" :
                 setLanguageEngineTwo(languageData["engineTwo"])
                 break;
+            case "engineOne" :
+                setLanguageEngineOne(languageData["engineOne"])
+                break;
             default :
                 throw new Error("text language isn't properly set // doesn't exist : " + languageKey[i])
         }
@@ -59,15 +62,20 @@ const setLanguageOfEveryPrompts = (languageData) => {
 }
 
 
+const setLanguageEngineOne = (engineOneText) => {
+    acceptText = engineOneText.accept
+    refuseText = engineOneText.refuse
+    finishQuestText = engineOneText.finishQuest
+}
+
 const setLanguageEngineTwo = (engineTwoText) => {
-    console.log(engineTwoText)
     endFightText = engineTwoText.endFight
     startFightText = engineTwoText.startFight
 }
 
 
 const setLanguagePlanets = (planetsText) => {
-    for(let i = 0; i < planetsText.length;i ++)
+    for(let i = 0; i < planetsText.length; i++)
     {
         planetsData[i].description = planetsText[i].description
         planetsData[i].name = planetsText[i].name

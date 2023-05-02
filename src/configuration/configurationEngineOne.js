@@ -29,6 +29,7 @@ var playerCanExplore = false;
 
 // Quest var
 
+let freeBobKidHappens = false;
 let questList = [];
 let animationIndexUiQuestGoal = 0;
 let toggleAnimationQuestIndex = false;
@@ -41,6 +42,9 @@ let npcDialoged = null;
 let actualDialog = 0;
 let firstDialog = true;
 let refuseIsShaking = false;
+let refuseText = "Refuse";
+let acceptText = "Accept";
+let finishQuestText = "Finish Quest";
 
 // Player dialog
 

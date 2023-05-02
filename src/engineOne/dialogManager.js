@@ -135,7 +135,7 @@ const showAcceptOnlyButton = (xStartDialog, yStartDialog, sizeXDialog, sizeYDial
     let boxChoiceHover = image(uiData[20].image, xBoxTrue, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice)
   }
 
-  text("Accept", xBoxTrue, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice)
+  text(acceptText, xBoxTrue, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice)
 
   createInputButtonWithCallback(xBoxTrue, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice, callback);
 
@@ -189,7 +189,7 @@ const showDialogChoiceBox = (xStartDialog, yStartDialog, sizeXDialog, sizeYDialo
     let boxChoiceHover = image(uiData[20].image, xBoxTrue, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice)
   }
 
-  text("Accept", xBoxTrue, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice)
+  text(acceptText, xBoxTrue, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice)
 
   createInputButtonWithCallback(xBoxTrue, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice, callback);
 
@@ -235,7 +235,7 @@ const showRewardBox = (xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, npc
   fill(255)
   changeFillOnHover(xBoxTrue, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice, 20, 254, 2)
 
-  text("Finish Quest", xBoxTrue, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice)
+  text(finishQuestText, xBoxTrue, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice)
 
   createInputButtonWithCallback(xBoxTrue, yStartDialog-paddingYChoice, sizeXChoice, sizeYChoice, 
       () => {
@@ -389,13 +389,16 @@ const setDialogInput = (xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, di
       break;
     case "freeBobKid" :
       createInputButtonWithCallback(xStartDialog, yStartDialog, sizeXDialog, sizeYDialog, ()=>{
-        mapData[2].npcOnMap.splice(0, 1)
         goNextDialog()
-        launchNpcDialog(mapData[1].npcOnMap[2])
-        mapData[1].map.objectLayer[23][6] = 97;
-        mapData[1].map.objectLayer[23][7] = 96;
-        let numberNpc = addNpcToMap(10, [6, 20], 'dialog', [1, 0], 'idle', true, 1)
-        mapData[1].npcOnMap[numberNpc-1].nextCase = searchPath(mapData[1].npcOnMap[numberNpc-1].pos, [10, 21], mapData[1].map.objectLayer);
+        if(freeBobKidHappens === false){
+          freeBobKidHappens = true;
+          mapData[2].npcOnMap.splice(0, 1)
+          launchNpcDialog(mapData[1].npcOnMap[2])
+          mapData[1].map.objectLayer[23][6] = 97;
+          mapData[1].map.objectLayer[23][7] = 96;
+          let numberNpc = addNpcToMap(10, [6, 20], 'dialog', [1, 0], 'idle', true, 1)
+          mapData[1].npcOnMap[numberNpc-1].nextCase = searchPath(mapData[1].npcOnMap[numberNpc-1].pos, [10, 21], mapData[1].map.objectLayer);
+        }
       });
       break ;
     default :
