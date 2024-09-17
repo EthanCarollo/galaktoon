@@ -30,7 +30,7 @@ This game only use the p5.js library.
 
 ### Choice Two
 
-* Play on https://yey-team.com/Galaktoon/
+* Play on [Galaktoon](https://galaktoon.vercel.app/)
 
 ## 3. Engine Informations
 
@@ -51,7 +51,7 @@ This game only use the p5.js library.
 * Player can now level Up ! 
 * Quests are now finished !
 * Npc pathing is displonible & generics for both engine
-* A tool for create map is disponible here ! : https://github.com/JackyTuneur/GalaktoonToolMapCreator
+* A tool for create map is disponible here ! : https://github.com/EthanCarollo/GalaktoonToolMapCreator
 
 ## 5. Studio Informations
 
